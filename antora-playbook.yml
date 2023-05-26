@@ -1,6 +1,6 @@
 site:
-  title: Antora Docs
-  start_page: docs-es-java::preface.adoc
+  title: Testing Angular
+  start_page: docs-testing-angular::introduction.adoc
 content:
   sources:
     - url: .
