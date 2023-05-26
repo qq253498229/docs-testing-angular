@@ -1,0 +1,17 @@
+= Testing Angular
+
+_A Guide to Robust Angular Applications_
+
+_A free online book and e-book_
+
+The Angular Framework is a mature and comprehensive solution for enterprise-ready applications based on web technologies. At Angular’s core lies the ability to test all application parts in an automated way. How do we take advantage of Angular’s testability?
+
+This guide explains the principles of automated testing as well as the practice of testing Angular web applications. It empowers you and your team to write effective tests on a daily basis.
+
+In this book, you learn how to set up your own testing conventions, write your own testing helpers and apply proven testing libraries. The book covers different tests that complement each other: unit tests, integration tests and end-to-end tests.
+
+With a strong focus on testing Angular Components, this guide teaches you to write realistic specs that describe and verify a Component’s behavior. It demonstrates how to properly mock dependencies like Services to test a Component in isolation. The guide introduces the Spectator and ng-mocks libraries, two powerful testing libraries.
+
+Apart from Components, the book illustrates how to test the other application parts: Services, Pipes, Directives as well as Modules. Last but not least, it covers end-to-end tests with Cypress.
+
+https://testing-angular.com/assets/testing-angular.epub[Download this book as EPUB (2 MB)]

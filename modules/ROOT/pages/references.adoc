@@ -1,0 +1,7 @@
+= References
+
+- _https://angular-buch.com/[Angular: Grundlagen, fortgeschrittene Themen und Best Practices]_, Second Edition, Ferdinand Malcher, Johannes Hoppe, Danny Koppenhagen. dpunkt.verlag, 2019. ISBN 978-3-86490-646-6
+- _https://www.manning.com/books/testing-angular-applications[Testing Angular Applications]_, Jesse Palmer, Corinna Cohn, Mike Giambalvo, Craig Nishina. Manning Publications, 2018. ISBN 978-1-61729-364-1
+- _https://www.manning.com/books/testing-javascript-applications[Testing JavaScript Applications]_, Lucas da Costa. Manning Publications, 2021. ISBN 978-1-61729-791-5
+- _https://shop.jcoglan.com/javascript-testing-recipes/[JavaScript Testing Recipes]_, James Coglan, 2016.
+

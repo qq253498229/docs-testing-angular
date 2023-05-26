@@ -1,0 +1,14 @@
+= Index of example applications
+
+All example applications are repositories on GitHub:
+
+[NOTE]
+====
+- https://github.com/9elements/angular-workshop[Counter Component]
+- https://github.com/9elements/angular-flickr-search[Flickr photo search]
+- https://github.com/molily/angular-form-testing[Sign-up form]
+- https://github.com/molily/translate-pipe[TranslatePipe]
+- https://github.com/molily/threshold-warning-directive[ThresholdWarningDirective]
+- https://github.com/molily/paginate-directive[PaginateDirective]
+====
+

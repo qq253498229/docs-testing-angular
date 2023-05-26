@@ -1,6 +1,6 @@
 site:
   title: Testing Angular
-  start_page: docs-testing-angular::introduction.adoc
+  start_page: docs-testing-angular::start.adoc
 content:
   sources:
     - url: .

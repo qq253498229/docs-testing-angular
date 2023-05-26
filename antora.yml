@@ -1,7 +1,7 @@
 name: docs-testing-angular
 title: Testing Angular
 version: '2021-08-22'
-start_page: ROOT:introduction.adoc
+start_page: ROOT:start.adoc
 nav:
   - modules/ROOT/nav.adoc
 asciidoc:

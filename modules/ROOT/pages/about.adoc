@@ -1,0 +1,14 @@
+= About
+
+Author: https://molily.de[Mathias Schäfer (molily)]
+
+Mathias is a software developer with a focus on web development and JavaScript web applications.
+
+Mathias is working for https://9elements.com[9elements], a software and design agency.
+
+https://mastodon.social/@molily[@molily on Mastodon], https://twitter.com/molily[@molily on Twitter].
+
+*Please send feedback and corrections to mailto:molily@mailbox.org[molily@mailbox.org] or https://github.com/molily/testing-angular/[file an issue on GitHub].*
+
+First published on February 17th, 2021.
+
