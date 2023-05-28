@@ -1,313 +1,303 @@
-= Testing principles
+= 测试原则
 
-Learning objectives
+学习目标
 
-- The goals of testing and how to achieve them
-- Establishing regular testing practice in your team
-- Classify tests by their proximity to the code
-- Classify tests by their knowledge of code internals
+- 测试的目标及如何实现这些目标
+- 在团队中建立定期测试的实践
+- 按代码接近程度分类测试
+- 按代码内部知识分类测试
 
-There is a gap between practical introductions – how to test a feature – and fundamental discussions on the core concepts – what does testing achieve, which types of tests are beneficial, etc. Before we dive into the tutorial, we need to reflect on a few basics about testing.
+在实际介绍（如何测试一个功能）和核心概念的基本讨论（测试能够实现什么，哪种类型的测试有益等）之间存在一个差距。在深入学习教程之前，我们需要对测试的一些基本概念进行反思。
 
-== What makes a good test
+== 一个好的测试的特点
 
-When writing tests, you need to keep the goals of testing in mind. You need to judge whether a test is valuable with regard to these goals.
+在编写测试时，你需要牢记测试的目标。你需要判断一个测试在这些目标方面是否有价值。
 
-Automated testing has several technical, economical and organizational benefits. Let us pick a few that are useful to judge a test:
+自动化测试具有几个技术、经济和组织上的好处。让我们选择一些对评估测试有用的好处：
 
-1. *Testing saves time and money.* Testing tries to nip software problems in the bud. Tests prevent bugs before they cause real damage, when they are still manageable and under control.
+1. *测试能够节省时间和金钱。* 测试试图在软件问题发展之初就予以解决。测试可以在错误造成实际损害之前预防它们，此时错误仍然可管理且处于控制之下。
 +
-Of course, quality assurance takes time and costs money itself. But it takes less time and is cheaper than letting bugs slip through into the software release.
+当然，质量保证本身需要花费时间和金钱。但相比让错误在软件发布中发生，它所需的时间更少，成本更低。
 +
-When a faulty application ships to the customer, when users run into a bug, when data is lost or corrupted, your whole business might be at stake. After an incident, it is expensive to analyze and fix the bug in order to regain the user’s trust.
+当一个有缺陷的应用程序交付给客户，当用户遇到错误时，当数据丢失或损坏时，整个业务都可能面临风险。事故发生后，为了重新赢得用户的信任，分析和修复错误的成本很高。
 +
-TIP: Cost-effective
+TIP: 成本效益
 +
-*A valuable test is cost-effective.* The test prevents bugs that could ultimately render the application unusable. The test is cheap to write compared to the potential damage it prevents.
+*一个有价值的测试具有成本效益。* 测试可以预防可能导致应用程序无法使用的错误。与它所预防的潜在损害相比，测试编写的成本较低。
 
-2. *Testing formalizes and documents the requirements.* A test suite is a formal, human- and machine-readable description of how the code should behave. It helps the original developers to understand the requirements they have to implement. It helps fellow developers to understand the challenges they had to deal with.
+2. *测试将需求形式化和文档化。* 测试套件是对代码应该如何行为的正式、可读性强的描述，可以被人类和机器理解。它帮助原始开发人员理解他们需要实现的需求。它帮助其他开发人员理解他们需要应对的挑战。
 +
-TIP: Descriptive
+TIP: 描述性
 +
-*A valuable test clearly describes how the implementation code should behave.* The test uses a proper language to talk to developers and convey the requirements. The test lists known cases the implementation has to deal with.
+*一个有价值的测试清晰地描述了实现代码的行为方式。* 测试使用适当的语言与开发人员交流并传达需求。测试列举了实现必须处理的已知情况。
 
-3. *Testing ensures that the code implements the requirements and does not exhibit bugs.* Testing taps every part of the code in order to find flaws.
+3. *测试确保代码实现了需求并且没有错误。* 测试会遍历代码的每个部分以发现缺陷。
 +
-TIP: Success and error cases
+TIP: 成功和错误案例
 +
-*A valuable test covers the important scenarios* – both correct and incorrect input, expected cases as well as exceptional cases.
+*一个有价值的测试涵盖了重要的场景* ——包括正确和错误的输入、预期情况和异常情况。
 
-4. *Testing makes change safe by preventing regressions.* Tests not only verify that the current implementation meets the requirements. They also verify that the code still works as expected after changes. With proper automated tests in place, accidentally breakage is less likely. Implementing new features and code refactoring is safer.
+4. *测试通过防止回归，使变更更加安全。* 测试不仅验证当前实现是否符合需求，还验证在变更后代码是否按预期工作。适当的自动化测试减少了意外的破坏。实施新功能和代码重构更加安全。
 +
-TIP: Prevent breakage
+TIP: 防止破坏
 +
-*A valuable test fails when essential code is changed or deleted.* Design the test to fail if dependent behavior is changed. It should still pass if unrelated code is changed.
+*一个有价值的测试会在关键代码被更改或删除时失败。* 设计测试以在依赖行为更改时失败。如果更改的是无关的代码，测试应该仍然通过。
 
-== What testing can achieve
+== 测试能够实现的目标
 
-Automated testing is a tool with a specific purpose. A basic concept is that testing helps to build an application that functions according to its requirements. That is true, but there are certain subtleties.
+自动化测试是一种具有特定目的的工具。一个基本的概念是，测试有助于构建一个按照需求运行的应用程序。这是正确的，但是有一些微妙之处。
 
-The https://www.istqb.org[International Software Testing Qualifications Board (ISTQB)] came up with *Seven Testing Principles* that shed light on what testing can achieve and what not. Without discussing every principle, let us consider the main ideas.
+The https://www.istqb.org[国际软件测试资格委员会（ISTQB）] 提出了 *七项测试原则* ，揭示了测试能够实现和不能实现的内容。我们不讨论每个原则，而是考虑其中的主要思想。
 
-TIP: Discover bugs
+TIP: 发现错误
 
-The purpose of a test is to *discover bugs*. If the test fails, it proves the presence of a bug (or the test is set up incorrectly). If the test passes, it proves that _this particular test setup_ did not trigger a bug. It does not prove that the code is correct and free of bugs.
+测试的目的是 *发现错误*。如果测试失败，它证明存在一个错误（或者测试设置不正确）。如果测试通过，它证明 _这个特定的测试设置_ 没有触发错误。它并不能证明代码是正确的和没有错误的。
 
-TIP: Test high-risk cases
+TIP: 测试高风险案例
 
-So should you write automated tests for all possible cases to ensure correctness? No, say the ISTQB principles: “*Exhaustive testing is impossible*”. It is neither technically feasible nor worthwhile to write tests for all possible inputs and conditions. Instead, you should _assess the risks_ of a certain case and write tests for high-risk cases first.
+那么，是否应该编写针对所有可能情况的自动化测试以确保正确性呢？ISTQB的原则表示：“*穷尽测试是不可能的*”。为所有可能的输入和条件编写测试既不可行，也不值得。相反，你应该 _评估某种情况的风险_ ，并首先为高风险案例编写测试。
 
-Even if it was viable to cover all cases, it would give you a false sense of security. No software is without errors, and a fully tested software may still be a usability nightmare that does not satisfy its users.
+即使覆盖所有情况是可行的，它也会给你一种虚假的安全感。没有哪个软件是没有错误的，即使经过全面测试的软件可能仍然是一个对用户来说难以使用的噩梦。
 
-TIP: Adapt testing approach
+TIP: 适应测试方法
 
-Another core idea is that *testing depends on its context* and that it needs to be adapted again and again to provide meaning. The specific context in this guide are single-page web applications written in JavaScript, made with Angular. Such applications need specific testing methods and tools we will get to know.
+另一个核心思想是，*测试取决于其上下文*，并且需要不断地进行适应以提供意义。在本指南中，特定的上下文是使用JavaScript编写的单页Web应用程序，采用Angular框架。这些应用程序需要特定的测试方法和工具，我们将了解它们。
 
-Once you have learned and applied these tools, you should not stop. A fixed tool chain will only discover certain types of bugs. You need to try different approaches to find new classes of bugs. Likewise, an existing test suite needs to be updated regularly so that it still finds regressions.
+一旦你学习并应用了这些工具，你不应该停止。固定的工具链只能发现某些类型的错误。你需要尝试不同的方法来发现新的错误类别。同样，现有的测试套件需要定期更新，以便仍然能够发现回归错误。
 
 [NOTE]
 ====
-- https://www.istqb.org/downloads/category/2-foundation-level-documents.html[International Software Testing Qualifications Board: Certified Tester Foundation Level Syllabus, Version 2018 V3.1, Page 16: Seven Testing Principles]
+- https://www.istqb.org/downloads/category/2-foundation-level-documents.html[国际软件测试资格委员会：认证测试员基础级别大纲, 2018年V3.1版, 第16页: 七项测试原则]
 ====
 
-== Tailoring your testing approach
+== 调整测试方法
 
-There is not one correct approach to testing. In fact there are several competing schools of thoughts and methodologies. Learn from other’s experience, but develop a testing approach that suits your application, your team, your project or business.
+没有一种正确的测试方法。实际上，有几种竞争的思想流派和方法论。从他人的经验中学习，但要开发一种适合你的应用程序、团队、项目或业务的测试方法。
 
-TIP: Examine your application
+TIP: 检查你的应用程序
 
-Before you start setting up tests, you should examine the current situation of your application:
+在开始设置测试之前，你应该检查你的应用程序的当前情况：
 
-- What are the *critical features*? For example, logging in, searching for a record and editing a form.
-- What are the frequently reported *technical problems and obstacles*? For example, your application may lack error handling or cross-browser compatibility.
-- What are the *technical requirements*? For example, your application needs to consume structured data from a given back-end API. In turn, it needs to expose certain URL routes.
+- 哪些是 *关键功能*？例如，登录、搜索记录和编辑表单。
+- 哪些是经常报告的 *技术问题和障碍*？例如，你的应用程序可能缺乏错误处理或跨浏览器兼容性。
+- 有哪些 *技术要求*？例如，你的应用程序需要从给定的后端API消费结构化数据。反过来，它需要公开某些URL路由。
 
-TIP: Development process
+TIP: 开发过程
 
-This technical assessment is as important as an inquiry of your development team:
+这种技术评估和对你的开发团队的调查一样重要：
 
-- What is the overall *attitude on testing*? For example, some developers value testing while others find it ineffective to avoid bugs.
-- What is the current *testing practice*? For example, developers sometimes write tests, but not as a daily routine.
-- What is the *experience on writing tests*? For example, some developers have written tests for several environments, while others understand the basic concepts but have not yet gotten into practice.
-- What are the *obstacles* that impede a good testing routine? For example, developers have not been trained on the testing tools.
-- Are tests *well-integrated* into your development workflow? For example, a continuous integration server automatically runs the test suite on every change set.
+- 整体对 *测试的态度* 是什么？例如，一些开发人员重视测试，而另一些人认为测试无法有效避免错误。
+- 目前的 *测试实践* 是什么样的？例如，开发人员有时会编写测试，但不是每天都进行。
+- *编写测试的经验* 如何？例如，一些开发人员已经为多个环境编写了测试，而另一些人对基本概念有所了解，但还没有实践过。
+- 阻碍良好测试例程的 *障碍* 是什么？例如，开发人员没有接受过测试工具的培训。
+- 测试是否被 *很好地整合* 到你的开发工作流程中？例如，一个持续集成服务器会在每个变更集上自动运行测试套件。
 
-Once you have answered these questions, you should set up a testing goal and implement steps to achieve it.
+一旦你回答了这些问题，你应该设定一个测试目标，并采取步骤来实现它。
 
-TIP: Return on investment
+TIP: 回报率
 
-A good start is to think economically. What is the return on investment of writing a test? Pick the low-hanging fruits. Find business-critical features and make sure they are covered by tests. Write tests that require little effort but cover large parts of the code.
+一个好的开始是从经济的角度思考。编写测试的回报率是多少？选择低成本的目标。找到业务关键功能，并确保它们被测试覆盖。编写测试需要很少的工作量，但能覆盖大部分代码。
 
-TIP: Normalize testing
+TIP: 规范测试
 
-Simultaneously, integrate testing into your team’s workflow:
+同时，将测试整合到团队的工作流程中：
 
-- Make sure everyone shares the same basic expertise.
-- Offer formal training workshops and pair experienced programmers with team members less familiar with testing.
-- Appoint maintainers and contact persons for test quality and testing infrastructure.
-- Hire dedicated software testers, if applicable.
+- 确保每个人都有相同的基本专业知识。
+- 提供正式的培训工作坊，并将经验丰富的程序员与对测试不太熟悉的团队成员进行搭档。
+- 指定测试质量和测试基础设施的维护人员和联系人。
+- 如果适用，雇佣专职软件测试人员。
 
-Writing automated tests should be *easy and fun* for your team members. Remove any obstacles that make testing difficult or inefficient.
+编写自动化测试对于团队成员来说应该是 *简单而有趣的*。消除任何使测试变得困难或低效的障碍。
 
-== The right amount of testing
+== 适量的测试
 
-A fierce debate revolves around the right amount of testing. Too little testing is a problem: Features are not properly specified, bugs go unnoticed, regressions happen. But too much testing consumes development time, yields no additional profit and slows down development in the long run.
+关于适量的测试存在激烈的争论。过少的测试会成为问题：功能没有得到正确的规范，错误未被发现，出现回归问题。但过多的测试会消耗开发时间，无法带来额外的利润，并在长期内拖慢开发速度。
 
-So we need to reach a sweet spot. If your testing practice deteriorates from this spot, you run into problems. If you add more tests, you observe little benefit.
+因此，我们需要找到一个平衡点。如果你的测试实践偏离了这个平衡点，就会遇到问题。如果增加更多的测试，你会发现收益微乎其微。
 
-TIP: Meaningful tests
+TIP: 有意义的测试
 
-Tests differ in their value and quality. Some tests are more meaningful than others. If they fail, your application is actually unusable. This means *the quality of tests is more important than their quantity*.
+测试在价值和质量上存在差异。有些测试比其他测试更有意义。如果这些测试失败，你的应用实际上就无法使用。这意味着 *测试的质量比数量更重要*。
 
-A common metric of testing is *code coverage*. It counts the lines in your code that are called by your tests. It tells you which parts of your code are executed at all.
+测试的一个常见度量指标是 *代码覆盖率*。它统计了你的代码中被测试调用的行数。它告诉你哪些代码部分被执行了。
 
-This metric on testing is *useful but also deeply flawed* because the value of a test cannot be quantified automatically. Code coverage tells you whether a piece of code was called, regardless of its importance.
+这个测试指标是 *有用但也存在严重缺陷的*，因为测试的价值无法自动量化。代码覆盖率告诉你某段代码是否被调用，而不管它的重要性。
 
-TIP: Find uncovered code
+TIP: 找到未覆盖的代码
 
-The coverage report may point to important behavior that is not yet covered by tests, but should be. It does not tell whether the existing tests are meaningful and make the right expectations. You can merely infer that the code does not throw exceptions under test conditions.
+代码覆盖率报告可能会指出一些重要的行为尚未被测试覆盖，但应该被覆盖。它并不能告诉你现有的测试是否有意义并且能够正确地进行期望。你只能推断出在测试条件下，代码没有抛出异常。
 
-It is controversial whether one should strive for 100% code coverage. While it is feasible to cover 100% of certain business-critical code, it requires immense efforts to cover all parts of an application written in Angular and TypeScript.
+关于是否应该追求100%的代码覆盖率存在争议。虽然覆盖100%的某些业务关键代码是可行的，但要覆盖Angular和TypeScript编写的应用程序的所有部分需要付出巨大的努力。
 
-TIP: Cover main features
+TIP: 覆盖主要功能
 
-If you write tests for the main features of your app from a user’s perspective, you can achieve a code coverage of 60-70%. Every extra percent gain takes more and more time and bears weird and twisted tests that do not reflect the actual usage of your application.
+如果你从用户的角度为应用程序的主要功能编写测试，你可以达到60-70%的代码覆盖率。每增加1%的收益都需要更多的时间，并且可能导致奇怪而扭曲的测试，这些测试不能反映你的应用程序的实际使用情况。
 
-We are going to discuss the <<measuring-code-coverage#_measuring_code_coverage, practical use of code coverage tools>> later.
+我们将在后面讨论 <<measuring-code-coverage#_measuring_code_coverage, 代码覆盖工具的实际使用>>。
 
 [NOTE]
 ====
-- https://angular.io/guide/testing-code-coverage[Angular guide: Code Coverage]
+- https://angular.cn/guide/testing-code-coverage[Angular指南：代码覆盖率]
 ====
 
-== Levels of testing
+== 测试的级别
 
-We can distinguish automated tests by their perspective and proximity to the code.
+我们可以通过测试的视角和与代码的接近程度来区分自动化测试。
 
-=== End-to-end tests
+=== 端到端测试
 
-TIP: Simulate real usage
+TIP: 模拟真实使用
 
-Some tests have a _high-level, bird’s-eye view_ on the application. They simulate a user interacting with the application: Navigating to an address, reading text, clicking on a link or button, filling out a form, moving the mouse or typing on the keyboard. These tests make expectations about what the user sees and reads in the browser.
+一些测试以 _高层次、鸟瞰_ 的视角看待应用程序。它们模拟用户与应用程序的交互：导航到一个地址、阅读文本、点击链接或按钮、填写表单、移动鼠标或键盘输入。这些测试对用户在浏览器中所看到和阅读的内容进行期望。
 
-From the user’s perspective, it does not matter that your application is implemented in Angular. Technical details like the inner structure of your code are not relevant. There is no distinction between front-end and back-end, between parts of your code. The full experience is tested.
+从用户的角度来看，你的应用程序是使用Angular实现的并不重要。代码的内部结构等技术细节并不相关。前端和后端之间，代码的各个部分之间没有区别。整个体验都被测试。
 
-TIP: End-to-end tests
+TIP: 端到端测试
 
-These tests are called *end-to-end (E2E) tests* since they integrate all parts of the application from one end (the user) to the other end (the darkest corners of the back-end). End-to-end tests also form the automated part of *acceptance tests* since they tell whether the application works for the user.
+这些测试被称为 *端到端（E2E）测试*，因为它们将应用程序的所有部分从一个端（用户）集成到另一个端（后端的最深处）。端到端测试也是 *验收测试* 的自动化部分，因为它们告诉你应用程序是否对用户有效。
 
-=== Unit tests
+=== 单元测试
 
-Other tests have a _low-level, worm’s-eye view_ on the application. They pick a small piece of code and put it through its paces. From this perspective, implementation details matter. The developer needs to set up an appropriate testing environment to trigger all relevant cases.
+其他测试以 _低层次、蠕虫视角_ 看待应用程序。它们选择一个小的代码片段并对其进行全面测试。从这个角度来看，实现细节很重要。开发人员需要设置一个适当的测试环境来触发所有相关的情况。
 
-TIP: Isolate one piece
+TIP: 隔离一个部分
 
-The shortsighted worm only sees what is directly in front. This perspective tries to cut off the ties of the code under test with its dependencies. It tries to _isolate_ the code in order to examine it.
+目光短浅的蠕虫只能看到眼前的事物。这个视角试图切断被测试代码与其依赖项的联系。它试图 _隔离_ 代码以进行检查。
 
-TIP: Unit tests
+TIP: 单元测试
 
-These tests are called *unit tests*. A unit is a small piece of code that is reasonable to test.
+这些测试被称为 *单元测试*。一个单元是一个可以合理进行测试的小代码片段。
 
-=== Integration tests
+=== 集成测试
 
-TIP: Cohesive groups
+TIP: 紧密的组合
 
-Between these two extreme perspectives, there are tests that operate on specific parts of the code, but test _cohesive groups_. They prescind from implementation details and try to take the user’s perspective.
+在这两个极端视角之间，有一些测试针对特定的代码部分，但测试 _紧密的组合_。它们摒弃实现细节，尝试从用户的角度出发。
 
-TIP: Integration tests
+TIP: 集成测试
 
-These tests are called *integration tests* since they test how well the parts _integrate_ into the group. For example, all parts of one feature may be tested together. An integration test proves that the parts work together properly.
+这些测试被称为 *集成测试*，因为它们测试各个部分如何 _集成_ 到组合中。例如，可以将一个功能的所有部分一起进行测试。集成测试证明各个部分正常地协同工作。
 
-== Distribution of testing efforts
+== 测试工作的分配
 
-All levels of testing are necessary and valuable. Different types of tests need to be combined to create a thorough test suite.
+所有级别的测试都是必要且有价值的。不同类型的测试需要结合起来创建一个全面的测试套件。
 
-But how should we divide our attention? On which level should we spend most of the time? Should we focus on end-to-end tests since they mimic how the user interacts with the application? Again, this is a controversial issue among testing experts.
+但我们应该如何分配注意力？我们应该在哪个级别花费最多的时间？我们应该专注于端到端测试，因为它们模拟了用户如何与应用程序进行交互？同样，这是测试专家之间有争议的问题。
 
-TIP: Speed
+TIP: 速度
 
-What is indisputable is that high-level tests like end-to-end tests are expensive and slow, while lower-level tests like integration and unit tests are cheaper and faster.
+毋庸置疑的是，端到端测试等高级别测试是昂贵且耗时的，而集成测试和单元测试等低级别测试则更便宜且更快。
 
-TIP: Reliability
+TIP: 可靠性
 
-Because of their inherent complexity, end-to-end tests tend to be unreliable. They often fail even though the software is without fault. Sometimes they fail for no apparent reason. When you run the same tests again, they suddenly pass. Even if the test correctly fails, it is hard to find the root cause of the problem. You need to wander through the full stack to locate the bug.
+由于其固有的复杂性，端到端测试往往不可靠。即使软件没有错误，它们经常会失败。有时它们会毫无明显原因地失败。当您再次运行相同的测试时，它们突然通过了。即使测试正确地失败，也很难找到问题的根本原因。您需要遍历整个堆栈以定位错误。
 
-TIP: Setup costs
+TIP: 设置成本
 
-End-to-end tests use a real browser and run against the full software stack. Therefore the testing setup is immense. You need to deploy front-end, back-end, databases, caches, etc. to testing machines and then have machines to run the end-to-end tests.
+端到端测试使用真实的浏览器，并针对完整的软件堆栈运行。因此，测试设置非常庞大。您需要将前端、后端、数据库、缓存等部署到测试机器上，然后使用机器运行端到端测试。
 
-In comparison, integration tests are simpler and unit tests even more so. Since they have less moving parts and fewer dependencies, they run faster and the results are reproducible. The setup is relatively simple. Integration and unit tests typically run on one machine against a build of the code under test.
+相比之下，集成测试更简单，单元测试则更简单。由于它们的移动部分较少且依赖性较少，它们运行更快，结果可重现。设置相对简单。集成测试和单元测试通常在一台机器上针对被测试代码的构建运行。
 
-TIP: Cost vs. benefit
+TIP: 成本与收益
 
-The crucial question for dividing your testing efforts is: Which tests yield the most return on investment? How much work is it to maintain a test in relation to its benefit?
+划分测试工作的关键问题是：哪些测试产生的投资回报最高？维护测试与其收益之间的工作量有多大？
 
-In theory, the benefit of end-to-end tests is the highest, since they indicate whether the application works for the user. In practice, they are unreliable, imprecise and hard to debug. The business value of integration and unit tests is estimated higher.
+从理论上讲，端到端测试的效益最高，因为它们能指示应用程序是否对用户有效。但在实践中，它们不可靠、不精确且难以调试。集成测试和单元测试的商业价值被认为更高。
 
-TIP: Distribution
+TIP: 分配
 
-For this reason, some experts argue you should write few end-to-end test, a fair amount of integration tests and many unit tests. If this distribution is visualized, it looks like a pyramid:
+因此，一些专家认为，您应该编写少量的端到端测试、适量的集成测试和大量的单元测试。如果将这种分配可视化，它看起来像一个金字塔：
 
 image::pyramid.png[]
 
-These proportions are known as the *Testing Pyramid*. They are widely recognized in software testing across domains, platforms and programming languages.
+这些比例被称为 *测试金字塔*。在各个领域、平台和编程语言中，它们在软件测试中被广泛认可。
 
-However, this common distribution also drew criticism. In particular, experts disagree on the value of unit tests.
+然而，这种常见的分配也引起了一些争议。特别是，关于单元测试的价值，专家们持不同意见。
 
-TIP: Design guide
+TIP: 设计指南
 
-On the one hand, unit tests are precise and cheap. They are ideal to specify all tiny details of a shared module. They help developers to design small, composable modules that “do one thing and do it well”. This level of testing forces developers to reconsider how the module interacts with other modules.
+一方面，单元测试精确而廉价。它们非常适合详细说明共享模块的所有细节。它们帮助开发人员设计小型、可组合的模块，这些模块“做一件事，并且做得很好”。这种测试水平迫使开发人员重新考虑模块如何与其他模块进行交互。
 
-TIP: Confidence
+TIP: 信心
 
-On the other hand, unit tests are too low-level to check whether a certain feature works for the user. They give you little confidence that your application works. In addition, unit tests might increase the cost of every code change.
+另一方面，单元测试过于低级，无法检查特定功能对用户是否有效。它们对于验证应用程序的可靠性提供的信心有限。此外，单元测试可能增加每次代码更改的成本。
 
-Unit tests run the risk of mirroring or even duplicating implementation details. These details change frequently because of new requirements elsewhere or during internal refactoring. If you change a line of code somewhere, some distant unit test suddenly fails.
+单元测试存在复制或反映实现细节的风险。这些细节会由于其他地方的新需求或内部重构而经常发生变化。如果你在某个地方更改了一行代码，一些远程的单元测试突然失败。
 
-This makes sense if you have touched shared types or shared logic, but it may just be a false alarm. You have to fix this failing test for technical reasons, not because something broke.
+如果你触及了共享类型或共享逻辑，这是有道理的，但这可能只是一个虚警。你必须为技术原因修复这个失败的测试，而不是因为出现了问题。
 
-TIP: Middle ground
+TIP: 中间地带
 
-Integration tests provide a better trade-off. These mid-level tests prescind from implementation details, cover a group of code units and provide more confidence. They are less likely to fail if you refactor code inside of the group.
+集成测试提供了更好的权衡。这些中级测试不考虑实现细节，涵盖了一组代码单元，并提供更多的信心。如果你重构组内的代码，它们不太可能失败。
 
-That is why some experts deem integration tests more valuable and recommend that you spend most of your testing efforts on this level.
+这就是为什么一些专家认为集成测试更有价值，并建议您将大部分测试工作集中在这个层级上的原因。
 
-In Angular, the difference between unit and integration tests is sometimes subtle. A unit test typically focusses on a single Angular Component, Directive, Service, Pipe, etc. Dependencies are replaced with fakes. An integration test spans one Component together with its children and possibly connected Services as well. It is also possible to write a test that integrates all parts of an Angular Module.
+在Angular中，单元测试和集成测试之间的区别有时是微妙的。单元测试通常专注于单个Angular组件、指令、服务、管道等。依赖项将被替换为模拟对象。而集成测试则涵盖了一个组件及其子组件以及可能连接的服务。还可以编写一个集成测试，将Angular模块的所有部分进行整合。
 
-<div class="wide-table-wrapper">
-<table class="wide-table">
-<caption>Comparison of software testing levels</caption>
-<tr>
-<th scope="row">Level</th>
-<th scope="col">End-to-End</th>
-<th scope="col">Inte&#xAD;gration</th>
-<th scope="col">Unit</th>
-</tr>
-<tr>
-<th scope="row">Coverage</th>
-<td>full</td>
-<td>large</td>
-<td>small</td>
-</tr>
-<tr>
-<th scope="row">Performance</th>
-<td>slow</td>
-<td>fast</td>
-<td>fastest</td>
-</tr>
-<tr>
-<th scope="row">Reliability</th>
-<td>least reliable</td>
-<td>reliable</td>
-<td>most reliable</td>
-</tr>
-<tr>
-<th scope="row">Isolate Failures</th>
-<td>hard</td>
-<td>fair</td>
-<td>easy</td>
-</tr>
-<tr>
-<th scope="row">Simulate the Real User</th>
-<td>yes</td>
-<td>no</td>
-<td>no</td>
-</tr>
-</table>
-</div>
 
-<p><small>(Table adapted from a https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html[Google Testing Blog article] by Mike Wacker.)</small></p>
+.软件测试级别的比较
+|===
+|级别 |端到端 |集成 |单元
+
+|覆盖率
+|全面
+|较高
+|较低
+
+|性能
+|较慢
+|较快
+|最快
+
+|可靠性
+|最不可靠
+|可靠
+|最可靠
+
+|隔离故障
+|困难
+|较为容易
+|容易
+
+|模拟真实用户
+|是
+|否
+|否
+|===
+
+
+（表格改编自Mike Wacker在 https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html[Google Testing Blog] 上的一篇文章。）
 
 [NOTE]
 ====
-- https://martinfowler.com/bliki/TestPyramid.html[Martin Fowler: Test Pyramid]
-- https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html[Google Testing Blog: Just Say No to More End-to-End Tests]
-- https://kentcdodds.com/blog/write-tests[Kent C. Dodds: Write tests. Not too many. Mostly integration.]
+- https://martinfowler.com/bliki/TestPyramid.html[Martin Fowler: 测试金字塔]
+- https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html[Google Testing Blog: 对于更多的端到端测试说不]
+- https://kentcdodds.com/blog/write-tests[Kent C. Dodds: 编写测试。不要太多。主要是集成测试。]
 ====
 
-== Black box vs. white box testing
+== 黑盒测试与白盒测试
 
-Once you have identified a piece of code you would like to test, you have to decide how to test it properly. One important distinction is whether a test treats the implementation as a closed, unlit box – a *black box* – or an open, lit box – a *white box*. In this metaphor, the code under test is a machine in a box with holes for inputs and outputs.
+一旦你确定了要测试的代码块，你就需要决定如何进行适当的测试。一个重要的区别是测试是将实现视为封闭、不透明的盒子——*黑盒测试*，还是将其视为开放、透明的盒子——*白盒测试*。在这个比喻中，待测试的代码就像是一个带有输入和输出接口的盒子里的机器。
 
-TIP: Outside
+TIP: 黑盒测试
 
-*Black box testing* does not assume anything about the internal structure. It puts certain values into the box and expects certain output values. The test talks to the publicly exposed, documented API. The inner state and workings are not examined.
+*黑盒测试* 对内部结构不做任何假设。它将一些值输入到盒子里，并期望得到一些输出值。测试与公开的、文档化的 API 进行交互。不会检查内部状态和运行方式。
 
 image::black-box.png[]
 
-TIP: Inside
+TIP: 内部
 
-*White box testing* opens the box, sheds light on the internals and takes measurements by reaching into the box. For example, a white box test may call methods that are not part of the public API, but still technically tangible. Then it checks the internal state and expects that it has changed accordingly.
+*白盒测试* 打开盒子，照亮内部，并通过伸手进入盒子进行测量。例如，白盒测试可能调用不属于公共 API 的方法，但仍然是技术上可触及的。然后它检查内部状态，并期望它相应地发生了变化。
 
-TIP: Irrelevant internals
+TIP: 不相关的内部
 
-While both approaches have their value, this guide recommends to *write black box tests whenever possible*. You should check what the code does for the user and for other parts of the code. For this purpose, it is not relevant how the code looks internally. Tests that make assumptions about internals are likely to break in the future when the implementation slightly changes.
+虽然两种方法都有其价值，但本指南 *建议尽可能编写黑盒测试*。你应该检查代码对用户和其他代码部分的行为。对此，代码内部的具体实现方式并不重要。对内部做出假设的测试在将来可能会在实现略微改变时出现故障。
 
-TIP: Relevant behavior
+TIP: 相关行为
 
-More importantly, white box tests run the risk of forgetting to check the real output. They reach into the box, spin some wheel, flip some switch and check a particular state. They just assume the output without actually checking it. So they fail to cover important code behavior.
+更重要的是，白盒测试有可能忘记检查真实的输出。它们进入盒子，转动一些轮子，拨动一些开关，并检查特定的状态。它们只是假设输出而没有实际检查。因此，它们无法涵盖重要的代码行为。
 
-TIP: Public API
+TIP: 公共 API
 
-For an Angular Component, Directive, Service, Pipe, etc., a black box test passes a certain input and expects a proper output or measures side effects. The test only calls methods that are marked with `public` in the TypeScript code. Internal methods should be marked with `private`.
+对于 Angular 的组件、指令、服务、管道等，黑盒测试传入某个特定的输入，并期望得到适当的输出或测量副作用。测试仅调用在 TypeScript 代码中标记为 `公共` 的方法。内部方法应标记为 `私有`。
 

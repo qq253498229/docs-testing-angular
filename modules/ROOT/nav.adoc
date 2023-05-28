@@ -1,7 +1,7 @@
 * xref:introduction.adoc[简介,leveloffset=-1]
 * xref:target-audience.adoc[目标受众,leveloffset=-1]
 * xref:terminology.adoc[术语,leveloffset=-1]
-* xref:testing-principles.adoc[Testing principles,leveloffset=-1]
+* xref:testing-principles.adoc[测试原则,leveloffset=-1]
 * xref:example-applications.adoc[Example applications,leveloffset=-1]
 * xref:angular-testing-principles.adoc[Angular testing principles,leveloffset=-1]
 * xref:test-suites-with-jasmine.adoc[Test suites with Jasmine,leveloffset=-1]
