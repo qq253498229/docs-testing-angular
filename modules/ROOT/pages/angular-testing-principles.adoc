@@ -34,8 +34,8 @@ TIP: Original or fake
 
 This is of immense importance for automated testing. In our test, we can decide how to deal with a dependency:
 
-- We can either provide an *original*, fully-functional implementation. In this case, we are writing an ../testing-principles/#integration-tests[integration test] that includes direct and indirect dependencies.
-- Or we provide a *fake* implementation that does not have side effects. In this case, we are writing a ../testing-principles/#unit-tests[unit test] that tries to test the application part in _isolation_.
+- We can either provide an *original*, fully-functional implementation. In this case, we are writing an <<testing-principles#_integration_tests, integration test>> that includes direct and indirect dependencies.
+- Or we provide a *fake* implementation that does not have side effects. In this case, we are writing a <<testing-principles#_unit_tests, unit test>> that tries to test the application part in _isolation_.
 
 A large portion of the time spent while writing tests is spent on decoupling an application part from its dependencies. This guide will teach you how to set up the test environment, isolate an application part and reconnect it with equivalent fake objects.
 
@@ -56,7 +56,7 @@ This setup is a trade-off with strengths and weaknesses. Since it is just one po
 
 TIP: Alternatives
 
-For example, some Angular developers use https://jestjs.io/[Jest] instead of Jasmine and Karma. Some use ../testing-components-with-spectator/#testing-components-with-spectator[Spectator] or the https://github.com/testing-library/angular-testing-library[Angular Testing Library] instead of using `TestBed` directly.
+For example, some Angular developers use https://jestjs.io/[Jest] instead of Jasmine and Karma. Some use <<testing-components-with-spectator#_testing_components_with_spectator, Spectator>> or the https://github.com/testing-library/angular-testing-library[Angular Testing Library] instead of using `TestBed` directly.
 
 These alternatives are not better or worse, they simply make different trade-offs. This guide uses Jasmine and Karma for unit and integration tests. Later, you will learn about Spectator.
 
@@ -120,7 +120,7 @@ TIP: Test runner
 
 The launched browser navigates to `http://localhost:9876/`. As mentioned, this site serves the test runner and the test bundle. The tests start immediately. You can track the progress and read the results in the browser and on the shell.
 
-When running the tests in the ../example-applications/#the-counter-component[counter project], the browser output looks like this:
+When running the tests in the <<example-applications#_the_counter_component, counter project>>, the browser output looks like this:
 
 image::karma-success.png[]
 
@@ -222,7 +222,7 @@ And finally:
 +
 image::karma-jasmine-html-reporter.png[]
 
-3. The coverage reporter (npm package: `karma-coverage`) creates the test coverage report. See ../measuring-code-coverage/#measuring-code-coverage[measuring code coverage].
+3. The coverage reporter (npm package: `karma-coverage`) creates the test coverage report. See <<measuring-code-coverage#_measuring_code_coverage, measuring code coverage>>.
 
 By editing the `reporters` array, you can add reporters or replace the existing ones:
 
@@ -278,7 +278,7 @@ client: {
 },
 ----
 
-This guide recommends to activate one useful Jasmine configuration option: `failSpecWithNoExpectations` lets the test fail if it does not contain at least one expectation. (More on ../test-suites-with-jasmine/#expectations[expectations] later.) In almost all cases, specs without expectations stem from an error in the test code.
+This guide recommends to activate one useful Jasmine configuration option: `failSpecWithNoExpectations` lets the test fail if it does not contain at least one expectation. (More on <<test-suites-with-jasmine#_expectations, expectations>> later.) In almost all cases, specs without expectations stem from an error in the test code.
 
 [source,javascript]
 ----

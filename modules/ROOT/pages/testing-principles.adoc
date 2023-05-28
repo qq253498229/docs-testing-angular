@@ -133,7 +133,7 @@ TIP: Cover main features
 
 If you write tests for the main features of your app from a user’s perspective, you can achieve a code coverage of 60-70%. Every extra percent gain takes more and more time and bears weird and twisted tests that do not reflect the actual usage of your application.
 
-We are going to discuss the ../measuring-code-coverage/#measuring-code-coverage[practical use of code coverage tools] later.
+We are going to discuss the <<measuring-code-coverage#_measuring_code_coverage, practical use of code coverage tools>> later.
 
 [NOTE]
 ====

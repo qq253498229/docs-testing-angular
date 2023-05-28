@@ -26,8 +26,8 @@ The easiest way to narrow down the scope is to set a *focus* on a suite or spec.
 [source,typescript]
 ----
 describe('Example spec', () => {
-  it('one spec', () => { /_ … _/ });
-  it('another spec', () => { /_ … _/ });
+  it('one spec', () => { /* … */ });
+  it('another spec', () => { /* … */ });
 });
 ----
 
@@ -38,8 +38,8 @@ If you want Jasmine to run only this test suite and skip all others, change `des
 [source,typescript]
 ----
 fdescribe('Example spec', () => {
-  it('one spec', () => { /_ … _/ });
-  it('another spec', () => { /_ … _/ });
+  it('one spec', () => { /* … */ });
+  it('another spec', () => { /* … */ });
 });
 ----
 
@@ -50,8 +50,8 @@ If you want Jasmine to run only one spec, change `it` to `fit`:
 [source,typescript]
 ----
 describe('Example spec', () => {
-  fit('one spec', () => { /_ … _/ });
-  it('another spec', () => { /_ … _/ });
+  fit('one spec', () => { /* … */ });
+  it('another spec', () => { /* … */ });
 });
 ----
 

@@ -7,7 +7,7 @@ Learning objectives
 - Rules for creating fakes to avoid pitfalls
 - Using Jasmine spies to fake functions and methods
 
-When testing a piece of code, you need to decide between an ../testing-principles/#integration-tests[integration test] and a ../testing-principles/#unit-tests[unit test]. To recap, the integration test includes (“integrates”) the dependencies. In contrast, the unit test replaces the dependencies with fakes in order to isolate the code under test.
+When testing a piece of code, you need to decide between an <<testing-principles#_integration_tests, integration test>> and a <<testing-principles#_unit_tests, unit test>>. To recap, the integration test includes (“integrates”) the dependencies. In contrast, the unit test replaces the dependencies with fakes in order to isolate the code under test.
 
 TIP: Also known as mocking
 
@@ -164,7 +164,7 @@ Then, we declare a test suite using `describe`:
 [source,typescript]
 ----
 describe('TodoService', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -173,7 +173,7 @@ The suite contains one spec that tests the `getTodos` method:
 [source,typescript]
 ----
 it('gets the to-dos', async () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -252,7 +252,7 @@ Now we add a second spec for the error case:
 [source,typescript]
 ----
 describe('TodoService', () => {
-  /_ … _/
+  /* … */
   it('handles an HTTP error when getting the to-dos', async () => {
     // Arrange
     const fetchSpy = jasmine.createSpy('fetch')
@@ -282,7 +282,7 @@ In the _Act_ phase, we call the method under test but anticipate that it throws 
 
 In the _Assert_ phase, we make two expectations again. Instead of verifying the return value, we make sure the caught error is an `Error` instance with a useful error message. Finally, we verify that the spy has been called with the right value, just like in the spec for the success case.
 
-Again, this is a plain TypeScript example to illustrate the usage of spies. Usually, an Angular Service does not use `fetch` directly but uses `HttpClient` instead. We will get to know testing this later (see ../testing-services/#testing-a-service-that-sends-http-requests[Testing a Service that sends HTTP requests]).
+Again, this is a plain TypeScript example to illustrate the usage of spies. Usually, an Angular Service does not use `fetch` directly but uses `HttpClient` instead. We will get to know testing this later (see <<testing-services#_testing_a_service_that_sends_http_requests, Testing a Service that sends HTTP requests>>).
 
 [NOTE]
 ====

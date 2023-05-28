@@ -22,7 +22,7 @@ In terms of Jasmine, a test consists of one or more *suites*. A suite is declare
 [source,typescript]
 ----
 describe('Suite description', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -32,7 +32,7 @@ TIP: `describe`: Suite
 
 `describe` is a function that takes two parameters.
 
-1. A string with a human-readable name. Typically the name of the function or class under test. For example, `describe('CounterComponent', /_ … _/)` is the suite that tests the `CounterComponent` class.
+1. A string with a human-readable name. Typically the name of the function or class under test. For example, `describe('CounterComponent', /* … */)` is the suite that tests the `CounterComponent` class.
 2. A function containing the suite definition.
 
 A `describe` block groups related specs that we will learn about in the next chapter.
@@ -45,10 +45,10 @@ TIP: Nesting `describe`
 ----
 describe('Suite description', () => {
   describe('One aspect', () => {
-    /_ … _/
+    /* … */
   });
   describe('Another aspect', () => {
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -65,9 +65,9 @@ Each suit consists of one or more _specifications_, or short, *specs*. A spec is
 ----
 describe('Suite description', () => {
   it('Spec description', () => {
-    /_ … _/
+    /* … */
   });
-  /_ … more specs …  _/
+  /* … more specs …  */
 });
 ----
 
@@ -84,10 +84,10 @@ Ask yourself, what does the code under test do? For example, in case of a `Count
 [source,typescript]
 ----
 it('increments the count', () => {
-  /_ … _/
+  /* … */
 });
 it('resets the count', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -95,7 +95,7 @@ After `it`, typically a verb follows, like `increments` and `resets` in the exam
 
 TIP: No “should”
 
-Some people prefer to write `it('should increment the count', /_ … _/)`, but `should` bears no additional meaning. The nature of a spec is to state what the code under test _should_ do. The word “should” is redundant and just makes the sentence longer. This guide recommends to simply state what the code does.
+Some people prefer to write `it('should increment the count', /* … */)`, but `should` bears no additional meaning. The nature of a spec is to state what the code under test _should_ do. The word “should” is redundant and just makes the sentence longer. This guide recommends to simply state what the code does.
 
 [NOTE]
 ====
@@ -112,7 +112,7 @@ TIP: Arrange, Act, Assert
 2. *Act* is the phase where interaction with the code under test happens. For example, a method is called or an HTML element in the DOM is clicked.
 3. *Assert* is the phase where the code behavior is checked and verified. For example, the actual output is compared to the expected output.
 
-How could the structure of the spec `it('resets the count', /_ … _/)` for the `CounterComponent` look like?
+How could the structure of the spec `it('resets the count', /* … */)` for the `CounterComponent` look like?
 
 1. *Arrange:*
 

@@ -301,7 +301,7 @@ Now let us test the `TranslatePipe`! We can either write a test that integrates 
 let translateService: Pick<
   TranslateService, 'onTranslationChange' | 'get'
 >;
-/_ … _/
+/* … */
 translateService = {
   onTranslationChange: new EventEmitter<Translations>(),
   get(key: string): Observable<string> {
@@ -362,7 +362,7 @@ describe('TranslatePipe: with TestBed and HostComponent', () => {
     fixture = TestBed.createComponent(HostComponent);
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -379,8 +379,8 @@ In the test, we write specs for both scenarios:
 
 [source,typescript]
 ----
-it('translates the key, sync service response', /_ … _/);
-it('translates the key, async service response', /_ … _/);
+it('translates the key, sync service response', /* … */);
+it('translates the key, async service response', /* … */);
 ----
 
 Let us start with the first case. The spec is straight-forward.
@@ -414,7 +414,7 @@ At the same time, we are writing an asynchronous spec. That is, Jasmine needs to
 
 TIP: `fakeAsync` and `tick`
 
-Again, there are several ways how to accomplish this. We are going to use Angular’s `fakeAsync` and `tick` functions. We have introduced them when ../testing-complex-forms/#successful-form-submission[testing a form with async validators].
+Again, there are several ways how to accomplish this. We are going to use Angular’s `fakeAsync` and `tick` functions. We have introduced them when <<testing-complex-forms#_successful_form_submission, testing a form with async validators>>.
 
 A quick recap: `fakeAsync` freezes time and prevents asynchronous tasks from being executed. The `tick` function then simulates the passage of time, executing the scheduled tasks.
 
@@ -423,7 +423,7 @@ A quick recap: `fakeAsync` freezes time and prevents asynchronous tasks from bei
 [source,typescript]
 ----
 it('translates the key, async service response', fakeAsync(() => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -434,7 +434,7 @@ Next, we need to change the `TranslateService`’s `get` method to make it async
 it('translates the key, async service response', fakeAsync(() => {
   translateService.get = (key) =>
     of(`Async translation for ${key}`).pipe(delay(100));
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -450,7 +450,7 @@ it('translates the key, async service response', fakeAsync(() => {
   translateService.get = (key) =>
     of(`Async translation for ${key}`).pipe(delay(100));
   fixture.detectChanges();
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -465,7 +465,7 @@ it('translates the key, async service response', fakeAsync(() => {
     of(`Async translation for ${key}`).pipe(delay(100));
   fixture.detectChanges();
   expectContent(fixture, '');
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -482,7 +482,7 @@ it('translates the key, async service response', fakeAsync(() => {
   expectContent(fixture, '');
 
   tick(100);
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -510,8 +510,8 @@ There are two specs left to write:
 
 [source,typescript]
 ----
-it('translates a changed key', /_ … _/);
-it('updates on translation change', /_ … _/);
+it('translates a changed key', /* … */);
+it('updates on translation change', /* … */);
 ----
 
 The `TranslatePipe` receives the translation asynchronously and stores both the key and the translation. When Angular calls `transform` with the _same key_ again, the Pipe returns the translation synchronously. Since the Pipe is marked as _impure_, Angular does not cache the `transform` result.

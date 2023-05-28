@@ -172,7 +172,7 @@ First of all, we need to test the presence of `app-counter`, the independent cou
 [source,typescript]
 ----
 it('renders an independent counter', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -239,7 +239,7 @@ The next feature we need to test is the `startCount` Input. In particular, the p
 ----
 it('passes a start count', () => {
   const counter = findComponent(fixture, 'app-counter');
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -287,7 +287,7 @@ Let us add a new spec for testing the Output:
 [source,typescript]
 ----
 it('listens for count changes', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -305,11 +305,11 @@ In this setup, we can simulate the Output using the known `triggerEventHandler` 
 [source,typescript]
 ----
 it('listens for count changes', () => {
-  /_ … _/
+  /* … */
   const counter = findComponent(fixture, 'app-counter');
   const count = 5;
   counter.triggerEventHandler('countChange', 5);
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -321,7 +321,7 @@ TIP: Output effect
 
 Under the hood, `triggerEventHandler` runs `handleCountChange($event)` with `$event` being `5`. `handleCountChange` calls `console.log`. This is the observable effect we need to test.
 
-How do we verify that `console.log` has been called? We can ../faking-dependencies/#spying-on-existing-methods[spy on existing methods] with Jasmine’s `spyOn`.
+How do we verify that `console.log` has been called? We can <<faking-dependencies#_spying_on_existing_methods, spy on existing methods>> with Jasmine’s `spyOn`.
 
 [source,typescript]
 ----
@@ -337,7 +337,7 @@ it('listens for count changes', () => {
   const counter = findComponent(fixture, 'app-counter');
   const count = 5;
   counter.triggerEventHandler('countChange', count);
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -426,7 +426,7 @@ This fake Component lacks a template and any logic, but has the same selector, I
 
 TIP: Same public API
 
-Remember the ../faking-dependencies/#faking-dependencies[rules for faking dependencies]? We need to make sure the fake resembles the original. `FakeCounterComponent implements Partial<CounterComponent>` requires the class to implement a subset of `CounterComponent`. TypeScript enforces that the given properties and methods have the same types as in the original class.
+Remember the <<faking-dependencies#_faking_dependencies, rules for faking dependencies>>? We need to make sure the fake resembles the original. `FakeCounterComponent implements Partial<CounterComponent>` requires the class to implement a subset of `CounterComponent`. TypeScript enforces that the given properties and methods have the same types as in the original class.
 
 TIP: Declare fake Component
 
@@ -678,7 +678,7 @@ describe('HomeComponent with ng-mocks', () => {
     counter = counterEl.componentInstance;
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 

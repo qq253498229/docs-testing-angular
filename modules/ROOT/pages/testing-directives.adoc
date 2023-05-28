@@ -30,7 +30,7 @@ Most styling logic can be implemented using CSS alone, no JavaScript code is nec
 
 === ThresholdWarningDirective
 
-None of our ../example-applications/#example-applications[example applications] contain an Attribute Directive, so we are introducing and testing the *`ThresholdWarningDirective`*.
+None of our <<example-applications#_example_applications, example applications>> contain an Attribute Directive, so we are introducing and testing the *`ThresholdWarningDirective`*.
 
 This Directive applies to `<input type="number">` elements. It toggles a class if the picked number exceeds a given threshold. If the number is higher than the threshold, the field should be marked visually.
 
@@ -164,7 +164,7 @@ First of all, Attribute and Structural Directives need an existing host element 
 class HostComponent {}
 ----
 
-We are going to render this Component. We need a standard ../testing-components/#configuring-the-testing-module[Component test setup] using the `TestBed`.
+We are going to render this Component. We need a standard <<testing-components#_configuring_the_testing_module, Component test setup>> using the `TestBed`.
 
 [source,typescript]
 ----
@@ -180,7 +180,7 @@ describe('ThresholdWarningDirective', () => {
     fixture.detectChanges();
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -188,7 +188,7 @@ When configuring the testing Module, we declare both the Directive under test an
 
 TIP: Find input element
 
-In the following specs, we need to access the input element. We use the standard approach: a `data-testid` attribute and the `findEl` ../testing-components/#testing-helpers[testing helper].
+In the following specs, we need to access the input element. We use the standard approach: a `data-testid` attribute and the `findEl` <<testing-components#_testing_helpers, testing helper>>.
 
 For convenience, we pick the input element in the `beforeEach` block. We save it in a shared variable named `input`.
 
@@ -218,7 +218,7 @@ describe('ThresholdWarningDirective', () => {
     input = findEl(fixture, 'input').nativeElement;
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -402,7 +402,7 @@ export class PaginateDirective<T> implements OnChanges {
   @Input()
   public appPaginateOf: T[] = [];
 
-  /_ … _/
+  /* … */
 }
 ----
 
@@ -452,7 +452,7 @@ export class PaginateDirective<T> implements OnChanges {
   @Input()
   public appPaginatePerPage = 10;
 
-  /_ … _/
+  /* … */
 }
 ----
 
@@ -576,7 +576,7 @@ export class PaginateDirective<T> implements OnChanges {
   @Input()
   public appPaginateControls?: TemplateRef<ControlsContext>;
 
-  /_ … _/
+  /* … */
 }
 ----
 
@@ -662,7 +662,7 @@ class HostComponent {
 }
 ----
 
-The template code already contains `data-testid` attributes. This is how we find and examine the elements in the test (see ../testing-components/#querying-the-dom-with-test-ids[Querying the DOM with test ids]).
+The template code already contains `data-testid` attributes. This is how we find and examine the elements in the test (see <<testing-components#_querying_the_dom_with_test_ids, Querying the DOM with test ids>>).
 
 This is quite a setup, but after all, we want to test the `PaginateDirective` under realistic conditions.
 
@@ -682,7 +682,7 @@ describe('PaginateDirective', () => {
     fixture.detectChanges();
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -738,7 +738,7 @@ TIP: Check controls
 
 The next spec proves that the controls template is rendered passing the current page and the total number of pages.
 
-The elements have have a `data-testid="page"` and `data-testid="pages"`, respectively. We use the ../testing-components/#testing-helpers[`expectText` testing helper] to check their text content.
+The elements have have a `data-testid="page"` and `data-testid="pages"`, respectively. We use the <<testing-components#_testing_helpers, `expectText` testing helper>> to check their text content.
 
 [source,typescript]
 ----

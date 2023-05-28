@@ -84,9 +84,9 @@ The `TestBed` comes with a testing Module that is configured like normal Modules
 [source,typescript]
 ----
 TestBed.configureTestingModule({
-  imports: [ /_… _/ ],
-  declarations: [ /_… _/ ],
-  providers: [ /_… _/ ],
+  imports: [ /*… */ ],
+  declarations: [ /*… */ ],
+  providers: [ /*… */ ],
 });
 ----
 
@@ -175,7 +175,7 @@ describe('CounterComponent', () => {
   });
 
   it('…', () => {
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -197,7 +197,7 @@ Per default, Jasmine expects that your testing code is synchronous. The function
 
 [NOTE]
 ====
-- ../test-suites-with-jasmine/#test-suites-with-jasmine[Test suites with Jasmine]
+- <<test-suites-with-jasmine#_test_suites_with_jasmine, Test suites with Jasmine>>
 ====
 
 == ComponentFixture and DebugElement
@@ -227,7 +227,7 @@ const component = fixture.componentInstance;
 component.startCount = 10;
 // Subscribe to Output
 component.countChange.subscribe((count) => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -276,7 +276,7 @@ Now let us roll up our sleeves and write the first spec! The main feature of our
 [source,typescript]
 ----
 it('increments the count', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -365,7 +365,7 @@ TIP: Establish a convention
 
 There is a nuanced discussion around the best way to find elements during testing. Certainly, there are several valid and elaborate approaches. This guide will only present one possible approach that is simple and approachable.
 
-The Angular testing tools are neutral when it comes to DOM querying. They tolerate different approaches. After consideration, you should opt for one specific solution, document it as a ../angular-testing-principles/#testing-conventions[testing convention] and apply it consistently across all tests.
+The Angular testing tools are neutral when it comes to DOM querying. They tolerate different approaches. After consideration, you should opt for one specific solution, document it as a <<angular-testing-principles#_testing_conventions, testing convention>> and apply it consistently across all tests.
 
 [NOTE]
 ====
@@ -387,7 +387,7 @@ TIP: Trigger event handler
 [source,typescript]
 ----
 incrementButton.triggerEventHandler('click', {
-  /_ … Event properties … _/
+  /* … Event properties … */
 });
 ----
 
@@ -459,7 +459,7 @@ The `counter.component.spec.ts` now looks like this:
 
 [source,typescript]
 ----
-/_ Incomplete! _/
+/* Incomplete! */
 describe('CounterComponent', () => {
   let fixture: ComponentFixture<CounterComponent>;
   let debugElement: DebugElement;
@@ -602,7 +602,7 @@ TIP: Testing helpers
 
 A *testing helper* is a piece of code that makes writing tests easier. It makes test code more concise and more meaningful. Since a spec should describe the implementation, a readable spec is better than an obscure, convoluted one.
 
-Your testing helpers should cast your ../angular-testing-principles/#testing-conventions[testing conventions] into code. They not only improve the individual test, but make sure all tests use the same patterns and work the same.
+Your testing helpers should cast your <<angular-testing-principles#+testing_conventions, testing conventions>> into code. They not only improve the individual test, but make sure all tests use the same patterns and work the same.
 
 A testing helper can be a simple function, but it can also be an abstraction class or a Jasmine extension. For the start, we extract common tasks into plain functions.
 
@@ -857,7 +857,7 @@ it('resets the count', () => {
 });
 ----
 
-While the reset feature is simple, this is how to test most form logic. Later, we will learn how to ../testing-complex-forms/#testing-complex-forms[test complex forms].
+While the reset feature is simple, this is how to test most form logic. Later, we will learn how to <<testing-complex-forms#_testing_complex_forms, test complex forms>>.
 
 TIP: Invalid input
 
@@ -927,9 +927,9 @@ Let us write a test for the `startCount` Input. We set the Input in the `beforeE
 
 [source,typescript]
 ----
-/_ Incomplete! _/
+/* Incomplete! */
 beforeEach(async () => {
-  /_ … _/
+  /* … */
 
   // Set the Input
   component.startCount = startCount;
@@ -978,7 +978,7 @@ describe('CounterComponent', () => {
     fixture.detectChanges();
   });
 
-  /_ … _/
+  /* … */
 
   it('shows the start count', () => {
     expectText(fixture, 'count', String(startCount));
@@ -1006,10 +1006,10 @@ The `CounterComponent` has an output named `countChange`. Whenever the count cha
 [source,typescript]
 ----
 export class CounterComponent implements OnChanges {
-  /_ … _/
+  /* … */
   @Output()
   public countChange = new EventEmitter<number>();
-  /_ … _/
+  /* … */
 }
 ----
 
@@ -1022,7 +1022,7 @@ Let us write a spec for the `countChange` Output!
 [source,typescript]
 ----
 it('emits countChange events on increment', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -1033,7 +1033,7 @@ Within the spec, we access the Output via `fixture.componentInstance.countChange
 it('emits countChange events on increment', () => {
   // Arrange
   component.countChange.subscribe((count) => {
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -1045,7 +1045,7 @@ We need to verify that the observer function is called with the right value when
 it('emits countChange events on increment', () => {
   // Arrange
   component.countChange.subscribe((count) => {
-    /_ … _/
+    /* … */
   });
 
   // Act
@@ -1082,7 +1082,7 @@ You might wonder why we did not put the `expect` call in the observer function:
 
 [source,typescript]
 ----
-/_ Not recommended! _/
+/* Not recommended! */
 it('emits countChange events on increment', () => {
   // Arrange
   component.countChange.subscribe((count: number) => {
@@ -1099,7 +1099,7 @@ TIP: Always run expectation
 
 This works as well. But if the feature under test is broken and the Output does not emit, `expect` is never called.
 
-Per default, Jasmine warns you that the spec has no expectations but treats the spec as successful (see ../angular-testing-principles/#configuring-karma-and-jasmine[Configuring Karma and Jasmine]). We want the spec to fail explicitly in this case, so we make sure the expectation is always run.
+Per default, Jasmine warns you that the spec has no expectations but treats the spec as successful (see <<angular-testing-principles#_configuring_karma_and_jasmine, Configuring Karma and Jasmine>>). We want the spec to fail explicitly in this case, so we make sure the expectation is always run.
 
 Now we have verified that `countChange` emits when the increment button is clicked. We also need to proof that the Output emits on decrement and reset. We can achieve that by adding two more specs that copy the existing spec:
 
@@ -1205,7 +1205,7 @@ This example requires some RxJS knowledge. We are going to encounter RxJS Observ
 
 Component tests are most meaningful if they closely mimic how the user interacts with the Component. The tests we have written apply this principle. We have worked directly with the DOM to read text, click on buttons and fill out form fields because this is what the user does.
 
-These tests are black box tests. We have already talked about ../testing-principles/#black-box-vs-white-box-testing[black box vs. white box testing] in theory. Both are valid testing methods. As stated, this guide advises to use black box testing first and foremost.
+These tests are black box tests. We have already talked about <<testing-principles#_black_box_vs_white_box_testing, black box vs. white box testing>> in theory. Both are valid testing methods. As stated, this guide advises to use black box testing first and foremost.
 
 A common technique to enforce black box testing is to mark internal methods as `private` so they cannot be called in the test. The test should only inspect the documented, public API.
 
@@ -1231,9 +1231,9 @@ They form the public API. However, there are several more properties and methods
 [source,typescript]
 ----
 public count = 0;
-public increment(): void { /_ … _/ }
-public decrement(): void { /_ … _/ }
-public reset(newCount: string): void { /_ … _/ }
+public increment(): void { /* … */ }
+public decrement(): void { /* … */ }
+public reset(newCount: string): void { /* … */ }
 ----
 
 TIP: `public` for the template
@@ -1244,9 +1244,9 @@ In our `CounterComponent` black box test, we increment the count by clicking on 
 
 [source,typescript]
 ----
-/_ Not recommended! _/
+/* Not recommended! */
 describe('CounterComponent', () => {
-  /_ … _/
+  /* … */
   it('increments the count', () => {
     component.increment();
     fixture.detectChanged();

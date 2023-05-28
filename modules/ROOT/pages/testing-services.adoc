@@ -29,7 +29,7 @@ So what does a Service do and how do we test it? Services are diverse, but some 
 
 - Services store data. They hold an internal state. We can get or set the state.
 
-  In the test, we check whether the state is changed correctly. Since the state should be held in private properties, we cannot access the state directly. We test the state change by calling public methods. We should not peek into the ../testing-principles/#black-box-vs-white-box-testing[black box].
+  In the test, we check whether the state is changed correctly. Since the state should be held in private properties, we cannot access the state directly. We test the state change by calling public methods. We should not peek into the <<testing-principles#_black_box_vs_white_box_testing, black box>>.
 
 - Services interact with dependencies. These are often other Services. For example, a Service might send HTTP requests via Angular’s `HttpClient`.
 
@@ -44,11 +44,11 @@ Let us start with testing the https://github.com/9elements/angular-workshop/blob
 class CounterService {
   private count: number;
   private subject: BehaviorSubject<number>;
-  public getCount(): Observable<number> { /_ … _/ }
-  public increment(): void { /_ … _/ }
-  public decrement(): void { /_ … _/ }
-  public reset(newCount: number): void { /_ … _/ }
-  private notify(): void { /_ … _/ }
+  public getCount(): Observable<number> { /* … */ }
+  public increment(): void { /* … */ }
+  public decrement(): void { /* … */ }
+  public reset(newCount: number): void { /* … */ }
+  private notify(): void { /* … */ }
 }
 ----
 
@@ -65,7 +65,7 @@ Let us write the test code! We create a file called `counter.service.spec.ts` an
 [source,typescript]
 ----
 describe('CounterService', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -74,10 +74,10 @@ We already know what the Service does and what needs to be tested. So we add spe
 [source,typescript]
 ----
 describe('CounterService', () => {
-  it('returns the count', () => { /_ … _/ });
-  it('increments the count', () => { /_ … _/ });
-  it('decrements the count', () => { /_ … _/ });
-  it('resets the count', () => { /_ … _/ });
+  it('returns the count', () => { /* … */ });
+  it('increments the count', () => { /* … */ });
+  it('decrements the count', () => { /* … */ });
+  it('resets the count', () => { /* … */ });
 });
 ----
 
@@ -103,18 +103,18 @@ describe('CounterService', () => {
     counterService = new CounterService();
   });
 
-  it('returns the count', () => { /_ … _/ });
-  it('increments the count', () => { /_ … _/ });
-  it('decrements the count', () => { /_ … _/ });
-  it('resets the count', () => { /_ … _/ });
+  it('returns the count', () => { /* … */ });
+  it('increments the count', () => { /* … */ });
+  it('decrements the count', () => { /* … */ });
+  it('resets the count', () => { /* … */ });
 });
 ----
 
-Let us start with writing the spec `it('returns the count', /_ … _/)`. It tests the `getCount` method that returns an Observable.
+Let us start with writing the spec `it('returns the count', /* … */)`. It tests the `getCount` method that returns an Observable.
 
 TIP: Change variable value
 
-For testing the Observable, we use the same pattern that we have used for ../testing-components/#testing-outputs[testing a Component Output]:
+For testing the Observable, we use the same pattern that we have used for <<testing-components#_testing_outputs, testing a Component Output>>:
 
 1. We declare a variable `actualCount` that is initially undefined.
 2. We subscribe to the Observable. We assign the emitted value to the `actualCount` variable.
@@ -192,7 +192,7 @@ let actualCount: number | undefined;
 counterService.getCount().subscribe((count) => {
   actualCount = count;
 });
-expect(actualCount).toBe(/_ … _/);
+expect(actualCount).toBe(/* … */);
 ----
 
 This is a good candidate for a helper function. Let us call it `expectCount`.
@@ -313,7 +313,7 @@ describe('CounterService', () => {
 
 Services without dependencies, like `CounterService`, are relatively easy to test. Let us examine a more complex Service with a dependency.
 
-In the ../example-applications/#the-flickr-photo-search[Flickr search], the https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.ts[FlickrService] is responsible for searching photos via the Flickr API. It makes an HTTP GET request to www.flickr.com. The server responds with JSON. Here is the full code:
+In the <<example-applications#_the_flickr_photo_search, Flickr search>>, the https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.ts[FlickrService] is responsible for searching photos via the Flickr API. It makes an HTTP GET request to www.flickr.com. The server responds with JSON. Here is the full code:
 
 [source,typescript]
 ----
@@ -416,10 +416,10 @@ describe('FlickrService', () => {
   it('searches for public photos', () => {
     flickrService.searchPublicPhotos(searchTerm).subscribe(
       (actualPhotos) => {
-        /_ … _/
+        /* … */
       }
     );
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -457,12 +457,12 @@ describe('FlickrService', () => {
   it('searches for public photos', () => {
     flickrService.searchPublicPhotos(searchTerm).subscribe(
       (actualPhotos) => {
-        /_ … _/
+        /* … */
       }
     );
 
     const request = controller.expectOne(expectedUrl);
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -498,7 +498,7 @@ We have already subscribed to the Observable:
 ----
 flickrService.searchPublicPhotos(searchTerm).subscribe(
   (actualPhotos) => {
-    /_ … _/
+    /* … */
   }
 );
 ----
@@ -514,7 +514,7 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
 );
 ----
 
-This leads to a problem that is known from ../testing-components/#testing-outputs[testing Outputs]: If the code under test is broken, the Observable never emits. The `next` callback with `expect` will not be called. Despite the defect, Jasmine thinks that all is fine.
+This leads to a problem that is known from <<testing-components#_testing_outputs, testing Outputs>>: If the code under test is broken, the Observable never emits. The `next` callback with `expect` will not be called. Despite the defect, Jasmine thinks that all is fine.
 
 TIP: Expect changed value
 
@@ -614,7 +614,7 @@ Let us simulate a “500 Internal Server Error”. Instead of responding to the 
 const status = 500;
 const statusText = 'Internal Server Error';
 const errorEvent = new ErrorEvent('API error');
-/_ … _/
+/* … */
 const request = controller.expectOne(expectedUrl);
 request.error(
   errorEvent,
@@ -638,7 +638,7 @@ We achieve that by subscribing to `next`, `error` and `complete` events:
 ----
 flickrService.searchPublicPhotos(searchTerm).subscribe(
   () => {
-    /_ next handler must not be called! _/
+    /* next handler must not be called! */
   },
   (error) => {
     /*
@@ -647,7 +647,7 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
     */
   },
   () => {
-    /_ complete handler must not be called! _/
+    /* complete handler must not be called! */
   },
 );
 ----

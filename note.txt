@@ -60,3 +60,10 @@ $2
 $1
 ====
 ---------------
+../testing-components-with-spectator/#testing-components-with-spectator[Spectator]
+\.\./(.+?)/#(.+?)\[(.+?)\]
+<<$1#$2, $3>>
+---------------
+/_(.*?)_/
+/*$1*/
+---------------

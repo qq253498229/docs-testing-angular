@@ -22,7 +22,7 @@ We need automated tests that take the user’s perspective. This is what *end-to
 
 == Strengths of end-to-end tests
 
-As discussed in ../testing-principles/#distribution-of-testing-efforts[distribution of testing efforts], all types of automated tests have pros and cons. Unit and integration tests are fast and reliable, but do not guarantee a working application. End-to-end test are slow and often fail incorrectly, but they assess the fitness of the application as a whole.
+As discussed in <<testing-principles#_distribution_of_testing_efforts, distribution of testing efforts>>, all types of automated tests have pros and cons. Unit and integration tests are fast and reliable, but do not guarantee a working application. End-to-end test are slow and often fail incorrectly, but they assess the fitness of the application as a whole.
 
 TIP: Real conditions
 
@@ -192,7 +192,7 @@ Mocha and Chai is a popular combination. They roughly do the same as Jasmine, bu
 
 TIP: Test suites
 
-If you have ../test-suites-with-jasmine/#test-suites-with-jasmine[written unit tests with Jasmine] before, the Mocha structure will be familiar to you. A test file contains one or more suites declared with `describe('…', () => { /_ … _/})`. Typically, one file contains one `describe` block, possible with nested `describe` blocks.
+If you have <<test-suites-with-jasmine#_test_suites_with_jasmine, written unit tests with Jasmine>> before, the Mocha structure will be familiar to you. A test file contains one or more suites declared with `describe('…', () => { /* … */})`. Typically, one file contains one `describe` block, possible with nested `describe` blocks.
 
 Inside `describe`, the blocks `beforeEach`, `afterEach`, `beforeAll`, `afterAll` and `it` can be used similar to Jasmine tests.
 
@@ -467,7 +467,7 @@ Just like with unit and integration test, the immediate question is: How should 
 
 TIP: Find by test id
 
-As discussed in ../testing-components/#querying-the-dom-with-test-ids[querying the DOM with test ids], this guide recommends to mark elements with *test ids*.
+As discussed in <<testing-components#_querying_the_dom_with_test_ids, querying the DOM with test ids>>, this guide recommends to mark elements with *test ids*.
 
 These are data attributes like `data-testid="example"`. In the test, we use a corresponding attribute selector to find the elements, for example:
 
@@ -644,7 +644,7 @@ All counter features are now tested. In the next chapters, we will refactor the 
 
 The test we wrote is quite repetitive. The pattern `cy.get('[data-testid="…"]')` is repeated over and over.
 
-The first improvement is to write a helper that hides this detail. We have already written two similar functions as ../testing-components/#testing-helpers[unit testing helpers], `findEl` and `findEls`.
+The first improvement is to write a helper that hides this detail. We have already written two similar functions as <<testing-components#_testing_helpers, unit testing helpers>>, `findEl` and `findEls`.
 
 TIP: Find by test id
 
@@ -838,7 +838,7 @@ describe('Flickr search', () => {
   });
 
   it('searches for a term', () => {
-    /_ … _/
+    /* … */
   });
 });
 ----
@@ -853,7 +853,7 @@ it('searches for a term', () => {
     .clear()
     .type(searchTerm);
   cy.byTestId('submit-search').first().click();
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -890,7 +890,7 @@ The Chainer has an `each` method to call a function for each element. This works
 cy.byTestId('photo-item-link')
   .should('have.length', 15)
   .each((link) => {
-    /_ Check the link _/
+    /* Check the link */
   });
 ----
 
@@ -974,7 +974,7 @@ In the end-to-end test, we add a spec to verify this behavior.
 [source,typescript]
 ----
 it('shows the full photo', () => {
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -1102,7 +1102,7 @@ describe('Flickr search (with page object)', () => {
     page.visit();
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -1227,7 +1227,7 @@ TIP: Intercept HTTP requests
 
 With Cypress, we can uncouple the dependency. Cypress allows us to intercept HTTP requests and respond with fake data.
 
-First of all, we need to set up the fake data. We have already created fake photo objects for the ../testing-services/#testing-a-service-that-sends-http-requests[`FlickrService` unit test]. For simplicity, we just import them:
+First of all, we need to set up the fake data. We have already created fake photo objects for the <<testing-services#_testing_a_service_that_sends_http_requests, `FlickrService` unit test>>. For simplicity, we just import them:
 
 [source,typescript]
 ----
@@ -1312,7 +1312,7 @@ it('searches for a term', () => {
 
   cy.wait('@flickrSearchRequest');
 
-  /_ … _/
+  /* … */
 });
 ----
 

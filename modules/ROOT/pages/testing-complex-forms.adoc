@@ -9,7 +9,7 @@ Learning objectives
 
 Forms are the powerhouses of large web applications. Especially enterprise applications revolve around entering and editing data via forms. Therefore, implementing complex forms is a vital feature of the Angular framework.
 
-We have already learned how to ../testing-components/#filling-out-forms[fill out form fields] when testing the counter Component. In doing so, we developed the `setFieldValue` testing helper.
+We have already learned how to <<testing-components#_filling_out_forms, fill out form fields>> when testing the counter Component. In doing so, we developed the `setFieldValue` testing helper.
 
 The simple forms we have dealt with served the purpose of entering one value. We have tested them by filling out the field and submitting the form. Now we will look at a more complex example.
 
@@ -88,7 +88,7 @@ The important bits of the `SignupFormComponent` class are:
   styleUrls: ['./signup-form.component.scss'],
 })
 export class SignupFormComponent {
-  /_ … _/
+  /* … */
   public form = this.formBuilder.group({
     plan: ['personal', required],
     username: [
@@ -119,13 +119,13 @@ export class SignupFormComponent {
       country: [null, required],
     }),
   });
-  /_ … _/
+  /* … */
   constructor(
     private signupService: SignupService,
     private formBuilder: FormBuilder) {
-    /_ … _/
+    /* … */
   }
-  /_ … _/
+  /* … */
 }
 ----
 
@@ -353,7 +353,7 @@ declarations: [
 
 TIP: Fake Service
 
-The `SignupFormComponent` depends on the `SignupService`. We do not want HTTP requests to the back-end when the tests run, so we ../testing-components-depending-on-services/#faking-service-dependencies[replace the Service with a fake instance].
+The `SignupFormComponent` depends on the `SignupService`. We do not want HTTP requests to the back-end when the tests run, so we <<testing-components-depending-on-services#_faking_service_dependencies, replace the Service with a fake instance>>.
 
 [source,typescript]
 ----
@@ -389,7 +389,7 @@ Since we are going to test several error cases as well, we need to create `Signu
 
 TIP: `createSpyObj`
 
-This is a job for Jasmine’s `createSpyObj` (see ../testing-components-depending-on-services/#faking-service-dependencies[Faking Service dependencies]).
+This is a job for Jasmine’s `createSpyObj` (see <<testing-components-depending-on-services#_faking_service_dependencies, Faking Service dependencies>>).
 
 [source,typescript]
 ----
@@ -448,7 +448,7 @@ describe('SignupFormComponent', () => {
     fixture.detectChanges();
   };
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -516,7 +516,7 @@ Back in `signup-form.component.spec.ts`, we create a new spec that calls the set
 it('submits the form successfully', async () => {
     await setup();
 
-    /_ … _/
+    /* … */
 });
 ----
 
@@ -541,7 +541,7 @@ const fillForm = () => {
 };
 ----
 
-The `fillForm` function lies in the scope of `describe` so it may access the `fixture` variable. It uses the `setFieldValue` and `checkField` ../testing-components/#testing-helpers[element testing helpers].
+The `fillForm` function lies in the scope of `describe` so it may access the `fixture` variable. It uses the `setFieldValue` and `checkField` <<testing-components#_testing_helpers, element testing helpers>>.
 
 In the spec, we call `fillForm`:
 
@@ -552,7 +552,7 @@ it('submits the form successfully', async () => {
 
     fillForm();
 
-    /_ … _/
+    /* … */
 });
 ----
 
@@ -560,7 +560,7 @@ Let us try to submit the form immediately after. The form under test listens for
 
 TIP: Submit form
 
-We find the `form` element by its test id and simulate a `submit` event (see ../testing-components/#triggering-event-handlers[Triggering event handlers]).
+We find the `form` element by its test id and simulate a `submit` event (see <<testing-components#_triggering_event_handlers, Triggering event handlers>>).
 
 Then we expect the `signup` spy to have been called with the entered data.
 
@@ -600,7 +600,7 @@ This technique to reduce the amount of requests is called _debouncing_. For exam
 
 The spec above submits the form immediately after filling out the fields. At this point in time, the asynchronous validators have been called but have not returned a value yet. They are still waiting for the debounce period to pass.
 
-In consequence, the test needs to wait one second for the asynchronous validators. An easy way would be to write an asynchronous test that uses `setTimeout(() => { /_ … _/}, 1000)`. But this would slow down our specs.
+In consequence, the test needs to wait one second for the asynchronous validators. An easy way would be to write an asynchronous test that uses `setTimeout(() => { /* … */}, 1000)`. But this would slow down our specs.
 
 TIP: `fakeAsync` and `tick`
 
@@ -768,7 +768,7 @@ it('handles signup failure', fakeAsync(async () => {
     signup: throwError(new Error('Validation failed')),
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -889,7 +889,7 @@ it('marks fields as required', async () => {
   });
   fixture.detectChanges();
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -910,7 +910,7 @@ requiredFields.forEach((testId) => {
     `${testId} must be marked as aria-required`,
   );
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -1050,7 +1050,7 @@ const setup = async (
     }
   );
 
-  /_ … _/
+  /* … */
 };
 ----
 
@@ -1065,7 +1065,7 @@ it('fails if the username is taken', fakeAsync(async () => {
     // Let the API return that the username is taken
     isUsernameTaken: of(true),
   });
-  /_ … _/
+  /* … */
 }));
 ----
 
@@ -1076,7 +1076,7 @@ it('fails if the email is taken', fakeAsync(async () => {
     // Let the API return that the email is taken
     isEmailTaken: of(true),
   });
-  /_ … _/
+  /* … */
 }));
 ----
 
@@ -1087,7 +1087,7 @@ it('fails if the password is too weak', fakeAsync(async () => {
     // Let the API return that the password is weak
     getPasswordStrength: of(weakPassword),
   });
-  /_ … _/
+  /* … */
 }));
 ----
 
@@ -1124,7 +1124,7 @@ We expect that the three async validators call the respective `SignupService` me
 
 The username validation fails, so we expect that the Component prevents the form submission. The `signup` method must not be called.
 
-As stated above, the two other specs `it('fails if the email is taken', /_ … _/)` and `it('fails if the password is too weak', /_ … _/)` look the same apart from the fake setup.
+As stated above, the two other specs `it('fails if the email is taken', /* … */)` and `it('fails if the password is too weak', /* … */)` look the same apart from the fake setup.
 
 [NOTE]
 ====
@@ -1165,7 +1165,7 @@ Let us write a spec to ensure that `addressLine1` is required for certain plans.
 it('requires address line 1 for business and non-profit plans', async () => {
   await setup();
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -1286,7 +1286,7 @@ To test this feature, we create a new spec:
 it('toggles the password display', async () => {
   await setup();
 
-  /_ … _/
+  /* … */
 });
 ----
 

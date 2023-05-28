@@ -111,7 +111,7 @@ If we want an integration test to verify that the Component stores the count in 
 
 Let us move on to the *unit test* for the `ServiceCounterComponent`. To tackle this challenge, we need to learn the art of faking Service dependencies.
 
-There are several practical approaches with pros and cons. We have discussed two main ../faking-dependencies/#faking-dependencies[requirements on fake dependencies]:
+There are several practical approaches with pros and cons. We have discussed two main <<faking-dependencies#_faking_dependencies, requirements on fake dependencies>>:
 
 1. Equivalence of fake and original: The fake must have a type derived from the original.
 2. Effective faking: the original stays untouched.
@@ -125,11 +125,11 @@ The dependency we need to fake, `CounterService`, is a simple class annotated wi
 [source,typescript]
 ----
 class CounterService {
-  public getCount(): Observable<number> { /_ … _/ }
-  public increment(): void { /_ … _/ }
-  public decrement(): void { /_ … _/ }
-  public reset(newCount: number): void { /_ … _/ }
-  private notify(): void { /_ … _/ }
+  public getCount(): Observable<number> { /* … */ }
+  public increment(): void { /* … */ }
+  public decrement(): void { /* … */ }
+  public reset(newCount: number): void { /* … */ }
+  private notify(): void { /* … */ }
 }
 ----
 
@@ -228,7 +228,7 @@ TIP: Spy on methods
 
 A plain object with methods is an easy way to create a fake instance. The spec needs to verify that the methods have been called with the right parameters.
 
-../faking-dependencies/#faking-functions-with-jasmine-spies[Jasmine spies] are suitable for this job. A first approach fills the fake with standalone spies:
+<<faking-dependencies#_faking_functions_with_jasmine_spies, Jasmine spies>> are suitable for this job. A first approach fills the fake with standalone spies:
 
 [source,typescript]
 ----
@@ -302,7 +302,7 @@ describe('ServiceCounterComponent: unit test', () => {
     fixture.detectChanges();
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -424,15 +424,15 @@ We declare a variable `fakeCount$` in the scope of the test suite and assign a `
 [source,typescript]
 ----
 describe('ServiceCounterComponent: unit test with minimal Service logic', () => {
-  /_ … _/
+  /* … */
   let fakeCount$: BehaviorSubject<number>;
 
   beforeEach(async () => {
     fakeCount$ = new BehaviorSubject(0);
-    /_ … _/
+    /* … */
   });
 
-  /_ … _/
+  /* … */
 });
 ----
 
@@ -441,7 +441,7 @@ Then we change the `fakeCounterService` so the methods push new values through `
 [source,typescript]
 ----
 const newCount = 123;
-/_ … _/
+/* … */
 fakeCounterService = {
   getCount(): Observable<number> {
     return fakeCount$;
@@ -590,7 +590,7 @@ TIP: Guidelines
 There are two guidelines that may help you:
 
 1. Is the test valuable? Does it cover the important interaction between Component and Service? Decide whether to test the interaction superficially or in-depth.
-2. Whichever approach you choose, make sure to meet the ../faking-dependencies/#faking-dependencies[basic requirements]:
+2. Whichever approach you choose, make sure to meet the <<faking-dependencies#_faking_dependencies, basic requirements>>:
 +
 ** 1. Equivalence of fake and original: The fake must have a type derived from the original.
 ** 2. Effective faking: the original stays untouched.
