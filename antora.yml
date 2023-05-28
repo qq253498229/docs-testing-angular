@@ -1,6 +1,6 @@
 name: docs-testing-angular
 title: Testing Angular
-version: '2021-08-22'
+version: '中文'
 start_page: ROOT:start.adoc
 nav:
   - modules/ROOT/nav.adoc

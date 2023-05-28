@@ -1,19 +1,19 @@
-= Terminology
+= 术语
 
-Learning objectives
+学习目标
 
-- Terms used in this book
-- Notation conventions
+- 本书中使用的术语
+- 符号约定
 
-Before we dive in, a quick note regarding the technical terms.
+在我们深入讨论之前，对技术术语进行一个简短的说明。
 
-Some words have a special meaning in the context of Angular. In the broader JavaScript context, they have plenty other meanings. This guide tries to distinguish these meanings by using a different letter case.
+在 Angular 的上下文中，某些词汇具有特殊的含义。在更广泛的 JavaScript 上下文中，它们可能有其他许多含义。本指南试图通过使用不同的大小写来区分这些含义。
 
-When referring to core Angular concepts, this guide uses *upper case*:
+当提到核心 Angular 概念时，本指南使用 *大写字母*：
 
-_Module, Component, Service, Input, Output, Directive, Pipe_, etc.
+_模块（Module）、组件（Component）、服务（Service）、输入（Input）、输出（Output）、指令（Directive）、管道（Pipe）_ 等。
 
-When using these terms in the general sense, this guide uses *lower case*:
+当在一般意义上使用这些术语时，本指南使用 *小写字母*：
 
-_module, component, service, input, output_, etc.
+_模块（module）、组件（component）、服务（service）、输入（input）、输出（output）_ 等。
 
