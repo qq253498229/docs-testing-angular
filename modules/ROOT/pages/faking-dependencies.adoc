@@ -1,84 +1,84 @@
-= Faking dependencies
+= 伪造依赖
 
-Learning objectives
+学习目标
 
-- Testing a code unit in isolation
-- Replacing dependencies with fakes
-- Rules for creating fakes to avoid pitfalls
-- Using Jasmine spies to fake functions and methods
+- 在隔离中测试代码单元
+- 用伪造物替换依赖项
+- 创建伪造物的规则，以避免陷阱
+- 使用 Jasmine 间谍来伪造函数和方法
 
-When testing a piece of code, you need to decide between an <<testing-principles#_integration_tests, integration test>> and a <<testing-principles#_unit_tests, unit test>>. To recap, the integration test includes (“integrates”) the dependencies. In contrast, the unit test replaces the dependencies with fakes in order to isolate the code under test.
+在测试代码时，您需要在 <<testing-principles#_集成测试, 集成测试>> 和 <<testing-principles#_单元测试, 单元测试>> 之间进行选择。回顾一下，集成测试包括（"整合"）依赖项。相反，单元测试用伪造物替换依赖项，以隔离测试代码。
 
-TIP: Also known as mocking
+TIP: 也称为模拟
 
-These replacements are also called _test doubles_, _stubs_ or _mocks_. Replacing a dependency is called _stubbing_ or _mocking_.
+这些替代物也被称为 _测试替身(test doubles)_、_存根(stubs)_或 _模拟(mocks)_。替换依赖项称为 _存根(stubbing)_ 或 _模拟(mocking)_。
 
-Since these terms are used inconsistently and their difference is subtle, *this guide uses the term “fake” and “faking”* for any dependency substitution.
+由于这些术语的使用不一致，它们之间的区别很微妙，*本指南使用术语“伪造物”和“伪造”* 来表示任何依赖项替换。
 
-TIP: Faking safely
+TIP: 安全伪造
 
-Creating and injecting fake dependencies is essential for unit tests. This technique is double-edged – powerful and dangerous at the same time. Since we will create many fakes throughout this guide, we need to set up *rules for faking dependencies* to apply the technique safely.
+创建和注入伪造的依赖项对于单元测试至关重要。这种技术是双刃剑——既强大又危险。由于我们将在本指南中创建许多伪造物，我们需要制定 *规则* 以安全地应用 *伪造依赖项* 技术。
 
-== Equivalence of fake and original
+== 伪造物和原始物的等价性
 
-A fake implementation must have the same shape as the original. If the dependency is a function, the fake must have the same signature, meaning the same parameters and the same return value. If the dependency is an object, the fake must have the same public API, meaning the same public methods and properties.
+伪造实现必须与原始实现具有相同的结构。如果依赖项是一个函数，则伪造物必须具有相同的签名，即相同的参数和相同的返回值。如果依赖项是一个对象，则伪造物必须具有相同的公共 API，即相同的公共方法和属性。
 
-TIP: Replaceability
+TIP: 可替换性
 
-The fake does not need to be complete, but sufficient enough to act as a replacement. The fake needs to be *equivalent to the original* as far as the code under test is concerned, not fully equal to the original.
+伪造物不需要完整，但必须足够作为替代品。伪造物在测试代码所涉及的方面上需要与 *原始物等价* ，而不必完全等于原始物。
 
-Imagine a fake building on a movie set. The outer shape needs to be indistinguishable from an original building. But behind the authentic facade, there is only a wooden scaffold. The building is an empty shell.
+想象一下电影拍摄现场的伪造建筑。外部形状必须与原始建筑无法区分。但在真实的外观背后，只有一个木质脚手架。建筑物是一个空壳。
 
-The biggest danger of creating a fake is that it does not properly mimic the original. Even if the fake resembles the original at the time of writing the code, it might easily get out of sync later when the original is changed.
+创建伪造物的最大危险在于它不能正确模仿原始物。即使伪造物在编写代码时与原始物相似，但在原始物更改后很容易不同步。
 
-When the original dependency changes its public API, dependent code needs to be adapted. Also, the fake needs to be aligned. When the fake is outdated, the unit test becomes a fantasy world where everything magically works. The test passes but in fact the code under test is broken.
+当原始依赖项更改其公共 API 时，依赖代码需要进行调整。伪造物也需要进行调整。当伪造物过时时，单元测试就变成了一个神奇的世界，其中一切都能够奇迹般地工作。测试通过了，但实际上被测试的代码已经出错了。
 
-TIP: Keep fake in sync
+TIP: 保持伪造物同步
 
-How can we ensure that the fake is up-to-date with the original? How can we ensure the equivalence of original and fake in the long run and prevent any possible divergence?
+如何确保伪造物与原始物保持最新？如何确保原始物和伪造物的等价性，并防止任何可能的分歧？
 
-We can use TypeScript to *enforce that the fake has a matching type*. The fake needs to be strictly typed. The fake’s type needs to be a subset of the original’s type.
+我们可以使用 TypeScript *强制伪造物具有匹配的类型*。伪造物需要是严格类型化的。伪造物的类型需要是原始物类型的子集。
 
-TIP: Type equivalence
+TIP: 类型等价性
 
-Then, TypeScript assures the equivalence. The compiler reminds us to update the implementation and the fake. The TypeScript code simply does not compile if we forget that. We will learn how to declare matching types in the upcoming examples.
+然后，TypeScript 保证了等价性。如果我们忘记了更新实现和伪造物，编译器会提醒我们。我们将在接下来的示例中学习如何声明匹配的类型。
 
-== Effective faking
+== 有效的伪造
 
-The original dependency code has side effects that need to be suppressed during testing. The fake needs to _effectively_ prevent the original code from being executed. Strange errors may happen if a mix of fake and original code is executed.
+原始的依赖项代码具有需要在测试期间抑制的副作用。伪造物需要 _有效地_ 阻止原始代码的执行。如果混合使用伪造物和原始代码，可能会发生奇怪的错误。
 
-TIP: Do not mix fake and original
+TIP: 不要混合使用伪造物和原始物
 
-In some faking approaches, the fake inherits from the original. Only those properties and methods are overwritten that are currently used by the code under test.
+在某些伪造方法中，伪造物继承自原始物。只有当前被测试代码使用的属性和方法会被覆盖。
 
-This is dangerous since we may forget to overwrite methods. When the code under test changes, the test may accidentally call original methods of the dependency.
+这是危险的，因为我们可能会忘记覆盖某些方法。当被测试代码发生变化时，测试可能会意外调用依赖项的原始方法。
 
-This guide will present thorough faking techniques that do not allow a slip. They imitate the original code while shielding the original from calls.
+本指南将介绍彻底的伪造技术，不允许出错。它们模仿原始代码，同时保护原始代码免受调用。
 
-== Faking functions with Jasmine spies
+== 使用 Jasmine 间谍伪造函数
 
-Jasmine provides simple yet powerful patterns to create fake implementations. The most basic pattern is the *Jasmine spy* for replacing a function dependency.
+Jasmine 提供了简单而强大的模式来创建伪造实现。最基本的模式是使用 *Jasmine 间谍* 来替换函数依赖项。
 
-TIP: Call record
+TIP: 调用记录
 
-In its simplest form, a spy is a function that records its calls. For each call, it records the function parameters. Using this record, we later assert that the spy has been called with particular input values.
+在最简单的形式中，间谍是一个记录其调用的函数。对于每个调用，它记录函数的参数。使用这个记录，我们之后可以断言该间谍已经以特定的输入值被调用。
 
-For example, we declare in a spec: “Expect that the spy has been called two times with the values `mickey` and `minnie`, respectively.”
+例如，我们在一个规范中声明：“期望该间谍已经分别以 `mickey` 和 `minnie` 的值被调用两次。”
 
-Like every other function, a spy can have a meaningful return value. In the simple case, this is a fixed value. The spy will always return the same value, regardless of the input parameters. In a more complex case, the return value originates from an underlying fake function.
+像其他任何函数一样，间谍可以有一个有意义的返回值。在简单的情况下，这是一个固定的值。无论输入参数如何，该间谍始终返回相同的值。在更复杂的情况下，返回值来自底层的伪造函数。
 
 TIP: `createSpy`
 
-A standalone spy is created by calling `jasmine.createSpy`:
+通过调用 `jasmine.createSpy` 创建一个独立的间谍：
 
 [source,typescript]
 ----
 const spy = jasmine.createSpy('name');
 ----
 
-`createSpy` expects one parameter, an optional name. It is recommended to pass a name that describes the original. The name will be used in error messages when you make expectations against the spy.
+`createSpy` 接受一个参数，一个可选的名称。建议传递一个描述原始功能的名称。当您对间谍进行期望时，该名称将在错误消息中使用。
 
-Assume we have class `TodoService` responsible for fetching a to-do list from the server. The class uses the https://developer.mozilla.org/de/docs/Web/API/Fetch_API[Fetch API] to make an HTTP request. (This is a plain TypeScript example. It is uncommon to use `fetch` directly in an Angular app.)
+假设我们有一个名为 `TodoService` 的类，负责从服务器获取待办事项列表。该类使用 https://developer.mozilla.org/de/docs/Web/API/Fetch_API[Fetch API] 进行HTTP请求。（这是一个普通的TypeScript示例，在Angular应用中直接使用 `fetch` 是不常见的。）
 
 [source,typescript]
 ----
@@ -100,13 +100,13 @@ class TodoService {
 }
 ----
 
-TIP: Inject fake
+TIP: 注入假的依赖项
 
-The `TodoService` uses the *constructor injection* pattern. The `fetch` dependency can be injected via an optional constructor parameter. In production code, this parameter is empty and defaults to the original `window.fetch`. In the test, a fake dependency is passed to the constructor.
+`TodoService` 使用 *构造函数注入* 模式。`fetch` 依赖项可以通过可选的构造函数参数进行注入。在生产代码中，该参数为空，并且默认为原始的 `window.fetch`。在测试中，传递一个假的依赖项给构造函数。
 
-The `fetch` parameter, whether original or fake, is saved as an instance property `this.fetch`. Eventually, the public method `getTodos` uses it to make an HTTP request.
+无论是原始的还是假的 `fetch` 参数，都保存为实例属性 `this.fetch` 。最终，公共方法 `getTodos` 使用它来发起HTTP请求。
 
-In our unit test, we do not want the Service to make any HTTP requests. We pass in a Jasmine spy as replacement for `window.fetch`.
+在我们的单元测试中，我们不希望Service进行任何HTTP请求。我们使用Jasmine spy作为 `window.fetch` 的替代品。
 
 [source,typescript]
 ----
@@ -138,7 +138,7 @@ describe('TodoService', () => {
 });
 ----
 
-There is a lot to unpack in this example. Let us start with the fake data before the `describe` block:
+在这个示例中有很多要理解的内容。让我们从 `describe` 块之前的假数据开始解析：
 
 [source,typescript]
 ----
@@ -153,13 +153,13 @@ const okResponse = new Response(JSON.stringify(todos), {
 });
 ----
 
-First, we define the fake data we want the `fetch` spy to return. Essentially, this is an array of strings.
+首先，我们定义了我们希望 `fetch` spy返回的假数据。实质上，这是一个字符串数组。
 
-TIP: Fake response
+TIP: 假响应
 
-The original `fetch` function returns a `Response` object. We create one using the built-in `Response` constructor. The original server response is a string before it is parsed as JSON. So we need to serialize the array into a string before passing it to the `Response` constructor. (These `fetch` details are not relevant to grasp the spy example.)
+原始的 `fetch` 函数返回一个 `Response` 对象。我们使用内置的 `Response` 构造函数创建一个 `Response` 对象。在被解析为JSON之前，原始的服务器响应是一个字符串。因此，我们需要将数组序列化为字符串，然后将其传递给 `Response` 构造函数。（这些 `fetch` 的细节与理解spy示例无关。）
 
-Then, we declare a test suite using `describe`:
+然后，我们使用 `describe` 声明一个测试套件：
 
 [source,typescript]
 ----
@@ -168,7 +168,7 @@ describe('TodoService', () => {
 });
 ----
 
-The suite contains one spec that tests the `getTodos` method:
+该测试套件包含一个规范（spec），用于测试 `getTodos` 方法：
 
 [source,typescript]
 ----
@@ -177,7 +177,7 @@ it('gets the to-dos', async () => {
 });
 ----
 
-The spec starts with _Arrange_ code:
+该规范（spec）以“安排（_Arrange_）”代码开始：
 
 [source,typescript]
 ----
@@ -187,22 +187,22 @@ const fetchSpy = jasmine.createSpy('fetch')
 const todoService = new TodoService(fetchSpy);
 ----
 
-Here, we create a spy. With `.and.returnValue(…)`, we set a fixed return value: the successful response.
+在这里，我们创建一个 Jasmine spy（间谍）。使用 `.and.returnValue(…)`，我们设置一个固定的返回值：成功的响应。
 
-TIP: Inject spy
+TIP: 注入 spy
 
-We also create an instance of `TodoService`, the class under test. We pass the spy into the constructor. This is a form of manual dependency injection.
+我们还创建了 `TodoService` 的一个实例，也就是待测试的类。我们将 spy 传递给构造函数。这是一种手动依赖注入的形式。
 
-In the _Act_ phase, we call the method under test:
+在行动（_Act_）阶段，我们调用待测试的方法：
 
 [source,typescript]
 ----
 const actualTodos = await todoService.getTodos();
 ----
 
-`getTodos` returns a Promise. We use an `async` function together with `await` to access the return value easily. Jasmine deals with async functions just fine and waits for them to complete.
+`getTodos` 返回一个 Promise。我们使用 `async` 函数结合 `await` 来轻松访问返回值。Jasmine 对于异步函数处理得很好，并等待它们完成。
 
-In the _Assert_ phase, we create two expectations:
+在断言（_Assert_）阶段，我们创建了两个期望（expectations）：
 
 [source,typescript]
 ----
@@ -210,19 +210,19 @@ expect(actualTodos).toEqual(todos);
 expect(fetchSpy).toHaveBeenCalledWith('/todos');
 ----
 
-TIP: Data processing
+TIP: 数据处理
 
-First, we verify the return value. We compare the actual data (`actualTodos`) with the fake data the spy returns (`todos`). If they are equal, we have proven that `getTodos` parsed the response as JSON and returned the result. (Since there is no other way `getTodos` could access the fake data, we can deduce that the spy has been called.)
+首先，我们验证返回值。我们将实际数据（`actualTodos`）与 spy 返回的伪数据（`todos`）进行比较。如果它们相等，我们就证明了 `getTodos` 将响应解析为 JSON 并返回结果。（由于 `getTodos` 访问伪数据的唯一方式就是通过 spy，我们可以推断出 spy 已被调用。）
 
-TIP: Verify call record
+TIP: 验证调用记录
 
-Second, we verify that the `fetch` spy has been called _with the correct parameter_, the API endpoint URL. Jasmine offers several matchers for making expectations on spies. The example uses `toHaveBeenCalledWith` to assert that the spy has been called with the parameter `'/todos'`.
+其次，我们验证 `fetch` spy 是否 _使用了正确的参数_ 进行调用，即 API 终端点 URL。Jasmine 提供了多种匹配器来对 spy 进行期望。示例中使用了 `toHaveBeenCalledWith` 来断言 spy 是否以参数 '/todos' 被调用。
 
-Both expectations are necessary to guarantee that `getTodos` works correctly.
+这两个期望都是必要的，以确保 `getTodos` 正确工作。
 
-TIP: Happy and unhappy paths
+TIP: 正常和异常路径
 
-After having written the first spec for `getTodos`, we need to ask ourselves: Does the test fully cover its behavior? We have tested the success case, also called _happy path_, but the error case, also called _unhappy path_, is yet to be tested. In particular, this error handling code:
+在编写了 `getTodos` 的第一个规范后，我们需要问自己：这个测试是否完全覆盖了其行为？我们已经测试了成功情况，也称为 _正常路径(happy path)_，但尚未测试错误情况，也称为 _异常路径(unhappy path)_，特别是以下错误处理代码：
 
 [source,typescript]
 ----
@@ -233,9 +233,9 @@ if (!response.ok) {
 }
 ----
 
-When the server response is not “ok”, we throw an error. “Ok” means the HTTP response status code is 200-299. Examples of “not ok” are “403 Forbidden”, “404 Not Found” and “500 Internal Server Error”. Throwing an error rejects the Promise so the caller of `getTodos` knows that fetching the to-dos failed.
+当服务器响应不是“ok”时，我们抛出一个错误。“Ok”表示HTTP响应状态码为200-299。不“ok”的示例有“403 Forbidden”、“404 Not Found”和“500 Internal Server Error”。抛出错误会拒绝 Promise，这样调用 `getTodos` 的调用方就知道获取待办事项失败了。
 
-The fake `okResponse` mimics the success case. For the error case, we need to define another fake `Response`. Let us call it `errorResponse` with the notorious HTTP status 404 Not Found:
+伪造的 `okResponse` 模拟了成功的情况。对于错误的情况，我们需要定义另一个伪造的 `Response`。让我们称之为 `errorResponse`，它具有臭名昭著的 HTTP 状态码 404 Not Found：
 
 [source,typescript]
 ----
@@ -245,9 +245,9 @@ const errorResponse = new Response('Not Found', {
 });
 ----
 
-Assuming the server does not return JSON in the error case, the response body is simply the string `'Not Found'`.
+假设服务器在错误的情况下不返回 JSON，响应主体只是字符串 `'Not Found'`。
 
-Now we add a second spec for the error case:
+现在我们为错误情况添加第二个规范：
 
 [source,typescript]
 ----
@@ -274,42 +274,42 @@ describe('TodoService', () => {
 });
 ----
 
-In the _Arrange_ phase, we inject a spy that returns the error response.
+在 _Arrange_ 阶段，我们注入了一个返回错误响应的 spy。
 
-TIP: Catching errors
+TIP: 捕获错误
 
-In the _Act_ phase, we call the method under test but anticipate that it throws an error. In Jasmine, there are several ways to test whether a Promise has been rejected with an error. The example above wraps the `getTodos` call in a `try/catch` statement and saves the error. Most likely, this is how implementation code would handle the error.
+在 _Act_ 阶段，我们调用要测试的方法，但预计它会抛出错误。在 Jasmine 中，有几种方法可以测试 Promise 是否被拒绝并抛出错误。上面的示例使用 `try/catch` 语句包裹 `getTodos` 调用并保存错误。很可能，这是实现代码处理错误的方式。
 
-In the _Assert_ phase, we make two expectations again. Instead of verifying the return value, we make sure the caught error is an `Error` instance with a useful error message. Finally, we verify that the spy has been called with the right value, just like in the spec for the success case.
+在 _Assert_ 阶段，我们再次进行两个断言。与验证返回值不同，我们确保捕获的错误是 `Error` 实例，并具有有用的错误消息。最后，我们验证 spy 是否已使用正确的值调用，就像成功情况的规范中一样。
 
-Again, this is a plain TypeScript example to illustrate the usage of spies. Usually, an Angular Service does not use `fetch` directly but uses `HttpClient` instead. We will get to know testing this later (see <<testing-services#_testing_a_service_that_sends_http_requests, Testing a Service that sends HTTP requests>>).
+再次强调，这是一个纯 TypeScript 示例，用于说明 spy 的用法。通常，Angular 服务不直接使用 `fetch`，而是使用 `HttpClient`。我们将在后面介绍如何测试这一点（请参阅 <<testing-services#_testing_a_service_that_sends_http_requests, 发送 HTTP 请求的服务的测试>>）。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/services/todos-service.spec.ts[TodoService: Implementation and test code]
-- https://jasmine.github.io/api/edge/Spy.html[Jasmine reference: Spies]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/services/todos-service.spec.ts[TodoService: 实现和测试代码]
+- https://jasmine.github.io/api/edge/Spy.html[Jasmine 参考文档: Spies]
 ====
 
-== Spying on existing methods
+== 对现有方法进行间谍操作
 
-We have used `jasmine.createSpy('name')` to create a standalone spy and have injected it into the constructor. Explicit constructor injection is straight-forward and used extensively in Angular code.
+我们已经使用 `jasmine.createSpy('name')` 创建了一个独立的 spy，并将其注入到构造函数中。显式构造函数注入在 Angular 代码中很直观，并且被广泛使用。
 
-TIP: Spy on object methods
+TIP: 对对象方法进行间谍操作
 
-Sometimes, there is already an object whose method we need to spy on. This is especially helpful if the code uses global methods from the browser environment, like `window.fetch` in the example above.
+有时，我们已经有一个对象，我们需要对其方法进行间谍操作。如果代码使用了来自浏览器环境的全局方法，如上面示例中的 `window.fetch`，这将特别有帮助。
 
-For this purpose, we can use the `spyOn` method:
+为此，我们可以使用 spyOn 方法:
 
 [source,typescript]
 ----
 spyOn(window, 'fetch');
 ----
 
-TIP: Overwrite and restore
+TIP: 覆盖和恢复
 
-This installs a spy on the global `fetch` method. Under the hood, Jasmine saves the original `window.fetch` function for later and overwrites `window.fetch` with a spy. Once the spec is completed, Jasmine automatically restores the original function.
+这将在全局的 `fetch` 方法上安装一个 spy。在内部，Jasmine 会保存原始的 `window.fetch` 函数以供以后使用，并将 `window.fetch` 覆盖为一个 spy。一旦规范完成，Jasmine 会自动恢复原始函数。
 
-`spyOn` returns the created spy, enabling us to set a return value, like we have learned above.
+`spyOn` 返回创建的 spy，使我们能够设置返回值，就像我们之前学到的那样。
 
 [source,typescript]
 ----
@@ -317,7 +317,7 @@ spyOn(window, 'fetch')
   .and.returnValue(okResponse);
 ----
 
-We can create a version of `TodoService` that does not rely on construction injection, but uses `fetch` directly:
+我们可以创建一个不依赖于构造注入而直接使用 `fetch` 的 `TodoService` 版本。
 
 [source,typescript]
 ----
@@ -334,7 +334,7 @@ class TodoService {
 }
 ----
 
-The test suite then uses `spyOn` to catch all calls to `window.fetch`:
+测试套件接下来使用 `spyOn` 来捕获所有对 `window.fetch` 的调用：
 
 [source,typescript]
 ----
@@ -366,12 +366,12 @@ describe('TodoService', () => {
 });
 ----
 
-Not much has changed here. We spy on `fetch` and make it return `okResponse`. Since `window.fetch` is overwritten with a spy, we make the expectation against it to verify that it has been called.
+在这里并没有太多变化。我们使用 spyOn 来对 `fetch` 进行监视，并使其返回 `okResponse`。由于 `window.fetch` 被重写为一个 spy，我们对它进行期望以验证它是否被调用。
 
-Creating standalone spies and spying on existing methods are not mutually exclusive. Both will be used frequently when testing Angular applications, and both work well with dependencies injected into the constructor.
+创建独立的 spy 和对现有方法进行监视并不是相互排斥的。在测试 Angular 应用程序时，这两种方式都经常被使用，并且可以很好地与注入到构造函数中的依赖项配合使用。
 
 [NOTE]
 ====
-- https://jasmine.github.io/api/edge/global.html#spyOn[Jasmine reference: spyOn]
+- https://jasmine.github.io/api/edge/global.html#spyOn[Jasmine 参考文档：spyOn]
 ====
 

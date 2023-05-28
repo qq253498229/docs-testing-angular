@@ -5,7 +5,7 @@
 * xref:example-applications.adoc[示例应用程序,leveloffset=-1]
 * xref:angular-testing-principles.adoc[Angular 测试原则,leveloffset=-1]
 * xref:test-suites-with-jasmine.adoc[使用Jasmine编写测试套件,leveloffset=-1]
-* xref:faking-dependencies.adoc[Faking dependencies,leveloffset=-1]
+* xref:faking-dependencies.adoc[伪造依赖,leveloffset=-1]
 * xref:debugging-tests.adoc[Debugging tests,leveloffset=-1]
 * xref:testing-components.adoc[Testing Components,leveloffset=-1]
 * xref:testing-components-with-children.adoc[Testing Components with children,leveloffset=-1]
