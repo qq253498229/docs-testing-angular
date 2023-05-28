@@ -1,130 +1,130 @@
-= Angular testing principles
+= Angular 测试原则
 
-Learning objectives
+学习目标
 
-- Angular’s architectural principles that facilitate testing
-- Standard and alternative testing tools
-- Running and configuring unit and integration tests with Karma and Jasmine
+- 促进测试的 Angular 架构原则
+- 标准和替代测试工具
+- 使用 Karma 和 Jasmine 运行和配置单元测试和集成测试
 
-== Testability
+== 可测试性
 
-In contrast to other popular front-end JavaScript libraries, Angular is an opinionated, comprehensive framework that covers all important aspects of developing a JavaScript web application. Angular provides high-level structure, low-level building blocks and means to bundle everything together into a usable application.
+与其他流行的前端 JavaScript 库相比，Angular 是一个有意见的、全面的框架，涵盖了开发 JavaScript Web 应用程序的所有重要方面。Angular 提供了高级结构、低级构建块和将所有内容打包成可用应用程序的手段。
 
-TIP: Testable architecture
+TIP: 可测试的架构
 
-The complexity of Angular cannot be understood without considering automated testing. Why is an Angular application structured into Components, Services, Modules, etc.? Why are the parts intertwined the way they are? Why do all parts of an Angular application apply the same patterns?
+没有考虑自动化测试，就无法理解 Angular 的复杂性。为什么 Angular 应用程序被结构化为组件、服务、模块等？为什么这些部分以这种方式交织在一起？为什么 Angular 应用程序的所有部分都采用相同的模式？
 
-An important reason is *testability*. Angular’s architecture guarantees that all application parts can be tested easily in a similar way.
+一个重要的原因是 *可测试性*。Angular 的架构保证了所有应用程序部分可以以类似的方式轻松进行测试。
 
-TIP: Well-structured code
+TIP: 良好结构化的代码
 
-We know from experience that code that is easy to test is also simpler, better structured, easier to read and easier to understand. The main technique of writing testable code is to break code into smaller chunks that “do one thing and do it well”. Then couple the chunks loosely.
+我们从经验中得知，易于测试的代码也更简单、结构更好、更易于阅读和理解。编写可测试代码的主要技术是将代码分解为更小的块，每个块“做一件事并做好”。然后松耦合这些块。
 
-== Dependency injection and faking
+== 依赖注入和模拟
 
-A major design pattern for loose coupling is *dependency injection* and the underlying *inversion of control*. Instead of creating a dependency itself, an application part merely declares the dependency. The tedious task of creating and providing the dependency is delegated to an _injector_ that sits on top.
+一种实现松耦合的主要设计模式是 *依赖注入* 和底层的 *控制反转*。应用程序部分不再自己创建依赖关系，而只是声明依赖关系。创建和提供依赖关系的繁琐任务被委托给位于顶部的 *注入器*。
 
-This division of work decouples an application part from its dependencies: One part does not need to know how to set up a dependency, let alone the dependency’s dependencies and so forth.
+这种工作分工将应用程序部分与其依赖关系解耦：一个部分不需要知道如何设置依赖关系，更不用说依赖关系的依赖关系等等。
 
-TIP: Loose coupling
+TIP: 松耦合
 
-Dependency injection turns tight coupling into loose coupling. A certain application part no longer depends on a specific class, function, object or other value. It rather depends on an abstract *token* that can be traded in for a concrete implementation. The injector takes the token and exchanges it for a real value.
+依赖注入将紧耦合变成了松耦合。某个应用程序部分不再依赖于特定的类、函数、对象或其他值，而是依赖于一个可以被交换为具体实现的抽象标记。注入器接受标记并将其交换为真实的值。
 
-TIP: Original or fake
+TIP: 原始或模拟
 
-This is of immense importance for automated testing. In our test, we can decide how to deal with a dependency:
+这对于自动化测试非常重要。在我们的测试中，我们可以决定如何处理依赖关系：
 
-- We can either provide an *original*, fully-functional implementation. In this case, we are writing an <<testing-principles#_integration_tests, integration test>> that includes direct and indirect dependencies.
-- Or we provide a *fake* implementation that does not have side effects. In this case, we are writing a <<testing-principles#_unit_tests, unit test>> that tries to test the application part in _isolation_.
+- 我们可以提供一个 *原始的*、完全功能的实现。在这种情况下，我们编写的是包括直接和间接依赖关系的 <<testing-principles#_集成测试, 集成测试>>。
+- 或者我们提供一个没有副作用的 *模拟* 实现。在这种情况下，我们编写的是试图在 *隔离环境* 中测试应用程序部分的 <<testing-principles#_单元测试,单元测试>>。
 
-A large portion of the time spent while writing tests is spent on decoupling an application part from its dependencies. This guide will teach you how to set up the test environment, isolate an application part and reconnect it with equivalent fake objects.
+编写测试时，花费的大部分时间都用于将应用程序部分与其依赖关系解耦。本指南将教你如何设置测试环境，将应用程序部分隔离开，并重新连接等效的模拟对象。
 
 [NOTE]
 ====
-- https://angular.io/guide/dependency-injection[Angular guide: Dependency injection]
+- https://angular.io/guide/dependency-injection[Angular 指南：依赖注入]
 ====
 
-== Testing tools
+== 测试工具
 
-Angular provides solid testing tools out of the box. When you create an Angular project using the command line interface, it comes with a fully-working testing setup for unit, integration and end-to-end tests.
+Angular提供了强大的测试工具。当使用命令行界面创建Angular项目时，它会自带一个完整的测试设置，用于单元测试、集成测试和端到端测试。
 
-TIP: Balanced defaults
+TIP: 平衡的默认设置
 
-The Angular team already made decisions for you: https://jasmine.github.io/[Jasmine] as testing framework and https://karma-runner.github.io/[Karma] as test runner. Implementation and test code is bundled with https://webpack.js.org[Webpack]. Application parts are typically tested inside Angular’s https://angular.io/api/core/testing/TestBed[TestBed].
+Angular团队已经为你做出了决策：使用 https://jasmine.github.io/[Jasmine] 作为测试框架，使用 https://karma-runner.github.io/[Karma] 作为测试运行器。实现代码和测试代码使用 https://webpack.js.org[Webpack] 进行打包。应用程序部分通常在Angular的 https://angular.io/api/core/testing/TestBed[TestBed] 中进行测试。
 
-This setup is a trade-off with strengths and weaknesses. Since it is just one possible way to test Angular applications, you can compile your own testing tool chain.
+这个设置是一种权衡，有其优势和劣势。由于这只是测试Angular应用程序的一种可能方式，你可以自己编译自己的测试工具链。
 
-TIP: Alternatives
+TIP: 其他选择
 
-For example, some Angular developers use https://jestjs.io/[Jest] instead of Jasmine and Karma. Some use <<testing-components-with-spectator#_testing_components_with_spectator, Spectator>> or the https://github.com/testing-library/angular-testing-library[Angular Testing Library] instead of using `TestBed` directly.
+例如，一些Angular开发者使用 https://jestjs.io/[Jest] 而不是Jasmine和Karma。一些开发者使用 <<testing-components-with-spectator#_testing_components_with_spectator, Spectator>> 或 https://github.com/testing-library/angular-testing-library[Angular Testing Library]，而不是直接使用 `TestBed`。
 
-These alternatives are not better or worse, they simply make different trade-offs. This guide uses Jasmine and Karma for unit and integration tests. Later, you will learn about Spectator.
+这些替代方案并不是更好或更差，它们只是做出不同的权衡。本指南在单元测试和集成测试中使用Jasmine和Karma。稍后，你将学习有关Spectator的内容。
 
-Once you have reached the limits of a particular setup, you should investigate whether alternatives make testing your application easier, faster and more reliable.
+一旦你达到了特定设置的限制，你应该调查一下是否有其他替代方案可以使你的应用程序测试更容易、更快速和更可靠。
 
-== Testing conventions
+== 测试约定
 
-Angular offers some tools and conventions on testing. By design, they are flexible enough to support different ways of testing. So you need to decide how to apply them.
+Angular提供了一些关于测试的工具和约定。从设计上讲，它们足够灵活，以支持不同的测试方式。因此，你需要决定如何应用它们。
 
-TIP: Making choices
+TIP: 做出选择
 
-This freedom of choice benefits experts, but confuses beginners. In your project, there should be one preferable way how to test a specific application part. You should make choices and set up project-wide conventions and patterns.
+这种选择的自由使得专家受益，但对初学者来说会感到困惑。在你的项目中，应该有一种首选的方式来测试特定的应用程序部分。你应该做出选择并建立项目范围的约定和模式。
 
-TIP: Cast conventions into code
+TIP: 将约定转化为代码
 
-The testing tools that ship with Angular are low-level. They merely provide the basic operations. If you use these tools directly, your tests become messy, repetitive and hard to maintain.
+Angular附带的测试工具是低级别的工具，它们仅提供基本操作。如果直接使用这些工具，你的测试会变得混乱、重复且难以维护。
 
-Therefore, you should create *high-level testing tools* that cast your conventions into code in order to write short, readable and understandable tests.
+因此，你应该创建 *高级别的测试工具*，将你的约定转化为代码，以便编写简短、可读和可理解的测试。
 
-This guide values strong conventions and introduces helper functions that codify these conventions. Again, your mileage may vary. You are free to adapt these tools to your needs or build other testing helpers.
+本指南重视强大的约定，并引入了将这些约定编码为辅助函数的工具。当然，这些工具可能因人而异。你可以根据自己的需求调整这些工具，或者构建其他的测试辅助工具。
 
-== Running the unit and integration tests
+== 运行单元测试和集成测试
 
-The Angular command line interface (CLI) allows you to run the unit, integration and end-to-end tests. If you have not installed the CLI yet or need to update to the latest version, run this command on your shell:
+Angular命令行界面（CLI）允许您运行单元测试、集成测试和端到端测试。如果您尚未安装CLI或需要更新到最新版本，请在命令行中运行以下命令：
 
 [source,]
 ----
 npm install -g @angular/cli
 ----
 
-This installs Angular CLI globally so the `ng` command can be used everywhere. `ng` itself does nothing but exposing a couple of Angular-specific commands.
+这将全局安装 Angular CLI，以便可以在任何地方使用 `ng` 命令。`ng` 本身并不做任何操作，只是提供了一些特定于 Angular 的命令。
 
-For example, `ng new` creates a new Angular project directory with a ready-to-use application scaffold. `ng serve` starts a development server, and `ng build` makes a build.
+例如， `ng new` 用于创建一个新的Angular项目目录，其中包含一个可用的应用程序脚手架。 `ng serve` 用于启动开发服务器， `ng build` 用于构建项目。
 
-The command for starting the unit and integration tests is:
+运行单元测试和集成测试的命令是：
 
 [source,]
 ----
 ng test
 ----
 
-First, this command finds all files in the directory tree that match the pattern `.spec.ts`. Using Webpack, it compiles them into a JavaScript bundle, together with its dependencies. The bundle code also initializes the Angular testing environment – the `TestBed`.
+首先，该命令会查找目录树中与 `.spec.ts` 模式匹配的所有文件。使用Webpack，它将它们与其依赖项一起编译成一个JavaScript bundle。该bundle的代码还会初始化Angular的测试环境 - `TestBed`。
 
-Typically, an Angular application loads and starts an `AppModule`. This startup is called bootstrapping. The `AppModule` then imports other Modules, Components, Services, etc. This way, the bundler finds all parts of the application.
+通常，Angular应用程序会加载并启动一个 `AppModule`。这个启动过程被称为引导（bootstrapping）。然后， `AppModule` 会导入其他模块、组件、服务等。这样，打包工具可以找到应用程序的所有部分。
 
-The test bundle works differently. It does not start with one Module in order to walk through its dependencies. It merely imports all files whose name ends with `.spec.ts`.
+但是测试bundle的工作方式不同。它不会从一个模块开始，然后遍历其依赖项。它只是导入所有以 `.spec.ts` 结尾的文件。
 
 TIP: `.spec.ts`
 
-Each *`.spec.ts` file* represents a test. Typically, one `.spec.ts` file contains at least one Jasmine test suite (more on that in the next chapter). The `.spec.ts` files are located in the same directory as the implementation code.
+每个 *`.spec.ts`* 文件代表一个测试。通常，一个 `.spec.ts` 文件包含至少一个Jasmine测试套件（在下一章中会详细介绍）。`.spec.ts` 文件位于与实现代码相同的目录中。
 
-In our example application, the `CounterComponent` is located in https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.ts[src/app/components/counter/counter.component.ts]. The corresponding test file sits in https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[src/app/components/counter/counter.component.spec.ts]. This is an Angular convention, not a technical necessity, and we are going to stick to it.
+在我们的示例应用程序中，`CounterComponent` 位于 https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.ts[src/app/components/counter/counter.component.ts] 文件中。相应的测试文件位于 https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[src/app/components/counter/counter.component.spec.ts]。这是Angular的约定，并非技术上的必要性，我们将坚持使用这种约定。
 
 TIP: Karma
 
-Second, `ng test` launches Karma, the test runner. Karma starts a development server at http://localhost:9876/[http://localhost:9876/] that serves the JavaScript bundles compiled by Webpack.
+其次，`ng test` 命令启动Karma测试运行器。Karma会在 http://localhost:9876/[http://localhost:9876/] 启动一个开发服务器，用于提供Webpack编译的JavaScript bundle。
 
-Karma then launches one or more browsers. The idea of Karma is to run the same tests in different browsers to ensure cross-browser interoperability. All widely used browsers are supported: Chrome, Internet Explorer, Edge, Firefox and Safari. Per default, Karma starts Chrome.
+Karma然后启动一个或多个浏览器。Karma的思想是在不同的浏览器中运行相同的测试，以确保跨浏览器的互操作性。支持所有广泛使用的浏览器：Chrome、Internet Explorer、Edge、Firefox和Safari。默认情况下，Karma会启动Chrome浏览器。
 
-TIP: Test runner
+TIP: 测试运行器
 
-The launched browser navigates to `http://localhost:9876/`. As mentioned, this site serves the test runner and the test bundle. The tests start immediately. You can track the progress and read the results in the browser and on the shell.
+启动的浏览器导航到 `http://localhost:9876/`。正如前面提到的，该网站提供测试运行器和测试bundle。测试会立即开始运行。您可以在浏览器和终端中跟踪进度并查看结果。
 
-When running the tests in the <<example-applications#_the_counter_component, counter project>>, the browser output looks like this:
+在运行 <<example-applications#_the_counter_component,counter项目>> 的测试时，浏览器的输出如下所示：
 
 image::karma-success.png[]
 
-This is the shell output:
+这是终端的输出：
 
 [source,]
 ----
@@ -137,35 +137,35 @@ Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 46 of 46 SUCCESS (0.394 secs / 0
 TOTAL: 46 SUCCESS
 ----
 
-Webpack watches changes on the `.spec.ts` files and files imported by them. When you change the implementation code, `counter.component.ts` for example, or the test code, `counter.component.spec.ts` for example, Webpack automatically re-compiles the bundle and pushes it to the open browsers. All tests will be restarted.
+Webpack会监视 `.spec.ts` 文件以及它们导入的文件的变化。当你修改实现代码（例如 `counter.component.ts` ）或测试代码（例如 `counter.component.spec.ts` ）时，Webpack会自动重新编译bundle并推送到打开的浏览器中。所有的测试将重新启动。
 
-TIP: Red-green cycle
+TIP: 红绿循环
 
-This feedback cycle allows you to work on the implementation and test code side-by-side. This is important for test-driven development. You change the implementation and expect the test to fail – the test is “red”. You adapt the test so it passes again – the test is “green”. Or you write a failing test first, then adapt the implementation until the test passes.
+这个反馈循环允许你同时处理实现代码和测试代码。这对于测试驱动开发非常重要。你修改实现代码，并期望测试失败 - 测试处于“红色”状态。然后你调整测试使其再次通过 - 测试处于“绿色”状态。或者你首先编写一个失败的测试，然后调整实现直到测试通过。
 
-Test-driven development means letting the red-green cycle guide your development.
+测试驱动开发意味着让红绿循环指导你的开发过程。
 
 [NOTE]
 ====
-- https://angular.io/cli/test[Angular CLI reference: ng test]
+- https://angular.io/cli/test[Angular CLI参考文档：ng test]
 ====
 
-== Configuring Karma and Jasmine
+== 配置Karma和Jasmine
 
-Karma and Jasmine are configured in the file `karma.conf.js` in the project’s root directory. Since Angular 15, the Angular CLI does not create this file per default. If it does not exist, you can create it using this shell command:
+Karma和Jasmine的配置文件位于项目根目录下的 `karma.conf.js` 文件中。自Angular 15开始，Angular CLI不会默认创建这个文件。如果它不存在，你可以使用以下终端命令创建它：
 
 [source,]
 ----
 ng generate config karma
 ----
 
-There are many configuration options and plenty of plugins, so we will only look at a few.
+有许多配置选项和插件可用，所以我们只会介绍其中几个。
 
-TIP: Launchers
+TIP: 启动器
 
-As mentioned, the standard configuration runs the tests in the Chrome browser. To run the tests in other browsers, we need to install different *launchers*.
+如前所述，标准配置在Chrome浏览器中运行测试。要在其他浏览器中运行测试，我们需要安装不同的 *启动器*。
 
-Each launcher needs to be loaded in the `plugins` array:
+每个启动器都需要在 `plugins` 数组中加载：
 
 [source,javascript]
 ----
@@ -178,16 +178,16 @@ plugins: [
 ],
 ----
 
-There is already one launcher, `karma-chrome-launcher`. This is an npm package.
+已经有一个启动器，`karma-chrome-launcher`。这是一个npm包。
 
-To install other launchers, we first need to install the respective npm package. Let us install the Firefox launcher. Run this shell command:
+要安装其他启动器，我们首先需要安装相应的npm包。让我们安装Firefox启动器。运行以下终端命令：
 
 [source,]
 ----
 npm install --save-dev karma-firefox-launcher
 ----
 
-Then we require the package in `karma.conf.js`:
+然后在 `karma.conf.js` 文件中引入该包：
 
 [source,javascript]
 ----
@@ -201,44 +201,44 @@ plugins: [
 ],
 ----
 
-To run the tests in Firefox as well, we need to add the Firefox to the browsers list: `browsers: ['Chrome']` becomes `browsers: ['Chrome', 'Firefox']`.
+为了在 Firefox 中运行测试，我们需要将 Firefox 添加到浏览器列表中：`browsers: ['Chrome']` 变为 `browsers: ['Chrome', 'Firefox']`。
 
-Karma will now start two browsers to run the tests in parallel.
+现在，Karma 将启动两个浏览器并并行运行测试。
 
-TIP: Reporters
+TIP: 报告器
 
-Another important concept of Karma are *reporters*. They format and output the test results. In the default configuration, three reporters are active:
+Karma 的另一个重要概念是 *报告器*。它们用于格式化和输出测试结果。在默认配置中，有三个报告器处于活动状态：
 
-1. The built-in `progress` reporter outputs text on the shell. While the tests are running, it outputs the progress:
+1. 内置的 `进度` 报告器在 shell 上输出文本。在测试运行时，它输出测试进度的信息，例如：
 +
 `Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 9 of 46 SUCCESS (0.278 secs / 0.219 secs)`
 +
-And finally:
+最后的输出为：
 +
 `Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 46 of 46 SUCCESS (0.394 secs / 0.329 secs)`<br>
 `TOTAL: 46 SUCCESS`
 
-2. The standard HTML reporter `kjhtml` (npm package: `karma-jasmine-html-reporter`) renders the results in the browser.
+2. 标准的 HTML 报告器 `kjhtml`（npm 包: `karma-jasmine-html-reporter`）在浏览器中呈现结果。+
 +
 image::karma-jasmine-html-reporter.png[]
 
-3. The coverage reporter (npm package: `karma-coverage`) creates the test coverage report. See <<measuring-code-coverage#_measuring_code_coverage, measuring code coverage>>.
+3. 代码覆盖率报告器（npm 包: `karma-coverage`）会生成测试覆盖率报告。详见 <<measuring-code-coverage#_measuring_code_coverage,测量代码覆盖率>>。
 
-By editing the `reporters` array, you can add reporters or replace the existing ones:
+通过编辑 `reporters` 数组，您可以添加报告器或替换现有的报告器：
 
 [source,javascript]
 ----
 reporters: ['progress', 'kjhtml'],
 ----
 
-For example, to add a reporter that creates JUnit XML reports, first install the npm package:
+例如，要添加一个创建 JUnit XML 报告的报告器，请先安装 npm 包：
 
 [source,]
 ----
 npm install --save-dev karma-junit-reporter
 ----
 
-Next, require it as a plugin:
+然后，将其作为插件进行引用：
 
 [source,javascript]
 ----
@@ -252,33 +252,33 @@ plugins: [
 ],
 ----
 
-Finally, add the reporter:
+最后，在添加这个 reporter：
 
 [source,javascript]
 ----
 reporters: ['progress', 'kjhtml', 'junit'],
 ----
 
-After running the tests with `ng test`, you will find an XML report file in the project directory.
+运行 `ng test` 后，你会在项目目录中找到一个 XML 报告文件。
 
-TIP: Jasmine configuration
+TIP: Jasmine 配置
 
-The configuration for the Jasmine adapter is located in `jasmine` object inside the `client` object:
+Jasmine 适配器的配置位于 `client` 对象内的 `jasmine` 属性中：
 
 [source,javascript]
 ----
 client: {
   jasmine: {
-    // you can add configuration options for Jasmine here
-    // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-    // for example, you can disable the random execution with `random: false`
-    // or set a specific seed with `seed: 4321`
+    // 在这里可以添加 Jasmine 的配置选项
+    // 可能的选项列表在 https://jasmine.github.io/api/edge/Configuration.html 中列出
+    // 例如，你可以通过 `random: false` 来禁用随机执行
+    // 或者通过 `seed: 4321` 来设置一个特定的种子值
   },
   clearContext: false // leave Jasmine Spec Runner output visible in browser
 },
 ----
 
-This guide recommends to activate one useful Jasmine configuration option: `failSpecWithNoExpectations` lets the test fail if it does not contain at least one expectation. (More on <<test-suites-with-jasmine#_expectations, expectations>> later.) In almost all cases, specs without expectations stem from an error in the test code.
+本指南建议激活一个有用的 Jasmine 配置选项：`failSpecWithNoExpectations`。如果测试中没有至少一个期望（<<test-suites-with-jasmine#_expectations,expectation>>），则会导致测试失败（有关期望的更多内容稍后会详细介绍）。在几乎所有情况下，没有期望的规范往往源于测试代码的错误。
 
 [source,javascript]
 ----
@@ -292,9 +292,9 @@ client: {
 
 [NOTE]
 ====
-- https://karma-runner.github.io/6.4/config/configuration-file.html[Karma documentation: Configuration File]
-- https://karma-runner.github.io/6.4/config/plugins.html[Karma documentation: Plugins]
-- https://www.npmjs.com/search?q=keywords:karma-plugin[npm: List of Karma plugins]
-- https://jasmine.github.io/api/edge/Configuration.html[Jasmine reference: Configuration options]
+- https://karma-runner.github.io/6.4/config/configuration-file.html[Karma 文档：配置文件]
+- https://karma-runner.github.io/6.4/config/plugins.html[Karma 文档：插件]
+- https://www.npmjs.com/search?q=keywords:karma-plugin[npm：Karma 插件列表]
+- https://jasmine.github.io/api/edge/Configuration.html[Jasmine 参考文档：配置选项]
 ====
 
