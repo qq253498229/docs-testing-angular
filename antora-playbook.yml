@@ -4,7 +4,7 @@ site:
 content:
   sources:
     - url: .
-      branches: [HEAD]
+      branches: [HEAD,english]
 ui:
   bundle:
     url: ./ui-bundle
