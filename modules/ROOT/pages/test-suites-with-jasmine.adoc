@@ -1,23 +1,23 @@
-= Test suites with Jasmine
+= 使用Jasmine编写测试套件
 
-Learning objectives
+学习目标
 
-- Introducing the Jasmine testing framework
-- Writing test suites, specs and assertions
-- Structuring a spec with Arrange, Act, Assert
-- Efficient test suites with setup and teardown logic
+- 介绍Jasmine测试框架
+- 编写测试套件、规范和断言
+- 使用"安排（Arrange）、行动（Act）、断言（Assert）"结构组织规范
+- 使用设置（setup）和拆卸（teardown）逻辑创建高效的测试套件
 
-Angular ships with Jasmine, a JavaScript framework that enables you to write and execute unit and integration tests. Jasmine consists of three important parts:
+Angular内置了Jasmine，这是一个JavaScript框架，可以编写和执行单元测试和集成测试。Jasmine由三个重要部分组成：
 
-1. A library with classes and functions for constructing tests.
-2. A test execution engine.
-3. A reporting engine that outputs test results in different formats.
+1. 一个包含用于构建测试的类和函数的库。
+2. 一个测试执行引擎。
+3. 一个将测试结果以不同格式输出的报告引擎。
 
-If you are new to Jasmine, it is recommended to read the https://jasmine.github.io/tutorials/your_first_suite[official Jasmine tutorial]. This guide provides a short introduction to Jasmine, exploring the basic structure and terminology that will be used throughout this guide.
+如果您对Jasmine还不熟悉，建议阅读 https://jasmine.github.io/tutorials/your_first_suite[官方的Jasmine教程]。本指南对Jasmine进行了简要介绍，探讨了在本指南中将使用的基本结构和术语。
 
-== Creating a test suite
+== 创建一个测试套件
 
-In terms of Jasmine, a test consists of one or more *suites*. A suite is declared with a `describe` block:
+在Jasmine中，测试由一个或多个 `套件` 组成。使用 `describe` 块声明一个套件：
 
 [source,typescript]
 ----
@@ -26,20 +26,20 @@ describe('Suite description', () => {
 });
 ----
 
-Each suite _describes_ a piece of code, the _code under test_.
+每个套件 _描述_ 了一段代码，即 _被测试的代码_。
 
-TIP: `describe`: Suite
+TIP: `describe`: 套件
 
-`describe` is a function that takes two parameters.
+`describe` 是一个接受两个参数的函数。
 
-1. A string with a human-readable name. Typically the name of the function or class under test. For example, `describe('CounterComponent', /* … */)` is the suite that tests the `CounterComponent` class.
-2. A function containing the suite definition.
+1. 一个可读性强的字符串，通常是被测试的函数或类的名称。例如，`describe('CounterComponent', /* … */)` 是测试 `CounterComponent` 类的套件。
+2. 一个包含套件定义的函数。
 
-A `describe` block groups related specs that we will learn about in the next chapter.
+`describe` 块将相关的规范（specs）分组，我们将在下一章节学习。
 
-TIP: Nesting `describe`
+TIP: 嵌套 `describe`
 
-`describe` blocks can be nested to structure big suites and divide them into logical sections:
+可以嵌套 `describe` 块以便将大的套件结构化，并将其分成逻辑上的部分：
 
 [source,typescript]
 ----
@@ -53,13 +53,13 @@ describe('Suite description', () => {
 });
 ----
 
-Nested `describe` blocks add a human-readable description to a group of specs. They can also host their own setup and teardown logic.
+嵌套的 `describe` 块为一组规范（specs）添加了可读性强的描述。它们还可以拥有自己的设置（setup）和拆卸（teardown）逻辑。
 
-== Specifications
+== 规范（Specifications）
 
 TIP: `it`: Spec
 
-Each suit consists of one or more _specifications_, or short, *specs*. A spec is declared with an `it` block:
+每个套件由一个或多个 _规范(specifications)_ 组成，简称规范（`specs`）。使用 `it` 块声明一个规范：
 
 [source,typescript]
 ----
@@ -71,15 +71,15 @@ describe('Suite description', () => {
 });
 ----
 
-Again, `it` is a function that takes two parameters. The first parameter is a string with a human-readable description. The second parameter is a function containing the spec code.
+再次强调，`it` 是一个函数，接受两个参数。第一个参数是一个可读性强的字符串，描述规范（spec）。第二个参数是一个包含规范代码的函数。
 
-TIP: Readable sentence
+TIP: 可读性强的句子
 
-The pronoun `it` refers to the code under test. `it` should be the subject of a human-readable sentence that asserts the behavior of the code under test. The spec code then proves this assertion. This style of writing specs originates from the concept of Behavior-Driven Development (BDD).
+代词 `it` 指的是被测试的代码。`it` 应该是一个可读性强的句子的主语，用于断言被测试代码的行为。然后规范代码通过实现这个断言来证明其正确性。这种编写规范的风格源于行为驱动开发（BDD）的概念。
 
-One goal of BDD is to describe software behavior in a natural language – in this case, English. Every stakeholder should be able to read the `it` sentences and understand how the code is supposed to behave. Team members without JavaScript knowledge should be able to add more requirements by forming `it does something` sentences.
+BDD 的一个目标是以自然语言（在本例中是英语）描述软件行为。每个利益相关者都应该能够阅读 `it` 句子，并理解代码应该如何运行。没有 JavaScript 知识的团队成员应该能够通过构造 `it does something` 的句子来添加更多需求。
 
-Ask yourself, what does the code under test do? For example, in case of a `CounterComponent`, _it_ increments the counter value. And _it_ resets the counter to a specific value. So you could write:
+问问自己，被测试的代码做了什么？例如，对于一个 `CounterComponent`，_it_ 增加了计数器的值。并且 _it_ 将计数器重置为特定的值。因此，您可以编写以下句子：
 
 [source,typescript]
 ----
@@ -91,68 +91,68 @@ it('resets the count', () => {
 });
 ----
 
-After `it`, typically a verb follows, like `increments` and `resets` in the example.
+在 `it` 块之后，通常会跟随一个动词，例如在示例中的 `increments` 和 `resets`。
 
-TIP: No “should”
+TIP: 不使用 “should”
 
-Some people prefer to write `it('should increment the count', /* … */)`, but `should` bears no additional meaning. The nature of a spec is to state what the code under test _should_ do. The word “should” is redundant and just makes the sentence longer. This guide recommends to simply state what the code does.
+有些人喜欢写成 `it('should increment the count', /* … */)`，但是 `should` 并没有额外的含义。规范的本质是陈述被测试代码应该做什么。使用 _should_ 这个词只会增加冗余，让句子变得更长。本指南建议简单陈述代码的行为。
 
 [NOTE]
 ====
-- https://jasmine.github.io/tutorials/your_first_suite[Jasmine tutorial: Your first suite]
+- https://jasmine.github.io/tutorials/your_first_suite[Jasmine 教程：你的第一个套件]
 ====
 
-== Structure of a test
+== 测试的结构
 
-Inside the `it` block lies the actual testing code. Irrespective of the testing framework, the testing code typically consists of three phases: *Arrange, Act and Assert*.
+在 `it` 块内部是实际的测试代码。不论测试框架如何，测试代码通常包括三个阶段：*安排（Arrange）、行动（Act）和断言（Assert）*。
 
-TIP: Arrange, Act, Assert
+TIP: 安排、行动、断言
 
-1. *Arrange* is the preparation and setup phase. For example, the class under test is instantiated. Dependencies are set up. Spies and fakes are created.
-2. *Act* is the phase where interaction with the code under test happens. For example, a method is called or an HTML element in the DOM is clicked.
-3. *Assert* is the phase where the code behavior is checked and verified. For example, the actual output is compared to the expected output.
+1. *Arrange* 是准备和设置阶段。例如，被测试的类被实例化，依赖项被设置，间谍（spies）和伪装（fakes）被创建。
+2. *Act* 是与被测试代码进行交互的阶段。例如，调用一个方法或点击 DOM 中的一个 HTML 元素。
+3. *Assert* 是检查和验证代码行为的阶段。例如，将实际输出与预期输出进行比较。
 
-How could the structure of the spec `it('resets the count', /* … */)` for the `CounterComponent` look like?
+针对 `CounterComponent` 的规范 `it('resets the count', /* … */)` 的结构可以是什么样子呢？
 
-1. *Arrange:*
+1. *Arrange*：
 
-   - Create an instance of `CounterComponent`.
-   - Render the Component into the document.
+- 创建一个 `CounterComponent` 的实例。
+- 将组件渲染到文档中。
 
 2. *Act:*
 
-   - Find and focus the reset input field.
-   - Enter the text “5”.
-   - Find and click the “Reset” button.
+- 找到并聚焦重置输入字段。
+- 输入文本“5”。
+- 找到并点击“重置”按钮。
 
 3. *Assert:*
 
-   - Expect that the displayed count now reads “5”.
+- 期望显示的计数现在为“5”。
 
-TIP: Structure a test
+TIP: 组织一个测试
 
-This structure makes it easier to come up with a test and also to implement it. Ask yourself:
+这个结构使得编写和实现测试更加容易。问问自己：
 
-- What is the necessary setup? Which dependencies do I need to provide? How do they behave? (_Arrange_)
-- What is the user input or API call that triggers the behavior I would like to test? (_Act_)
-- What is the expected behavior? How do I prove that the behavior is correct? (_Assert_)
+- 需要哪些设置？我需要提供哪些依赖项？它们的行为是怎样的？（_Arrange_）
+- 哪些用户输入或 API 调用会触发我想要测试的行为？（_Act_）
+- 期望的行为是什么？如何证明这个行为是正确的？（_Assert_）
 
 TIP: Given, When, Then
 
-In Behavior-Driven Development (BDD), the three phases of a test are fundamentally the same. But they are called *Given, When and Then*. These plain English words try to avoid technical jargon and pose a natural way to think of a test’s structure: “_Given_ these conditions, _when_ the user interacts with the application, _then_ it behaves in a certain way.”
+在行为驱动开发（Behavior-Driven Development BDD）中，测试的三个阶段本质上是相同的。但它们被称为 *给定（Given）、当（When）和那么（Then）*。这些简单的英语单词试图避免技术术语，并提供了一种自然的思考测试结构的方式：“_给定(Given)_ 这些条件，_当(when)_ 用户与应用程序交互时，_那么(then)_ 它会以某种方式表现。”
 
-== Expectations
+== 期望
 
-In the _Assert_ phase, the test compares the actual output or return value to the expected output or return value. If they are the same, the test passes. If they differ, the test fails.
+在 _断言_ 阶段，测试将实际输出或返回值与期望的输出或返回值进行比较。如果它们相同，测试通过。如果它们不同，测试失败。
 
-Let us examine a simple contrived example, an `add` function:
+让我们来看一个简单的人为示例，一个 `add` 函数：
 
 [source,typescript]
 ----
 const add = (a, b) => a + b;
 ----
 
-A primitive test without any testing tools could look like this:
+一个没有任何测试工具的原始测试可以是这样的：
 
 [source,typescript]
 ----
@@ -167,7 +167,7 @@ if (expectedValue !== actualValue) {
 
 TIP: `expect`
 
-We could write that code in a Jasmine spec, but Jasmine allows us to create expectations in an easier and more concise manner: The `expect` function together with a *matcher*.
+我们可以在 Jasmine 规范中编写该代码，但是 Jasmine 允许我们以一种更简单、更简洁的方式创建期望值：使用 *expect* 函数和匹配器（*matcher*）。
 
 [source,typescript]
 ----
@@ -176,15 +176,15 @@ const actualValue = add(2, 3);
 expect(actualValue).toBe(expectedValue);
 ----
 
-First, we pass the actual value to the `expect` function. It returns an expectation object with methods for checking the actual value. We would like to compare the actual value to the expected value, so we use the `toBe` matcher.
+首先，我们将实际值传递给 `expect` 函数。它返回一个期望对象，其中包含用于检查实际值的方法。我们想要将实际值与期望值进行比较，因此我们使用了 `toBe` 匹配器。
 
-TIP: Matchers
+TIP: 匹配器（Matchers）
 
-`toBe` is the simplest matcher that applies to all possible JavaScript values. Internally, it uses JavaScript’s strict equality operator `===`. <code>expect(actualValue)&#x200b;.toBe(expectedValue)</code> essentially runs `actualValue === expectedValue`.
+`toBe` 是适用于所有可能的 JavaScript 值的最简单的匹配器。它在内部使用了 JavaScript 的严格相等运算符 `===`。`expect(actualValue).toBe(expectedValue)` 本质上运行的是 `actualValue === expectedValue`。
 
-`toBe` is useful to compare primitive values like strings, numbers and booleans. For objects, `toBe` matches only if the actual and the expected value are the very same object. `toBe` fails if two objects are not identical, even if they happen to have the same properties and values.
+`toBe` 适用于比较字符串、数字和布尔值等原始值。对于对象，`toBe` 仅在实际值和期望值完全相同的对象时匹配。即使两个对象恰好具有相同的属性和值，如果它们不是完全相同的对象，`toBe` 会失败。
 
-For checking the deep equality of two objects, Jasmine offers the `toEqual` matcher. This example illustrates the difference:
+如果要检查两个对象的深层相等性，Jasmine 提供了 `toEqual` 匹配器。下面的示例说明了它们之间的区别：
 
 [source,typescript]
 ----
@@ -195,27 +195,27 @@ expect({ name: 'Linda' }).toBe({ name: 'Linda' });
 expect({ name: 'Linda' }).toEqual({ name: 'Linda' });
 ----
 
-Jasmine has numerous useful matchers built-in, `toBe` and `toEqual` being the most common. You can add custom matchers to hide a complex check behind a short name.
+Jasmine内置了许多有用的匹配器，其中 `toBe` 和 `toEqual` 是最常用的。您可以添加自定义匹配器，将复杂的检查隐藏在一个简短的名称后面。
 
-TIP: Readable sentence
+TIP: 可读的句子
 
-The pattern `expect(actualValue).toEqual(expectedValue)` originates from Behavior-Driven Development (BDD) again. The `expect` function call and the matcher methods form a human-readable sentence: “Expect the actual value to equal the expected value.” The goal is to write a specification that is as readable as a plain text but can be verified automatically.
+模式 `expect(actualValue).toEqual(expectedValue)` 再次源自行为驱动开发（BDD）。`expect` 函数调用和匹配器方法形成了一个可读的句子：“期望实际值等于期望值。”目标是编写一个规范，它像纯文本一样可读，但可以自动验证。
 
 [NOTE]
 ====
-- https://jasmine.github.io/api/edge/matchers[Jasmine documentation: Built-in matchers]
-- https://jasmine.github.io/tutorials/custom_matcher[Jasmine tutorials: Custom matchers]
+- https://jasmine.github.io/api/edge/matchers[Jasmine 文档：内置的匹配器]
+- https://jasmine.github.io/tutorials/custom_matcher[Jasmine 教程：自定义匹配器]
 ====
 
-== Efficient test suites
+== 高效的测试套件
 
-When writing multiple specs in one suite, you quickly realize that the _Arrange_ phase is similar or even identical across these specs. For example, when testing the `CounterComponent`, the _Arrange_ phase always consists of creating a Component instance and rendering it into the document.
+在一个套件中编写多个规范时，您很快会意识到 _Arrange_ 阶段在这些规范中是相似或甚至相同的。例如，当测试 `CounterComponent` 时， _Arrange_ 阶段始终包括创建一个组件实例并将其渲染到文档中。
 
-TIP: Repetitive setup
+TIP: 重复的设置
 
-This setup is repeated over and over, so it should be defined once in a central place. You could write a `setup` function and call it at the beginning of each spec. But using Jasmine, you can declare code that is called before and after each spec, or before and after all specs.
+这种设置反复出现，因此应该在一个中心位置定义一次。您可以编写一个 `设置` 函数，并在每个规范的开头调用它。但是使用 Jasmine，您可以声明在每个规范之前和之后，或在所有规范之前和之后调用的代码。
 
-For this purpose, Jasmine provides four functions: `beforeEach`, `afterEach`, `beforeAll` and `afterAll`. They are called inside of a `describe` block, just like `it`. They expect one parameter, a function that is called at the given stages.
+为此，Jasmine 提供了四个函数：`beforeEach`、`afterEach`、`beforeAll` 和 `afterAll`。它们在 `describe` 块内部调用，就像 `it` 一样。它们都接受一个参数，即在给定阶段调用的函数。
 
 [source,typescript]
 ----
@@ -243,7 +243,7 @@ describe('Suite description', () => {
 });
 ----
 
-This suite has two specs and defines shared setup and teardown code. The output is:
+这个套件有两个规范，并定义了共享的安排（setup）和清理（teardown）代码。输出结果如下：
 
 [source,]
 ----
@@ -257,5 +257,5 @@ Called after each spec is run
 Called after all specs are run
 ----
 
-Most tests we are going to write will have a `beforeEach` block to host the _Arrange_ code.
+我们将要编写的大多数测试都将包含一个 `beforeEach` 块来承载安排（_Arrange_）代码。
 
