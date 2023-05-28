@@ -1,23 +1,23 @@
-= Example applications
+= 示例应用程序
 
-Learning objectives
+学习目标
 
-- Example Angular applications used in the book
-- Features demonstrated by the examples
+- 书中使用的示例 Angular 应用程序
+- 示例演示的功能
 
-In this guide, we will explore the different aspects of testing Angular applications by looking at two examples.
+在本指南中，我们将通过查看两个示例来探索测试 Angular 应用程序的不同方面。
 
-== The counter Component
+== 计数器组件
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop[Counter Component: Source code]
-- https://9elements.github.io/angular-workshop/[Counter Component: Run the app]
+- https://github.com/9elements/angular-workshop[计数器组件：源代码]
+- https://9elements.github.io/angular-workshop/[计数器组件：运行应用程序]
 ====
 
 ++++
 <button class="load-iframe">
-See the counter Component app in action
+查看计数器组件应用程序的运行效果
 </button>
 
 <script type="text/x-template">
@@ -27,39 +27,39 @@ See the counter Component app in action
 </script>
 ++++
 
-The counter is a reusable Component that increments, decrements and resets a number using buttons and input fields.
+计数器是一个可重用的组件，使用按钮和输入字段来增加、减少和重置一个数字。
 
-TIP: Challenging to test
+TIP: 测试具有挑战性
 
-For intermediate Angular developers, this might look trivial. That is intentional. This guide assumes that you know Angular basics and that you are able to build a counter Component, but struggle testing the ins and outs.
+对于中级的 Angular 开发者来说，这可能看起来很简单。这是有意的。本指南假设您已经了解 Angular 的基础知识，并且能够构建一个计数器组件，但在测试细节方面遇到了困难。
 
-The goals of this example are:
+这个示例的目标是：
 
-- *Simplicity*: Quickly grasp what the Component is supposed to do.
-- *Cover core Angular features*: Reusable Components with state, Inputs, Outputs, templates, event handling.
-- *Scalability*: Starting point for more complex application architectures.
+- *简单性*：快速了解组件应该做什么。
+- *涵盖核心 Angular 功能*：具有状态的可重用组件，输入、输出、模板、事件处理。
+- *可扩展性*：更复杂应用架构的起点。
 
-TIP: State management
+TIP: 状态管理
 
-The counter comes in three flavors with different state management solutions:
+计数器有三种不同的状态管理解决方案：
 
-1. An independent, self-sufficient counter Component that holds its own state.
-2. A counter that is connected to a Service using dependency injection. It shares its state with other counters and changes it by calling Service methods.
-3. A counter that is connected to a central NgRx Store. (NgRx is a popular state management library.) The counter changes the state indirectly by dispatching NgRx Actions.
+1. 独立的、自包含的计数器组件，它持有自己的状态。
+2. 使用依赖注入连接到服务的计数器。它与其他计数器共享状态，并通过调用服务方法来更改状态。
+3. 连接到中央 NgRx Store 的计数器（NgRx 是一个流行的状态管理库）。计数器通过分派 NgRx Action 间接更改状态。
 
-While the counter seems easy to implement, it already offers valuable challenges from a testing perspective.
+尽管计数器看起来很容易实现，但从测试的角度来看，它已经提供了宝贵的挑战。
 
-== The Flickr photo search
+== Flickr 图片搜索
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search[Flickr photo search: Source code]
-- https://9elements.github.io/angular-flickr-search/[Flickr photo search: Run the app]
+- https://github.com/9elements/angular-flickr-search[Flickr 图片搜索：源代码]
+- https://9elements.github.io/angular-flickr-search/[Flickr 图片搜索：运行应用程序]
 ====
 
 ++++
 <button class="load-iframe">
-See the Flickr photo search in action
+查看 Flickr 图片搜索的运行效果
 </button>
 
 <script type="text/x-template">
@@ -69,24 +69,24 @@ See the Flickr photo search in action
 </script>
 ++++
 
-This application allows you to search for photos on Flickr, the popular photo hosting site.
+该应用程序允许您在流行的图片托管站点 Flickr 上搜索照片。
 
-TIP: Typical application flow
+TIP: 典型的应用程序流程
 
-First, you enter a search term and start the search. The Flickr search API is queried. Second, the search results with thumbnails are rendered. Third, you can select a search result to see the photo details.
+首先，您输入搜索词并开始搜索。然后，查询 Flickr 搜索 API。其次，呈现搜索结果的缩略图。第三，您可以选择一个搜索结果查看照片的详细信息。
 
-This application is straight-forward and relatively simple to implement. Still it raises important questions:
+该应用程序的实现相对简单和直观。但它也提出了一些重要的问题：
 
-- *App structure*: How to split responsibilities into Components and how to model dependencies.
-- *API communication*: How to fetch data by making HTTP requests and update the user interface.
-- *State management*: Where to hold the state, how to pass it down in the Component tree, how to alter it.
+- *应用程序结构*：如何将责任划分为组件并建立依赖关系。
+- *API 通信*：如何通过发出 HTTP 请求获取数据并更新用户界面。
+- *状态管理*：如何保存状态，在组件树中传递状态以及如何修改状态。
 
-The Flickr search comes in two flavors using different state management solutions:
+Flickr 搜索提供了两种不同的状态管理解决方案：
 
-TIP: State management
+TIP: 状态管理
 
-1. The state is managed in the top-level Component, passed down in the Component tree and changed using Outputs.
-2. The state is managed by an NgRx Store. Components are connected to the store to pull state and dispatch Actions. The state is changed in a Reducer. The side effects of an Action are handled by NgRx Effects.
+1. 顶级组件中管理状态，并通过组件树传递状态，并使用 Outputs 进行更改。
+2. 状态由 NgRx Store 管理。组件连接到存储库以获取状态并分派 Actions。状态在 Reducer 中进行更改。Action 的副作用由 NgRx Effects 处理。
 
-Once you are able to write automatic tests for this example application, you will be able to test most features of a typical Angular application.
+一旦您能够为这个示例应用程序编写自动化测试，您就能够测试大多数典型 Angular 应用程序的功能。
 
