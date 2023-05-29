@@ -1,32 +1,32 @@
-= Testing Components
+= 组件测试
 
-Learning objectives
+学习目标
 
-- Setting up a Component test using Angular’s testing Module
-- Getting familiar with Angular’s Component testing abstractions
-- Accessing the rendered DOM and checking text content
-- Simulating user input like clicks and form field input
-- Testing Component Input and Outputs
-- Using helpers functions for common Component testing tasks
+- 使用 Angular 的测试模块设置组件测试
+- 熟悉 Angular 的组件测试抽象
+- 访问渲染的 DOM 并检查文本内容
+- 模拟用户输入，如点击和表单字段输入
+- 测试组件的输入和输出
+- 使用辅助函数处理常见的组件测试任务
 
-Components are the power houses of an Angular application. Components are composed to form the user interface.
+组件是 Angular 应用程序的核心。组件组合在一起形成用户界面。
 
-A Component deals with several concerns, among others:
+组件涉及多个任务，包括：
 
-- It renders the template into the HTML DOM.
-- It accepts data from parent Components using Input properties.
-- It emits data to parent Components using Outputs.
-- It reacts to user input by registering event handlers.
-- It renders the content (`ng-content`) and templates (`ng-template`) that are passed.
-- It binds data to form controls and allows the user to edit the data.
-- It talks to Services or other state managers.
-- It uses routing information like the current URL and URL parameters.
+- 将模板渲染到 HTML DOM 中。
+- 使用输入属性接收来自父组件的数据。
+- 使用输出属性向父组件发出数据。
+- 通过注册事件处理程序响应用户输入。
+- 渲染传递的内容（`ng-content`）和模板（`ng-template`）。
+- 将数据绑定到表单控件，并允许用户编辑数据。
+- 与服务或其他状态管理器进行通信。
+- 使用路由信息，如当前 URL 和 URL 参数。
 
-All these tasks need to be tested properly.
+所有这些任务都需要进行适当的测试。
 
-== Unit test for the counter Component
+== 计数器组件的单元测试
 
-As a first example, we are going to test the https://github.com/9elements/angular-workshop/tree/main/src/app/components/counter[CounterComponent].
+作为第一个示例，我们将测试 https://github.com/9elements/angular-workshop/tree/main/src/app/components/counter[CounterComponent] 组件。
 
 ++++
 <button class="load-iframe">
@@ -40,46 +40,46 @@ See the CounterComponent in action
 </script>
 ++++
 
-When designing a Component test, the guiding questions are: What does the Component do, what needs to be tested? How do I test this behavior?
+在设计组件测试时，指导性的问题是：组件做什么，需要测试什么？如何测试这个行为？
 
-TIP: Counter features
+TIP: 计数器的功能
 
-We will test the following features of the `CounterComponent`:
+我们将测试 `CounterComponent` 的以下功能：
 
-- It displays the current count. The initial value is 0 and can be set by an Input.
-- When the user activates the “+” button, the count increments.
-- When the user activates the “-” button, the count decrements.
-- When the user enters a number into the reset input field and activates the reset button, the count is set to the given value.
-- When the user changes the count, an Output emits the new count.
+- 它显示当前计数。初始值为 0，可以通过输入属性进行设置。
+- 当用户激活“+”按钮时，计数增加。
+- 当用户激活“-”按钮时，计数减少。
+- 当用户在重置输入字段中输入一个数字并激活重置按钮时，计数将设置为给定值。
+- 当用户更改计数时，输出属性会发出新的计数。
 
-Writing down what the Component does already helps to structure the unit test. The features above roughly translate to specs in a test suite.
+写下组件的功能已经有助于组织单元测试。上述功能大致对应于测试套件中的规范。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/tree/main/src/app/components/counter[CounterComponent: full code]
+- https://github.com/9elements/angular-workshop/tree/main/src/app/components/counter[CounterComponent：完整代码]
 ====
 
 == TestBed
 
-Several chores are necessary to render a Component in Angular, even the simple counter Component. If you look into the https://github.com/9elements/angular-workshop/blob/main/src/main.ts[main.ts] and the https://github.com/9elements/angular-workshop/blob/main/src/app/app.module.ts[AppModule] of a typical Angular application, you find that a “platform” is created, a Module is declared and this Module is bootstrapped.
+即使是简单的计数器组件，在 Angular 中渲染组件也需要进行一些准备工作。如果你查看典型 Angular 应用程序的 https://github.com/9elements/angular-workshop/blob/main/src/main.ts[main.ts] 和 https://github.com/9elements/angular-workshop/blob/main/src/app/app.module.ts[AppModule]，你会发现创建了一个“平台”，声明了一个模块，并对该模块进行了引导。
 
-The Angular compiler translates the templates into JavaScript code. To prepare the rendering, an instance of the Component is created, dependencies are resolved and injected, inputs are set.
+Angular 编译器将模板转换为 JavaScript 代码。为了准备渲染，会创建组件的实例，解析和注入依赖项，并设置输入属性。
 
-Finally, the template is rendered into the DOM. For testing, you could do all that manually, but you would need to dive deeply into Angular internals.
+最后，将模板渲染到 DOM 中。在测试中，你可以手动完成所有这些操作，但你需要深入了解 Angular 的内部实现。
 
 TIP: `TestBed`
 
-Instead, the Angular team provides the `TestBed` to ease unit testing. The `TestBed` creates and configures an Angular environment so you can test particular application parts like Components and Services safely and easily.
+相反，Angular 团队提供了 `TestBed` 来简化单元测试。`TestBed` 创建和配置了一个 Angular 环境，因此你可以安全且轻松地测试特定的应用程序部分，如组件和服务。
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/TestBed[Angular API reference: TestBed]
-- https://angular.io/guide/testing-utility-apis#testbed-class-summary[Testing Utility APIs: TestBed]
+- https://angular.io/api/core/testing/TestBed[Angular API 参考文档：TestBed]
+- https://angular.io/guide/testing-utility-apis#testbed-class-summary[测试实用工具 API：TestBed]
 ====
 
-== Configuring the testing Module
+== 配置测试模块
 
-The `TestBed` comes with a testing Module that is configured like normal Modules in your application: You can declare Components, Directives and Pipes, provide Services and other Injectables as well as import other Modules. `TestBed` has a static method `configureTestingModule` that accepts a Module definition:
+`TestBed` 提供了一个测试模块，该模块的配置方式与你应用程序中的普通模块相同：你可以声明组件、指令和管道，提供服务和其他可注入对象，以及导入其他模块。`TestBed` 有一个静态方法 `configureTestingModule`，它接受一个模块定义：
 
 [source,typescript]
 ----
@@ -90,9 +90,9 @@ TestBed.configureTestingModule({
 });
 ----
 
-TIP: Declare what is necessary
+TIP: 声明必要的部分
 
-In a unit test, add those parts to the Module that are strictly necessary: the code under test, mandatory dependencies and fakes. For example, when writing a unit test for `CounterComponent`, we need to declare that Component class. Since the Component does not have dependencies, does not render other Components, Directives or Pipes, we are done.
+在单元测试中，将那些严格必要的部分添加到模块中：被测试的代码、必需的依赖项和伪装对象。例如，当编写 `CounterComponent` 的单元测试时，我们需要声明该组件类。由于该组件没有依赖项，也没有渲染其他组件、指令或管道，好了我们已经完成了配置。
 
 [source,typescript]
 ----
@@ -101,18 +101,18 @@ TestBed.configureTestingModule({
 });
 ----
 
-Our Component under test is now part of a Module. We are ready to render it, right? Not yet. First we need to compile all declared Components, Directives and Pipes:
+我们要测试的组件现在是模块的一部分了。我们准备好渲染它了吗？还没有。首先，我们需要编译所有声明的组件、指令和管道：
 
 [source,typescript]
 ----
 TestBed.compileComponents();
 ----
 
-This instructs the Angular compiler to translate the template files into JavaScript code.
+这指示 Angular 编译器将模板文件转换为 JavaScript 代码。
 
-TIP: Configure and compile
+TIP: 配置和编译
 
-Since `configureTestingModule` returns the `TestBed` again, we can chain those two calls:
+由于 `configureTestingModule` 返回的仍然是 `TestBed`，我们可以将这两个调用链接在一起：
 
 [source,typescript]
 ----
@@ -123,28 +123,28 @@ TestBed
   .compileComponents();
 ----
 
-You will see this pattern in most Angular tests that rely on the `TestBed`.
+你会在大多数依赖于 `TestBed` 的 Angular 测试中看到这种模式。
 
-== Rendering the Component
+== 渲染组件
 
-Now we have a fully-configured testing Module with compiled Components. Finally, we can render the Component under test using `createComponent`:
+现在，我们有一个完全配置的测试模块，其中包含编译后的组件。最后，我们可以使用 `createComponent` 渲染要测试的组件：
 
 [source,typescript]
 ----
 const fixture = TestBed.createComponent(CounterComponent);
 ----
 
-`createComponent` returns a `ComponentFixture`, essentially a wrapper around the Component with useful testing tools. We will learn more about the `ComponentFixture` later.
+`createComponent` 返回一个 `ComponentFixture`，它实质上是围绕组件的一个包装器，提供了有用的测试工具。我们将在后面更详细地了解 `ComponentFixture`。
 
-`createComponent` renders the Component into a `div` container element in the HTML DOM. Alas, something is missing. The Component is not fully rendered. All the static HTML is present, but the dynamic HTML is missing. The template bindings, like `{% raw %}{{ count }}{% endraw %}` in the example, are not evaluated.
+`createComponent` 将组件渲染到 HTML DOM 中的一个 `div` 容器元素中。然而，还有一些东西缺失。组件没有完全渲染出来。所有静态的 HTML 存在，但动态的 HTML 却缺失了。模板绑定，如示例中的 `{% raw %}{{ count }}{% endraw %}`，没有被计算。
 
-TIP: Manual change detection
+TIP: 手动触发变更检测
 
-In our testing environment, there is *no automatic change detection*. Even with the default change detection strategy, a Component is not automatically rendered and re-rendered on updates.
+在我们的测试环境中，*没有自动的变更检测*。即使使用默认的变更检测策略，组件在更新时也不会自动渲染和重新渲染。
 
-In testing code, we have to *trigger the change detection manually*. This might be a nuisance, but it is actually a feature. It allows us to test asynchronous behavior in a synchronous manner, which is much simpler.
+在测试代码中，我们必须 *手动触发变更检测*。这可能有点麻烦，但实际上这是一个特性。它允许我们以同步的方式测试异步行为，这要简单得多。
 
-So the last thing we need to do is to trigger change detection:
+因此，我们需要做的最后一件事就是触发变更检测：
 
 [source,typescript]
 ----
@@ -153,12 +153,12 @@ fixture.detectChanges();
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/ComponentFixture[Angular API reference: ComponentFixture]
+- https://angular.io/api/core/testing/ComponentFixture[Angular API 参考文档：ComponentFixture]
 ====
 
-== TestBed and Jasmine
+== TestBed 和 Jasmine
 
-The code for rendering a Component using the `TestBed` is now complete. Let us wrap the code in a Jasmine test suite.
+使用 `TestBed` 渲染组件的代码现在已经完成。让我们将代码包装在一个 Jasmine 测试套件中。
 
 [source,typescript]
 ----
@@ -180,44 +180,43 @@ describe('CounterComponent', () => {
 });
 ----
 
-Using `describe`, we define a test suite for the `CounterComponent`. In contains a `beforeEach` block that configures the `TestBed` and renders the Component.
+使用 `describe`，我们为 `CounterComponent` 定义了一个测试套件。其中包含一个 `beforeEach` 块，用于配置 `TestBed` 并渲染组件。
 
-TIP: Async compilation
+TIP: 异步编译
 
-You might wonder why the function passed to `beforeEach` is marked as an `async` function. It is because `compileComponents` is an asynchronous operation. To compile the Components, Angular needs to fetch external the template files referenced by `templateUrl`.
+你可能会想知道为什么传递给 `beforeEach` 的函数被标记为 `异步` 函数。这是因为 `compileComponents` 是一个异步操作。为了编译组件，Angular 需要获取 `templateUrl` 引用的外部模板文件。
 
-If you are using the Angular CLI, which is most likely, the template files are already included in the test bundle. So they are available instantly. If you are not using the CLI, the files have to be loaded asynchronously.
+如果你使用的是 Angular CLI（很可能是这样），模板文件已经包含在测试捆绑包中，因此它们可以立即使用。如果你没有使用 CLI，那么这些文件必须以异步方式加载。
 
-This is an implementation detail that might change in the future. The safe way is wait for `compileComponents` to complete.
+这是一个可能在将来发生变化的实现细节。安全的做法是等待 `compileComponents` 完成。
 
-TIP: `async` and `await`
+TIP: `async` 和 `await`
 
-Per default, Jasmine expects that your testing code is synchronous. The functions you pass to `it` but also `beforeEach`, `beforeAll`, `afterEach`, `afterAll` need to finish in a certain amount of time, also known as timeout. Jasmine also supports asynchronous specs. If you pass an `async` function, Jasmine waits for it to finish.
-
+默认情况下，Jasmine 希望你的测试代码是同步的。你传递给 `it` 的函数以及 `beforeEach`、`beforeAll`、`afterEach`、`afterAll` 函数需要在一定时间内完成，也就是所谓的超时时间。Jasmine 也支持 `异步` 的规范。如果你传递一个异步函数，Jasmine 会等待它完成。
 
 [NOTE]
 ====
-- <<test-suites-with-jasmine#_test_suites_with_jasmine, Test suites with Jasmine>>
+- <<test-suites-with-jasmine#_使用jasmine编写测试套件, Jasmine 中的测试套件>>
 ====
 
-== ComponentFixture and DebugElement
+== ComponentFixture 和 DebugElement
 
-`TestBed.createComponent(CounterComponent)` returns a fixture, an instance of `ComponentFixture`. What is the fixture and what does it provide?
+`TestBed.createComponent(CounterComponent)` 返回一个 fixture，即 `ComponentFixture` 的实例。fixture 是什么，它提供了什么功能？
 
-The term fixture is borrowed from real-world testing of mechanical parts or electronic devices. A fixture is a standardized frame into which the test object is mounted. The fixture holds the object and connects to electrical contacts in order to provide power and to take measurements.
+fixture 这个术语来源于对机械部件或电子设备的现实世界测试。一个夹具是一个标准化的框架，用于安装测试对象。夹具持有对象并连接到电气接点，以提供电源和进行测量。
 
-TIP: <p><code>Component&#xAD;Fixture</code></p>
+TIP: ComponentFixture
 
-In the context of Angular, the `ComponentFixture` holds the Component and provides a convenient interface to both the Component instance and the rendered DOM.
+在 Angular 的上下文中，`ComponentFixture` 包含了组件并为组件实例和渲染的 DOM 提供了方便的接口。
 
-The fixture references the Component instance via the `componentInstance` property. In our example, it contains a `CounterComponent` instance.
+fixture 通过 `componentInstance` 属性引用组件实例。在我们的示例中，它包含了一个 `CounterComponent` 实例。
 
 [source,typescript]
 ----
 const component = fixture.componentInstance;
 ----
 
-The Component instance is mainly used to set Inputs and subscribe to Outputs, for example:
+组件实例主要用于设置输入属性（Inputs）和订阅输出属性（Outputs），例如：
 
 [source,typescript]
 ----
@@ -231,22 +230,22 @@ component.countChange.subscribe((count) => {
 });
 ----
 
-We will learn more on testing Inputs and Outputs later.
+我们稍后将更详细地了解如何测试输入属性和输出属性。
 
 TIP: `DebugElement`
 
-For accessing elements in the DOM, Angular has another abstraction: The `DebugElement` wraps the native DOM element. The fixture’s `debugElement` property returns the Component’s host element. For the `CounterComponent`, this is the `app-counter` element.
+为了访问 DOM 中的元素，Angular 提供了另一个抽象层：`DebugElement`，它封装了原生的 DOM 元素。fixture 的 `debugElement` 属性返回组件的宿主元素。对于 `CounterComponent`，它是 `app-counter` 元素。
 
 [source,typescript]
 ----
 const { debugElement } = fixture;
 ----
 
-The `DebugElement` offers handy properties like `properties`, `attributes`, `classes` and `styles` to examine the DOM element itself. The properties `parent`, `children` and `childNodes` help navigating in the DOM tree. They return `DebugElement`s as well.
+DebugElement 提供了一些方便的属性，例如 `properties`、`attributes`、`classes` 和 `styles`，用于检查 DOM 元素本身。属性 `parent`、`children` 和 `childNodes` 有助于在 DOM 树中进行导航。它们也会返回 `DebugElement`。
 
 TIP: `nativeElement`
 
-Often it is necessary to unwrap the `DebugElement` to access the native DOM element inside. Every `DebugElement` has a `nativeElement` property:
+通常需要解包 `DebugElement`，以访问内部的原生 DOM 元素。每个 `DebugElement` 都有一个 `nativeElement` 属性：
 
 [source,typescript]
 ----
@@ -257,21 +256,21 @@ console.log(nativeElement.textContent);
 console.log(nativeElement.innerHTML);
 ----
 
-`nativeElement` is typed as `any` because Angular does not know the exact type of the wrapped DOM element. Most of the time, it is a subclass of https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement[`HTMLElement`].
+`nativeElement` 的类型为 `any`，因为 Angular 无法确定包装的 DOM 元素的确切类型。大多数情况下，它是 https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement[`HTMLElement`] 的子类。
 
-When you use `nativeElement`, you need to learn about the DOM interface of the specific element. For example, a `button` element is represented as https://developer.mozilla.org/en-US/docs/Web/API/[`HTMLButtonElement`] in the DOM.
+当使用 `nativeElement` 时，您需要了解特定元素的 DOM 接口。例如，button 元素在 DOM 中表示为 https://developer.mozilla.org/en-US/docs/Web/API/[`HTMLButtonElement`]。
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/ComponentFixture[Angular API reference: ComponentFixture]
-- https://angular.io/api/core/DebugElement[Angular API reference: DebugElement]
+- https://angular.io/api/core/testing/ComponentFixture[Angular API 参考文档: ComponentFixture]
+- https://angular.io/api/core/DebugElement[Angular API 参考文档: DebugElement]
 ====
 
-== Writing the first Component spec
+== 编写第一个组件规范
 
-We have compiled a test suite that renders the `CounterComponent`. We have met Angular’s primary testing abstractions: `TestBed`, `ComponentFixture` and `DebugElement`.
+我们已经编译了一个测试套件，用于渲染 `CounterComponent`。我们已经了解了 Angular 的主要测试抽象: `TestBed`、`ComponentFixture` 和 `DebugElement`。
 
-Now let us roll up our sleeves and write the first spec! The main feature of our little counter is the ability to increment the count. Hence the spec:
+现在让我们开始撸起袖子，编写第一个规范！我们的小计数器的主要功能是能够递增计数。因此，我们的规范如下：
 
 [source,typescript]
 ----
@@ -280,11 +279,11 @@ it('increments the count', () => {
 });
 ----
 
-The *Arrange, Act and Assert* phases help us to structure the spec:
+*安排（Arrange）、行动（Act）和断言（Assert）* 阶段有助于规范我们的规范：
 
-- We have already covered the _Arrange_ phase in the `beforeEach` block that renders the Component.
-- In the _Act_ phase, we click on the increment button.
-- In the _Assert_ phase, we check that the displayed count has incremented.
+- 我们已经在 `beforeEach` 块中涵盖了 _安排(Arrange)_ 阶段，该阶段渲染了组件。
+- 在 _行动(Act)_ 阶段，我们点击增加按钮。
+- 在 _断言(Assert)_ 阶段，我们检查显示的计数是否已增加。
 
 [source,typescript]
 ----
@@ -294,27 +293,27 @@ it('increments the count', () => {
 });
 ----
 
-To click on the increment button, two actions are necessary:
+要点击增加按钮，需要进行两个操作：
 
-1. Find the increment button element in the DOM.
-2. Fire a click event on it.
+1. 在 DOM 中找到增加按钮元素。
+2. 触发点击事件。
 
-Let us learn about finding elements in the DOM first.
+让我们首先学习如何在 DOM 中查找元素。
 
-== Querying the DOM with test ids
+== 使用测试 ID 查询 DOM
 
-Every `DebugElement` features the methods `query` and `queryAll` for finding descendant elements (children, grandchildren and so forth).
+每个 `DebugElement` 都提供了 `query` 和 `queryAll` 方法来查找后代元素（子元素、孙子元素等）。
 
 TIP: `query` and `queryAll`
 
-- `query` returns the first descendant element that meets a condition.
-- `queryAll` returns an array of all matching elements.
+- `query` 方法返回满足条件的第一个后代元素。
+- `queryAll` 方法返回所有匹配的元素数组。
 
-Both methods expect a predicate, that is a function judging every element and returning `true` or `false`.
+这两个方法都需要一个谓词函数，该函数用于判断每个元素并返回 `true` 或 `false`。
 
 TIP: `By.css`
 
-Angular ships with predefined predicate functions to query the DOM using familiar CSS selectors. For this purpose, pass `By.css('…')` with a CSS selector to `query` and `queryAll`.
+Angular 提供了预定义的谓词函数，可以使用熟悉的 CSS 选择器来查询 DOM。为此，将带有 CSS 选择器的 `By.css('…')` 传递给 `query` 和 `queryAll` 方法。
 
 [source,typescript]
 ----
@@ -325,34 +324,34 @@ const h1 = debugElement.query(By.css('h1'));
 const userElements = debugElement.queryAll(By.css('.user'));
 ----
 
-The return value of `query` is a `DebugElement` again, that of `queryAll` is an array of `DebugElement`s (`DebugElement[]` in TypeScript notation).
+`query` 方法的返回值是一个 `DebugElement`，而 `queryAll` 的返回值是一个 `DebugElement` 数组（`DebugElement[]` 在 TypeScript 中的表示方式）。
 
-In the example above, we have used a type selector (`h1`) and a class selector (`.user`) to find elements in the DOM. For everyone familiar with CSS, this is familiar as well.
+在上面的示例中，我们使用了类型选择器（`h1`）和类选择器（`.user`）来查找 DOM 中的元素。对于熟悉 CSS 的人来说，这是非常熟悉的。
 
-While these selectors are fine when styling Components, using them in a test needs to be challenged.
+虽然这些选择器在样式化组件时很好用，但在测试中使用它们需要考虑一下。
 
-TIP: Avoid tight coupling
+TIP: 避免紧密耦合
 
-Type and class selectors introduce a _tight coupling_ between the test and the template. HTML elements are picked for semantic reasons. Classes are picked mostly for styling. Both change frequently when the Component template is refactored. Should the test fail if the element type or class changes?
+类型和类选择器在测试和模板之间引入了 _紧密耦合_。HTML 元素是根据语义原因选择的。类通常是为了样式化选择的。当组件模板进行重构时，这些都经常发生变化。如果元素类型或类发生变化，测试应该失败吗？
 
-Sometimes the element type and the class are crucial for the feature under test. But most of the time, they are not relevant for the feature. The test should better find the element by a feature that never changes and that bears no additional meaning: test ids.
+有时候，元素类型和类对于正在测试的功能至关重要。但大多数情况下，它们与功能无关。测试应该通过一个永远不会改变且不带有其他含义的特征来找到元素：测试 ID。
 
-TIP: Test ids
+TIP: 测试 ID
 
-A *test id* is an identifier given to an element just for the purpose of finding it in a test. The test will still find the element if the element type or unrelated attributes change.
+*测试 ID* 是专门为了在测试中查找元素而赋予元素的标识符。如果元素类型或其他属性发生变化，测试仍然能够找到该元素。
 
-The preferred way to mark an HTML element is a https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes[data attribute]. In contrast to element types, `class` or `id` attributes, data attributes do not come with any predefined meaning. Data attributes never clash with each other.
+标记 HTML 元素的首选方式是使用 https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes[data 属性]。与元素类型、`class` 或 `id` 属性不同，数据属性没有任何预定义的含义。数据属性永远不会互相冲突。
 
 TIP: `data-testid`
 
-For the purpose of this guide, we use the *`data-testid`* attribute. For example, we mark the increment button in the `CounterComponent` with `data-testid="increment-button"`:
+在本指南中，我们使用 *`data-testid`* 属性来标记元素。例如，我们可以使用 `data-testid="increment-button"` 来标记 `CounterComponent` 中的增加按钮：
 
 [source,html]
 ----
 <button (click)="increment()" data-testid="increment-button">+</button>
 ----
 
-In the test, we use the corresponding attribute selector:
+在测试中，我们使用相应的属性选择器：
 
 [source,typescript]
 ----
@@ -361,28 +360,28 @@ const incrementButton = debugElement.query(
 );
 ----
 
-TIP: Establish a convention
+TIP: 建立一个约定
 
-There is a nuanced discussion around the best way to find elements during testing. Certainly, there are several valid and elaborate approaches. This guide will only present one possible approach that is simple and approachable.
+关于在测试中查找元素的最佳方法有很多细微的讨论。当然，有几种有效且复杂的方法。本指南只提供一种可能的简单和可行的方法。
 
-The Angular testing tools are neutral when it comes to DOM querying. They tolerate different approaches. After consideration, you should opt for one specific solution, document it as a <<angular-testing-principles#_testing_conventions, testing convention>> and apply it consistently across all tests.
+在DOM查询方面，Angular测试工具是中立的。它们可以容忍不同的方法。经过考虑后，您应该选择一种具体的解决方案，将其作为 <<angular-testing-principles#_测试约定_, 测试约定>> 记录下来，并在所有测试中一致应用。
 
 [NOTE]
 ====
-- https://angular.io/api/platform-browser/By[Angular API reference: By.css]
+- https://angular.io/api/platform-browser/By[Angular API参考文档：By.css]
 ====
 
-== Triggering event handlers
+== 触发事件处理程序
 
-Now that we have marked and got hold of the increment button, we need to click on it.
+现在，我们已经标记并获取了增加按钮，我们需要点击它。
 
-It is a common task in tests to simulate user input like clicking, typing in text, moving pointers and pressing keys. From an Angular perspective, user input causes DOM events.
+在测试中模拟用户输入，如点击、输入文本、移动指针和按键，是一个常见的任务。从Angular的角度来看，用户输入会导致DOM事件。
 
-The Component template registers event handlers using the schema `(event)="handler($event)"`. In the test, we need to simulate an event to call these handlers.
+组件模板使用模式 `(event)="handler($event)"` 注册事件处理程序。在测试中，我们需要模拟事件以调用这些处理程序。
 
-TIP: Trigger event handler
+TIP: 触发事件处理程序
 
-`DebugElement` has a useful method for firing events: `triggerEventHandler`. This method calls all event handlers for a given event type like `click`. As a second parameter, it expects a fake event object that is passed to the handlers:
+`DebugElement` 有一个非常有用的方法用于触发事件：`triggerEventHandler`。该方法调用给定事件类型（例如 `click`）的所有事件处理程序。作为第二个参数，它期望一个伪事件对象，该对象将传递给处理程序：
 
 [source,typescript]
 ----
@@ -391,44 +390,44 @@ incrementButton.triggerEventHandler('click', {
 });
 ----
 
-This example fires a `click` event on the increment button. Since the template contains `(click)="increment()"`, the `increment` method of `CounterComponent` will be called.
+这个示例在增加按钮上触发了一个 `click` 事件。由于模板包含了 `(click)="increment()"`，`CounterComponent` 的 `increment` 方法将被调用。
 
-TIP: Event object
+TIP: 事件对象
 
-The `increment` method does not access the event object. The call is simply `increment()`, not `increment($event)`. Therefore, we do not need to pass a fake event object, we can simply pass `null`:
+`increment` 方法并没有使用事件对象。调用的是简单的 `increment()`，而不是 `increment($event)`。因此，我们不需要传递一个伪造的事件对象，可以直接传递 `null`：
 
 [source,typescript]
 ----
 incrementButton.triggerEventHandler('click', null);
 ----
 
-It is worth noting that `triggerEventHandler` does not dispatch a synthetic DOM event. The effect stays on the `DebugElement` abstraction level and does not touch the native DOM.
+值得注意的是，`triggerEventHandler` 不会触发合成的DOM事件。它的影响仅限于 `DebugElement` 的抽象层级，不会触及原生的DOM。
 
-TIP: No bubbling
+TIP: 没有事件冒泡
 
-This is fine as long as the event handler is registered on the element itself. If the event handler is registered on a parent and relies on event bubbling, you need to call `triggerEventHandler` directly on that parent. `triggerEventHandler` does not simulate event bubbling or any other effect a real event might have.
+只要事件处理程序在元素本身上注册，这是可以的。如果事件处理程序在父元素上注册，并依赖于事件冒泡，你需要直接在该父元素上调用 `triggerEventHandler`。`triggerEventHandler` 不会模拟事件冒泡或任何其他真实事件可能具有的效果。
 
-== Expecting text output
+== 期望文本输出
 
-We have completed the _Act_ phase in which the test clicks on the increment button. In the _Assert_ phase, we need to expect that the displayed count changes from “0” to “1”.
+我们已经完成了 _Act_ 阶段，在该阶段测试会点击增加按钮。在 _Assert_ 阶段，我们需要期望显示的计数从“0”变为“1”。
 
-In the template, the count is rendered into a `strong` element:
+在模板中，计数被渲染到一个 `strong` 元素中：
 
 [source,html]
 ----
 {% raw %}<strong>{{ count }}</strong>{% endraw %}
 ----
 
-TIP: Find by test id
+TIP: 通过测试id查找元素
 
-In our test, we need to find this element and read its text content. For this purpose, we add a test id:
+在我们的测试中，我们需要找到这个元素并读取它的文本内容。为此，我们添加一个测试id：
 
 [source,html]
 ----
 {% raw %}<strong data-testid="count">{{ count }}</strong>{% endraw %}
 ----
 
-We can now find the element as usual:
+现在我们可以像往常一样找到该元素：
 
 [source,typescript]
 ----
@@ -437,25 +436,25 @@ const countOutput = debugElement.query(
 );
 ----
 
-TIP: Text content
+TIP: 文本内容
 
-The next step is to read the element’s content. In the DOM, the count is a text node that is a child of `strong`.
+接下来的步骤是读取元素的内容。在DOM中，计数是 `strong` 的子节点，它是一个文本节点。
 
-Unfortunately, the `DebugElement` does not have a method or property for reading the text content. We need to access the native DOM element that has a convenient `textContent` property.
+不幸的是，`DebugElement` 没有用于读取文本内容的方法或属性。我们需要访问具有方便的 `textContent` 属性的原生DOM元素。
 
 [source,typescript]
 ----
 countOutput.nativeElement.textContent
 ----
 
-Finally, we expect that this string is `"1"` using Jasmine’s `expect`:
+最后，我们使用Jasmine的 `expect` 来断言这个字符串是否为 `"1"`：
 
 [source,typescript]
 ----
 expect(countOutput.nativeElement.textContent).toBe('1');
 ----
 
-The `counter.component.spec.ts` now looks like this:
+`counter.component.spec.ts` 现在如下所示：
 
 [source,typescript]
 ----
@@ -491,7 +490,7 @@ describe('CounterComponent', () => {
 });
 ----
 
-When we run that suite, the spec fails:
+当我们运行该测试套件时，该规范将失败：
 
 [source,]
 ----
@@ -499,18 +498,18 @@ CounterComponent increments the count FAILED
   Error: Expected '0' to be '1'.
 ----
 
-What is wrong here? Is the implementation faulty? No, the test just missed something important.
+这里出了什么问题？是实现有问题吗？不，测试只是漏掉了一些重要的内容。
 
-TIP: Manual change detection
+TIP: 手动进行变更检测
 
-We have mentioned that in the testing environment, Angular does not automatically detect changes in order to update the DOM. Clicking the increment button changes the `count` property of the Component instance. To update the template binding `{% raw %}{{ count }}{% endraw %}`, we need to _trigger the change detection manually_.
+我们已经提到在测试环境中，Angular不会自动检测变更以更新DOM。点击增加按钮会更改组件实例的 `count` 属性。要更新模板绑定 `{% raw %}{{ count }}{% endraw %}`，我们需要 _手动触发变更检测_。
 
 [source,typescript]
 ----
 fixture.detectChanges();
 ----
 
-The full test suite now looks like this:
+完整的测试套件现在如下所示：
 
 [source,typescript]
 ----
@@ -547,25 +546,25 @@ describe('CounterComponent', () => {
 });
 ----
 
-Congratulations! We have written our first Component test. It is not complete yet, but it already features a typical workflow. We will make small improvements to the existing code with each spec we add.
+恭喜！我们已经编写了我们的第一个组件测试。虽然它还不完整，但已经包含了一个典型的工作流程。随着我们添加每个规范，我们将对现有代码进行小的改进。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: test code]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: 测试代码]
 ====
 
-== Testing helpers
+== 测试辅助函数
 
-The next `CounterComponent` feature we need to test is the decrement button. It is very similar to the increment button, so the spec looks almost the same.
+我们需要测试的下一个 `CounterComponent` 功能是递减按钮。它与递增按钮非常相似，所以规范几乎相同。
 
-First, we add a test id to the decrement button:
+首先，我们给递减按钮添加一个测试ID：
 
 [source,html]
 ----
 <button (click)="decrement()" data-testid="decrement-button">-</button>
 ----
 
-Then we write the spec:
+然后我们编写规范：
 
 [source,typescript]
 ----
@@ -586,29 +585,29 @@ it('decrements the count', () => {
 });
 ----
 
-There is nothing new here, only the test id, the variable names and the expected output changed.
+在此我们没有新内容，只是测试标识、变量名和预期输出发生了变化。
 
-TIP: Repeating patterns
+TIP: 重复的模式
 
-Now we have two specs that are almost identical. The code is repetitive and the signal-to-noise ratio is low, meaning there is much code that does little. Let us identify the patterns repeated here:
+现在我们有两个几乎相同的规范。代码重复，信号与噪声比例低，也就是说有很多代码起到了很少的作用。让我们识别出这里重复的模式：
 
-1. Finding an element by test id
-2. Clicking on an element found by test id
-3. Expecting a given text content on an element found by test id
+1. 通过测试标识查找元素
+2. 点击通过测试标识找到的元素
+3. 在通过测试标识找到的元素上期望给定的文本内容
 
-These tasks are highly generic and they will appear in almost every Component spec. It is worth writing testing helpers for them.
+这些任务是非常通用的，几乎会出现在每个组件规范中。值得为它们编写测试助手。
 
-TIP: Testing helpers
+TIP: 测试助手
 
-A *testing helper* is a piece of code that makes writing tests easier. It makes test code more concise and more meaningful. Since a spec should describe the implementation, a readable spec is better than an obscure, convoluted one.
+*测试助手* 是使编写测试更容易的一段代码。它使测试代码更简洁、更有意义。由于规范应该描述实现，因此可读性强的规范要比晦涩难懂的规范更好。
 
-Your testing helpers should cast your <<angular-testing-principles#+testing_conventions, testing conventions>> into code. They not only improve the individual test, but make sure all tests use the same patterns and work the same.
+您的测试助手应将 <<angular-testing-principles#_测试约定, 测试约定>> 转化为代码。它们不仅改善了单个测试，还确保所有测试使用相同的模式并且工作相同。
 
-A testing helper can be a simple function, but it can also be an abstraction class or a Jasmine extension. For the start, we extract common tasks into plain functions.
+测试助手可以是一个简单的函数，也可以是一个抽象类或Jasmine扩展。首先，我们将常见任务提取为普通函数。
 
-TIP: Find by test id
+TIP: 通过测试标识查找
 
-First, let us write a helper for finding an element by test id. We have used this pattern multiple times:
+首先，让我们编写一个通过测试标识查找元素的辅助函数。我们已经多次使用了这个模式：
 
 [source,typescript]
 ----
@@ -617,7 +616,7 @@ const xyzElement = fixture.debugElement.query(
 );
 ----
 
-We move this code into a reusable function:
+我们将这段代码转移到可重用的函数中：
 
 [source,typescript]
 ----
@@ -631,11 +630,11 @@ function findEl<T>(
 }
 ----
 
-This function is self-contained. We need to pass in the Component fixture explicitly. Since `ComponentFixture<T>` requires a type parameter – the wrapped Component type –, `findEl` also has a type parameter called `T`. TypeScript will infer the Component type automatically when you pass a `ComponentFixture`.
+这个函数是自包含的。我们需要显式地传递组件的 fixture。由于 `ComponentFixture<T>` 需要一个类型参数 - 包装的组件类型 -，`findEl` 也有一个名为 `T` 的类型参数。当你传递一个 `ComponentFixture` 时，TypeScript 会自动推断出组件的类型。
 
-TIP: Click
+TIP: 点击
 
-Second, we write a testing helper that clicks on an element with a given test id. This helper builds on `findEl`.
+其次，我们编写一个测试助手，它可以点击具有给定测试 id 的元素。这个助手基于 `findEl`。
 
 [source,typescript]
 ----
@@ -649,7 +648,7 @@ export function click<T>(
 }
 ----
 
-To create a fake click event object, `click` calls another function, `makeClickEvent`.
+为了创建一个模拟的点击事件对象，`click` 函数调用另一个函数 `makeClickEvent`。
 
 [source,typescript]
 ----
@@ -670,19 +669,19 @@ export function makeClickEvent(
 }
 ----
 
-This function returns a partial https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent[MouseEvent] fake object with the most important methods and properties of real click events. It is suitable for clicks on buttons and links when the pointer position and modifier keys do not matter.
+这个函数返回一个部分的 https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent[MouseEvent] 模拟对象，其中包含真实点击事件的最重要的方法和属性。它适用于在指针位置和修饰键不重要的情况下点击按钮和链接。
 
-TIP: Click means activate
+TIP: 点击意味着激活
 
-The `click` testing helper can be used on every element that has a `(click)="…"` event handler. For accessibility, make sure the element can be focussed and activated. This is already the case for buttons (`button` element) and links (`a` elements).
+`点击` 测试助手可用于具有 `(click)="…"` 事件处理程序的每个元素。为了辅助功能，请确保元素可以聚焦和激活。对于按钮（`button` 元素）和链接（`a` 元素）来说，这已经是默认情况。
 
-Historically, the `click` event was only triggered by mouse input. Today, it is a generic “activate” event. It is also triggered by touch input (“tap”), keyboard input or voice input.
+从历史上看，`点击` 事件只由鼠标输入触发。但是现在，它是一个通用的“激活”事件。它还可以由触摸输入（“轻触”）、键盘输入或语音输入触发。
 
-So in your Component, you do not need to listen for touch or keyboard events separately. In the test, a generic `click` event usually suffices.
+因此，在组件中，您不需要单独监听触摸或键盘事件。在测试中，通常只需要一个通用的 `点击` 事件即可。
 
-TIP: Expect text content
+TIP: 期望文本内容
 
-Third, we write a testing helper that expects a given text content on an element with a given test id.
+第三个测试助手是一个函数，用于在具有给定测试 id 的元素上期望给定的文本内容。
 
 [source,typescript]
 ----
@@ -697,9 +696,9 @@ export function expectText<T>(
 }
 ----
 
-Again, this is a simple implementation we will improve later.
+再次强调，这是一个简单的实现，我们将在以后进行改进。
 
-Using these helpers, we rewrite our spec:
+使用这些助手函数，我们重新编写我们的规范（spec）：
 
 [source,typescript]
 ----
@@ -714,7 +713,7 @@ it('decrements the count', () => {
 });
 ----
 
-That is much better to read and less to write! You can tell what the spec is doing at first glance.
+这样的代码读起来更好，写起来也更少！一眼就能看出规范在做什么。
 
 [NOTE]
 ====
@@ -722,19 +721,19 @@ That is much better to read and less to write! You can tell what the spec is doi
 - https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[Element spec helpers: full code]
 ====
 
-== Filling out forms
+== 填充表单
 
-We have tested the increment and decrement button successfully. The remaining user-facing feature we need to test is the reset feature.
+我们已经成功测试了增加和减少按钮。我们还需要测试的剩下的用户界面功能是重置功能。
 
-In the user interface, there is a reset input field and a reset button. The user enters a new number into the field, then clicks on the button. The Component resets the count to the user-provided number.
+在用户界面中，有一个重置输入字段和一个重置按钮。用户在字段中输入一个新数字，然后点击按钮。组件将计数重置为用户提供的数字。
 
-TIP: Set field value
+TIP: 设置字段值
 
-We already know how to click a button, but how do we fill out a form field? Unfortunately, Angular’s testing tools do not provide a solution for filling out forms easily.
+我们已经知道如何点击按钮，但是如何填写表单字段呢？不幸的是，Angular 的测试工具没有提供一种简单地填写表单的解决方案。
 
-The answer depends on the field type and value. The generic answer is: Find the native DOM element and set the `value` property to the new value.
+答案取决于字段类型和值。一般的答案是：找到原生 DOM 元素，并将 `value` 属性设置为新值。
 
-For the reset input, this means:
+对于重置输入字段来说，这意味着：
 
 [source,typescript]
 ----
@@ -744,7 +743,7 @@ const resetInput = debugElement.query(
 resetInput.nativeElement.value = '123';
 ----
 
-With our testing helper:
+使用我们的测试助手：
 
 [source,typescript]
 ----
@@ -752,9 +751,9 @@ const resetInputEl = findEl(fixture, 'reset-input').nativeElement;
 resetInputEl.value = '123';
 ----
 
-This fills in the value programmatically.
+这样可以通过编程的方式填充值。
 
-In `CounterComponent`’s template, the reset input has a _template reference variable_, `#resetInput`:
+在 `CounterComponent` 的模板中，重置输入字段有一个 _模板引用变量_，`#resetInput`:
 
 [source,html]
 ----
@@ -764,17 +763,17 @@ In `CounterComponent`’s template, the reset input has a _template reference va
 </button>
 ----
 
-The click handler uses `resetInput` to access the `input` element, reads the `value` and passes it to the `reset` method.
+点击处理程序使用 `resetInput` 来访问 `input` 元素，读取其 `值` 并将其传递给 `reset` 方法。
 
-The example already works because the form is very simple. Setting a field’s `value` is not a full simulation of user input and will not work with Template-driven or Reactive Forms yet.
+这个示例已经可以工作，因为表单非常简单。设置字段的 `值` 并不能完全模拟用户输入，并且还不能与模板驱动或响应式表单一起使用。
 
-TIP: Fake `input` event
+TIP: 伪造 `输入` 事件
 
-Angular forms cannot observe `value` changes directly. Instead, Angular listens for an `input` event that the browser fires when a field value changes.
+Angular 表单不能直接观察到 `值` 的变化。相反，Angular 监听浏览器在字段值变化时触发的 `input` 事件。
 
-For *compatibility with Template-driven and Reactive Forms*, we need to dispatch a fake `input` event. Such events are also called _synthetic events_.
+为了 *兼容模板驱动和响应式表单*，我们需要触发一个伪造的 `input` 事件。这样的事件也被称为 _合成事件_。
 
-In newer browsers, we create a fake `input` event with `new Event('input')`. To dispatch the event, we use the `dispatchEvent` method of the target element.
+在较新的浏览器中，我们可以使用 `new Event('input')` 来创建一个伪造的 `input` 事件。要触发事件，我们使用目标元素的 `dispatchEvent` 方法。
 
 [source,typescript]
 ----
@@ -783,7 +782,7 @@ resetInputEl.value = '123';
 resetInputEl.dispatchEvent(new Event('input'));
 ----
 
-If you need to run your tests in legacy Internet Explorer, a bit more code is necessary. Internet Explorer does not support `new Event('…')`, but the `document.createEvent` method:
+如果您需要在旧版的 Internet Explorer 中运行测试，需要更多的代码。Internet Explorer 不支持 `new Event('…')`，而是使用 `document.createEvent` 方法：
 
 [source,typescript]
 ----
@@ -792,7 +791,7 @@ event.initEvent('input', true, false);
 resetInputEl.dispatchEvent(event);
 ----
 
-The full spec for the reset feature then looks like this:
+重置功能的完整规范如下所示：
 
 [source,typescript]
 ----
@@ -818,11 +817,11 @@ it('resets the count', () => {
 });
 ----
 
-Filling out forms is a common task in tests, so it makes sense to extract the code and put it into a helper.
+填写表单是测试中常见的任务，因此将代码提取出来放入助手函数中是有意义的。
 
-TIP: Helper functions
+TIP: 辅助函数
 
-The helper function `setFieldValue` takes a Component fixture, a test id and a string value. It finds the corresponding element using `findEl`. Using another helper, `setFieldElementValue`, it sets the `value` and dispatches an `input` event.
+辅助函数 `setFieldValue` 接受一个组件 fixture、一个测试 id 和一个字符串值。它使用 `findEl` 找到相应的元素。使用另一个辅助函数 `setFieldElementValue`，它设置 `值` 并触发一个输入事件。
 
 [source,typescript]
 ----
@@ -838,9 +837,9 @@ export function setFieldValue<T>(
 }
 ----
 
-You can find the full source code of the involved helper functions in https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[element.spec-helper.ts].
+您可以在 https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[element.spec-helper.ts] 文件中找到所涉及的辅助函数的完整源代码。
 
-Using the newly created `setFieldValue` helper, we can simplify the spec:
+使用新创建的 `setFieldValue` 辅助函数，我们可以简化规范（spec）：
 
 [source,typescript]
 ----
@@ -857,13 +856,13 @@ it('resets the count', () => {
 });
 ----
 
-While the reset feature is simple, this is how to test most form logic. Later, we will learn how to <<testing-complex-forms#_testing_complex_forms, test complex forms>>.
+尽管重置功能很简单，但这是如何测试大多数表单逻辑的方式。稍后，我们将学习如何 <<testing-complex-forms#_testing_complex_forms, 测试复杂的表单>>。
 
-TIP: Invalid input
+TIP: 无效输入
 
-The `CounterComponent` checks the input value before it resets the count. If the value is not a number, clicking the reset button does nothing.
+`CounterComponent` 在重置计数之前会检查输入值。如果值不是数字，点击重置按钮将不会有任何操作。
 
-We need to cover this behavior with another spec:
+我们需要用另一个规范来覆盖这种行为：
 
 [source,typescript]
 ----
@@ -880,9 +879,9 @@ it('does not reset if the value is not a number', () => {
 });
 ----
 
-The small difference in this spec is that we set the field value to “not a number”, a string that cannot be parsed as a number, and expect the count to remain unchanged.
+在这个规范中的小差异是，我们将字段值设置为“not a number”，这是一个无法解析为数字的字符串，并期望计数保持不变。
 
-This is it! We have tested the reset form with both valid and invalid input.
+就是这样！我们已经使用有效和无效的输入测试了重置表单。
 
 [NOTE]
 ====
@@ -890,15 +889,15 @@ This is it! We have tested the reset form with both valid and invalid input.
 - https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[Element spec helpers: full code]
 ====
 
-== Testing Inputs
+== 测试输入
 
-`CounterComponent` has an Input `startCount` that sets the initial count. We need to test that the counter handles the Input properly.
+`CounterComponent` 有一个名为 `startCount` 的 Input，用于设置初始计数值。我们需要测试计数器如何正确处理这个 Input。
 
-For example, if we set `startCount` to `123`, the rendered count needs to be `123` as well. If the Input is empty, the rendered count needs to be `0`, the default value.
+例如，如果我们将 `startCount` 设置为 `123`，渲染的计数也应该是 `123`。如果输入为空，渲染的计数应该是 `0`，即默认值。
 
-TIP: Set Input value
+TIP: 设置 Input 值
 
-An Input is a special property of the Component instance. We can set this property in the _Arrange_ phase.
+Input 是组件实例的特殊属性。我们可以在 _Arrange_ 阶段设置这个属性。
 
 [source,typescript]
 ----
@@ -906,13 +905,13 @@ const component = fixture.componentInstance;
 component.startCount = 10;
 ----
 
-It is a good practice not to change an Input value within a Component. An Input property should always reflect the data passed in by the parent Component.
+在组件中最好不要改变 Input 的值。Input 属性应始终反映父组件传入的数据。
 
-TIP: Input vs. Component state
+TIP: Input 与组件状态
 
-That is why `CounterComponent` has a public Input named `startCount` as well as an internal property named `count`. When the user clicks the increment or decrement buttons, `count` is changed, but `startCount` remains unchanged.
+这就是为什么 `CounterComponent` 既有一个名为 `startCount` 的公共 Input，又有一个名为 `count` 的内部属性。当用户点击增加或减少按钮时，`count` 会发生变化，但 `startCount` 保持不变。
 
-Whenever the `startCount` Input changes, `count` needs to be set to `startCount`. The safe place to do that is the `ngOnChanges` lifecycle method:
+每当 `startCount` Input 发生变化时，`count` 需要被设置为 `startCount` 的值。最安全的做法是在 `ngOnChanges` 生命周期方法中进行设置：
 
 [source,typescript]
 ----
@@ -921,9 +920,9 @@ public ngOnChanges(): void {
 }
 ----
 
-`ngOnChanges` is called whenever a “data-bound property” changes, including Inputs.
+`ngOnChanges` 在“数据绑定属性”发生变化时被调用，包括 Inputs。
 
-Let us write a test for the `startCount` Input. We set the Input in the `beforeEach` block, before calling `detectChanges`. The spec itself checks that the correct count is rendered.
+让我们为 `startCount` Input 编写一个测试。我们在 `beforeEach` 块中设置 Input，在调用 `detectChanges` 之前。规范本身检查正确的计数是否被渲染出来。
 
 [source,typescript]
 ----
@@ -941,7 +940,7 @@ it('shows the start count', () => {
 });
 ----
 
-When we run this spec, we find that it fails:
+当我们运行这个规范时，我们发现它失败了：
 
 [source,]
 ----
@@ -951,11 +950,11 @@ CounterComponent > shows the start count
 
 TIP: `ngOnChanges`
 
-What is wrong here? Did we forget to call `detectChanges` again? No, but we forgot to call `ngOnChanges`!
+这里出了什么问题？我们是不是忘记再次调用 `detectChanges` 了？不是的，但我们忘记调用 `ngOnChanges`！
 
-In the testing environment, `ngOnChanges` is not called automatically. We have to call it manually after setting the Input.
+在测试环境中，`ngOnChanges` 不会自动调用。我们必须在设置完 Input 后手动调用它。
 
-Here is the corrected example:
+以下是修正后的示例：
 
 [source,typescript]
 ----
@@ -986,22 +985,22 @@ describe('CounterComponent', () => {
 });
 ----
 
-The `CounterComponent` expects a `number` Input and renders it into the DOM. When reading text from the DOM, we always deal with strings. That is why we pass in a number `123` but expect to find the string `'123'`.
+`CounterComponent` 期望一个 `number` 输入，并将其渲染到 DOM 中。当从 DOM 中读取文本时，我们总是处理字符串。这就是为什么我们传入一个数字 `123`，但期望找到字符串 `'123'` 的原因。
 
 [NOTE]
 ====
 - https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: test code]
 ====
 
-== Testing Outputs
+== 测试输出
 
-While Inputs pass data from parent to child, Outputs send data from child to parent. In combination, a Component can perform a specific operation just with the required data.
+虽然输入将数据从父组件传递到子组件，但输出将数据从子组件发送到父组件。结合起来，一个组件可以只使用所需的数据执行特定的操作。
 
-For example, a Component may render a form so the user can edit or review the data. Once completed, the Component emits the data as an Output.
+例如，一个组件可以呈现一个表单，以便用户可以编辑或审查数据。一旦完成，组件就会将数据作为输出发出。
 
-Outputs are not a user-facing feature, but a vital part of the public Component API. Technically, Outputs are Component instance properties. A unit test must inspect the Outputs thoroughly to proof that the Component plays well with other Components.
+输出不是一个面向用户的功能，但是它是公共组件 API 的重要组成部分。从技术上讲，输出是组件实例的属性。单元测试必须仔细检查输出，以证明组件与其他组件的协作良好。
 
-The `CounterComponent` has an output named `countChange`. Whenever the count changes, the `countChange` Output emits the new value.
+`CounterComponent` 有一个名为 `countChange` 的输出。每当计数发生变化时，`countChange` 输出会发出新的值。
 
 [source,typescript]
 ----
@@ -1013,11 +1012,11 @@ export class CounterComponent implements OnChanges {
 }
 ----
 
-TIP: Subscribe to Observable
+TIP: 订阅 Observable
 
-`EventEmitter` is a subclass of RxJS `Subject`, which itself extends RxJS `Observable`. The Component uses the `emit` method to publish new values. The parent Component uses the `subscribe` method to listen for emitted values. In the testing environment, we will do the same.
+`EventEmitter` 是 RxJS `Subject` 的子类，它本身扩展了 RxJS `Observable`。组件使用 `emit` 方法来发布新的值，而父组件使用 `subscribe` 方法来监听发布的值。在测试环境中，我们也将进行相同的操作。
 
-Let us write a spec for the `countChange` Output!
+让我们为 `countChange` 输出编写一个规范！
 
 [source,typescript]
 ----
@@ -1026,7 +1025,7 @@ it('emits countChange events on increment', () => {
 });
 ----
 
-Within the spec, we access the Output via `fixture.componentInstance.countChange`. In the _Arrange_ phase, we subscribe to the `EventEmitter`.
+在规范中，我们通过 `fixture.componentInstance.countChange` 访问 Output。在 _Arrange_ 阶段，我们订阅 `EventEmitter`。
 
 [source,typescript]
 ----
@@ -1038,7 +1037,7 @@ it('emits countChange events on increment', () => {
 });
 ----
 
-We need to verify that the observer function is called with the right value when the increment button is clicked. In the _Act_ phase, we click on the button using our helper function:
+我们需要验证当点击递增按钮时，观察者函数是否以正确的值被调用。在 _Act_ 阶段，我们使用我们的辅助函数点击按钮：
 
 [source,typescript]
 ----
@@ -1053,9 +1052,9 @@ it('emits countChange events on increment', () => {
 });
 ----
 
-TIP: Change variable value
+TIP: 修改变量值
 
-In the _Assert_ phase, we expect that `count` has the correct value. The easiest way is to declare a variable in the spec scope. Let us name it `actualCount`. Initially, it is `undefined`. The observer function sets a value – or not, if it is never called.
+在 _Assert_ 阶段，我们期望 `count` 具有正确的值。最简单的方法是在 spec 的作用域中声明一个变量。让我们将其命名为 `actualCount`。最初，它的值是 `未定义(undefined)` 的。观察者函数设置一个值 - 或者如果它从未被调用，则不设置任何值。
 
 [source,typescript]
 ----
@@ -1074,11 +1073,11 @@ it('emits countChange events on increment', () => {
 });
 ----
 
-TIP: Expect changed value
+TIP: 期望值发生变化
 
-The click on the button emits the count and calls the observer function synchronously. That is why the next line of code can expect that `actualCount` has been changed.
+点击按钮会同步地发出 count 并调用观察者函数。这就是为什么代码的下一行可以期望 `actualCount` 已经发生了变化。
 
-You might wonder why we did not put the `expect` call in the observer function:
+你可能想知道为什么我们没有将 `expect` 调用放在观察者函数中：
 
 [source,typescript]
 ----
@@ -1095,13 +1094,13 @@ it('emits countChange events on increment', () => {
 });
 ----
 
-TIP: Always run expectation
+TIP: 始终执行断言
 
-This works as well. But if the feature under test is broken and the Output does not emit, `expect` is never called.
+这种方法也是可行的。但是，如果被测试的功能出现故障，输出不会发出，那么 1 就不会被调用。
 
-Per default, Jasmine warns you that the spec has no expectations but treats the spec as successful (see <<angular-testing-principles#_configuring_karma_and_jasmine, Configuring Karma and Jasmine>>). We want the spec to fail explicitly in this case, so we make sure the expectation is always run.
+默认情况下，Jasmine 会警告您该规范没有期望值，但将该规范视为成功（参见 <<angular-testing-principles#_配置karma和jasmine, 配置 Karma 和 Jasmine>>）。在这种情况下，我们希望该规范明确失败，以确保始终运行期望值。
 
-Now we have verified that `countChange` emits when the increment button is clicked. We also need to proof that the Output emits on decrement and reset. We can achieve that by adding two more specs that copy the existing spec:
+现在，我们已经验证了在点击增加按钮时 `countChange` 是否发出。我们还需要证明输出在减少和重置时也会发出。我们可以通过添加两个更多的规范来实现，这两个规范与现有规范相同：
 
 [source,typescript]
 ----
@@ -1142,27 +1141,27 @@ it('emits countChange events on reset', () => {
 - https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: test code]
 ====
 
-== Repetitive Component specs
+== 重复的组件规范
 
-Testing the `countChange` Output with three specs works fine, but the code is highly repetitive. A testing helper can reduce the repetition. Experts disagree on whether repetitive testing code is a problem at all.
+使用三个规范测试 `countChange` 输出效果很好，但代码非常重复。测试辅助函数可以减少重复。关于重复测试代码是否成问题，专家们有不同的意见。
 
-On the one hand, it is hard to grasp the essence of repetitive specs. Testing helpers form a custom language for expressing testing instructions clearly and briefly. For example, if your specs find DOM elements via test ids, a testing helper establishes the convention and hides the implementation details.
+一方面，很难抓住重复规范的本质。测试辅助函数形成了一种自定义语言，可以清晰而简洁地表达测试指令。例如，如果您的规范通过测试 ID 查找 DOM 元素，测试辅助函数会建立惯例并隐藏实现细节。
 
-On the other hand, abstractions like helper functions make tests more complex and therefore harder to understand. A developer reading the specs needs to get familiar with the testing helpers first. After all, tests should be more readable than the implementation code.
+另一方面，像辅助函数这样的抽象会使测试变得更复杂，因此更难理解。阅读规范的开发人员首先需要熟悉测试辅助函数。毕竟，测试应该比实现代码更易读。
 
-TIP: Duplication vs. abstraction
+TIP: 重复与抽象
 
-There is a controversial debate in software development regarding repetition and the value of abstractions. https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction[As Sandi Metz famously stated], “duplication is far cheaper than the wrong abstraction”.
+在软件开发中，有关重复和抽象价值的问题存在争议。https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction[正如 Sandi Metz 所说]，“重复比错误的抽象要便宜得多”。
 
-This is especially true when writing specs. You should try to eliminate duplication and boilerplate code with `beforeEach`/`beforeAll`, simple helper functions and even testing libraries. But do not try to apply your optimization habits and skills to test code.
+当编写规范时，这一点尤为正确。您应该尝试使用 `beforeEach`/`beforeAll`、简单的辅助函数甚至测试库来消除重复和样板代码。但是不要试图将您的优化习惯和技巧应用于测试代码。
 
-A test is supposed to reproduce all relevant logical cases. Finding a proper abstraction for all these diverse, sometimes mutually exclusive cases is often futile.
+测试应该重现所有相关的逻辑情况。为所有这些不同的、有时是互斥的情况找到合适的抽象通常是徒劳的。
 
-TIP: Carefully reduce repetition
+TIP: 谨慎地减少重复
 
-Your mileage may vary on this question. For completeness, let us discuss how to reduce the repetition in the `countChange` Output specs.
+对于这个问题，您的实践可能会有所不同。为了完整起见，让我们讨论一下如何减少 `countChange` 输出规范中的重复。
 
-An Output is an `EventEmitter`, that is a fully-functional RxJS `Observable`. This allows us to transform the `Observable` as we please. Specifically, we can click all three buttons and then expect that the `countChange` Output has emitted three values.
+输出是一个 `EventEmitter`，它是一个完全功能的 RxJS `Observable`。这使得我们可以按照自己的方式转换 `Observable`。具体来说，我们可以点击所有三个按钮，然后期望 `countChange` 输出已发出三个值。
 
 [source,typescript]
 ----
@@ -1194,28 +1193,28 @@ it('emits countChange events', () => {
 });
 ----
 
-This example requires some RxJS knowledge. We are going to encounter RxJS Observables again and again when testing Angular applications. If you do not understand the example above, that is totally fine. It is just an optional way to merge three specs into one.
+这个示例需要一些 RxJS 知识。在测试 Angular 应用程序时，我们会一遍又一遍地遇到 RxJS Observable。如果您不理解上面的示例，完全没有关系。这只是一种将三个规范合并为一个的可选方法。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: test code]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts[CounterComponent: 测试代码]
 ====
 
-== Black vs. white box Component testing
+== 组件测试黑盒 vs. 白盒
 
-Component tests are most meaningful if they closely mimic how the user interacts with the Component. The tests we have written apply this principle. We have worked directly with the DOM to read text, click on buttons and fill out form fields because this is what the user does.
+如果组件测试能够紧密模拟用户与组件的交互，那么这些测试就是最有意义的。我们编写的测试符合这个原则。我们直接使用 DOM 来读取文本、点击按钮和填写表单字段，因为这就是用户所做的操作。
 
-These tests are black box tests. We have already talked about <<testing-principles#_black_box_vs_white_box_testing, black box vs. white box testing>> in theory. Both are valid testing methods. As stated, this guide advises to use black box testing first and foremost.
+这些测试是黑盒测试。我们已经在理论上讨论了 <<testing-principles#_黑盒测试与白盒测试, 黑盒与白盒测试>>。两者都是有效的测试方法。正如先前所述，本指南首先建议使用黑盒测试。
 
-A common technique to enforce black box testing is to mark internal methods as `private` so they cannot be called in the test. The test should only inspect the documented, public API.
+强制进行黑盒测试的一种常见技术是将内部方法标记为 `private` ，以便在测试中无法调用这些方法。测试应该只检查文档化的公共 API。
 
-TIP: Internal yet `public`
+TIP: 内部但仍然是 `public` 的
 
-In Angular Components, the difference between external and internal properties and methods does not coincide with their TypeScript visibility (`public` vs. `private`). Properties and methods need to be `public` so that the template is able to access them.
+在 Angular 组件中，外部和内部属性和方法的区别与它们在 TypeScript 中的可见性（`public` vs. `private`）不一致。属性和方法需要是 `public` 的，以便模板能够访问它们。
 
-This makes sense for Input and Output properties. They need to be read and written from the outside, from your test. However, internal properties and methods exist that are `public` only for the template.
+这对于 Input 和 Output 属性是有意义的。它们需要从外部（即您的测试）进行读取和写入。然而，还存在一些仅对模板 `public` 的内部属性和方法。
 
-For example, the `CounterComponent` has an Input `startCount` and an Output `countChange`. Both are `public`:
+例如，`CounterComponent` 具有一个名为 `startCount` 的 Input 和一个名为 `countChange` 的 Output。它们都是 `public` 的：
 
 [source,typescript]
 ----
@@ -1226,7 +1225,7 @@ public startCount = 0;
 public countChange = new EventEmitter<number>();
 ----
 
-They form the public API. However, there are several more properties and methods that are `public`:
+它们构成了公共 API。然而，还有几个其他的属性和方法是 `public` 的：
 
 [source,typescript]
 ----
@@ -1236,11 +1235,11 @@ public decrement(): void { /* … */ }
 public reset(newCount: string): void { /* … */ }
 ----
 
-TIP: `public` for the template
+TIP: 对于模板而言是 `public` 的
 
-These properties and methods are internal, they are used only within the Component. Yet they need to be `public` so the template may access them. Angular compiles templates into TypeScript code, and TypeScript ensures that the template code only accesses public properties and methods.
+这些属性和方法是内部的，仅在组件内部使用。然而，它们需要是 `public` 的，以便模板可以访问它们。Angular将模板编译为TypeScript代码，而TypeScript确保模板代码只能访问公共属性和方法。
 
-In our `CounterComponent` black box test, we increment the count by clicking on the “+” button. In contrast, many Angular testing tutorials conduct Component white box tests. They call the `increment` method directly:
+在我们的 `CounterComponent` 黑盒测试中，我们通过点击“+”按钮来增加计数。相比之下，许多 Angular 测试教程进行组件的白盒测试。它们直接调用 `increment` 方法：
 
 [source,typescript]
 ----
@@ -1255,60 +1254,50 @@ describe('CounterComponent', () => {
 });
 ----
 
-This white box test reaches into the Component to access an internal, yet `public` method. This is sometimes valuable, but most of the time it is misused.
+这个白盒测试通过调用内部但是 `public` 的方法来访问组件。有时候这样做是有价值的，但大部分情况下是被滥用的。
 
-TIP: Inputs, Outputs, DOM
+TIP: 输入、输出和 DOM
 
-As we have learned, a Component test is meaningful if it interacts with the Component via Inputs, Outputs and the rendered DOM. If the Component test calls internal methods or accesses internal properties instead, it often misses important template logic and event handling.
+正如我们所学到的，组件测试在与组件通过输入、输出和呈现的 DOM 进行交互时才具有意义。如果组件测试调用了内部方法或访问了内部属性，它往往会错过重要的模板逻辑和事件处理。
 
-The white box spec above calls the `increment` method, but does not test the corresponding template code, the increment button:
+上面的白盒测试规范调用了 `increment` 方法，但没有测试相应的模板代码，即增加按钮。
 
 [source,html]
 ----
 <button (click)="increment()" data-testid="increment-button">+</button>
 ----
 
-If we remove the increment button from the template entirely, the feature is obviously broken. But the white box test does not fail.
+如果我们完全从模板中删除增加按钮，该功能显然就会出现问题。但是白盒测试不会失败。
 
-TIP: Start with black box tests
+TIP: 首先进行黑盒测试
 
-When applied to Angular Components, black box testing is more intuitive and easier for beginners. When writing a black box test, ask what the Component does for the user and for the parent Component. Then imitate the usage in your test.
+当应用于 Angular 组件时，黑盒测试对于初学者来说更直观和更容易理解。在编写黑盒测试时，询问组件对用户和父组件做了什么，然后在测试中模仿使用情况。
 
-A white box test does not examine the Component strictly from the DOM perspective. Thereby, it runs the risk of missing crucial Component behavior. It gives the illusion that all code is tested.
+白盒测试不仅从 DOM 视角严格地检查组件。因此，它存在错过关键组件行为的风险。它给人一种所有代码都经过测试的错觉。
 
-That being said, white box testing is a viable advanced technique. Experienced testers can write efficient white box specs that still test out all Component features and cover all code.
+也就是说，白盒测试是一种可行的高级技术。有经验的测试人员可以编写高效的白盒规范，仍然测试所有组件功能并覆盖所有代码。
 
-The following table shows which properties and methods of an Angular Component you should access or not in a black box test.
+下表显示了在黑盒测试中应该访问或不访问的 Angular 组件的属性和方法。
 
-TIP: Recommendation
+TIP: 推荐方式
 
-<div class="wide-table-wrapper">
-<table class="wide-table">
-<caption>Black box testing an Angular Component</caption>
-<tr>
-<th scope="col">Class member</th>
-<th scope="col">Access from test</th>
-</tr>
-<tr>
-<th scope="row"><code>@Input</code> properties</th>
-<td>Yes (write)</td>
-</tr>
-<tr>
-<th scope="row"><code>@Output</code> properties</th>
-<td>Yes (subscribe)</td>
-</tr>
-<tr>
-<th scope="row">Lifecycle methods</th>
-<td>Avoid except for <code>ngOnChanges</code></td>
-</tr>
-<tr>
-<th scope="row">Other public methods</th>
-<td>Avoid</td>
-</tr>
-<tr>
-<th scope="row">Private properties<br>and methods</th>
-<td>No access</td>
-</tr>
-</table>
-</div>
+.黑盒测试 Angular 组件
+|===
+|类成员 |测试中的访问
+
+|`@Input` 属性
+|是 (写入)
+
+|`@Output` 属性
+|是 (订阅)
+
+|生命周期方法
+|避免，除非是 `ngOnChanges`
+
+|其他公共方法
+|避免
+
+|私有属性和方法
+|不访问
+|===
 
