@@ -1,47 +1,47 @@
-= Testing Components with children
+= 测试带有子组件的组件
 
-Learning objectives
+学习目标
 
-- Rendering a Component with or without its children
-- Checking that the parent and its children are wired up correctly
-- Replacing child Components with fakes
-- Using the ng-mocks library to fake dependencies
+- 渲染带有或不带子组件的组件
+- 检查父组件及其子组件的正确连接
+- 使用虚拟组件替换子组件
+- 使用 ng-mocks 库来模拟依赖关系
 
-TIP: Presentational Components
+TIP: 展示型组件
 
-So far, we have tested an independent Component that renders plain HTML elements, but no child Components. Such low-level Components are the workhorses of an Angular application.
+到目前为止，我们已经测试了一个独立的组件，它只渲染了普通的 HTML 元素，没有包含子组件。这种低级组件是 Angular 应用程序的核心组成部分。
 
-- They directly render what the user sees and interacts with.
-- They are often highly generic and reusable.
-- They are controlled through Inputs and report back using Outputs.
-- They have little to none dependencies.
-- They are easy to reason about and therefore easy to test.
-- The preferred way of testing them is a unit test.
+- 它们直接呈现给用户看到并与之交互的内容。
+- 它们通常是高度通用和可重用的。
+- 它们通过输入属性进行控制，并使用输出属性进行反馈。
+- 它们的依赖性很少或几乎没有。
+- 它们易于理解，因此易于测试。
+- 测试这些组件的首选方式是单元测试。
 
-These Components are called *presentational Components* since they directly present a part of the user interface using HTML and CSS. Presentational Components need to be combined and wired to form a working user interface.
+这些组件被称为 *展示型组件* ，因为它们直接使用 HTML 和 CSS 展示用户界面的一部分。展示型组件需要组合和连接在一起，形成一个工作的用户界面。
 
-TIP: Container Components
+TIP: 容器组件
 
-This is the duty of *container Components*. These high-level Components bring multiple low-level Components together. They pull data from different sources, like Services and state managers, and distribute it to their children.
+这是 *容器组件* 的职责。这些高级组件将多个低级组件组合在一起。它们从不同的来源（如服务和状态管理器）获取数据，并将其分发给它们的子组件。
 
-Container Components have several types of dependencies. They depend on the nested child Components, but also Injectables. These are classes, functions, objects, etc. provided via dependency injection, like Services. These dependencies make testing container Components complicated.
+容器组件有几种类型的依赖关系。它们依赖于嵌套的子组件，还依赖于可注入对象。可注入对象是通过依赖注入提供的类、函数、对象等，比如服务。这些依赖关系使得测试容器组件变得复杂。
 
-TIP: Shallow vs. deep rendering
+TIP: 浅渲染 vs. 深渲染
 
-There are two fundamental ways to test Components with children:
+有两种基本的测试带有子组件的组件的方式：
 
-- A unit test using *shallow rendering*. The child Components are not rendered.
-- An integration test using *deep rendering*. The child Components are rendered.
+- 使用 *浅渲染* 进行单元测试。子组件不会被渲染。
+- 使用 *深渲染* 进行集成测试。子组件会被渲染。
 
-Again, both are valid approaches we are going to discuss.
+同样，这两种方法都是有效的，我们将进行讨论。
 
-== Shallow vs. deep rendering
+== 浅渲染 vs. 深渲染
 
-In the counter example application, the https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.ts[`HomeComponent`] contains `CounterComponent`s, `ServiceCounterComponent`s and `NgRxCounterComponent`s.
+在计数器示例应用程序中，https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.ts[`HomeComponent`] 包含 `CounterComponent`、`ServiceCounterComponent` 和 `NgRxCounterComponent`。
 
 ++++
 <button class="load-iframe">
-See the HomeComponent in action
+观察 HomeComponent 的实际效果
 </button>
 
 <script type="text/x-template">
@@ -51,7 +51,7 @@ See the HomeComponent in action
 </script>
 ++++
 
-From the https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.html[template]:
+从 https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.html[模板] 中:
 
 [source,html]
 ----
@@ -65,32 +65,32 @@ From the https://github.com/9elements/angular-workshop/blob/main/src/app/compone
 <app-ngrx-counter></app-ngrx-counter>
 ----
 
-These custom `app-_` elements end up in the DOM tree. They become the _host elements* of the child Components.
+这些自定义的 `app-_` 元素最终出现在 DOM 树中。它们成为子组件的 _宿主元素_。
 
-TIP: Check wiring only
+TIP: 仅检查连接
 
-A *unit test of `HomeComponent`* does not render these children. The host elements are rendered, but they remain empty. You might wonder, what is the point of such a test? What does it do after all?
+`HomeComponent` 的 *单元测试* 不会渲染这些子组件。宿主元素被渲染，但保持为空。你可能会想，这样的测试有什么意义？它到底做了什么呢？
 
-From `HomeComponent`’s perspective, the inner workings of its children are not relevant. We need to test that the template contains the children. Also, we need to check that `HomeComponent` and its children are wired up correctly using Inputs and Outputs.
+从 `HomeComponent` 的角度来看，其子组件的内部工作并不重要。我们需要测试模板是否包含这些子组件。此外，我们还需要检查 `HomeComponent` 及其子组件是否使用输入和输出正确地进行了连接。
 
-In particular, the `HomeComponent` unit test checks that an `app-counter` element is present, that the `startCount` Input is passed correctly and that `HomeComponent` handles the `countChange` event. The same is done for the other children, `app-service-counter` and `app-ngrx-counter`.
+特别是，`HomeComponent` 的单元测试检查是否存在 `app-counter` 元素，`startCount` 输入是否正确传递，以及 `HomeComponent` 是否处理了 `countChange` 事件。对于其他子组件，如 `app-service-counter` 和 `app-ngrx-counter`，也是同样的做法。
 
-TIP: Render children
+TIP: 渲染子组件
 
-An *integration test of `HomeComponent`* renders the child Components. The host elements are filled with the output of `CounterComponent`, `ServiceCounterComponent` and `NgRxCounterComponent`, respectively. This integration test is actually testing all four Components.
+*`HomeComponent` 的集成测试* 会渲染子组件。宿主元素将分别填充 `CounterComponent`、`ServiceCounterComponent` 和 `NgRxCounterComponent` 的输出内容。这个集成测试实际上测试了这四个组件。
 
-TIP: Test cooperation
+TIP: 测试协同工作
 
-We need to decide the level of detail for testing the nested Components. If separate unit tests for them exist, we do not need to click on each respective increment button. After all, the integration test needs to prove that the four Component work together, without going into the child Component details.
+我们需要确定测试嵌套组件的详细程度。如果它们有单独的单元测试，我们就不需要点击每个相应的增加按钮。毕竟，集成测试需要证明这四个组件可以协同工作，而不涉及子组件的细节。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/tree/main/src/app/components/home[HomeComponent: implementation and test code]
+- https://github.com/9elements/angular-workshop/tree/main/src/app/components/home[HomeComponent：实现和测试代码]
 ====
 
-== Unit test
+== 单元测试
 
-Let us write a unit test for `HomeComponent` first. The setup looks familiar to the `CounterComponent` test suite. We are using `TestBed` to configure a testing Module and to render the Component under test.
+让我们先为 `HomeComponent` 编写一个单元测试。设置过程与 `CounterComponent` 的测试套件相似。我们使用 `TestBed` 来配置一个测试模块，并渲染要测试的组件。
 
 [source,typescript]
 ----
@@ -114,36 +114,36 @@ describe('HomeComponent', () => {
 });
 ----
 
-TIP: Smoke test
+TIP: 冒烟测试
 
-This suite has one spec that acts as a _smoke test_. It checks the presence of a Component instance. It does not assert anything specific about the Component behavior yet. It merely proves that the Component renders without errors.
+这个测试套件包含一个 _冒烟测试_ 规范。它检查组件实例的存在性，但并不对组件的具体行为进行断言。它只是验证组件能够在没有错误的情况下正常渲染。
 
-If the smoke test fails, you know that something is wrong with the testing setup.
+如果冒烟测试失败，说明测试设置存在问题。
 
-TIP: Unknown custom elements
+TIP: 未知的自定义元素
 
-From Angular 9 on, the spec passes but produces a bunch of warnings on the shell:
+从 Angular 9 开始，这个测试规范通过了，但是在控制台上产生了一系列警告信息：
 
 `'app-counter' is not a known element:`<br>
 `1. If 'app-counter' is an Angular component, then verify that it is part of this module.`<br>
 `2. If 'app-counter' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.`
 
-We get the same warning regarding `app-service-counter` and `app-ngrx-counter`. Another warning reads:
+我们在 `app-service-counter` 和 `app-ngrx-counter` 中也得到了同样的警告。还有另一个警告信息：
 
-`Can't bind to 'startCount' since it isn't a known property of 'app-counter'.`
+`无法绑定到 'startCount'，因为它不是 'app-counter' 的已知属性。`
 
-What do these warnings mean? Angular does not recognize the custom elements `app-counter`, `app-service-counter` and `app-ngrx-counter` because we have not declared Components that match these selectors. The warning points at two solutions:
+这些警告的含义是什么呢？Angular 无法识别自定义元素 `app-counter`、`app-service-counter` 和 `app-ngrx-counter`，因为我们没有声明与这些选择器匹配的组件。警告指向了两个解决方案：
 
-1. Either declare the child Components in the testing Module. *This turns the test into an integration test.*
-2. Or tell Angular to ignore the unknown elements. *This turns the test into a unit test.*
+1. 要么在测试模块中声明子组件，*将测试转为集成测试*；
+2. 要么告诉 Angular 忽略这些未知元素，*将测试保持为单元测试*。
 
-TIP: Ignore child elements
+TIP: 忽略子元素
 
-Since we plan to write a unit test, we opt for the second.
+由于我们计划编写的是单元测试，我们选择了第二个解决方案。
 
-When configuring the testing Module, we can specify `schemas` to tell Angular how to deal with elements that are not handled by Directives or Components.
+在配置测试模块时，我们可以指定 `schemas` 来告诉 Angular 如何处理那些未被指令或组件处理的元素。
 
-The warning suggests `CUSTOM_ELEMENTS_SCHEMA`, but the elements in question are not Web Components. We want Angular to simply ignore the elements. Therefore we use the `NO_ERRORS_SCHEMA`, “a schema that allows any property on any element”.
+警告建议使用 `CUSTOM_ELEMENTS_SCHEMA`，但是这些元素并不是 Web 组件。我们希望 Angular 简单地忽略这些元素。因此，我们使用 `NO_ERRORS_SCHEMA`，这是一个“允许任何元素上的任何属性”的模式。
 
 [source,typescript]
 ----
@@ -153,9 +153,9 @@ await TestBed.configureTestingModule({
 }).compileComponents();
 ----
 
-With this addition, our smoke test passes.
+加上这个配置后，我们的冒烟测试通过了。
 
-Now let us write a more meaningful spec! We start with the nested `app-counter`. This is the code we need to cover:
+现在让我们编写一个更有意义的规范！我们从嵌套的 `app-counter` 开始。这是我们需要覆盖的代码：
 
 [source,html]
 ----
@@ -165,9 +165,9 @@ Now let us write a more meaningful spec! We start with the nested `app-counter`.
 ></app-counter>
 ----
 
-TIP: Child presence
+TIP: 子元素存在性测试
 
-First of all, we need to test the presence of `app-counter`, the independent counter. We create a new spec for that purpose:
+首先，我们需要测试独立计数器 `app-counter` 的存在。我们创建一个新的规范来完成这个目的：
 
 [source,typescript]
 ----
@@ -176,7 +176,7 @@ it('renders an independent counter', () => {
 });
 ----
 
-To verify that an `app-counter` element exists in the DOM, we use the familiar `query` method of the topmost `DebugElement`.
+为了验证在 DOM 中存在一个 `app-counter` 元素，我们使用最顶层的 `DebugElement` 的熟悉的 `query` 方法。
 
 [source,typescript]
 ----
@@ -184,15 +184,15 @@ const { debugElement } = fixture;
 const counter = debugElement.query(By.css('app-counter'));
 ----
 
-This code uses the `app-counter` type selector to find the element. You might wonder, why not use a test id and the `findEl` helper?
+这段代码使用了 `app-counter` 类型选择器来查找元素。你可能会想，为什么不使用测试 ID 和 `findEl` 辅助函数呢？
 
-TIP: Find by element type
+TIP: 通过元素类型查找
 
-In this rare occasion, we need to enforce the element `app-counter` because this is `CounterComponent`’s selector.
+在这种罕见的情况下，我们需要强制使用 `app-counter` 元素，因为这是 `CounterComponent` 的选择器。
 
-Using a test id makes the element type arbitrary. This makes tests more robust in other case. When testing the existence of child Components though, it is the element type that invokes the child.
+使用测试 ID 会使元素类型变得任意。这在其他情况下可以使测试更加健壮。然而，在测试子组件存在性时，正是元素类型调用了子组件。
 
-Our spec still lacks an expectation. The query method returns a `DebugElement` or `null`. We simply expect the return value to be truthy:
+我们的测试还缺少一个期望值。query 方法返回一个 `DebugElement` 或 `null`。我们只需期望返回值为真值：
 
 [source,typescript]
 ----
@@ -203,13 +203,13 @@ it('renders an independent counter', () => {
 });
 ----
 
-Finding a child Component is a common task. Such repeating patterns are good candidates for testing helpers. Not because it is much code, but because the code has a specific meaning we would like to convey.
+查找子组件是一个常见的任务。这样重复的模式是测试辅助函数的好候选对象。不是因为它是很多代码，而是因为代码具有特定的含义，我们希望传达出来。
 
-`debugElement.query(By.css('app-counter'))` is not particularly descriptive. The reader has to think for a moment to realize that the code tries to find a nested Component.
+`debugElement.query(By.css('app-counter'))` 并不特别描述性。读者需要花一点时间才能意识到这段代码试图找到一个嵌套的组件。
 
 TIP: `findComponent`
 
-So let us introduce a helper function named `findComponent`.
+因此，让我们引入一个名为 `findComponent` 的辅助函数。
 
 [source,typescript]
 ----
@@ -221,7 +221,7 @@ export function findComponent<T>(
 }
 ----
 
-Our spec now looks like this:
+我们的规范现在如下所示：
 
 [source,typescript]
 ----
@@ -231,9 +231,9 @@ it('renders an independent counter', () => {
 });
 ----
 
-TIP: Check Inputs
+TIP: 检查输入
 
-The next feature we need to test is the `startCount` Input. In particular, the property binding `[startCount]="5"` in `HomeComponent`’s template. Let us create a new spec:
+接下来，我们需要测试的是 `startCount` 输入。特别是 `HomeComponent` 模板中的属性绑定 `[startCount]="5"`。让我们创建一个新的规范：
 
 [source,typescript]
 ----
@@ -245,9 +245,9 @@ it('passes a start count', () => {
 
 TIP: `properties`
 
-How do we read the Input value? Each `DebugElement` has a `properties` object that contains DOM properties together with its values. In addition, it contains certain property bindings. (The type is `{ [key: string]: any }`).
+我们如何读取输入值？每个 `DebugElement` 都有一个 `properties` 对象，其中包含DOM属性及其值。此外，它还包含特定的属性绑定（类型为 `{ [key: string]: any }`）。
 
-In a unit test with shallow rendering, `properties` contains the Inputs of a child Component. First, we find `app-counter` to obtain the corresponding `DebugElement`. Then we check the Input value, `properties.startCount`.
+在使用浅层渲染的单元测试中，`properties` 包含子组件的输入。首先，我们找到 `app-counter` 以获取相应的 `DebugElement`。然后，我们检查输入值 `properties.startCount`。
 
 [source,typescript]
 ----
@@ -257,11 +257,11 @@ it('passes a start count', () => {
 });
 ----
 
-That was quite easy! Last but not least, we need to test the Output.
+那非常简单！最后但同样重要的是，我们需要测试输出事件。
 
-TIP: Output event
+TIP: 输出事件
 
-From `HomeComponent`’s perspective, reacting to the Output is like handling an event on the `app-counter` element. The template uses the familiar `(event)="handler($event)"` syntax:
+从 `HomeComponent` 的角度来看，对输出事件的反应就像处理 `app-counter` 元素上的事件一样。模板使用了熟悉的 `(event)="handler($event)"` 语法：
 
 [source,html]
 ----
@@ -271,7 +271,7 @@ From `HomeComponent`’s perspective, reacting to the Output is like handling an
 ></app-counter>
 ----
 
-The `handleCountChange` method is defined in the Component class. It simply calls `console.log` to prove that the child-parent communication worked:
+`handleCountChange` 方法在组件类中定义。它只是调用 `console.log` 来证明子组件和父组件之间的通信成功了：
 
 [source,typescript]
 ----
@@ -282,7 +282,7 @@ export class HomeComponent {
 }
 ----
 
-Let us add a new spec for testing the Output:
+让我们添加一个新的规范来测试输出（Output）：
 
 [source,typescript]
 ----
@@ -291,16 +291,16 @@ it('listens for count changes', () => {
 });
 ----
 
-The spec needs to do two things:
+该规范需要执行两个步骤：
 
-1. _Act:_ Find the child Component and let the `countChange` Output emit a value.
-2. _Assert:_ Check that `console.log` has been called.
+1. _Act:_ 找到子组件，并让 `countChange` 输出（Output）发出一个值。
+2. _Assert:_ 检查 `console.log` 是否已被调用。
 
-From the parent’s viewpoint, `countChange` is simply an event. Shallow rendering means there is no `CounterComponent` instance and no `EventEmitter` named `countChange`. Angular only sees an element, `app-counter`, with an event handler, `(countChange)="handleCountChange($event)"`.
+从父组件的角度来看，`countChange` 只是一个事件。浅渲染意味着没有 `CounterComponent` 实例，也没有名为 `countChange` 的 `EventEmitter`。Angular只会看到一个元素 `app-counter` ，带有一个事件处理器 `(countChange)="handleCountChange($event)"`。
 
-TIP: Simulate Output
+TIP: 模拟输出（Output）
 
-In this setup, we can simulate the Output using the known `triggerEventHandler` method.
+在这种设置中，我们可以使用已知的 `triggerEventHandler` 方法来模拟输出（Output）。
 
 [source,typescript]
 ----
@@ -313,22 +313,22 @@ it('listens for count changes', () => {
 });
 ----
 
-The spec finds the `app-counter` element and triggers the `countChange` event handler.
+该规范找到 `app-counter` 元素并触发 `countChange` 事件处理程序。
 
-The second `triggerEventHandler` parameter, `5`, is not an event object as we know from DOM events like `click`. It is a value that the Output would emit. The `countChange` Output has the type `EventEmitter<number>`, so we use the fixed number `5` for testing purposes.
+第二个 `triggerEventHandler` 参数 `5` 不是我们从DOM事件（如 `click`）中所了解的事件对象。它是一个输出（Output）将会发出的值。`countChange` 输出的类型是 `EventEmitter<number>`，因此我们在测试中使用固定的数字 `5`。
 
-TIP: Output effect
+TIP: 输出效果
 
-Under the hood, `triggerEventHandler` runs `handleCountChange($event)` with `$event` being `5`. `handleCountChange` calls `console.log`. This is the observable effect we need to test.
+在内部，`triggerEventHandler` 使用 `$event` 为 `5` 运行 `handleCountChange($event)`。`handleCountChange` 调用 `console.log`。这是我们需要测试的可观察效果。
 
-How do we verify that `console.log` has been called? We can <<faking-dependencies#_spying_on_existing_methods, spy on existing methods>> with Jasmine’s `spyOn`.
+如何验证是否已调用 `console.log`？我们可以使用Jasmine的 `spyOn` 来 <<faking-dependencies#_对现有方法进行间谍操作, 对现有方法进行监听>>。
 
 [source,typescript]
 ----
 spyOn(console, 'log');
 ----
 
-This overwrites `console.log` with a spy for the duration of the test run. We need to set up the spy in the _Arrange_ phase, at the beginning of our spec.
+在整个测试运行期间，这将使用spy覆盖 `console.log`。我们需要在测试规范的开始处，在 _Arrange_ 阶段设置spy。
 
 [source,typescript]
 ----
@@ -341,7 +341,7 @@ it('listens for count changes', () => {
 });
 ----
 
-In the _Assert_ phase, we expect that the spy has been called with a certain text and the number the Output has emitted.
+在 _断言(Assert)_ 阶段，我们期望该spy已被调用，并传入特定的文本和Output所发出的数字。
 
 [source,typescript]
 ----
@@ -357,7 +357,7 @@ it('listens for count changes', () => {
 });
 ----
 
-So much for testing the `CounterComponent` child. The `HomeComponent` also renders a `ServiceCounterComponent` and an `NgRxCounterComponent` like this:
+至此我们已经测试了 `CounterComponent` 子组件。`HomeComponent` 还会以类似以下方式渲染 `ServiceCounterComponent` `和NgRxCounterComponent`：
 
 [source,html]
 ----
@@ -366,9 +366,9 @@ So much for testing the `CounterComponent` child. The `HomeComponent` also rende
 <app-ngrx-counter></app-ngrx-counter>
 ----
 
-TIP: Child presence
+TIP: 子组件存在性
 
-Since they do not have Inputs or Outputs, we merely need to test whether they are mentioned in the template. We add two additional specs that check the presence of these `app-service-counter` and `app-ngrx-counter` elements, respectively.
+由于它们没有输入或输出，我们只需测试它们是否在模板中被提及。我们添加两个额外的规范，分别检查这些 `app-service-counter` 和 `app-ngrx-counter` 元素的存在。
 
 [source,typescript]
 ----
@@ -383,29 +383,29 @@ it('renders a NgRx counter', () => {
 });
 ----
 
-This is it! We have written a unit test with shallow rendering that proves that `HomeComponent` correctly embeds several child Components.
+就是这样了！我们使用浅渲染编写了一个单元测试，证明了 `HomeComponent` 正确嵌入了几个子组件。
 
-Note that this is one possible testing method. As always, it has pros and cons. Compared with a full integration test, there is little setup. The specs can use Angular’s `DebugElement` abstraction to test presence as well as Inputs and Outputs.
+请注意，这只是一种可能的测试方法。和全面的集成测试相比，设置工作很少。规范可以使用Angular的 `DebugElement` 抽象来测试存在性以及输入和输出。
 
-TIP: Unit test confidence
+TIP: 单元测试的可信度
 
-However, the unit test gives little confidence that `HomeComponent` works in production. We have instructed Angular to ignore the elements `app-counter`, `app-service-counter` and `app-ngrx-counter`.
+然而，单元测试对于 `HomeComponent` 在生产环境中的正常工作并没有太多的信心。我们已经指示Angular忽略了元素 `app-counter`、`app-service-counter` 和``app-ngrx-counter``。
 
-What if `HomeComponent` uses a wrong element name and the test copies that error? The test would pass incorrectly. We need to render the involved Components together to spot the error.
+如果``HomeComponent`` 使用了错误的元素名称，并且测试复制了该错误，那么测试将错误地通过。我们需要将涉及的组件一起渲染，以便发现错误。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home[HomeComponent: implementation and test code]
-- https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[Element spec helpers: full code]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home[HomeComponent: 实现和测试代码]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[元素规范辅助函数: 完整代码]
 ====
 
-== Faking a child Component
+== 模拟子组件
 
-There is a middle ground between a naive unit test and an integration test. Instead of working with empty custom elements, we can render _fake_ child Components.
+在天真的单元测试和集成测试之间有一种中间地带。我们可以使用 _假_ 的子组件来渲染，而不是使用空的自定义元素。
 
-A fake Component has the same selector, Inputs and Outputs, but has no dependencies and does not have to render anything. When testing a Component with children, we substitute the children for fake Components.
+假组件具有相同的选择器、输入和输出，但没有依赖项，也不需要渲染任何内容。当测试带有子组件的组件时，我们可以用假组件替换子组件。
 
-Let us reduce the `CounterComponent` to an empty shell that offers the same public API:
+让我们将``CounterComponent``简化为一个什么都不做但提供相同公共API的空壳子：
 
 [source,typescript]
 ----
@@ -422,15 +422,15 @@ class FakeCounterComponent implements Partial<CounterComponent> {
 }
 ----
 
-This fake Component lacks a template and any logic, but has the same selector, Input and Output.
+这个伪造的组件缺少模板和任何逻辑，但具有相同的选择器、输入和输出。
 
-TIP: Same public API
+TIP: 相同的公共API
 
-Remember the <<faking-dependencies#_faking_dependencies, rules for faking dependencies>>? We need to make sure the fake resembles the original. `FakeCounterComponent implements Partial<CounterComponent>` requires the class to implement a subset of `CounterComponent`. TypeScript enforces that the given properties and methods have the same types as in the original class.
+还记得 <<faking-dependencies#_伪造依赖, 伪造依赖关系的规则>> 吗？我们需要确保伪造的组件与原始组件相似。`FakeCounterComponent 实现 Partial<CounterComponent>` 要求该类实现 `CounterComponent` 的一个子集。TypeScript 会强制要求给定的属性和方法具有与原始类相同的类型。
 
-TIP: Declare fake Component
+TIP: 声明伪造组件
 
-In our test suite, we place the `FakeCounterComponent` before the `describe` block. The next step is to add the Component to the testing Module:
+在我们的测试套件中，我们将 `FakeCounterComponent` 放置在 `describe` 块之前。下一步是将该组件添加到测试模块中：
 
 [source,typescript]
 ----
@@ -440,22 +440,22 @@ TestBed.configureTestingModule({
 }).compileComponents();
 ----
 
-When Angular encounters an `app-counter` element, it instantiates and mounts a `FakeCounterComponent`. The element stays empty since the fake template is empty as well. The `startCount` Input property is set and the parent `HomeComponent` subscribes to the `countChange` Output.
+当 Angular 遇到 `app-counter` 元素时，它会实例化并挂载一个 `FakeCounterComponent`。由于伪造的模板也是空的，因此该元素保持为空。`startCount` 输入属性被设置，并且父级 `HomeComponent` 订阅 `countChange` 输出。
 
-We need to adapt the test suite now that child Component are rendered. Instead of searching for an `app-counter` element and inspecting its properties, we explicitly search for a `FakeCounterComponent` instance.
+现在，由于子组件被渲染，我们需要调整测试套件。我们不再搜索 `app-counter` 元素并检查其属性，而是显式搜索 `FakeCounterComponent` 实例。
 
-So far, we have used `DebugElement`’s `query` method to find nested elements. For example:
+到目前为止，我们使用了 `DebugElement` 的 `query` 方法来查找嵌套元素。例如：
 
 [source,typescript]
 ----
 const element = fixture.debugElement.query(By.css('…'));
 ----
 
-Our helpers `findEl` and `findComponent` are using this pattern as well.
+我们的辅助函数 `findEl` 和 `findComponent` 也使用了这种模式。
 
-TIP: Find by Directive
+TIP: 通过指令查找
 
-Now we want to find a nested Component. We can use `query` together with the `By.directive` predicate function:
+现在我们想要找到一个嵌套的组件。我们可以使用 `query` 方法和 `By.directive` 这个断言函数：
 
 [source,typescript]
 ----
@@ -464,13 +464,13 @@ const counterEl = fixture.debugElement.query(
 );
 ----
 
-`By.directive` finds all kinds of Directives. A Component is a kind of Directive.
+`By.directive` 可以找到各种类型的指令，组件也是指令的一种。
 
-`query` returns a `DebugElement` or `null` in case no match was found. As we have learned, a `DebugElement` always wraps a native DOM element. When we query for `FakeCounterComponent`, we get a `DebugElement` that wraps the `app-counter` element – just as `By.css('app-counter')` would return.
+`query` 方法会返回一个 `DebugElement`，如果没有找到匹配的元素，则返回 `null`。正如我们所了解的，`DebugElement` 总是包装了一个原生的 DOM 元素。当我们查询 `FakeCounterComponent` 时，我们会得到一个包装了 `app-counter` 元素的 `DebugElement`，就像 `By.css('app-counter')` 一样。
 
-TIP: Child Component instance
+TIP: 获取子组件实例
 
-The difference is that we can now access the rendered `FakeCounterComponent` via the `componentInstance` property:
+不同的是，现在我们可以通过 `componentInstance` 属性访问渲染的 `FakeCounterComponent` 的实例：
 
 [source,typescript]
 ----
@@ -480,11 +480,11 @@ const counterEl = fixture.debugElement.query(
 const counter: CounterComponent = counterEl.componentInstance;
 ----
 
-Angular does not know the type of the Component, `componentInstance` has the type `any`. So we add an explicit type annotation.
+由于 Angular 不知道组件的类型，`componentInstance` 的类型是 `any`。因此，我们添加了一个显式的类型注释。
 
-TIP: Child presence
+TIP: 子组件的存在
 
-Having access to the child Component instance, we can make expectations against it. First of all, we verify the presence.
+有了对子组件实例的访问权限，我们可以对其进行断言。首先，我们验证其是否存在。
 
 [source,typescript]
 ----
@@ -498,11 +498,11 @@ it('renders an independent counter', () => {
 });
 ----
 
-This is a smoke test that fails early if no instance of `FakeCounterComponent` was found. `query` would return `null` and `counterEl.componentInstance` would fail with a `TypeError: counterEl is null`.
+这是一个冒烟测试，如果没有找到 `FakeCounterComponent` 的实例，它将会提前失败。`query` 会返回 `null`，并且 `counterEl.componentInstance` 会因为 `TypeError: counterEl is null` 而失败。
 
-TIP: Check Inputs
+TIP: 检查输入
 
-The second spec checks the Input. An Input is a property of the Component instance, so `counter.startCount` gives us the value of the `startCount` Input.
+第二个规范检查输入。输入是组件实例的一个属性，因此 `counter.startCount` 可以给出 `startCount` 输入的值。
 
 [source,typescript]
 ----
@@ -516,11 +516,11 @@ it('passes a start count', () => {
 });
 ----
 
-The third spec checks the Output handling: If the counter emits a value, the `HomeComponent` passes it to `console.log`.
+第三个规范检查输出的处理：如果计数器发出一个值，`HomeComponent` 将其传递给 `console.log`。
 
-TIP: Emit Output
+TIP: 触发输出
 
-As mentioned earlier, an Output is an `EventEmitter` property on the Component instance. Previously, we have simulated an Output event using the `triggerEventHandler` abstraction. Now we can access the Output directly and call its `emit` method, just like the code in the child Component does.
+正如之前提到的，输出是组件实例上的 `EventEmitter` 属性。之前我们使用 `triggerEventHandler` 抽象来模拟输出事件。现在我们可以直接访问输出，并调用其 `emit` 方法，就像子组件中的代码一样。
 
 [source,typescript]
 ----
@@ -540,7 +540,7 @@ it('listens for count changes', () => {
 });
 ----
 
-We are done! Here is the `HomeComponent` test suite that vets the `CounterComponent` child. To minimize repetition and noise, we move the query part into the `beforeEach` block.
+我们完成了！这是对 `CounterComponent` 子组件进行验证的 `HomeComponent` 测试套件。为了减少重复和噪音，我们将查询部分移到 `beforeEach` 块中。
 
 [source,typescript]
 ----
@@ -597,43 +597,43 @@ describe('HomeComponent (faking a child Component)', () => {
 });
 ----
 
-Let us recap what we have gained with this type of testing the `HomeComponent`.
+让我们总结一下使用这种方式测试 `HomeComponent` 所获得的收益。
 
-We have replaced a Component dependency with a fake that behaves the same, as far as `HomeComponent` is concerned. The fake child is rendered, but the template may be empty.
+我们用一个行为相同的伪造组件替代了一个组件依赖项，就 `HomeComponent` 来说，它们的行为是一样的。伪造的子组件被渲染，但模板可能是空的。
 
-The original child Component, `CounterComponent`, is imported only to create the derived fake Component. Our test remains a fast and short unit test.
+原始的子组件 `CounterComponent` 仅被导入用于创建衍生的伪造组件。我们的测试仍然是一个快速、简短的单元测试。
 
-TIP: Advantages
+TIP: 优势
 
-Instead of searching for an element named `app-counter`, we search for a Component instance. This is more robust. The presence of the host element is a good indicator, but it is more relevant that a Component has been rendered into this element.
+与其搜索名为 `app-counter` 的元素，我们搜索组件实例。这样更加稳健。主机元素的存在是一个很好的指示，但更重要的是组件是否已被渲染到该元素中。
 
-Working with the Component instance is more intuitive than working with the `DebugElement` abstraction. We can read Component properties to learn about Inputs and Outputs. Basic JavaScript and Angular knowledge suffices to write specs against such an instance.
+使用组件实例比使用 `DebugElement` 抽象更直观。我们可以读取组件的属性来了解输入和输出。基本的 JavaScript 和 Angular 知识足以编写针对这种实例的规范。
 
-TIP: Manual faking drawbacks
+TIP: 手动伪造的缺点
 
-Our simple approach to faking a child Component has its flaws. We have created the fake manually. This is tedious and time-consuming, but also risky. The fake is only partly tied to the original.
+我们简单的伪造子组件方法有其缺点。我们手动创建了伪造组件。这是繁琐和耗时的，同时也存在风险。伪造组件只与原始组件部分相关。
 
-For example, if the original changes its selector `app-counter`, the test should fail and remind us to adapt the template. Instead, it passes incorrectly since we did not inherit the Component metadata, `{ selector: 'app-counter', … }`, but duplicated it in the test.
+例如，如果原始组件更改了其选择器 `app-counter`，测试应该失败，并提醒我们调整模板。然而，由于我们没有继承组件元数据 `{ selector: 'app-counter', … }`，而是在测试中复制了它，因此测试会通过而不是失败。
 
-We are going to address these shortcomings in the next chapter.
+在下一章中，我们将解决这些缺点。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.fake-child.spec.ts[HomeComponent spec that fakes a child Component]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.fake-child.spec.ts[伪造子组件的 HomeComponent 规范]
 ====
 
-== Faking a child Component with ng-mocks
+== 使用 ng-mocks 伪造子组件
 
-We have manually created a Component fake. This is an important exercise to understand how faking Components works, but it does not produce a robust, versatile fake. In this guide, we cannot discuss all necessary bits and pieces of creating airtight fake Components.
+我们手动创建了一个组件伪造。这是一个重要的练习，用于理解如何伪造组件，但它不能产生一个稳健、多用途的伪造组件。在本指南中，我们无法讨论创建严密伪造组件所需的所有要点和细节。
 
-Instead, we will use a mature solution: https://github.com/help-me-mom/ng-mocks[ng-mocks] is a feature-rich library for
-testing Components with fake dependencies. (Remember, this guide uses the umbrella term “fake” while other articles and tools use terms like “mock” or “stub”.)
+相反，我们将使用一个成熟的解决方案：https://github.com/help-me-mom/ng-mocks[ng-mocks] 是一个功能丰富的库，用于使用伪造依赖项测试组件。
+（请记住，本指南使用总称“伪造(fake)”而其他文章和工具使用“模拟(mock)”或“存根(stub)”等术语。）
 
-TIP: Create fake from original
+TIP: 从原始组件创建伪造组件
 
-Among other things, ng-mocks helps creating fake Components to substitute children. The `MockComponent` function expects the original Component and returns a fake that resembles the original.
+ng-mocks 帮助创建伪造组件以替代子组件，是其中的一项功能。`MockComponent` 函数接受原始组件并返回一个类似原始组件的伪造组件。
 
-Instead of creating a `FakeCounterComponent`, we call `MockComponent(CounterComponent)` and add the fake to the testing Module.
+我们不再创建 `FakeCounterComponent`，而是调用 `MockComponent(CounterComponent)` 并将伪造组件添加到测试模块中。
 
 [source,typescript]
 ----
@@ -650,8 +650,8 @@ beforeEach(async () => {
 });
 ----
 
-We can then query the rendered DOM for an instance of `CounterComponent`. The found instance is in fact a fake created by ng-mocks.
-Still, we can declare the type `CounterComponent`.
+然后，我们可以查询渲染的 DOM 来查找 `CounterComponent` 的实例。找到的实例实际上是由 ng-mocks 创建的伪造组件。
+尽管如此，我们仍然可以声明类型 `CounterComponent`。
 
 [source,typescript]
 ----
@@ -682,13 +682,13 @@ describe('HomeComponent with ng-mocks', () => {
 });
 ----
 
-From a TypeScript viewpoint, the fake conforms to the `CounterComponent` type. TypeScript uses a structural type system that checks if all type requirements are met.
+从 TypeScript 的角度来看，伪造组件符合 `CounterComponent` 类型。TypeScript 使用结构类型系统，检查是否满足所有类型要求。
 
-TIP: Type equivalence
+TIP: 类型等价性
 
-Every proposition that holds true for a `CounterComponent` holds true for the fake as well. The fake has all properties and methods that the original has. That is why we can safely replace the original with the fake and treat the fake the same in our test.
+对于 `CounterComponent` 适用的每个命题也适用于伪造组件。伪造组件具有与原始组件相同的所有属性和方法。这就是为什么我们可以安全地用伪造组件替换原始组件，并在测试中将伪造组件视为相同的原始组件。
 
-The full code:
+完整代码：
 
 [source,typescript]
 ----
@@ -733,13 +733,13 @@ describe('HomeComponent with ng-mocks', () => {
 });
 ----
 
-We have eliminated the manual `FakeCounterComponent`. We are using `MockComponent(CounterComponent)` to create the fake and the original class `CounterComponent`. The specs itself did not change.
+我们消除了手动创建的 `FakeCounterComponent`。我们使用 `MockComponent(CounterComponent)` 来创建伪造组件，并使用原始的 `CounterComponent` 类。测试本身并没有改变。
 
-This was only a glimpse of ng-mocks. The library not only helps with nested Components, but provides high-level helpers for setting up the Angular test environment. ng-mocks replaces the conventional setup with `TestBed.configureTestingModule` and helps faking Modules, Components, Directives, Pipes and Services.
+这只是 ng-mocks 的一个简单示例。该库不仅帮助处理嵌套组件，还提供了高级的辅助方法来设置 Angular 测试环境。ng-mocks 可以替代传统的 `TestBed.configureTestingModule` 设置，并帮助伪造模块、组件、指令、管道和服务。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home-component.ng-mocks.spec.ts[HomeComponent spec with ng-mocks]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home-component.ng-mocks.spec.ts[使用 ng-mocks 的 HomeComponent 测试用例]
 - https://github.com/help-me-mom/ng-mocks[ng-mocks]
 ====
 
