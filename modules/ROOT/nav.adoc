@@ -9,7 +9,7 @@
 * xref:debugging-tests.adoc[调试测试,leveloffset=-1]
 * xref:testing-components.adoc[组件测试,leveloffset=-1]
 * xref:testing-components-with-children.adoc[测试带有子组件的组件,leveloffset=-1]
-* xref:testing-components-depending-on-services.adoc[Testing Components depending on Services,leveloffset=-1]
+* xref:testing-components-depending-on-services.adoc[依赖于服务的组件的测试,leveloffset=-1]
 * xref:testing-complex-forms.adoc[Testing complex forms,leveloffset=-1]
 * xref:testing-components-with-spectator.adoc[Testing Components with Spectator,leveloffset=-1]
 * xref:testing-services.adoc[Testing Services,leveloffset=-1]
