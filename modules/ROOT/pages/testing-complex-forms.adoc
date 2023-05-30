@@ -1,26 +1,26 @@
-= Testing complex forms
+= 测试复杂表单
 
-Learning objectives
+学习目标
 
-- Filling out and submitting forms in a Component test
-- Testing synchronous and asynchronous field validation and error messages
-- Testing dynamic form logic
-- Using tools to ensure that forms are accessible to everyone
+- 在组件测试中填写和提交表单
+- 测试同步和异步字段验证和错误消息
+- 测试动态表单逻辑
+- 使用工具确保表单对所有人都是可访问的
 
-Forms are the powerhouses of large web applications. Especially enterprise applications revolve around entering and editing data via forms. Therefore, implementing complex forms is a vital feature of the Angular framework.
+表单是大型 Web 应用程序的核心。特别是企业应用程序围绕通过表单输入和编辑数据展开。因此，实现复杂表单是 Angular 框架的一个重要功能。
 
-We have already learned how to <<testing-components#_filling_out_forms, fill out form fields>> when testing the counter Component. In doing so, we developed the `setFieldValue` testing helper.
+我们已经学习了如何在测试计数器组件时 <<testing-components#_填充表单, 填写表单字段>>。在此过程中，我们开发了 setFieldValue 测试辅助函数。
 
-The simple forms we have dealt with served the purpose of entering one value. We have tested them by filling out the field and submitting the form. Now we will look at a more complex example.
+我们处理的简单表单旨在输入一个值。我们通过填写字段并提交表单来进行测试。现在我们将看一个更复杂的示例。
 
-TIP: Sign-up form
+TIP: 注册表单
 
-We are introducing and testing a *sign-up form* for a fictional online service.
+我们将引入和测试一个虚构在线服务的**注册表单**。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing[Sign-up form: Source code]
-- https://molily.github.io/angular-form-testing/[Sign-up form: Run the app]
+- https://github.com/molily/angular-form-testing[注册表单：源代码]
+- https://molily.github.io/angular-form-testing/[注册表单：运行应用程序]
 ====
 
 ++++
@@ -35,50 +35,50 @@ See the sign-up form in action
 </script>
 ++++
 
-The sign-up form features are:
+注册表单的功能包括：
 
-- Different types of input fields: text, radio buttons, checkboxes, select boxes
-- Field validation with synchronous and asynchronous validators
-- Accessible form structure, field labels and error messages
-- Dynamic relations between fields
+- 不同类型的输入字段：文本、单选按钮、复选框、下拉框
+- 同步和异步验证器的字段验证
+- 可访问的表单结构、字段标签和错误消息
+- 字段之间的动态关联
 
-The form consists of four sections:
+该表单包含四个部分：
 
-1. The plan selection: “Personal”, “Business” or “Education & Non-profit”
-2. The login credentials: username, email and password
-3. The billing address
-4. Terms of Services and submit button
+1. 计划选择：“个人”、“商业”或“教育及非营利”
+2. 登录凭据：用户名、电子邮件和密码
+3. 账单地址
+4. 服务条款和提交按钮
 
-TIP: Impractical
+TIP: 非实用性
 
-Please note that this form is for demonstration purposes only. While it follows best practices regarding validation and accessibility, it is not practical from a design and user experience perspective. Among other things, it is way too complex to get new users onboard.
+请注意，此表单仅用于演示目的。虽然它遵循了验证和可访问性的最佳实践，但从设计和用户体验的角度来看，它并不实用。其中包括，对于新用户来说过于复杂。
 
-TIP: Client & server
+TIP: 客户端和服务器
 
-In contrast to the other example repositories, this one is split into a `client` and a `server` directory:
+与其他示例存储库不同，这个示例被分成了一个 `客户端` 目录和一个 `服务器` 目录：
 
-- The https://github.com/molily/angular-form-testing/tree/main/client[`client` directory] contains a standard Angular app created with Angular CLI.
-- The https://github.com/molily/angular-form-testing/tree/main/server[`server` directory] contains a simple Node.js service that simulates the user management and account creation.
+- The https://github.com/molily/angular-form-testing/tree/main/client[``客户端``目录]包含使用 Angular CLI 创建的标准 Angular 应用程序。
+- The https://github.com/molily/angular-form-testing/tree/main/server[``服务器``目录]包含一个简单的 Node.js 服务，模拟用户管理和账户创建。
 
-Again, the Node.js service is for demonstration purposes only. The service holds the created user accounts in memory and discards them when stopped. Please do not use it in production.
+同样，Node.js 服务仅用于演示目的。该服务将创建的用户帐户保存在内存中，并在停止时丢弃。请勿在生产环境中使用它。
 
-With 12 form controls, the sign-up form is not particularly large. But there are subtle details we are going to explore.
+尽管注册表单只有12个表单控件，并不特别大。但是，我们将要探索一些微妙的细节。
 
-== Sign-up form Component
+== 注册表单组件
 
-The form logic lies in the https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.ts[`SignupFormComponent`]. The Component depends on the https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts[`SignupService`] for communicating with the back-end service.
+表单逻辑位于 https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.ts[`SignupFormComponent`] 中。该组件依赖于 https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts[`SignupService`] 与后端服务进行通信。
 
-You might remember that there are two fundamental approaches to forms in Angular: _Template-driven Forms_ and _Reactive Forms_.
+您可能记得，在 Angular 中，有两种基本的表单方法：__模板驱动表单__和__响应式表单__。
 
-While both approaches look quite different in practice, they are based on the same underlying concepts: Form groups (`FormGroup` objects) and form controls (`FormControl` objects).
+虽然这两种方法在实践中看起来非常不同，但它们基于相同的基本概念：表单组（`FormGroup` 对象）和表单控件（`FormControl` 对象）。
 
-TIP: Reactive Form
+TIP: 响应式表单
 
-The `SignupFormComponent` is a *Reactive Form* that explictly creates the groups and controls in the Component class. This way, it is easier to specify custom validators and to set up dynamic field relations.
+`SignupFormComponent` 是一个**响应式表单**，它在组件类中显式创建组和控件。这样，更容易指定自定义验证器并设置动态字段关联。
 
-As with other Angular core concepts, this guide assumes you have a basic understanding of Reactive Forms. Please refer to the https://angular.io/guide/reactive-forms[official guide on Reactive Forms] to brush up your knowledge.
+与其他 Angular 核心概念一样，本指南假定您对响应式表单有基本的了解。请参考 https://angular.io/guide/reactive-forms[官方的响应式表单指南]以加深您的知识。
 
-The important bits of the `SignupFormComponent` class are:
+`SignupFormComponent` 类的重要部分如下所示：
 
 [source,typescript]
 ----
@@ -131,9 +131,9 @@ export class SignupFormComponent {
 
 TIP: Form groups and controls
 
-Using Angular’s https://angular.io/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls[FormBuilder], we create the `form` property, the topmost form group. Inside, there is another form group for the address-related fields.
+使用Angular的 https://angular.io/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls[FormBuilder]，我们创建了``form``属性，即最顶层的表单组。内部有另一个用于地址相关字段的表单组。
 
-The form controls are declared with their initial values and their validators. For example, the password control:
+表单控件通过指定其初始值和验证器进行声明。例如，密码控件：
 
 [source,typescript]
 ----
@@ -147,9 +147,9 @@ password: [
 ],
 ----
 
-The https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html[`SignupFormComponent` template] uses the `formGroup`, `formGroupName` and `formControlName` directives to associate elements with a form group or control, respectively.
+https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html[`SignupFormComponent` 模板] 使用``formGroup``、``formGroupName``和``formControlName``指令分别将元素与表单组或控件关联起来。
 
-The stripped-down form structure with only one control looks like this:
+只有一个控件的简化表单结构如下所示：
 
 [source,html]
 ----
@@ -163,9 +163,9 @@ The stripped-down form structure with only one control looks like this:
 </form>
 ----
 
-TIP: Form submission
+TIP: 表单提交
 
-When the form is filled out correctly and all validations pass, the user is able to submit to the form. It produces an object described by the https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts[`SignupData` interface]:
+当表单填写正确且所有验证通过时，用户可以提交表单。它会生成一个由 https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts[``SignupData``接口]描述的对象：
 
 [source,typescript]
 ----
@@ -187,26 +187,26 @@ export interface SignupData {
 }
 ----
 
-`Plan` is a union of strings:
+``Plan``是一个字符串的联合类型：
 
 [source,typescript]
 ----
 export type Plan = 'personal' | 'business' | 'non-profit';
 ----
 
-The `SignupService`’s `signup` method takes the `SignupData` and sends it to the server. For security reasons, the server validates the data again. But we will focus on the front-end in this guide.
+SignupService``的``signup``方法接受``SignupData``并将其发送到服务器。出于安全原因，服务器再次验证数据。但在本指南中，我们将专注于前端。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/[SignupFormComponent: full code]
-- https://angular.io/guide/reactive-forms[Angular documentation: Reactive forms]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/[SignupFormComponent：完整代码]
+- https://angular.io/guide/reactive-forms[Angular文档：响应式表单]
 ====
 
-== Form validation and errors
+== 表单验证和错误
 
-TIP: Sync validators
+TIP: 同步验证器
 
-Several form controls have synchronous validators. `required`, `email`, `maxLength`, `pattern` etc. are built-in, synchronous validators provided by Angular:
+几个表单控件具有同步验证器。`required`、`email`、`maxLength`、``pattern``等都是Angular提供的内置同步验证器：
 
 [source,typescript]
 ----
@@ -217,26 +217,26 @@ const {
 } = Validators;
 ----
 
-These validators take the control value, a string most of the time, and return a `ValidationErrors` object with potential error messages. The validation happens synchronously on the client.
+这些验证器接受控件值，大多数情况下是一个字符串，并返回一个包含可能的错误消息的``ValidationErrors``对象。验证在客户端同步进行。
 
-TIP: Async validators
+TIP: 异步验证器
 
-For the username, the email and the password, there are custom asynchronous validators. They check whether the username and email are available and whether the password is strong enough.
+对于用户名、电子邮件和密码，存在自定义的异步验证器。它们检查用户名和电子邮件是否可用，以及密码是否足够强大。
 
-The asynchronous validators use the `SignupService` to talk to the back-end service. These HTTP requests turn the validation asynchronous.
+异步验证器使用 `SignupService` 与后端服务进行通信。这些HTTP请求使验证变成了异步操作。
 
-TIP: Error rendering
+TIP: 错误呈现
 
-When a validator returns any errors, corresponding messages are shown below the form control. This repetitive task is outsourced to another Component.
+当验证器返回任何错误时，相应的错误消息会显示在表单控件下方。这个重复的任务被外包给另一个组件。
 
 TIP: invalid && (touched || dirty)
 
-The https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors[`ControlErrorsComponent`] displays the errors when the form control is _invalid_ and either _touched_ or _dirty_.
+当表单控件__无效__且__被触摸__或__被修改__时，https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors[`ControlErrorsComponent`] 会显示错误。
 
-- _Touched_ means the user has focussed the control but it has lost the focus again (the `blur` event fired).
-- _Dirty_ means the user has changed the value.
+- __touched__表示用户已经聚焦到控件上，但又失去了焦点（触发了``blur``事件）。
+- __dirty__表示用户已经修改了值。
 
-For example, for the `name` control, the interaction between the `input` element and the `ControlErrorsComponent` looks like this:
+例如，对于 `name` 控件，`input` 元素和``ControlErrorsComponent``之间的交互如下所示：
 
 [source,html]
 ----
@@ -259,17 +259,17 @@ For example, for the `name` control, the interaction between the `input` element
 </app-control-errors>
 ----
 
-TIP: ARIA attributes
+TIP: ARIA 属性
 
-The `appErrorMessage` attribute activates the https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts[`ErrorMessageDirective`]. When the form control is invalid and either touched or dirty, the Directive adds `aria-invalid` and `aria-errormessage` attributes.
+`appErrorMessage` 属性会激活 https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts[`ErrorMessageDirective`]。当表单控件无效且被触摸或被修改时，该指令会添加``aria-invalid``和``aria-errormessage``属性。
 
-`aria-invalid` marks the control as invalid for assistive technologies like screen readers. `aria-errormessage` points to another element that contains the error messages.
+``aria-invalid``将控件标记为辅助技术（如屏幕阅读器）中的无效控件。``aria-errormessage``指向包含错误消息的另一个元素。
 
-TIP: Connect control with errors
+TIP: 将控件与错误信息关联起来
 
-In case of an error, the Directive sets `aria-errormessage` to the id of the corresponding `app-control-errors` element. In the example above, the id is `name-errors`. This way, a screen reader user finds the associated error messages quickly.
+在出现错误时，该指令将``aria-errormessage``设置为相应的``app-control-errors``元素的id。在上面的示例中，该id为``name-errors``。这样，屏幕阅读器用户可以快速找到关联的错误消息。
 
-The control-specific error messages are still located in `signup-form.component.html`. They are passed to `ControlErrorsComponent` as an `ng-template`. The `ControlErrorsComponent` renders the template dynamically, passing the `errors` object as a variable:
+控件特定的错误消息仍然位于``signup-form.component.html``中。它们作为``ng-template``传递给``ControlErrorsComponent``。``ControlErrorsComponent``动态地渲染模板，并将``errors``对象作为变量传递进去：
 
 [source,html]
 ----
@@ -280,41 +280,41 @@ The control-specific error messages are still located in `signup-form.component.
 </ng-template>
 ----
 
-You do not have to understand the details of this particular implementation. The solution in the sign-up form is just one possibility to display errors, avoid repetition and set ARIA attributes for accessibility.
+您不需要理解这个特定实现的细节。在注册表单中，解决方案只是显示错误、避免重复并为可访问性设置ARIA属性的可能性之一。
 
-From the user perspective and also from a testing perspective, it does not matter how you implement the rendering of error messages – as long as they are present and accessible.
+从用户和测试的角度来看，实现错误消息的渲染方式并不重要——只要它们存在并且可访问即可。
 
-TIP: Implementation details
+TIP: 实现细节
 
-We are going to test the `SignupFormComponent` in conjunction with `ControlErrorsComponent` and `ErrorMessageDirective` in a *black-box integration test*. For this test, the latter two will be irrelevant implementation details.
+我们将在**黑盒集成测试**中测试``SignupFormComponent``与``ControlErrorsComponent``和``ErrorMessageDirective``的配合使用。对于这个测试，后两者将是无关紧要的实现细节。
 
 [NOTE]
 ====
-- https://angular.io/guide/form-validation[Angular guide: Validating form input]
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA[MDN: Introduction to ARIA]
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid[MDN: aria-invalid]
-- https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage[ARIA specification: aria-errormessage]
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts[ErrorMessageDirective: full code]
-- https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors[ControlErrorsComponent: full code]
+- https://angular.io/guide/form-validation[Angular指南：验证表单输入]
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA[MDN：ARIA简介]
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid[MDN：aria-invalid]
+- https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage[ARIA规范：aria-errormessage]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts[ErrorMessageDirective：完整代码]
+- https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors[ControlErrorsComponent：完整代码]
 ====
 
-== Test plan
+== 测试计划
 
-What are the important parts of the sign-up form that need to be tested?
+哪些注册表单的重要部分需要进行测试？
 
-1. Form submission
-  - #successful-form-submission[Successful submission]
-  - #invalid-form[Do not submit the invalid form]
-  - #form-submission-failure[Submission failure]
-2. #required-fields[Required fields are marked as such and display error messages]
-3. #asynchronous-validators[Asynchronous validation of username, email and password]
-4. #dynamic-field-relations[Dynamic field relations]
-5. #password-type-toggle[Password type toggle]
-6. #testing-form-accessibility[Accessibility of the form structure, field labels and error messages]
+1. 表单提交
+  - xref:_successful_form_submission[成功提交]
+  - xref:_invalid_form[不要提交无效的表单]
+  - xref:_form_submission_failure[提交失败]
+2. xref:_required_fields[必填字段被标记为必填，并显示错误消息]
+3. xref:_asynchronous_validators[对用户名、电子邮件和密码进行异步验证]
+4. xref:_dynamic_field_relations[动态字段关系]
+5. xref:_password_type_toggle[密码类型切换]
+6. xref:_testing_form_accessibility[表单结构、字段标签和错误消息的可访问性]
 
-== Test setup
+== 测试设置
 
-Before writing the individual specs, we need to set up the suite in https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[`signup-form.component.spec.ts`]. Let us start with the testing Module configuration.
+在 https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[`signup-form.component.spec.ts`]中编写各个规范之前，我们需要设置测试套件。让我们从测试模块配置开始。
 
 [source,typescript]
 ----
@@ -331,16 +331,16 @@ await TestBed.configureTestingModule({
 }).compileComponents();
 ----
 
-The Component under test contains a Reactive Form. That is why we import the `ReactiveFormsModule`:
+被测试的组件包含一个响应式表单。这就是为什么我们导入了``ReactiveFormsModule``：
 
 [source,typescript]
 ----
 imports: [ReactiveFormsModule],
 ----
 
-TIP: Deep rendering
+TIP: 深度渲染
 
-As described, we are writing an integration test, so we declare the Component and its child components:
+如描述的那样，我们正在编写一个集成测试，所以我们声明组件及其子组件：
 
 [source,typescript]
 ----
@@ -351,9 +351,9 @@ declarations: [
 ],
 ----
 
-TIP: Fake Service
+TIP: 虚拟服务
 
-The `SignupFormComponent` depends on the `SignupService`. We do not want HTTP requests to the back-end when the tests run, so we <<testing-components-depending-on-services#_faking_service_dependencies, replace the Service with a fake instance>>.
+``SignupFormComponent``依赖于``SignupService``。当测试运行时，我们不希望向后端发送HTTP请求，因此我们 <<testing-components-depending-on-services#_虚拟服务依赖, 将该服务替换为一个虚拟实例>>。
 
 [source,typescript]
 ----
@@ -362,7 +362,7 @@ providers: [
 ],
 ----
 
-A possible `SignupService` fake looks like this:
+一个可能的``SignupService``虚拟实例如下所示：
 
 [source,typescript]
 ----
@@ -383,13 +383,13 @@ const signupService:
 };
 ----
 
-This fake implements the _success case_: the username and email are available, the password is strong enough and the form submission was successful.
+这个虚拟实例实现了__成功的情况__：用户名和电子邮件可用，密码足够强大，并且表单提交成功。
 
-Since we are going to test several error cases as well, we need to create `SignupService` fakes dynamically. Also we need Jasmine spies to verify that the Service methods are called correctly.
+由于我们还将测试其他错误情况，我们需要动态创建``SignupService``的虚拟实例。此外，我们还需要使用Jasmine的spy来验证Service方法是否被正确调用。
 
 TIP: `createSpyObj`
 
-This is a job for Jasmine’s `createSpyObj` (see <<testing-components-depending-on-services#_faking_service_dependencies, Faking Service dependencies>>).
+这就是Jasmine的``createSpyObj``的用途（参见 <<testing-components-depending-on-services#_虚拟服务依赖,虚拟服务依赖>>）。
 
 [source,typescript]
 ----
@@ -405,9 +405,9 @@ const signupService = jasmine.createSpyObj<SignupService>(
 );
 ----
 
-TIP: Setup function
+TIP: 设置函数
 
-Together with the testing Module configuration, we put this code into a setup function. To adjust the `SignupService` fake behavior, we allow passing method return values.
+与测试模块配置一起，我们将这段代码放入一个设置函数中。为了调整``SignupService``虚拟实例的行为，我们允许传递方法的返回值。
 
 [source,typescript]
 ----
@@ -452,9 +452,9 @@ describe('SignupFormComponent', () => {
 });
 ----
 
-In all following specs, we are going to call `setup` first. If we simply write `async setup()`, the `SignupService` fake returns successful responses.
+在所有接下来的规范中，我们将首先调用 `setup` 函数。如果我们简单地编写``async setup()``，则``SignupService``虚拟实例将返回成功的响应。
 
-We can pass an object with different return values to simulate failure. For example, when testing that the username is taken:
+我们可以传递一个带有不同返回值的对象来模拟失败。例如，在测试用户名已被使用时：
 
 [source,typescript]
 ----
@@ -464,20 +464,20 @@ await setup({
 });
 ----
 
-Such a `setup` function is just one way to create fakes and avoid repetition. You might come up with a different solution that serves the same purpose.
+这样的 `setup` 函数只是创建伪造数据并避免重复的一种方式。您可以提出其他解决方案，以达到相同的目的。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent：测试代码]
 ====
 
-== Successful form submission
+== 成功提交表单
 
-The first case we need to test is the successful form submission. If the user fills out all required fields and the validations pass, we expect the Component to call `SignupService`’s `signup` method with the entered form data.
+我们需要测试的第一个情况是成功提交表单。如果用户填写了所有必填字段并且验证通过，我们期望该组件调用``SignupService``的``signup``方法，并将输入的表单数据作为参数。
 
-TIP: Test data
+TIP: 测试数据
 
-The first step is to define _valid test data_ we can fill into the form. We put this in a separate file, https://github.com/molily/angular-form-testing/blob/main/client/src/app/spec-helpers/signup-data.spec-helper.ts[signup-data.spec-helper.ts]:
+第一步是定义__有效的测试数据__，我们可以填充到表单中。我们将其放在一个单独的文件中，https://github.com/molily/angular-form-testing/blob/main/client/src/app/spec-helpers/signup-data.spec-helper.ts[signup-data.spec-helper.ts]：
 
 [source,typescript]
 ----
@@ -505,11 +505,11 @@ export const signupData: SignupData = {
 };
 ----
 
-In the https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html[signup-form.component.html] template, all field elements need to be marked with test ids so we can find them and enter the values programmatically.
+在 https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html[signup-form.component.html]模板中，所有的字段元素都需要用测试ID标记，以便我们可以通过程序找到它们并输入值。
 
-For example, the username input gets the test id `username`, the email input gets `email` and so on.
+例如，用户名输入框使用测试ID `username`，电子邮件输入框使用 `email`，依此类推。
 
-Back in `signup-form.component.spec.ts`, we create a new spec that calls the setup function.
+回到``signup-form.component.spec.ts``中，我们创建一个新的规范(spec)，并调用设置函数(setup function)。
 
 [source,typescript]
 ----
@@ -520,9 +520,9 @@ it('submits the form successfully', async () => {
 });
 ----
 
-TIP: Fill out form
+TIP: 填写表单
 
-Next, we fill out all required fields with valid values. Since we need to do that in several upcoming specs, let us create a reusable function.
+接下来，我们用有效的值填写所有必填字段。由于我们需要在接下来的几个规范(spec)中都进行这样的操作，让我们创建一个可重复使用的函数。
 
 [source,typescript]
 ----
@@ -541,9 +541,9 @@ const fillForm = () => {
 };
 ----
 
-The `fillForm` function lies in the scope of `describe` so it may access the `fixture` variable. It uses the `setFieldValue` and `checkField` <<testing-components#_testing_helpers, element testing helpers>>.
+``fillForm``函数位于``describe``的作用域内，因此它可以访问``fixture``变量。它使用``setFieldValue``和``checkField`` <<testing-components#_测试辅助函数, 元素测试助手>>。
 
-In the spec, we call `fillForm`:
+在规范(spec)中，我们调用``fillForm``函数：
 
 [source,typescript]
 ----
@@ -556,13 +556,13 @@ it('submits the form successfully', async () => {
 });
 ----
 
-Let us try to submit the form immediately after. The form under test listens for an https://angular.io/api/forms/NgForm#listening-for-form-submission[`ngSubmit` event] at the `form` element. This boils down to a native `submit` event.
+接下来，让我们尝试立即提交表单。被测试的表单在``form``元素上监听 https://angular.io/api/forms/NgForm#listening-for-form-submission[``ngSubmit``事件]，这实际上是一个原生的``submit``事件。
 
-TIP: Submit form
+TIP: 提交表单
 
-We find the `form` element by its test id and simulate a `submit` event (see <<testing-components#_triggering_event_handlers, Triggering event handlers>>).
+我们通过其测试ID找到 `form` 元素，并模拟一个``submit``事件（参见 <<testing-components#_触发事件处理程序,触发事件处理程序>>）。
 
-Then we expect the `signup` spy to have been called with the entered data.
+然后，我们期望``signup`` spy已经被调用，并使用输入的数据作为参数。
 
 [source,typescript]
 ----
@@ -577,7 +577,7 @@ it('submits the form successfully', async () => {
 });
 ----
 
-If we run this spec, we find that is fails:
+如果我们运行这个规范(spec)，我们会发现它失败了：
 
 [source,]
 ----
@@ -586,35 +586,35 @@ Expected spy SignupService.signup to have been called with:
 but it was never called.
 ----
 
-The spec fails because the form is still in the _invalid_ state even though we have filled out all fields correctly.
+规范(spec)失败是因为尽管我们正确填写了所有字段，但表单仍处于__无效__状态。
 
-TIP: Async validators
+TIP: 异步验证器
 
-The cause are the *asynchronous validators* for username, email and password. When the user stops typing into these fields, they wait for one second before sending a request to the server.
+造成问题的是用户名、电子邮件和密码的**异步验证器**。当用户停止在这些字段中输入时，它们会等待一秒钟，然后向服务器发送请求。
 
-In production, the HTTP request takes additional time, but our fake `SignupService` returns the response instantly.
+在实际生产环境中，HTTP请求需要额外的时间，但我们的伪造``SignupService``立即返回响应。
 
-TIP: One second debounce
+TIP: 一秒的防抖
 
-This technique to reduce the amount of requests is called _debouncing_. For example, typing the username “fox” should send _one_ request with “fox”, not _three_ subsequent requests with “f”, “fo”, “fox”.
+这种减少请求量的技术称为__防抖(debouncing)__。例如，输入用户名"fox"应该发送__一个__带有"fox"的请求，而不是连续发送__三个__带有"f"、"fo"、"fox"的请求。
 
-The spec above submits the form immediately after filling out the fields. At this point in time, the asynchronous validators have been called but have not returned a value yet. They are still waiting for the debounce period to pass.
+上述规范在填写字段后立即提交表单。在这个时间点上，异步验证器已经被调用，但尚未返回值。它们仍在等待防抖期过去。
 
-In consequence, the test needs to wait one second for the asynchronous validators. An easy way would be to write an asynchronous test that uses `setTimeout(() => { /* … */}, 1000)`. But this would slow down our specs.
+因此，测试需要等待一秒钟以等待异步验证器。一种简单的方法是编写一个使用 `setTimeout(() => { /* … */}, 1000)` 的异步测试。但这会减慢我们的规范(spec)的执行速度。
 
-TIP: `fakeAsync` and `tick`
+TIP: `fakeAsync` 和 `tick`
 
-Instead, we are going to use Angular’s `fakeAsync` and `tick` functions to _simulate_ the passage of time. They are a powerful couple to test asynchronous behavior.
+相反，我们将使用Angular的``fakeAsync``和``tick``函数来__模拟__时间的流逝。它们是测试异步行为的强大组合。
 
-`fakeAsync` freezes time. It hooks into the processing of asynchronous tasks created by timers, intervals, Promises and Observables. It prevents these tasks from being executed.
+``fakeAsync``冻结时间。它会钩入由定时器、间隔、Promises和Observables创建的异步任务的处理过程。它防止这些任务被执行。
 
-TIP: Simulate passage of time
+TIP: 模拟时间的流逝
 
-Inside the time warp created by `fakeAsync`, we use the `tick` function to simulate the passage of time. The scheduled tasks are executed and we can test their effect.
+在``fakeAsync``创建的时间扭曲中，我们使用``tick``函数来模拟时间的流逝。计划的任务将被执行，我们可以测试它们的效果。
 
-The specialty of `fakeAsync` and `tick` is that the passage of time is only virtual. Even if one second passes in the simulation, the spec still completes in a few milliseconds.
+``fakeAsync``和``tick``的特殊之处在于时间的流逝只是虚拟的。即使在模拟中经过一秒钟，规范仍然在几毫秒内完成。
 
-`fakeAsync` wraps the spec function which is also an `async` function due to the `setup` call. After filling out the form, we simulate the waiting with `tick(1000)`.
+``fakeAsync``包装了规范函数，该函数由于 `setup` 调用而也是一个``异步``函数。在填写表单后，我们使用 `tick(1000)` 来模拟等待的时间。
 
 [source,typescript]
 ----
@@ -632,9 +632,9 @@ it('submits the form successfully', fakeAsync(async () => {
 }));
 ----
 
-This spec passes! Now we should add some expectations to test the details.
+这个规范(spec)通过了！现在我们应该添加一些期望来测试细节。
 
-First, we expect the asynchronous validators to call the `SignupService` methods with the user input. The methods are `isUsernameTaken`, `isEmailTaken` and `getPasswordStrength`.
+首先，我们期望异步验证器调用``SignupService``的方法，并使用用户输入作为参数。这些方法是``isUsernameTaken``、``isEmailTaken``和``getPasswordStrength``。
 
 [source,typescript]
 ----
@@ -655,15 +655,15 @@ it('submits the form successfully', fakeAsync(async () => {
 }));
 ----
 
-TIP: Submit button
+TIP: 提交按钮
 
-Next, we make sure that the submit button is disabled initially. After successful validation, the button is enabled. (The submit button carries the test id `submit`.)
+接下来，我们要确保提交按钮最初处于禁用状态。在成功验证后，按钮将启用。（提交按钮使用测试ID `submit`。）
 
-TIP: Status message
+TIP: 状态消息
 
-Also, when the form has been submitted successfully, the status message “Sign-up successful!” needs to appear. (The status message carries the test id `status`.)
+此外，当表单成功提交时，需要出现状态消息"Sign-up successful!"。（状态消息使用测试ID `status`。）
 
-This brings us to the final spec:
+这将带我们进入最终的规范(spec)：
 
 [source,typescript]
 ----
@@ -693,20 +693,20 @@ it('submits the form successfully', fakeAsync(async () => {
 }));
 ----
 
-Because we are testing DOM changes, we have to call `detectChanges` after each _Act_ phase.
+因为我们正在测试DOM的变化，所以我们必须在每个 _Act_ 阶段之后调用``detectChanges``。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
-- https://angular.io/api/core/testing/fakeAsync[Angular API reference: fakeAsync]
-- https://angular.io/api/core/testing/tick[Angular API reference: tick]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.tsSignupFormComponent：测试代码]
+- https://angular.io/api/core/testing/fakeAsyncAngular API参考：fakeAsync]
+- https://angular.io/api/core/testing/tickAngular API参考：tick]
 ====
 
-== Invalid form
+== 无效的表单
 
-Now that we have tested the successful form submission, let us check the handling of an invalid form. What happens if we do not fill out any fields, but submit the form?
+现在我们已经测试了成功提交表单的情况，让我们来检查无效表单的处理。如果我们没有填写任何字段，但提交表单会发生什么？
 
-We create a new spec for this case:
+我们为这种情况创建一个新的规范(spec)：
 
 [source,typescript]
 ----
@@ -725,35 +725,35 @@ it('does not submit an invalid form', fakeAsync(async () => {
 }));
 ----
 
-This spec does less than the previous. We wait for a second and submit the form without entering data. Finally, we expect that no `SignupService` method has been called.
+这个规范(spec)比之前的规范要简单。我们等待一秒钟，然后在不输入数据的情况下提交表单。最后，我们期望没有调用任何``SignupService``方法。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent：测试代码]
 ====
 
-== Form submission failure
+== 表单提交失败
 
-We have already tested the successful form submission. Now let us test the form submission failure.
+我们已经测试了成功提交表单的情况。现在让我们测试表单提交失败的情况。
 
-TIP: Reasons for failure
+TIP: 失败原因
 
-Despite correct input, the submission may fail for several reasons:
+尽管输入正确，提交可能因为以下几个原因而失败：
 
-- The network is unavailable
-- The back-end processed the request but returned an error:
-  - The server-side validation failed
-  - The request structure is not as expected
-  - The server code has bugs, has crashed or is frozen
+- 网络不可用
+- 后端处理了请求，但返回了错误：
+  - 服务器端验证失败
+  - 请求的结构与预期不符
+  - 服务器代码有错误、崩溃或冻结
 
 TIP: Observable
 
-When the user submits the form, the Component under tests calls the `SignupService`’s `signup` method.
+当用户提交表单时，被测试的组件调用``SignupService``的``signup``方法。
 
-- In the _success case_, the `signup` method returns an Observable that emits the value `{ success: true }` and completes. The form displays a status message “Sign-up successful!”.
-- In the _error case_, the Observable fails with an error. The form displays a status message “Sign-up error”.
+- 在__成功情况__下，``signup``方法返回一个发出值为 `{ success: true }` 的Observable，并完成。表单显示状态消息"Sign-up successful!"。
+- 在__错误情况下__，Observable会失败并抛出一个错误。表单显示状态消息"Sign-up error"。
 
-Let us test the latter case in a new spec. The structure resembles the spec for the successful submission. But we configure the fake `signup` method to return an Observable that fails with an error.
+让我们在一个新的规范(spec)中测试后一种情况。其结构类似于成功提交的规范。但我们配置伪造的``signup``方法返回一个失败的Observable。
 
 [source,typescript]
 ----
@@ -772,7 +772,7 @@ it('handles signup failure', fakeAsync(async () => {
 });
 ----
 
-We fill out the form, wait for the validators and submit the form.
+我们填写表单，等待验证器完成，然后提交表单。
 
 [source,typescript]
 ----
@@ -785,9 +785,9 @@ findEl(fixture, 'form').triggerEventHandler('submit', {});
 fixture.detectChanges();
 ----
 
-TIP: Status message
+TIP: 状态消息
 
-Finally, we expect the “Sign-up error” status message to appear. Also, we verify that the relevant `SignupService` methods have been called.
+最后，我们期望出现"Sign-up error"的状态消息。此外，我们还验证相关的``SignupService``方法是否已被调用。
 
 [source,typescript]
 ----
@@ -798,7 +798,7 @@ expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
 expect(signupService.signup).toHaveBeenCalledWith(signupData);
 ----
 
-The full spec:
+完整的规范(spec)如下：
 
 [source,typescript]
 ----
@@ -826,22 +826,22 @@ it('handles signup failure', fakeAsync(async () => {
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: 测试代码]
 ====
 
-== Required fields
+== 必填字段
 
-A vital form logic is that certain fields are required and that the user interface conveys the fact clearly. Let us write a spec that checks whether required fields as marked as such.
+一个关键的表单逻辑是某些字段是必填的，并且用户界面清楚地传达了这个事实。让我们编写一个规范(spec)来检查是否将必填字段标记为必填。
 
-TIP: Requirements
+TIP: 要求
 
-The requirements are:
+要求如下：
 
-- A required field has an `aria-required` attribute.
-- A required, invalid field has an `aria-errormessage` attribute. It contains the id of another element.
-- This element contains an error message “… must be given”. (The text for the Terms of Services checkbox reads “Please accept the Terms and Services” instead.)
+- 必填字段具有``aria-required``属性。
+- 必填但无效的字段具有``aria-errormessage``属性。它包含另一个元素的id。
+- 该元素包含错误消息 “… must be given”（“Terms of Services”复选框的文本为“Please accept the Terms and Services”）。
 
-Our spec needs to verify all required fields, so we compile a list of their respective test ids:
+我们的规范(spec)需要验证所有必填字段，因此我们编制了一个它们各自的测试ID列表：
 
 [source,typescript]
 ----
@@ -857,17 +857,17 @@ const requiredFields = [
 ];
 ----
 
-TIP: invalid && (touched || dirty)
+TIP: invalid && (touched || dirty)
 
-Before examining the fields, we need to trigger the display of form errors. As described in #form-validation-and-errors[Form validation and errors], error messages are shown when the field is _invalid_ and either _touched_ or _dirty_.
+在检查字段之前，我们需要触发表单错误的显示。如 xref:_表单验证和错误[表单验证和错误] 中所述，当字段无效且__已触摸(touched)__或__已修改(dirty)__时，错误消息会显示出来。
 
-Luckily, the empty, but required fields are already invalid. Entering text would make them _dirty_ but also _valid_.
+幸运的是，空的但是必填的字段已经是无效的。输入文本会使它们变为__dirty__，但也是__有效__的。
 
-TIP: Mark as touched
+TIP: 标记为已触摸(touched)
 
-So we need to _touch_ the fields. If a field is focussed and loses focus again, Angular considers it as _touched_. Under the hood, Angular listens for the `blur` event.
+因此，我们需要__触摸(touch)__这些字段。如果一个字段被聚焦并再次失去焦点，Angular将认为它已__被触摸(touched)__。在幕后，Angular会监听__blur__事件。
 
-In our spec, we simulate a `blur` event using the `dispatchFakeEvent` testing helper. Let us put the call in a reusable function:
+在我们的规范(spec)中，我们使用``dispatchFakeEvent``测试助手来模拟``blur``事件。让我们将调用放在一个可重用的函数中：
 
 [source,typescript]
 ----
@@ -876,7 +876,7 @@ const markFieldAsTouched = (element: DebugElement) => {
 };
 ----
 
-We can now write the _Arrange_ and _Act_ phases of the spec:
+我们现在可以编写规范(spec)的 _安排(Arrange)_ 和 __执行(Act)__阶段：
 
 [source,typescript]
 ----
@@ -893,11 +893,11 @@ it('marks fields as required', async () => {
 });
 ----
 
-A `forEach` loop walks through the required field test ids, finds the element and marks the field as touched. We call `detectChanges` afterwards so the error messages appear.
+一个``forEach``循环遍历必填字段的测试ID，找到相应的元素并将字段标记为已触摸。然后我们调用``detectChanges``，以便错误消息出现。
 
 TIP: `aria-required`
 
-Next, the _Assert_ phase. Again we walk through the required fields to examine each one of them. Let us start with the `aria-required` attribute.
+接下来是 _断言(Assert)_ 阶段。再次遍历必填字段，逐个检查它们。让我们从``aria-required``属性开始。
 
 [source,typescript]
 ----
@@ -914,17 +914,17 @@ requiredFields.forEach((testId) => {
 });
 ----
 
-`findEl` returns a `DebugElement` with an `attributes` property. This object contains all attributes set by the template. We expect the attribute `aria-required="true"` to be present.
+``findEl``函数返回一个具有``attributes``属性的``DebugElement``。该属性包含模板设置的所有属性。我们期望 `aria-required="true"` 属性存在。
 
 TIP: `aria-errormessage`
 
-The next part tests the error message with three steps:
+下一部分测试错误消息，包含三个步骤：
 
-1. Read the `aria-errormessage` attribute. Expect that it is set.
-2. Find the element that `aria-errormessage` refers to. Expect that it exists.
-3. Read the text content. Expect an error message.
+1. 读取``aria-errormessage``属性。期望它被设置。
+2. 找到``aria-errormessage``引用的元素。期望它存在。
+3. 读取文本内容。期望得到一个错误消息。
 
-Step 1 looks like this:
+步骤1如下所示：
 
 [source,typescript]
 ----
@@ -935,13 +935,13 @@ if (!errormessageId) {
 }
 ----
 
-Normally, we would use a Jasmine expectation like `expect(errormessageId).toBeDefined()`. But `errormessageId` has the type `string | null` whereas we need a `string` in the upcoming commands.
+通常情况下，我们会使用Jasmine的expectation，如 `expect(errormessageId).toBeDefined()`。但是``，errormessageId``的类型是``string | null``，而我们需要一个 `string` 类型的值来进行后续的操作。
 
-TIP: Type assertions
+TIP: 类型断言
 
-We need a TypeScript type assertion that rules out the `null` case and narrows down the type to `string`. If the attribute is absent or empty, we throw an exception. This fails the test with the given error and ensures that `errormessageId` is a string for the rest of the spec.
+我们需要一个TypeScript的类型断言，将``null``的情况排除，并将类型缩小为 `string` 类型。如果该属性不存在或为空，我们会抛出异常。这将使测试失败，并显示给定的错误信息，并确保``errormessageId``在规范(spec)的其余部分是一个字符串类型。
 
-Step 2 finds the error message element:
+第2步找到错误消息元素：
 
 [source,typescript]
 ----
@@ -952,11 +952,11 @@ if (!errormessageEl) {
 }
 ----
 
-We use the native DOM method `document.getElementById` to find the element. `errormessageEl` has the type `HTMLElement | null`, so we rule out the `null` case to work with `errormessageEl`.
+我们使用原生的DOM方法``document.getElementById``来找到元素。``errormessageEl``的类型是``HTMLElement | null``，所以我们排除了``null``的情况，以便使用``errormessageEl``。
 
-TIP: Error message
+TIP: 错误消息
 
-Finally, we ensure that the element contains an error message, with a special treatment of the Terms and Services message.
+最后，我们确保该元素包含一个错误消息，并对“Terms and Services”消息进行特殊处理。
 
 [source,typescript]
 ----
@@ -969,7 +969,7 @@ if (errormessageId === 'tos-errors') {
 }
 ----
 
-The full spec looks like this:
+完整的规范(spec)如下所示：
 
 [source,typescript]
 ----
@@ -1018,18 +1018,18 @@ it('marks fields as required', async () => {
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: 测试代码]
 ====
 
-== Asynchronous validators
+== 异步验证器
 
-The sign-up form features asynchronous validators for username, email and password. They are asynchronous because they wait for a second and make an HTTP request. Under the hood, they are implemented using RxJS Observables.
+注册表单中的用户名、电子邮件和密码都有异步验证器。它们是异步的，因为它们等待一秒钟并进行HTTP请求。在底层，它们使用RxJS Observables来实现。
 
-TIP: Async validation failure
+TIP: 异步验证失败
 
-We have already covered the “happy path” in which the entered username and email are available and the password is strong enough. We need to write three specs for the error cases: Username or email are taken and the password is too weak.
+我们已经覆盖了“正常路径”，其中输入的用户名和电子邮件都可用，密码也足够强大。我们需要为错误情况编写三个规范(spec)：用户名或电子邮件已被使用，以及密码太弱。
 
-The validators call `SignupService` methods. Per default, the `SignupService` fake returns successful responses.
+这些验证器调用了``SignupService``的方法。默认情况下，``SignupService``的fake返回成功的响应。
 
 [source,typescript]
 ----
@@ -1054,9 +1054,9 @@ const setup = async (
 };
 ----
 
-The `setup` function allows us to overwrite the fake behavior. It accepts an object with `SignupService` method return values.
+``setup``函数允许我们覆盖虚拟行为。它接受一个包含``SignupService``方法返回值的对象。
 
-We add three specs that configure the fake accordingly:
+我们添加三个规范(spec)，以相应地配置虚拟行为：
 
 [source,typescript]
 ----
@@ -1091,7 +1091,7 @@ it('fails if the password is too weak', fakeAsync(async () => {
 }));
 ----
 
-The rest is the same for all three specs. Here is the first spec:
+其余的部分对于所有三个规范(spec)都是相同的。下面是第一个规范(spec)：
 
 [source,typescript]
 ----
@@ -1118,29 +1118,29 @@ it('fails if the username is taken', fakeAsync(async () => {
 }));
 ----
 
-We fill out the form, wait for the async validators and try to submit the form.
+我们填写表单，等待异步验证器并尝试提交表单。
 
-We expect that the three async validators call the respective `SignupService` methods.
+我们期望这三个异步验证器调用相应的``SignupService``方法。
 
-The username validation fails, so we expect that the Component prevents the form submission. The `signup` method must not be called.
+用户名验证失败，所以我们期望组件阻止表单提交。``signup``方法不应该被调用。
 
-As stated above, the two other specs `it('fails if the email is taken', /* … */)` and `it('fails if the password is too weak', /* … */)` look the same apart from the fake setup.
+如上所述，另外两个规范(spec) `it('fails if the email is taken', /* … */)` 和 `it('fails if the password is too weak', /* … */)` 除了虚拟设置之外，看起来是相同的。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
-- https://angular.io/guide/form-validation#creating-asynchronous-validators[Angular documentation: Creating asynchronous validators]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: 测试代码]
+- https://angular.io/guide/form-validation#creating-asynchronous-validators[Angular文档: 创建异步验证器]
 ====
 
-== Dynamic field relations
+== 动态字段关系
 
-The sign-up form has a fixed set of fields. But the `addressLine1` field depends on the value of the `plan` field:
+注册表单有一组固定的字段。但是``addressLine1``字段取决于``plan``字段的值：
 
-- If the selected plan is “Personal”, the field is optional and the label reads “Address line 1”.
-- If the selected plan is “Business”, the field is required and the label reads “Company”.
-- If the selected plan is “Education & Non-profit”, the field is required and the label reads “Organization”.
+- 如果选择的计划是“个人”，则该字段是可选的，标签显示为“地址行1”。
+- 如果选择的计划是“商业”，则该字段是必需的，标签显示为“公司”。
+- 如果选择的计划是“教育与非营利”，则该字段是必需的，标签显示为“组织”。
 
-The implementation in the Component class looks like this:
+在组件类中的实现如下所示：
 
 [source,typescript]
 ----
@@ -1154,24 +1154,24 @@ this.plan.valueChanges.subscribe((plan: Plan) => {
 });
 ----
 
-We listen for value changes of the `plan` control. Depending on the selection, we either add the `required` validator to the `addressLine1` control or remove all validators.
+我们监听``plan``控件的值变化。根据选择，我们要么给``addressLine1``控件添加 `必需(required)` 验证器，要么移除所有验证器。
 
-Finally, we need to tell Angular to revalidate the field value, now that the validators have changed.
+最后，我们需要告诉Angular重新验证字段值，现在验证器已经改变。
 
-Let us write a spec to ensure that `addressLine1` is required for certain plans.
+让我们编写一个规范(spec)来确保对于某些计划，``addressLine1``是必需的。
 
 [source,typescript]
 ----
 it('requires address line 1 for business and non-profit plans', async () => {
   await setup();
 
-  /* … */
+  /* … */
 });
 ----
 
-First, we need inspect the initial state: The “Personal” plan is selected and `addressLine1` is optional.
+首先，我们需要检查初始状态：选择了“个人”计划，``addressLine1``是可选的。
 
-We do so by looking at attributes of the `addressLine1` field element: The `ng-invalid` class and the `aria-required` attribute must be absent.
+我们通过查看``addressLine1``字段元素的属性来进行检查：``ng-invalid``类和``aria-required``属性必须不存在。
 
 [source,typescript]
 ----
@@ -1181,7 +1181,7 @@ expect('ng-invalid' in addressLine1El.classes).toBe(false);
 expect('aria-required' in addressLine1El.attributes).toBe(false);
 ----
 
-From this baseline, let us change the plan from “Personal” to “Business”. We use the `checkField` spec helper to activate the corresponding radio button.
+从这个基线出发，让我们将计划从“个人”更改为“商业”。我们使用``checkField``规范助手来激活相应的单选按钮。
 
 [source,typescript]
 ----
@@ -1190,7 +1190,7 @@ checkField(fixture, 'plan-business', true);
 fixture.detectChanges();
 ----
 
-To see the effect of the change, we need to tell Angular to update the DOM. Then we expect the `ng-invalid` class and the `aria-required` to be present.
+为了看到更改的效果，我们需要告诉Angular更新DOM。然后我们期望``ng-invalid``类和``aria-required``存在。
 
 [source,typescript]
 ----
@@ -1198,7 +1198,7 @@ expect(addressLine1El.attributes['aria-required']).toBe('true');
 expect(addressLine1El.classes['ng-invalid']).toBe(true);
 ----
 
-We perform the same check for the “Education & Non-profit” plan.
+我们对“教育和非营利”计划执行相同的检查。
 
 [source,typescript]
 ----
@@ -1210,7 +1210,7 @@ expect(addressLine1El.attributes['aria-required']).toBe('true');
 expect(addressLine1El.classes['ng-invalid']).toBe(true);
 ----
 
-This is it! Here is the full spec:
+就是这样！这就是完整的规格说明：
 
 [source,typescript]
 ----
@@ -1238,36 +1238,36 @@ it('requires address line 1 for business and non-profit plans', async () => {
 });
 ----
 
-We have already checked the presence of `aria-required` attributes when testing the #required-fields[required fields]. For consistency, we check for `aria-required` in this spec as well.
+当测试 xref:_必填字段[必填字段]时，我们已经检查了``aria-required``属性的存在。为了一致性，我们在此规格中也检查``aria-required``。
 
-As a second indicator, we check for the `ng-invalid` class. This class is set by Angular itself on invalid form fields without us having to add it via the template. Note that the mere presence of the class does not imply that the invalid state is conveyed visually.
+作为第二个指标，我们检查``ng-invalid``类的存在。这个类是Angular自己在无效的表单字段上设置的，而不需要我们通过模板添加它。请注意，仅有该类的存在并不意味着无效状态已经以视觉方式传达。
 
-Alternatively, we could check for the presence of an error message, like we did in the required fields spec.
+或者，我们可以检查错误消息的存在，就像在必填字段规格中所做的那样。
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent：测试代码]
 ====
 
-== Password type toggle
+== 密码类型切换
 
-Another small feature of the sign-up form is the password type switcher. This button toggles the visibility of the entered password. Under the hood, it changes the input type from `password` to `text` and vice versa.
+密码类型切换 注册表单的另一个小功能是密码类型切换器。此按钮切换输入密码的可见性。在幕后，它会将输入类型从 `password` 更改为 `text` ，反之亦然。
 
-The Component class stores the visibility in a boolean property:
+组件类将可见性存储在布尔属性中：
 
 [source,typescript]
 ----
 public showPassword = false;
 ----
 
-In the template, the input type depends on the property (shortened code):
+在模板中，输入类型取决于属性（简化的代码）：
 
 [source,html]
 ----
 <input [type]="showPassword ? 'text' : 'password'" />
 ----
 
-Finally, the button toggles the boolean value (shortened code):
+最后，按钮切换布尔值（简化的代码）：
 
 [source,html]
 ----
@@ -1279,7 +1279,7 @@ Finally, the button toggles the boolean value (shortened code):
 </button>
 ----
 
-To test this feature, we create a new spec:
+为了测试这个特性，我们创建一个新的规范：
 
 [source,typescript]
 ----
@@ -1290,16 +1290,16 @@ it('toggles the password display', async () => {
 });
 ----
 
-Initially, the field has the `password` type so the entered text is obfuscated. Let us test this baseline.
+最初，该字段具有 `password` 类型，因此输入的文本被模糊化。让我们测试这个基线。
 
-First, we enter a password into the field. This is not strictly necessary but makes the test more realistic and debugging easier. (The password field has the test id `password`.)
+首先，我们在字段中输入密码。这并不是严格必要的，但可以使测试更加真实，也更容易进行调试。（密码字段具有测试 id `password`。）
 
 [source,typescript]
 ----
 setFieldValue(fixture, 'password', 'top secret');
 ----
 
-We find the input element by its test id again to check the `type` attribute.
+我们再次通过测试 id 查找输入元素，以检查其 `type` 属性。
 
 [source,typescript]
 ----
@@ -1307,7 +1307,7 @@ const passwordEl = findEl(fixture, 'password');
 expect(passwordEl.attributes.type).toBe('password');
 ----
 
-Now we click on the toggle button for the first time. We let Angular update the DOM and check the input type again.
+现在我们第一次单击切换按钮。我们让 Angular 更新 DOM，并再次检查输入类型。
 
 [source,typescript]
 ----
@@ -1317,9 +1317,9 @@ fixture.detectChanges();
 expect(passwordEl.attributes.type).toBe('text');
 ----
 
-We expect that the type has changed from `password` to `text`. The password is now visible.
+我们期望类型已经从 `password` 更改为 `text`。密码现在可见。
 
-With a second click on the toggle button, the type switches back to `password`.
+通过第二次单击切换按钮，类型将切换回 `password`。
 
 [source,typescript]
 ----
@@ -1329,7 +1329,7 @@ fixture.detectChanges();
 expect(passwordEl.attributes.type).toBe('password');
 ----
 
-This is the whole spec:
+这是整个规范：
 
 [source,typescript]
 ----
@@ -1354,71 +1354,71 @@ it('toggles the password display', async () => {
 
 [NOTE]
 ====
-- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: test code]
+- https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: 测试代码]
 ====
 
-== Testing form accessibility
+== 测试表单的可访问性
 
-Web accessibility means that all people can use a web site, regardless of their physical or mental abilities or web access technologies. It is is part of a greater effort called Inclusive Design, the process of creating information systems that account for people with diverse abilities and needs.
+Web可访问性意味着所有人都可以使用网站，无论他们的身体或精神能力或网络访问技术如何。它是一个称为包容性设计的更大努力的一部分，这是创建考虑到具有不同能力和需求的人的信息系统的过程。
 
-Designing web forms is a usability and accessibility challenge. Web forms often pose a barrier for users with disabilities and users of assistive technologies.
+设计Web表单是一个可用性和可访问性的挑战。Web表单经常对残疾人和辅助技术用户构成障碍。
 
-TIP: Accessible form
+TIP: 可访问表单
 
-The sign-up form has several accessibility features, among others:
+注册表单有几个可访问性特征，其中包括：
 
-- The form is well-structured with heading, `fieldset` and `legend` elements.
-- All fields have proper labels, e.g. “Username (required)”.
-- Some fields have additional descriptions. The descriptions are linked with `aria-describedby` attributes.
-- Required fields are marked with `aria-required="true"`.
-- Invalid fields are marked with `aria-invalid="true"`. The error messages are linked with `aria-errormessage` attributes.
-- When the form is submitted, the result is communicated using a status message with `role="status"`.
-- The structure and styling clearly conveys the current focus as well as the validity state.
+- 该表单结构良好，具有标题，`字段集(fieldset)` 和 `图例(legend)` 元素。
+- 所有字段都有适当的标签，例如“用户名（必填）”。
+- 某些字段有其他描述。这些描述与``aria-describedby``属性链接。
+- 必填字段标有 `aria-required="true"`。
+- 无效字段标有 `aria-invalid="true"`。错误消息与``aria-errormessage``属性链接。
+- 提交表单时，使用 `role="status"` 的状态消息通知结果。
+- 结构和样式清楚地传达了当前焦点以及有效状态。
 
-TIP: Automated accessibility testing
+TIP: 自动化可访问性测试
 
-There are many more accessibility requirements and best practices that we have not mentioned. Since this guide is not about creating accessible forms primarily, let us explore how to *test accessibility in an automated way*.
+还有许多我们没有提到的可访问性要求和最佳实践。由于本指南的主要目的不是创建可访问的表单，因此让我们探讨如何**以自动化方式测试可访问性**。
 
-We have tested some of the features above in the `SignupFormComponent`’s integration test. Instead of writing more specs for accessibility requirements by hand, let us test the accessibility with a proper tool.
+我们已经在``SignupFormComponent``的集成测试中测试了上述一些功能。让我们使用适当的工具测试可访问性，而不是手动编写更多的可访问性需求规范。
 
 [NOTE]
 ====
-- https://inclusivedesignprinciples.org/[Inclusive Design Principles]
+- https://inclusivedesignprinciples.org/[包容性设计原则]
 ====
 
 === pa11y
 
-In this guide, we will look at *pa11y*, a Node.js program that checks the accessibility of a web page.
+在本指南中，我们将看看**pa11y**，这是一个Node.js程序，用于检查Web页面的可访问性。
 
-TIP: Tests in Chrome
+TIP: 在Chrome中进行测试
 
-pa11y starts and remotely-controls a Chrome or Chromium browser. The browser navigates to the page under test. pa11y then injects _axe-core_ and/or _HTML CodeSniffer_, two accessibility testing engines.
+pa11y启动并远程控制Chrome或Chromium浏览器。浏览器导航到测试页面。然后，pa11y注入了__axe-core__和__HTML CodeSniffer__两个可访问性测试引擎。
 
-These engines check compliance with the Web Content Accessibility Guidelines (WCAG), the authoritative technical standard for web accessibility.
+这些引擎检查是否符合Web内容可访问性指南（WCAG），这是Web可访问性的权威技术标准。
 
 TIP: CLI vs. CI
 
-pa11y has two modes of operation: The command line interface (CLI) for checking one web page and the continuous integration (CI) mode for checking multiple web pages.
+pa11y有两种操作模式：针对一个Web页面的命令行界面（CLI）和针对多个Web页面的持续集成（CI）模式。
 
-For quickly testing a single page of your Angular application, use the command line interface. When testing the whole application on a regular basis, use the continuous integration mode.
+要快速测试您的Angular应用程序的单个页面，请使用命令行界面。定期测试整个应用程序时，请使用持续集成模式。
 
-To use the command line interface, install pa11y as a global npm module:
+要使用命令行界面，请将pa11y安装为全局npm模块：
 
 [source,]
 ----
 npm install -g pa11y
 ----
 
-TIP: Test single page
+TIP: 测试单个页面
 
-This installs the global command `pa11y`. To test a page on the local Angular development server, run:
+这将安装全局命令``pa11y``。要在本地Angular开发服务器上测试页面，请运行：
 
 [source,]
 ----
 pa11y http://localhost:4200/
 ----
 
-For the sign-up form, pa11y does not report any errors:
+对于注册表单，pa11y没有报告任何错误：
 
 [source,]
 ----
@@ -1429,9 +1429,9 @@ Welcome to Pa11y
 No issues found!
 ----
 
-TIP: Error report
+TIP: 错误报告
 
-If one of the form fields did not have a proper label, pa11y would complain:
+如果表单字段中有一个没有正确的标签，pa11y将会报错：
 
 [source,]
 ----
@@ -1451,28 +1451,28 @@ If one of the form fields did not have a proper label, pa11y would complain:
    └── <input _ngcontent-srr-c42="" type="text" formcontrolname="username" …
 ----
 
-Each error message contains the violated WCAG rule, the DOM path to the violating element and its HTML code.
+每个错误消息都包含了违反的WCAG规则、违反元素的DOM路径和HTML代码。
 
 [NOTE]
 ====
-- https://pa11y.org/[pa11y: Accessibility testing tools]
-- https://github.com/dequelabs/axe-core[axe-core: Accessibility engine for automated Web UI testing]
-- https://github.com/squizlabs/HTML_CodeSniffer[HTML CodeSniffer: Accessibility auditor]
-- https://www.w3.org/TR/WCAG21/[Web Content Accessibility Guidelines (WCAG) 2.1]
+- https://pa11y.org/[pa11y：无障碍测试工具]
+- https://github.com/dequelabs/axe-core[axe-core：自动化Web UI测试的无障碍引擎]
+- https://github.com/squizlabs/HTML_CodeSniffer[HTML CodeSniffer：无障碍审计器]
+- https://www.w3.org/TR/WCAG21/[Web内容无障碍指南（WCAG）2.1]
 ====
 
 === pa11y-ci
 
-For comprehensive test runs both during development and on a build server, we will set up pa11y in the continuous integration mode.
+为了在开发和构建服务器上进行全面的测试运行，我们将在连续集成模式下设置pa11y。
 
-In your Angular project directory, install the `pa11y-ci` package:
+在您的Angular项目目录中，安装``pa11y-ci``包：
 
 [source,]
 ----
 npm install pa11y-ci
 ----
 
-pa11y-ci expects a configuration file named `.pa11yci` in the project directory. Create the file and paste this JSON:
+pa11y-ci期望在项目目录中存在名为 `.pa11yci` 的配置文件。创建该文件并粘贴以下JSON内容:
 
 [source,json]
 ----
@@ -1489,18 +1489,18 @@ pa11y-ci expects a configuration file named `.pa11yci` in the project directory.
 }
 ----
 
-TIP: Test multiple URLs
+TIP: 测试多个URL
 
-This configuration tells pa11y to check the URL http://localhost:4200 and to use both available testing engines, `axe` and `htmlcs`. You can add many URLs to the `urls` array.
+这个配置告诉pa11y检查URL http://localhost:4200，并使用可用的测试引擎``axe``和``htmlcs``。您可以将许多URL添加到``urls``数组中。
 
-We can now run pa11y-ci with:
+现在我们可以使用以下命令运行pa11y-ci:
 
 [source,]
 ----
 npx pa11y-ci
 ----
 
-For the sign-up form, we get this output:
+对于注册表单，我们得到以下输出：
 
 [source,]
 ----
@@ -1512,27 +1512,27 @@ Running Pa11y on 1 URLs:
 
 [NOTE]
 ====
-- https://github.com/pa11y/pa11y-ci[pa11y-ci: CI-centric accessibility test runner]
+- https://github.com/pa11y/pa11y-ci[pa11y-ci：面向CI的可访问性测试运行器]
 ====
 
-=== Start server and run pa11y-ci
+=== 启动服务器并运行pa11y-ci
 
-The configuration above expects that the development server is already running at http://localhost:4200. Both in development and on a build server, it is useful to start the Angular server, run the accessibility tests and then stop the server again.
+上述配置期望开发服务器已在http://localhost:4200上运行。在开发和构建服务器上都可以启动Angular服务器、运行可访问性测试，然后再停止服务器，这非常有用。
 
-We can achieve this with another handy Node.js package, `start-server-and-test`.
+我们可以使用另一个方便的Node.js包``start-server-and-test``来实现这一点。
 
 [source,]
 ----
 npm install start-server-and-test
 ----
 
-`start-server-and-test` first runs an npm script that is supposed to start an HTTP server. Then it waits for the server to boot up. Once a given URL is available, it runs another npm script.
+``start-server-and-test``首先运行一个npm脚本，该脚本应该启动一个HTTP服务器。然后等待服务器启动。一旦给定的URL可用，它就会运行另一个npm脚本。
 
-In our case, the first script is `start`, an alias for `ng serve`. We need to create the second script to run `pa11y-ci`.
+在我们的情况下，第一个脚本是``start``，它是``ng serve``的别名。我们需要创建第二个脚本来运行``pa11y-ci``。
 
-TIP: npm scripts
+TIP: npm脚本
 
-We edit package.json, and add two scripts:
+我们编辑package.json，并添加两个脚本：
 
 [source,json]
 ----
@@ -1544,32 +1544,32 @@ We edit package.json, and add two scripts:
 }
 ----
 
-Now, `npm run a11y` starts the Angular development server, then runs pa11y-ci, finally stops the server. The audit result is written to the standard output.
+现在，``npm run a11y``会启动Angular开发服务器，然后运行pa11y-ci，最后停止服务器。审核结果将写入标准输出。
 
 [NOTE]
 ====
-- https://github.com/bahmutov/start-server-and-test[start-server-and-test: Starts server, waits for URL, then runs test command]
+- https://github.com/bahmutov/start-server-and-test[start-server-and-test：启动服务器，等待URL，然后运行测试命令]
 ====
 
-== Form accessibility: Summary
+== 表格可访问性：总结
 
-pa11y is a powerful set of tools with many options. We have barely touched on its features.
+pa11y是一套功能强大的工具，有许多选项。我们仅仅触及了它的一些特点。
 
-Automated accessibility testing is a valuable addition to unit, integration and end-to-end tests. You should run an accessibility tester like pa11y against the pages of your Angular application. It is especially helpful to ensure the accessibility of complex forms.
+自动化可访问性测试是单元测试、集成测试和端到端测试的有价值的补充。您应该对您的Angular应用程序的页面运行像pa11y这样的可访问性测试器。确保复杂表单的可访问性特别有帮助。
 
-Bear in mind that automated testing only points out certain accessibility barriers that can be detected programmatically.
+请记住，自动化测试只会指出可以以编程方式检测到的某些可访问性障碍。
 
-The Web Content Accessibility Guidelines (WCAG) establish – from abstract to specific – _principles_, _guidelines_ and _success criteria_. The latter are the practical rules some of which can be checked automatically.
+Web内容可访问性指南（Web Content Accessibility Guidelines -- WCAG）从抽象到具体地建立了__原则(principles)__、__指南(guidelines)__和__成功标准(success criteria)__。后者是一些实际规则，其中一些可以自动检查。
 
-The WCAG success criteria are accompanied by _techniques_ for HTML, CSS, JavaScript etc. For JavaScript web applications, techniques like ARIA are especially relevant.
+WCAG的成功标准伴随着HTML、CSS、JavaScript等__技术__。对于JavaScript Web应用程序，ARIA等技术特别相关。
 
-In summary, you need to learn about accessibility and Inclusive Design first, apply the rules while designing and implementing the application. Then check the compliance manually and automatically.
+总之，您需要先了解可访问性和包容性设计，应用规则来设计和实现应用程序。然后手动和自动检查符合性。
 
 [NOTE]
 ====
-- https://www.w3.org/TR/WCAG21/[Web Content Accessibility Guidelines (WCAG) 2.1]
-- https://www.w3.org/WAI/WCAG21/quickref/[Quick Reference: How to Meet WCAG]
-- https://webaim.org/techniques/aria/[WebAIM: Introduction to ARIA - Accessible Rich Internet Applications]
-- https://www.w3.org/WAI/tutorials/forms/[Web Accessibility Tutorial: Forms]
+- https://www.w3.org/TR/WCAG21/[Web内容可访问性指南（WCAG）2.1]
+- https://www.w3.org/WAI/WCAG21/quickref/[快速参考：如何满足WCAG]
+- https://webaim.org/techniques/aria/[WebAIM：ARIA介绍-可访问的富互联网应用程序]
+- https://www.w3.org/WAI/tutorials/forms/[Web可访问性教程：表单]
 ====
 
