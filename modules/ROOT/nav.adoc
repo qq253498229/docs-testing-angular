@@ -11,7 +11,7 @@
 * xref:testing-components-with-children.adoc[测试带有子组件的组件,leveloffset=-1]
 * xref:testing-components-depending-on-services.adoc[测试依赖于服务的组件,leveloffset=-1]
 * xref:testing-complex-forms.adoc[测试复杂表单,leveloffset=-1]
-* xref:testing-components-with-spectator.adoc[Testing Components with Spectator,leveloffset=-1]
+* xref:testing-components-with-spectator.adoc[测试时使用Spectator库简化组件,leveloffset=-1]
 * xref:testing-services.adoc[Testing Services,leveloffset=-1]
 * xref:testing-pipes.adoc[Testing Pipes,leveloffset=-1]
 * xref:testing-directives.adoc[Testing Directives,leveloffset=-1]
