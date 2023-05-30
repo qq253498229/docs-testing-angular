@@ -1,43 +1,43 @@
-= Testing Services
+= 测试服务
 
-Learning objectives
+学习目标
 
-- Writing tests for Services with internal state
-- Testing Observables returned by Services
-- Verifying HTTP requests and payload processing
-- Covering HTTP success and error cases
+- 编写具有内部状态的服务的测试
+- 测试服务返回的可观察对象
+- 验证HTTP请求和有效负载处理
+- 涵盖HTTP成功和错误情况
 
-In an Angular application, Services are responsible for fetching, storing and processing data. Services are singletons, meaning there is only one instance of a Service during runtime. They are fit for central data storage, HTTP and WebSocket communication as well as data validation.
+在Angular应用程序中，服务负责获取、存储和处理数据。服务是单例，意味着在运行时只有一个服务实例。它们适用于中央数据存储、HTTP和WebSocket通信以及数据验证。
 
-TIP: Singleton
+TIP: 单例
 
-The single Service instance is shared among Components and other application parts. Therefore, a Service is used when Components that are not parent and child need to communicate with each other and exchange data.
+单个服务实例在组件和其他应用程序部分之间共享。因此，在不是父子关系的组件之间需要通信和交换数据时，使用服务。
 
-TIP: Injectable
+TIP: 可注入
 
-“Service” is an umbrella term for any object that serves a specific purpose and is injected as a dependency. Technically, Services have little in common. There are no rules regarding the structure or behavior of a Service.
+“服务”是指任何作为依赖项注入并提供特定功能的对象的总称。从技术上讲，服务没有什么共同之处。没有关于服务结构或行为的规则。
 
-Typically, Services are classes, but not necessarily. While Modules, Components and Directives are marked with respective decorators – `@Module`, `@Component`, `@Directive` –, Services are marked with the generic `@Injectable`.
+通常，服务是类，但不一定。虽然模块、组件和指令带有相应的装饰器（`@Module`、`@Component`、`@Directive`），但服务使用通用的 ``@Injectable`` 装饰器。
 
-TIP: Responsibilities
+TIP: 职责
 
-So what does a Service do and how do we test it? Services are diverse, but some patterns are widespread.
+那么服务是做什么的，我们如何测试它呢？服务是多样化的，但一些模式是普遍的。
 
-- Services have public methods that return values.
+- 服务有公共方法返回值。
 
-  In the test, we check whether a method returns correct data.
+  在测试中，我们检查方法是否返回正确的数据。
 
-- Services store data. They hold an internal state. We can get or set the state.
+- 服务存储数据。它们保持一种内部状态。我们可以获取或设置该状态。
 
-  In the test, we check whether the state is changed correctly. Since the state should be held in private properties, we cannot access the state directly. We test the state change by calling public methods. We should not peek into the <<testing-principles#_black_box_vs_white_box_testing, black box>>.
+  在测试中，我们检查状态是否正确地更改。由于状态应该保存在私有属性中，因此我们不能直接访问状态。我们通过调用公共方法来测试状态变化。我们不应窥视<<testing-principles#_黑盒测试与白盒测试,黑盒>>。
 
-- Services interact with dependencies. These are often other Services. For example, a Service might send HTTP requests via Angular’s `HttpClient`.
+- 服务与依赖项交互。这些通常是其他服务。例如，服务可能通过Angular的``HttpClient``发送HTTP请求。
 
-  In the unit test, we replace the dependency with a fake that returns canned responses.
+  在单元测试中，我们用返回预先设定响应的虚拟对象替换依赖项。
 
-== Testing a Service with internal state
+== 测试一个具有内部状态的服务
 
-Let us start with testing the https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.ts[`CounterService`]. By now, you should be familiar with the Service. As a reminder, here is the shape including private members:
+让我们从测试 https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.ts[`CounterService`] 开始。现在，您应该对服务已经很熟悉了。作为提醒，这里是一段包括私有成员的代码：
 
 [source,typescript]
 ----
@@ -52,15 +52,15 @@ class CounterService {
 }
 ----
 
-We need to identify what the Service does, what we need test and how we test it.
+我们需要确定该服务的功能，需要测试什么以及如何进行测试。
 
-TIP: What it does
+TIP: 它的功能
 
-- The Service holds an internal state, namely in the private `count` and `subject` properties. We cannot and should not access these properties in the test.
-- For reading the state, the Service has the `getCount` method. It does not return a synchronous value, but an RxJS Observable. We will use `getCount` to get the current count and also to subscribe to changes.
-- For changing the state, the Service provides the methods `increment`, `decrement` and `reset`. We will call them and check whether the state has changed accordingly.
+- 该服务保存一个内部状态，即私有 `计数(count)` 和 `主题(subject)` 属性。我们不能也不应该在测试中访问这些属性。
+- 为了读取状态，该服务有一个名为``getCount``的方法。它不返回同步值，而是一个RxJS可观察对象。我们将使用``getCount``来获取当前计数，并订阅更改。
+- 为了改变状态，该服务提供了 `增加(increment)`，`减少(decrement)` 和 `重置(reset)` 的方法。我们将调用它们并检查状态是否相应地改变。
 
-Let us write the test code! We create a file called `counter.service.spec.ts` and fill it with test suite boilerplate code:
+让我们编写测试代码！我们创建一个名为``counter.service.spec.ts``的文件，并填充测试套件样板代码：
 
 [source,typescript]
 ----
@@ -69,7 +69,7 @@ describe('CounterService', () => {
 });
 ----
 
-We already know what the Service does and what needs to be tested. So we add specs for all features:
+我们已经知道该服务的功能以及需要测试什么。因此，我们为所有功能添加规范：
 
 [source,typescript]
 ----
@@ -81,18 +81,18 @@ describe('CounterService', () => {
 });
 ----
 
-TIP: Instantiate without `TestBed`
+TIP: 不使用 `TestBed` 实例化
 
-In the _Arrange_ phase, each spec needs to create an instance of `CounterService`. The simplest way to do that is:
+在__Arrange__阶段，每个规范都需要创建``CounterService``的一个实例。最简单的方法是：
 
 [source,typescript]
 ----
 const counterService = new CounterService();
 ----
 
-This is fine for simple Services without dependencies. For testing Services with dependencies, we will use the `TestBed` later.
+对于没有依赖关系的简单服务，这样做是可以的。对于具有依赖关系的服务进行测试，稍后我们将使用``TestBed``。
 
-We create the fresh instance in a `beforeEach` block since every spec needs it:
+我们在``beforeEach``块中创建新实例，因为每个规范都需要它：
 
 [source,typescript]
 ----
@@ -110,15 +110,15 @@ describe('CounterService', () => {
 });
 ----
 
-Let us start with writing the spec `it('returns the count', /* … */)`. It tests the `getCount` method that returns an Observable.
+让我们从编写规范 `it('returns the count', /* … */)` 开始。它测试返回Observable的``getCount``方法。
 
-TIP: Change variable value
+TIP: 更改变量值
 
-For testing the Observable, we use the same pattern that we have used for <<testing-components#_testing_outputs, testing a Component Output>>:
+为了测试Observable，我们使用了与 <<testing-components#_测试输出,测试组件输出>> 相同的模式：
 
-1. We declare a variable `actualCount` that is initially undefined.
-2. We subscribe to the Observable. We assign the emitted value to the `actualCount` variable.
-3. Finally, outside of the subscriber function, we compare the actual to the expected value.
+1. 我们声明一个变量``actualCount``，最初为undefined。
+2. 我们订阅Observable。我们将发射的值赋给``actualCount``变量。
+3. 最后，在订阅函数的外部，我们将实际值与期望值进行比较。
 
 [source,typescript]
 ----
@@ -131,13 +131,13 @@ it('returns the count', () => {
 });
 ----
 
-This works because the Observable is backed by a `BehaviorSubject` that stores the latest value and sends it to new subscribers immediately.
+这是行得通的，因为Observable由一个``BehaviorSubject``支持，它存储最新的值并立即将其发送给新的订阅者。
 
-TIP: State change
+TIP: 状态更改
 
-The next spec tests the `increment` method. We call the method and verify that the count state has changed.
+下一个规范测试``increment``方法。我们调用该方法并验证计数状态是否已更改。
 
-As mentioned before, we cannot access the private properties for this purpose. Just like in the spec above, we need to use the public `getCount` method to read the count.
+如前所述，出于此目的，我们无法访问私有属性。就像上面的规范一样，我们需要使用公共的``getCount``方法来读取计数。
 
 [source,typescript]
 ----
@@ -152,11 +152,11 @@ it('increments the count', () => {
 });
 ----
 
-TIP: Expect changed value
+TIP: 期望更改的值
 
-The order here is important: First, we call `increment`, then we subscribe to the Observable to read and verify the changed value. Again, the `BehaviorSubject` emits the current value to new subscribers synchronously.
+这里的顺序很重要：首先，我们调用``increment``，然后我们订阅Observable以读取并验证更改后的值。同样，``BehaviorSubject``将当前值同步地发送给新的订阅者。
 
-The two remaining specs work almost the same. We just call the respective methods.
+剩下的两个规范几乎相同。我们只是调用了相应的方法。
 
 [source,typescript]
 ----
@@ -182,9 +182,9 @@ it('resets the count', () => {
 });
 ----
 
-TIP: Repeating patterns
+TIP: 重复的模式
 
-We quickly notice that the specs are highly repetitive and noisy. In every spec’s _Assert_ phase, we are using this pattern to inspect the Service state:
+我们很快就会注意到这些规范非常重复且嘈杂。在每个规范的__Assert__阶段，我们都使用这个模式来检查服务状态：
 
 [source,typescript]
 ----
@@ -195,7 +195,7 @@ counterService.getCount().subscribe((count) => {
 expect(actualCount).toBe(/* … */);
 ----
 
-This is a good candidate for a helper function. Let us call it `expectCount`.
+这是一个很好的助手函数候选项。我们称其为``expectCount``。
 
 [source,typescript]
 ----
@@ -208,21 +208,21 @@ function expectCount(count: number): void {
 }
 ----
 
-The pattern has one variable bit, the expected count. That is why the helper function has one parameter.
+这个模式有一个可变的位，即期望的数量，这就是为什么助手函数只有一个参数的原因。
 
-TIP: Unsubscribe
+TIP: 取消订阅
 
-Now that we have pulled out the code into a central helper function, there is one optimization we should add. The First Rule of RxJS Observables states: “Anyone who subscribes, must unsubscribe as well”.
+现在我们已经将代码提取到一个中央助手函数中，我们应该添加一个优化。 RxJS Observables的第一条规则是：“任何订阅者都必须取消订阅”。
 
-In `expectCount`, we need to get the current count only once. We do not want to create a long-lasting subscription. We are not interested in future changes.
+在``expectCount``中，我们只需要获取当前计数一次。我们不想创建一个长期持续的订阅。我们对未来的更改不感兴趣。
 
-If we call `expectCount` only once per spec, this is not a huge problem. If we wrote a more complex spec with several `expectCount` calls, we would create pointless subscriptions. This is likely to cause confusion when debugging the subscriber function.
+如果我们每个规范只调用一次``expectCount``，这不是一个很大的问题。如果我们编写一个更复杂的规范，有几个``expectCount``调用，我们将创建无意义的订阅。这很可能在调试订阅函数时引起混淆。
 
-In short, we want to fetch the count and then unsubscribe to reduce unwanted subscriptions.
+简而言之，我们想要获取计数，然后取消订阅以减少不必要的订阅。
 
-TIP: Unsubscribe manually
+TIP: 手动取消订阅
 
-One possible solution is unsubscribing immediately after subscribing. The `subscribe` method returns a `Subscription` with the useful `unsubscribe` method.
+一个可能的解决方案是立即在订阅后取消订阅。 ``subscribe``方法返回一个``Subscription``，其中包含有用的``unsubscribe``方法。
 
 [source,typescript]
 ----
@@ -238,9 +238,9 @@ function expectCount(count: number): void {
 }
 ----
 
-TIP: RxJS operator
+TIP: RxJS操作符
 
-A more idiomatic way is to use an RxJS operator that completes the Observable after the first value: https://rxjs.dev/api/operators/first[`first`].
+更符合惯用方式的方法是使用一个RxJS操作符，它在第一个值之后就完成Observable： https://rxjs.dev/api/operators/first[`first`]。
 
 [source,typescript]
 ----
@@ -258,9 +258,9 @@ function expectCount(count: number): void {
 }
 ----
 
-If you are not familiar with this arcane RxJS magic, do not worry. In the simple `CounterService` test, unsubscribing is not strictly necessary. But it is a good practice that avoids weird errors when testing more complex Services that make use of Observables.
+如果您不熟悉这个神秘的RxJS魔法，不要担心。在简单的``CounterService``测试中，取消订阅并不是必须的。但这是一个良好的实践，可以避免在测试使用Observables的更复杂的服务时出现奇怪的错误。
 
-The complete test suite now looks like this:
+完整的测试套件现在如下所示：
 
 [source,typescript]
 ----
@@ -306,14 +306,14 @@ describe('CounterService', () => {
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.spec.ts[CounterService: test code]
+- https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.spec.ts[计数器服务：测试代码]
 ====
 
-== Testing a Service that sends HTTP requests
+== 测试发送HTTP请求的服务
 
-Services without dependencies, like `CounterService`, are relatively easy to test. Let us examine a more complex Service with a dependency.
+没有依赖关系的服务，如 `CounterService`，相对容易测试。让我们来看一个具有依赖关系的更复杂的服务。
 
-In the <<example-applications#_the_flickr_photo_search, Flickr search>>, the https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.ts[FlickrService] is responsible for searching photos via the Flickr API. It makes an HTTP GET request to www.flickr.com. The server responds with JSON. Here is the full code:
+在 <<example-applications#_flickr_图片搜索,Flickr搜索>> 中，https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.ts[FlickrService]负责通过Flickr API搜索照片。它向www.flickr.com发送一个HTTP GET请求。服务器以JSON格式响应。以下是完整的代码：
 
 [source,typescript]
 ----
@@ -344,25 +344,25 @@ export class FlickrService {
 }
 ----
 
-The Service is marked with `@Injectable()` so it takes part in Angular’s Dependency Injection. It depends on Angular’s standard HTTP library, `HttpClient` from the `@angular/common/http` package. Most Angular applications use `HttpClient` to communicate with HTTP APIs.
+该服务标有``@Injectable()``，因此它参与Angular的依赖注入。它依赖于Angular标准的HTTP库，即 `@angular/common/http` 包中的``HttpClient``。大多数Angular应用程序使用``HttpClient``与HTTP API通信。
 
-There are two ways to test the `FlickrService`: an integration test or a unit test.
+有两种测试``FlickrService``的方法：集成测试或单元测试。
 
-TIP: Requests against production
+TIP: 针对生产环境的请求
 
-An *integration test* provides the real `HttpClient`. This leads to HTTP requests to the Flickr API when the running the tests. This makes the whole test unreliable.
+**集成测试**提供真正的``HttpClient``。这会导致在运行测试时向Flickr API发送HTTP请求。这使整个测试不可靠。
 
-The network or the web service might be slow or unavailable. Also the Flickr API endpoint returns a different response for each request. It is hard to expect a certain `FlickrService` behavior if the input is unknown.
+网络或Web服务可能会很慢或不可用。此外，Flickr API端点针对每个请求返回不同的响应。如果输入未知，则很难期望某个``FlickrService``的行为。
 
-Requests to third-party production APIs make little sense in a testing environment. If you want to write an integration test for a Service that makes HTTP request, better use a dedicated testing API that returns fixed data. This API can run on the same machine or in the local network.
+在测试环境中，针对第三方生产API的请求意义不大。如果要为进行HTTP请求的服务编写集成测试，请使用返回固定数据的专用测试API。此API可以在同一台计算机或本地网络上运行。
 
-TIP: Intercept requests
+TIP: 拦截请求
 
-In the case of `FlickrService`, we better write a *unit test*. Angular has a powerful helper for testing code that depends on `HttpClient`: the https://angular.io/guide/http#testing-http-requests[`HttpClientTestingModule`].
+在``FlickrService``的情况下，我们最好编写**单元测试**。Angular具有用于测试依赖于``HttpClient``的代码的强大辅助程序： https://angular.io/guide/http#testing-http-requests[`HttpClientTestingModule`]。
 
-For testing a Service with dependencies, it is tedious to instantiate the Service with `new`. Instead, we use the `TestBed` to set up a testing Module.
+对于具有依赖关系的服务进行测试，使用``new``实例化服务是很繁琐的。相反，我们使用``TestBed``来设置一个测试模块。
 
-In place of the `HttpClient`, we import the `HttpClientTestingModule`.
+我们导入``HttpClientTestingModule``来代替``HttpClient``。
 
 [source,typescript]
 ----
@@ -372,31 +372,31 @@ TestBed.configureTestingModule({
 });
 ----
 
-The `HttpClientTestingModule` provides a fake implementation of `HttpClient`. It does not actually send out HTTP requests. It merely intercepts them and records them internally.
+``HttpClientTestingModule``提供了一个假的``HttpClient``实现。它实际上不会发送HTTP请求，而只是拦截并在内部记录它们。
 
-In the test, we inspect that record of HTTP requests. We respond to pending requests manually with fake data.
+在测试中，我们检查HTTP请求的记录。我们使用虚假数据手动响应未决请求。
 
-TIP: Find, respond, verify
+TIP: 查找、响应、验证
 
-Our test will perform the following steps:
+我们的测试将执行以下步骤：
 
-1. Call the method under test that sends HTTP requests
-2. Find pending requests
-3. Respond to these requests with fake data
-4. Check the result of the method call
-5. Verify that all requests have been answered
+1. 调用发送HTTP请求的被测方法
+2. 查找未决请求
+3. 使用虚假数据响应这些请求
+4. 检查方法调用的结果
+5. 验证所有请求都已得到回答
 
 [NOTE]
 ====
-- https://angular.io/guide/http[Angular guide: Communicating with backend services using HTTP ]
-- https://angular.io/api/common/http/HttpClient[Angular API reference: HttpClient]
-- https://angular.io/guide/http#testing-http-requests[Angular guide: Testing HTTP requests]
-- https://angular.io/api/common/http/testing/HttpClientTestingModule[Angular API reference: HttpClientTestingModule]
+- https://angular.io/guide/http[Angular指南：使用HTTP与后端服务通信]
+- https://angular.io/api/common/http/HttpClient[Angular API参考：HttpClient]
+- https://angular.io/guide/http#testing-http-requests[Angular指南：测试HTTP请求]
+- https://angular.io/api/common/http/testing/HttpClientTestingModule[Angular API参考：HttpClientTestingModule]
 ====
 
-=== Call the method under test
+=== 调用被测方法
 
-In the first step, we call the method under test, `searchPublicPhotos`. The search term is simply a fixed string.
+在第一步中，我们调用被测方法``searchPublicPhotos``。搜索词仅为固定字符串。
 
 [source,typescript]
 ----
@@ -424,17 +424,17 @@ describe('FlickrService', () => {
 });
 ----
 
-We subscribe to the Observable returned by `searchPublicPhotos` so the (fake) HTTP request is sent. We will investigate the response, `actualPhotos`, later in step four.
+我们订阅了由``searchPublicPhotos``返回的Observable，从而发送了（虚假的）HTTP请求。我们稍后会在第四步中调查响应``actualPhotos``。
 
-=== Find pending requests
+=== 查找挂起的请求
 
-In the second step, we find the pending request using the https://angular.io/api/common/http/testing/HttpTestingController[`HttpTestingController`]. This class is part of the `HttpClientTestingModule`. We get hold of the instance by calling `TestBed.inject(HttpTestingController)`.
+在第二步中，我们使用  https://angular.io/api/common/http/testing/HttpTestingController[`HttpTestingController`]查找挂起的请求。这个类是 ``HttpClientTestingModule``的一部分。我们通过调用 `TestBed.inject(HttpTestingController)` 来获取实例。
 
 TIP: `expectOne`
 
-The controller has methods to find requests by different criteria. The simplest is `expectOne`. It finds a request matching the given criteria and expects that there is exactly one match.
+该控制器具有按不同条件查找请求的方法。最简单的是``expectOne``。它查找与给定条件匹配的请求，并期望恰好有一个匹配项。
 
-In our case, we search for a request with a given URL of the Flickr API.
+在我们的情况下，我们搜索Flickr API的给定URL的请求。
 
 [source,typescript]
 ----
@@ -467,32 +467,32 @@ describe('FlickrService', () => {
 });
 ----
 
-`expectOne` returns the found request, that is an instance of `TestRequest`. If there is no pending request that matches the URL, `expectOne` throws an exception, failing the spec.
+``expectOne``返回找到的请求，它是``TestRequest``的实例。如果没有匹配URL的挂起请求，``expectOne``会抛出异常，导致测试失败。
 
 [NOTE]
 ====
-- https://angular.io/api/common/http/testing/HttpTestingController[Angular API reference: HttpTestingController]
-- https://angular.io/api/common/http/testing/TestRequest[Angular API reference: TestRequest]
+- https://angular.io/api/common/http/testing/HttpTestingController[Angular API参考文档：HttpTestingController]
+- https://angular.io/api/common/http/testing/TestRequest[Angular API参考文档：TestRequest]
 ====
 
-=== Respond with fake data
+=== 使用虚假数据响应
 
-Now that we have the pending request at hand, we respond to it with an object that mimics the original API response. The Flickr API returns a complex object with an array of photos objects deep within. In the `FlickrService` test, we only care about the payload, the photos array.
+现在我们手头有挂起的请求，我们使用一个对象来响应它，这个对象模仿了原始的API响应。Flickr API返回一个复杂的对象，其中深度包含一组照片对象。在``FlickrService``测试中，我们只关心有效载荷，即照片数组。
 
-The Flickr search repository contains https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[fake photo objects] that are used throughout the tests. For the `FlickrService` test, we import the `photos` array with two fake photo objects.
+Flickr搜索存储库包含用于整个测试的 https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[虚假照片对象]。对于``FlickrService``测试，我们导入具有两个虚假照片对象的``照片(photos)``数组。
 
-We use the request’s `flush` method to respond with fake data. This simulates a successful “200 OK” server response.
+我们使用请求的``flush``方法来响应虚假数据。这模拟了一个成功的“200 OK”服务器响应。
 
 [source,typescript]
 ----
 request.flush({ photos: { photo: photos } });
 ----
 
-=== Check the result of the method call
+=== 检查方法调用的结果
 
-The spec has proven that `searchPublicPhotos` makes a request to the expected URL. It still needs to prove that the method passes through the desired part of the API response. In particular, it needs to prove that the Observable emits the `photos` array.
+该规范已经证明``searchPublicPhotos``向预期的URL发出了请求。它仍然需要证明该方法传递了所需的API响应部分。特别是，它需要证明Observable发出了``照片(photos)``数组。
 
-We have already subscribed to the Observable:
+我们已经订阅了Observable：
 
 [source,typescript]
 ----
@@ -503,7 +503,7 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
 );
 ----
 
-We expect that the Observable emits a photos array that equals to the one from the API response:
+我们期望Observable发出的照片数组与API响应中的数组相等：
 
 [source,typescript]
 ----
@@ -514,11 +514,11 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
 );
 ----
 
-This leads to a problem that is known from <<testing-components#_testing_outputs, testing Outputs>>: If the code under test is broken, the Observable never emits. The `next` callback with `expect` will not be called. Despite the defect, Jasmine thinks that all is fine.
+这会导致一个已知的 <<testing-components#_测试输出,测试输出>> 问题：如果正在测试的代码出现问题，那么Observable将不会发出任何内容。因此，``expect``中的 `下一个(next)` 回调函数将不会被调用。尽管出现了缺陷，Jasmine仍然认为一切正常。
 
-TIP: Expect changed value
+TIP: 期望值的变化
 
-There are several ways to solve this problem. We have opted for a variable that is `undefined` initially and is assigned a value.
+有几种方法可以解决这个问题。我们选择了一个最初为``undefined``的变量，并分配了一个值。
 
 [source,typescript]
 ----
@@ -537,24 +537,24 @@ request.flush({ photos: { photo: photos } });
 expect(actualPhotos).toEqual(photos);
 ----
 
-The `expect` call is located outside of the `next` callback function to ensure it is definitely called. If the Observable emits no value or a wrong value, the spec fails.
+``expect``调用位于``next``回调函数之外，以确保它被确实调用。如果Observable没有发出任何值或错误的值，那么该规范(spec)将会失败。
 
-=== Verify that all requests have been answered
+=== 验证所有请求都已得到回应
 
-In the last step, we ensure that there are no pending requests left. We expect the method under test to make _one_ request to a specific URL. We have found the request with `expectOne` and have answered it with `flush`.
+在最后一步，我们确保没有任何未处理的请求。我们期望被测试的方法向特定的URL发起一个请求。我们使用``expectOne``找到请求并使用``flush``回答它。
 
-Finally, we call:
+最后，我们调用：
 
 [source,typescript]
 ----
 controller.verify();
 ----
 
-This fails the test if there are any outstanding requests.
+如果有任何未处理的请求，这会导致测试失败。
 
-`verify` guarantees that the code under test is not making excess requests. But it also guarantees that your spec checks all requests, for example by inspecting their URLs.
+``verify``保证被测试的代码不会发出多余的请求。但它也保证您的规范(spec)检查所有请求，例如通过检查它们的URL。
 
-Putting the parts together, the full test suite:
+将所有部分整合起来，完整的测试套件：
 
 [source,typescript]
 ----
@@ -593,21 +593,21 @@ describe('FlickrService', () => {
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.spec.ts[FlickrService: test code]
-- https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[Photo spec helper]
+- https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.spec.ts[FlickrService: 测试代码]
+- https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[照片测试助手]
 ====
 
-=== Testing the error case
+=== 测试错误情况
 
-Are we done with testing `searchPublicPhotos`? We have tested the success case in which the server returns a `200 OK`. But we have not tested the error case yet!
+我们是否已经完成了对``searchPublicPhotos``的测试？我们已经在服务器返回``200 OK``的成功情况下进行了测试。但我们尚未测试错误情况！
 
-TIP: Unhappy path
+TIP: 不良路径
 
-`searchPublicPhotos` passes through the error from `HttpClient`. If the Observable returned by `this.http.get` fails with an error, the Observable returned by `searchPublicPhotos` fails with the same error.
+``searchPublicPhotos``通过从``HttpClient``传递错误。如果``this.http.get``返回的Observable失败，则由``searchPublicPhotos``返回的Observable也会因相同的错误而失败。
 
-Whether there is custom error handling in the Service or not, the _unhappy path_ should be tested.
+无论服务中是否有自定义错误处理，都应该测试__不良路径__。
 
-Let us simulate a “500 Internal Server Error”. Instead of responding to the request with `flush`, we let it fail by calling `error`.
+让我们模拟“500内部服务器错误”。我们不会使用``flush``响应请求，而是通过调用``error``来让其失败。
 
 [source,typescript]
 ----
@@ -622,17 +622,17 @@ request.error(
 );
 ----
 
-The `TestRequest`’s `error` method expects an `ErrorEvent`, and an optional options object.
+``TestRequest``的``error``方法需要一个``ErrorEvent``和一个可选的options对象。
 
-https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent[`ErrorEvent`] is a special type of `Error`. For testing purposes, we create an instance using `new ErrorEvent('…')`. The constructor parameter is a string message that describes the error case.
+https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent[`ErrorEvent`]是一种特殊的 `错误(Error)` 类型。为了测试目的，我们使用 `new ErrorEvent('…')` 创建一个实例。构造函数参数是描述错误情况的字符串消息。
 
-The second parameter, the options object, allows us to set the HTTP `status` (like `500`), the `statusText` (like `'Internal Server Error'`) and response headers. In the example above, we set `status` and `statusText`.
+第二个参数，options对象，允许我们设置HTTP `状态(status)`（如``500``），`状态文本(statusText)`（如 `'Internal Server Error'`）和响应头。在上面的示例中，我们设置了 `状态(status)` 和 `状态文本(statusText)`。
 
-TIP: Expect Observable error
+TIP: 期望Observable出错
 
-Now we check that the returned Observable behaves correctly. It must not emit a next value and must not complete. It must fail with an error.
+现在我们检查返回的Observable是否正确地行为。它不应该发出下一个值，也不应该完成。它必须失败并出现错误。
 
-We achieve that by subscribing to `next`, `error` and `complete` events:
+我们通过订阅``next``、``error``和``complete``事件来实现这一点：
 
 [source,typescript]
 ----
@@ -654,9 +654,9 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
 
 TIP: `fail`
 
-When the `next` or `complete` handlers are called, the spec must fail immediately. There is a handy global Jasmine function for this purpose: `fail`.
+当调用``next``或``complete``处理程序时，规范必须立即失败。为此，有一个方便的全局Jasmine函数：`fail`。
 
-For inspecting the error, we use the same pattern as above, saving the error in a variable in the outer scope.
+为了检查错误，我们使用与上面相同的模式，在外部作用域中将错误保存在变量中。
 
 [source,typescript]
 ----
@@ -675,7 +675,7 @@ flickrService.searchPublicPhotos(searchTerm).subscribe(
 );
 ----
 
-After answering the request with a server error, we check that the error is passed through. The `error` handler receives an `HttpErrorResponse` object that reflects the `ErrorEvent` as well as the status information.
+在回答请求时发生服务器错误后，我们会检查错误是否被传递。`error` 处理程序接收到一个包含``ErrorEvent``和状态信息的``HttpErrorResponse``对象。
 
 [source,typescript]
 ----
@@ -687,13 +687,13 @@ expect(actualError.status).toBe(status);
 expect(actualError.statusText).toBe(statusText);
 ----
 
-TIP: Type guard
+TIP: 类型守卫
 
-Since `actualError` is defined as `HttpErrorResponse | undefined`, we need to rule out the `undefined` case first before accessing the properties.
+由于``actualError``被定义为 `HttpErrorResponse | undefined`，我们需要在访问属性之前先排除``undefined``的情况。
 
-`expect(actualError).toBeDefined()` would accomplish that. But the TypeScript compiler does not know that this rules out the `undefined` case. So we need to throw an exception manually.
+使用 `expect(actualError).toBeDefined()` 可以实现这一点。但是TypeScript编译器不知道这将排除``undefined``的情况。因此，我们需要手动抛出异常。
 
-This is the full spec for the error case:
+以下是完整的错误情况规范：
 
 [source,typescript]
 ----
@@ -730,29 +730,29 @@ it('passes through search errors', () => {
 });
 ----
 
-This example is deliberately verbose. It shows you how to test all details. It fails fast and provides helpful error messages.
+这个例子有意地冗长。它向您展示了如何测试所有细节。它会快速失败并提供有用的错误消息。
 
-This approach is recommended for Service methods that have a dedicated error handling. For example, a Service might distinguish between successful responses (like “200 OK”), client errors (like “404 Not Found”) and server errors (like “500 Server error”).
+这种方法适用于具有专门错误处理的服务方法。例如，服务可能区分成功的响应（如“200 OK”）、客户端错误（如“404 Not Found”）和服务器错误（如“500 Server error”）。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/[FlickrService: implementation and test]
-- https://angular.io/api/common/http/HttpErrorResponse[Angular API reference: HttpErrorResponse]
-- https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent[MDN reference: ErrorEvent]
+- https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/[FlickrService：实现和测试]
+- https://angular.io/api/common/http/HttpErrorResponse[Angular API参考：HttpErrorResponse]
+- https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent[MDN参考：ErrorEvent]
 ====
 
-=== Alternatives for finding pending requests
+=== 查找待处理请求的替代方法
 
-We have used `controller.expectOne` to find a request that matches the expected URL. Sometimes it is necessary to specify more criteria, like the method (`GET`, `POST`, etc.), headers or the request body.
+我们使用了``controller.expectOne``来查找与预期URL匹配的请求。有时需要指定更多的条件，如方法（`GET`、``POST``等）、头部或请求体。
 
-`expectOne` has several signatures. We have used the simplest, a string that is interpreted as URL:
+``expectOne``有几种签名。我们使用了最简单的签名，一个被解释为URL的字符串：
 
 [source,typescript]
 ----
 controller.expectOne('https://www.example.org')
 ----
 
-To search for a request with a given method and url, pass an object with these properties:
+要搜索具有特定方法和URL的请求，请传递一个包含这些属性的对象：
 
 [source,typescript]
 ----
@@ -762,7 +762,7 @@ controller.expectOne({
 })
 ----
 
-If you need to find one request by looking at its details, you can pass a function:
+如果您需要通过查看请求的详细信息来查找一个请求，可以传递一个函数：
 
 [source,typescript]
 ----
@@ -774,15 +774,15 @@ controller.expectOne(
 );
 ----
 
-This predicate function is called for each request, decides whether the candidate matches and returns a boolean.
+这个判断函数会对每个请求进行调用，决定候选请求是否匹配，并返回一个布尔值。
 
-This lets you sift through all requests programmatically and check all criteria. The candidate is an https://angular.io/api/common/http/HttpRequest[HttpRequest] instance with properties like `method`, `url`, `headers`, `body`, `params`, etc.
+这使您能够以编程方式筛选所有请求并检查所有条件。候选请求是一个具有诸如``method``、`url`、`headers`、`body`、``params``等属性的 https://angular.io/api/common/http/HttpRequest[HttpRequest] 实例。
 
-There are two possible approaches: Either you use `expectOne` with many criteria, like in the predicate example. If some request detail does not match, `expectOne` throws an exception and fails the test.
+有两种可能的方法：要么您使用具有多个条件的``expectOne``，就像谓词示例中一样。如果某个请求细节不匹配，``expectOne``会抛出异常并导致测试失败。
 
-Or you use `expectOne` with few criteria, passing `{ method: '…', url: '…' }`. To check the request details, you can still use Jasmine expectations.
+要么您使用具有少量条件的``expectOne``，传递 `{ method: '…', url: '…' }`。要检查请求的详细信息，仍然可以使用Jasmine的断言。
 
-`expectOne` returns a `TestRequest` instance. This object only has methods to answer the request, but no direct information about the request. Use the `request` property to access the underlying `HttpRequest`.
+``expectOne``返回一个``TestRequest``实例。该对象只有用于响应请求的方法，但没有关于请求的直接信息。使用``request``属性来访问底层的``HttpRequest``。
 
 [source,typescript]
 ----
@@ -797,13 +797,13 @@ expect(httpRequest.headers.get('Accept')).toBe('application/json');
 request.flush({ success: true });
 ----
 
-This is equivalent to the predicate example above, but gives a more specific error message if the header is incorrect.
+这与上面判断的示例相等，但如果标头不正确，则会给出更具体的错误消息。
 
 TIP: `match`
 
-In addition to `expectOne`, there is the `match` method for finding multiple requests that match certain criteria. It returns an array of requests. If there are no matches, the array is empty, but the spec does not fail. Hence, you need to add Jasmine expectations to check the array and the requests therein.
+除了``expectOne``之外，还有一个``match``方法可用于找到满足特定条件的多个请求。它返回一个请求数组。如果没有匹配项，数组为空，但规范不会失败。因此，您需要添加Jasmine的断言来检查数组和其中的请求。
 
-Assume there is a `CommentService` with a method `postTwoComments`. The code under test makes two requests to the same URL, but with a different body.
+假设存在一个名为``CommentService``的服务，其中有一个名为``postTwoComments``的方法。被测试的代码发起两个请求到相同的URL，但请求体不同。
 
 [source,typescript]
 ----
@@ -819,7 +819,7 @@ class CommentService() {
 }
 ----
 
-The spec could contain:
+规范可以包含以下内容：
 
 [source,typescript]
 ----
@@ -840,23 +840,23 @@ requests[0].flush({ success: true });
 requests[1].flush({ success: true });
 ----
 
-We verify the number of requests and also the body of each request. If these checks pass, we answer each request.
+我们验证请求的数量以及每个请求的请求体。如果这些检查通过，我们回答每个请求。
 
 [NOTE]
 ====
-- https://angular.io/api/common/http/HttpRequest[Angular API reference: HttpRequest]
-- https://angular.io/api/common/http/testing/TestRequest[Angular API reference: TestRequest]
+- https://angular.io/api/common/http/HttpRequest[Angular API参考：HttpRequest]
+- https://angular.io/api/common/http/testing/TestRequest[Angular API参考：TestRequest]
 ====
 
-== Testing Services: Summary
+== 测试服务：概述
 
-All in all, testing Services is easier than testing other Angular application parts. Most Services have a clear purpose and a well-defined public API.
+总体而言，测试服务比测试其他Angular应用程序部分更容易。大多数服务都有明确的目的和明确定义的公共API。
 
-If the Service under test depends on another Service, a unit test needs to the fake the dependency. This is probably the hardest part, but takes the same effort as faking Services that are Component dependencies.
+如果要测试的服务依赖于另一个服务，单元测试需要对依赖进行虚拟化。这可能是最困难的部分，但与虚拟化组件依赖的服务所需的工作量相同。
 
-TIP: Predefined testing modules
+TIP: 预定义的测试模块
 
-Angular ships with crucial Services that are commonly used in your own Services. Since Angular intends to be testable, Angular also offers tools to replace them with fakes.
+Angular提供了一些关键的服务，这些服务通常在您自己的服务中使用。由于Angular旨在具有可测试性，Angular还提供了用于将这些服务替换为虚拟化版本的工具。
 
-We have used the `HttpClientTestingModule` for testing a Service that depends on `HttpClient`. To name another example, there is the https://angular.io/api/router/testing/RouterTestingModule[`RouterTestingModule`] for testing Services that depend on `Router` and `Location`.
+我们在测试依赖于``HttpClient``的服务时使用了``HttpClientTestingModule``。再举一个例子，还有 https://angular.io/api/router/testing/RouterTestingModule[`RouterTestingModule`] 用于测试依赖于``Router``和``Location``的服务。
 
