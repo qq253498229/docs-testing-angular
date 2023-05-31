@@ -1,20 +1,20 @@
-= Summary
+= 总结
 
-Learning objectives
+学习目标
 
-- Reducing the frustration from implementing and testing an application
-- Taking small steps when learning testing techniques and expanding test coverage
-- Growing as a developer and as a team by practicing automated testing
+- 减少实施和测试应用程序的挫败感
+- 在学习测试技术和扩展测试覆盖范围时采取小步骤
+- 通过实践自动化测试来成长为开发人员和团队
 
-Writing tests is often a frustrating experience that comes on top of implementation troubles. The logical and technical complexity is overwhelming and intimidating. All this drains motivation.
+编写测试往往是一种令人沮丧的经历，它在实施问题之上增加了困扰。逻辑和技术复杂性是压倒性和令人畏惧的。所有这些都会消耗动力。
 
-The goal of this guide is to dispel the fear of testing. While testing Angular applications is a complex matter, this guide breaks it down into small, approachable steps and aims to give a well-balanced overview.
+本指南的目标是消除对测试的恐惧。尽管测试Angular应用程序是一个复杂的问题，但本指南将其分解为小而可行的步骤，并旨在提供一个全面而均衡的概述。
 
-Find a testing strategy that reduces the frustration and benefits the quality of your software. Once you have written tests for a couple of features, you will learn which tests are worthwhile – tests that uncover bugs and prevent regressions. Continue with these successes, then slowly explore other kind of tests.
+找到一种测试策略，减少挫败感，并改善软件质量。一旦为几个功能编写了测试，您将了解哪些测试是值得的-能够发现错误并防止回归的测试。继续这些成功，然后慢慢探索其他类型的测试。
 
-Luckily, the Angular community works steadily to make testing accessible. Angular’s architecture facilitates the testing of all relevant parts. The framework ships with robust testing tools. If they do not fit your needs, there are mature community projects with alternative workflows.
+幸运的是，Angular社区正在持续努力使测试变得更加易于使用。Angular的架构便于测试所有相关部分。该框架配备了强大的测试工具。如果它们不符合您的需求，还有成熟的社区项目提供其他的工作流程。
 
-Testing does not only make your software more reliable, but also evolves your coding practice in the long run. It requires to write testable code, and testable code is usually simpler.
+测试不仅使您的软件更可靠，而且在长期内也能提升您的编码实践水平。它要求编写可测试的代码，而可测试的代码通常更简单。
 
-Automated software testing is challenging and rewarding for various reasons. Despite all troubles, that makes it fascinating.
+自动化软件测试由于各种原因而具有挑战性和回报性。尽管存在种种问题，但这正是使其变得迷人的地方。
 

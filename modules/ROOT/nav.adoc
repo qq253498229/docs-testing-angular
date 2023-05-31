@@ -18,7 +18,7 @@
 * xref:testing-modules.adoc[测试模块,leveloffset=-1]
 * xref:measuring-code-coverage.adoc[代码覆盖率测量,leveloffset=-1]
 * xref:end-to-end-testing.adoc[端到端测试,leveloffset=-1]
-* xref:summary.adoc[Summary,leveloffset=-1]
+* xref:summary.adoc[总结,leveloffset=-1]
 * xref:index-of-example-applications.adoc[Index of example applications,leveloffset=-1]
 * xref:references.adoc[References,leveloffset=-1]
 * xref:acknowledgements.adoc[Acknowledgements,leveloffset=-1]
