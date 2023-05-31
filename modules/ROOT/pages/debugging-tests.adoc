@@ -120,7 +120,7 @@ TIP: `debugger`
 
 image::jasmine-debugger.png[]
 
-虽然调试器确实可以给你更多的控制权，但它会暂停 JavaScript 的执行。这可能会干扰异步 JavaScript 任务的处理和执行顺序。
+虽然``debugger``确实可以给你更多的控制权，但它会暂停 JavaScript 的执行。这可能会干扰异步 JavaScript 任务的处理和执行顺序。
 
 TIP: 异步日志记录
 
