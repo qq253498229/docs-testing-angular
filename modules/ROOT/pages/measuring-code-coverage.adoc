@@ -1,70 +1,70 @@
-= Measuring code coverage
+= 代码覆盖率测量
 
-Learning objectives
+学习目标
 
-- Understanding the code coverage metric
-- Generating and inspecting a code coverage report
-- Finding code that is not yet covered by automated tests
-- Enforcing code coverage thresholds and improving code coverage
+- 了解代码覆盖率指标
+- 生成和检查代码覆盖率报告
+- 找到尚未被自动化测试覆盖的代码
+- 强制执行代码覆盖率阈值和提高代码覆盖率
 
-Code coverage, also called test coverage, tells you which parts of your code are executed by running the unit and integration tests. Code coverage is typically expressed as percent values, for example, 79% statements, 53% branches, 74% functions, 78% lines.
+代码覆盖率（也称为测试覆盖率）告诉您通过运行单元测试和集成测试来执行的代码部分。代码覆盖率通常以百分比形式表示，例如，79％语句，53％分支，74％函数，78％行数。
 
-Statements are, broadly speaking, control structures like `if` and `for` as well as expressions separated by semicolon. Branches refers to the two branches of `if (…) {…} else {…}` and `… ? … : …` conditions. Functions and lines are self-explanatory.
+语句广义上是控制结构，例如``if``和``for``，以及由分号分隔的表达式。分支是指 `if (…) {…} else {…}` 和 `… ? … : …` 条件的两个分支。函数和行不言自明。
 
-== Coverage report
+== 覆盖率报告
 
-In Angular’s Karma and Jasmine setup, https://istanbul.js.org/[Istanbul] is used for measuring test coverage. Istanbul rewrites the code under test to record whether a statement, branch, function and line was called. Then it produces a comprehensive test report.
+在Angular的Karma和Jasmine设置中，使用 https://istanbul.js.org/[伊斯坦布尔(Istanbul)] 来测量测试覆盖率。Istanbul重写要测试的代码，记录是否调用了语句、分支、函数和行。然后它生成一个全面的测试报告。
 
-To activate Istanbul when running the tests, add the `--code-coverage` parameter:
+要在运行测试时激活Istanbul，请添加``--code-coverage``参数：
 
 [source,]
 ----
 ng test --code-coverage
 ----
 
-After the tests have completed, Istanbul saves the report in the `coverage` directory located in the Angular project directory.
+在测试完成后，Istanbul会将报告保存在位于Angular项目目录下的``coverage``目录中。
 
-The report is a bunch of HTML files you can open with a browser. Start by opening `coverage/index.html` in the browser of your choice.
+该报告是一组HTML文件，您可以使用浏览器打开。首先，在您选择的浏览器中打开``coverage/index.html``文件。
 
-The report for the Flickr search example looks like this:
+Flickr搜索示例的报告如下所示：
 
 image::code-coverage-flickr-search.png[]
 
-Istanbul creates an HTML page for every directory and every file. By following the links, you can descend to reports for the individual files.
+Istanbul为每个目录和每个文件创建了一个HTML页面。通过跟随链接，您可以查看每个文件的报告。
 
-For example, the coverage report for https://github.com/9elements/angular-flickr-search/blob/main/src/app/components/photo-item/photo-item.component.ts[photo-item.component.ts] of the Flickr search:
+例如，Flickr搜索的 https://github.com/9elements/angular-flickr-search/blob/main/src/app/components/photo-item/photo-item.component.ts[photo-item.component.ts] 的覆盖率报告如下：
 
 image::code-coverage-photo-item.png[]
 
-The report renders the source code annotated with the information how many times a line was called. In the example above, the code is fully covered except for an irrelevant `else` branch, marked with an “E”.
+报告呈现了带有调用次数信息的源代码注释。在上面的示例中，除了一个不相关的``else``分支（用“E”标记）之外，代码完全被覆盖。
 
-The spec `it('focusses a photo on click', () => {…})` clicks on the photo item to test whether the `focusPhoto` Output emits. Let us disable the spec on purpose to see the impact.
+规范 `it('focusses a photo on click', () => {…})` 在点击照片项来测试``focusPhoto``输出是否发出。让我们故意禁用这个规范，以查看影响。
 
 image::code-coverage-photo-item-uncovered.png[]
 
-You can tell from the coverage report above that the `handleClick` method is never called. A key Component behavior is untested.
+从上面的覆盖率报告中可以看出，``handleClick``方法从未被调用过。一个关键的组件行为没有进行测试。
 
-== How to use the coverage report
+== 如何使用覆盖率报告
 
-Now that we know how to generate the report, what should we do with it?
+现在我们知道如何生成报告，那么我们应该如何使用它呢？
 
-In the chapter <<testing-principles#_the_right_amount_of_testing, The right amount of testing>>, we have identified code coverage as a useful, but flawed metric. As a quantitative measure, code coverage cannot assess the quality of your tests.
+在章节 <<testing-principles#_适量的测试,适量的测试>> 中，我们已经确定了代码覆盖率作为一个有用但存在缺陷的度量标准。作为一种定量的指标，代码覆盖率无法评估测试的质量。
 
-Software testing is not a competition. We should not try to reach a particular score just for the sake of it. For what purpose are we measuring code coverage then?
+软件测试不是一场竞赛。我们不应该为了得分而努力达到某个特定的分数。那么我们测量代码覆盖率的目的是什么呢？
 
-TIP: Find uncovered code
+TIP: 找到未覆盖的代码
 
-The coverage report is a valuable tool you should use while writing tests. It _reveals code behavior that is not yet tested_. The report not only guides your testing, it also deepens your understanding of how your tests work.
+覆盖率报告是一个有价值的工具，你在编写测试时应该使用它。它 _揭示了尚未进行测试的代码行为_。该报告不仅指导您的测试，还加深了您对测试工作原理的理解。
 
-Whatever your current coverage score is, use the reporting to monitor and improve your testing practice. As described in <<testing-principles#_tailoring_your_testing_approach, Tailoring your testing approach>>, testing should be part of the development routine. New features should include tests, bug fixes should include a test as proof and to prevent regressions.
+无论您当前的覆盖率得分是多少，都可以使用报告来监控和改进您的测试实践。如 <<testing-principles#_调整测试方法,定制您的测试方法>> 中所述，测试应该是开发例程的一部分。新功能应包括测试，错误修复应包括一个测试作为证明和防止回归的手段。
 
-TIP: Improve coverage
+TIP: 提高覆盖率
 
-Writing new code and changing existing code should not lower the coverage score, but gradually increase it. This means if your existing tests cover 75% lines of code, new code needs to be at least 75% covered. Otherwise the score slowly deteriorates.
+编写新代码和修改现有代码不应降低覆盖率得分，而是逐步增加。这意味着如果您现有的测试覆盖了75%的代码行数，新代码需要至少有75%的覆盖率。否则，得分会逐渐下降。
 
-It is common practice to run the unit and integration tests in a continuous integration environment and measure the code coverage. To enforce a certain coverage score and to prevent decline, you can configure *thresholds* in the <<angular-testing-principles#_configuring_karma_and_jasmine, Karma configuration>>.
+在持续集成环境中运行单元测试和集成测试，并测量代码覆盖率是常见做法。为了强制执行特定的覆盖率得分并防止下降，您可以在 <<angular-testing-principles#_配置karma和jasmine,Karma配置>> 中配置阈值。
 
-In `karma.conf.js`, you can add global thresholds for statements, branches, functions and lines.
+在``karma.conf.js``中，您可以为语句、分支、函数和行添加全局阈值。
 
 [source,]
 ----
@@ -81,18 +81,18 @@ coverageReporter: {
 },
 ----
 
-In the configuration above, all values are set to 75%. If the coverage drops below that number, the test execution fails even if all specs succeeded.
+在上述配置中，所有的值都设置为75%。如果覆盖率低于这个数字，即使所有的规范都通过了，测试执行也会失败。
 
-TIP: Raise the bar
+TIP: 提高标准
 
-When new code is added to the project with a test coverage better than average, you can raise the thresholds slowly but steadily – for example, from `75` to `75.1`, `75.2`, `75.3` and so on. Soon these small improvements add up.
+当新的代码添加到项目中，并且测试覆盖率优于平均水平时，您可以逐渐提高阈值，例如从``75``提高到``75.1``、`75.2`、``75.3``等等。很快，这些小的改进将累积起来。
 
-Test coverage should not be a pointless competition that puts developers under pressure and shames those that do not meet an arbitrary mark. Measuring coverage is a tool you should use for your benefit. Keep in mind that writing meaningful, spot-on tests does not necessarily increase the coverage score.
+测试覆盖率不应该是一个毫无意义的竞争，它给开发人员带来压力，并让那些未达到任意标准的人感到羞耻。测量覆盖率应该是一个可以为您自己获益的工具。请记住，编写有意义、准确的测试并不一定会增加覆盖率得分。
 
-For beginners and experts alike, the coverage report helps to set up, debug and improve their tests. For experienced developers, the score helps to keep up a steady testing practice.
+对于初学者和专家来说，覆盖率报告有助于设置、调试和改进他们的测试。对于经验丰富的开发人员，得分有助于保持稳定的测试实践。
 
 [NOTE]
 ====
-- https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md[karma-coverage Configuration]
+- https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md[karma-coverage配置]
 ====
 
