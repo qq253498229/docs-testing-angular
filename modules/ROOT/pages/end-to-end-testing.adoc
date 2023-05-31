@@ -1,153 +1,153 @@
-= End-to-end testing
+= 端到端测试
 
-Learning objectives
+学习目标
 
-- Writing valueable tests that cover all parts of your application
-- Understanding different approaches to end-to-end testing
-- Setting up Cypress for testing your Angular project
-- Orchestrating a web browser to load and inspect your application
-- Intercepting API calls to return fixed data
+- 编写有价值的测试覆盖应用程序的所有部分
+- 了解不同的端到端测试方法
+- 设置Cypress来测试您的Angular项目
+- 编排Web浏览器来加载和检查您的应用程序
+- 拦截API调用以返回固定数据
 
-We have successfully written unit and integration tests using Karma, Jasmine and Angular’s own testing tools. These precise tests give confidence that a single application part – like a Component or Service - or a group of connected parts work as intended.
+我们已经成功地使用Karma、Jasmine和Angular的自有测试工具编写了单元测试和集成测试。这些精确的测试能够确保单个应用程序部分（如组件或服务）或一组连接的部分按照预期工作。
 
-TIP: User perspective
+TIP: 用户角度
 
-Karma and Jasmine tests take a technical perspective. They focus on the front-end JavaScript code alone and run it in a controlled and isolated test environment. What is really important though is whether the whole application works *for the user*.
+Karma和Jasmine测试从技术角度进行。它们仅关注前端JavaScript代码，并在受控且隔离的测试环境中运行。然而，真正重要的是整个应用程序**对用户**是否有效。
 
-The most effective and reliable way to ensure a working application is _manual testing_: A dedicated software tester walks through the application feature by feature, case by case according to a test plan.
+确保应用程序正常工作的最有效和可靠的方式是__手动测试__：专门的软件测试人员根据测试计划逐个功能、逐个案例地测试应用程序。
 
-Manual tests are slow, labor-intensive and cannot be repeated often. They are unspecific from a developer perspective: If the test fails, we cannot easily pin down which part of the application is responsible or which code change causes the regression.
+手动测试速度慢、劳动密集且不能经常重复。从开发人员的角度来看，它们不具备特定性：如果测试失败，我们不能轻易确定应用程序的哪个部分负责或哪个代码更改导致了回归。
 
-We need automated tests that take the user’s perspective. This is what *end-to-end (E2E) tests* do.
+我们需要采用用户的角度进行自动化测试。这就是**端到端（E2E）测试**的作用。
 
-== Strengths of end-to-end tests
+== 端到端测试的优势
 
-As discussed in <<testing-principles#_distribution_of_testing_efforts, distribution of testing efforts>>, all types of automated tests have pros and cons. Unit and integration tests are fast and reliable, but do not guarantee a working application. End-to-end test are slow and often fail incorrectly, but they assess the fitness of the application as a whole.
+如在 <<testing-principles#_测试工作的分配,测试工作的分配>> 中所讨论的，所有类型的自动化测试都有其优缺点。单元测试和集成测试速度快、可靠，但不能保证应用程序正常工作。端到端测试速度较慢，经常出现错误，但可以评估整个应用程序的适用性。
 
-TIP: Real conditions
+TIP: 真实条件
 
-When all parts of the application come together, a new type of bug appears. Often these bugs have to do with timing and order of events, like network latency and race conditions.
+当应用程序的所有部分集合在一起时，会出现一种新类型的错误。这些错误通常与事件的时间和顺序有关，例如网络延迟和竞态条件。
 
-The unit and integration tests we wrote worked with a fake back-end. We send fake HTTP requests and respond with fake data. We made an effort to keep the originals and fakes on par.
+我们编写的单元测试和集成测试使用了一个假的后端。我们发送假的HTTP请求并用假的数据进行响应。我们努力使原始数据和假数据保持一致。
 
-TIP: Front-end and back-end
+TIP: 前端和后端
 
-It is much harder to keep the front-end code in sync with the actual API endpoints and responses from the back-end. Even if the front-end and the back-end share type information about the transferred data, there will be mismatches.
+让前端代码与实际的API端点和后端的响应保持同步要困难得多。即使前端和后端共享有关传输数据的类型信息，仍然会出现不匹配。
 
-It is the goal of end-to-end tests to catch these bugs that cannot be caught by other automated tests.
+端到端测试的目标是捕获这些无法通过其他自动化测试捕获的错误。
 
-== Deployment for end-to-end tests
+== 端到端测试的部署
 
-End-to-end tests require a testing environment that closely resembles the production environment. You need to deploy the full application, including the front-end and the relevant back-end parts. For that purpose, back-end frameworks typically support configurations for different environments, like development, testing and production.
+端到端测试需要一个与生产环境密切相似的测试环境。您需要部署完整的应用程序，包括前端和相关的后端部分。为此，后端框架通常支持不同环境的配置，如开发、测试和生产环境。
 
-TIP: Deterministic environment
+TIP: 确定性环境
 
-The database needs to be filled with pre-fabricated fake data. With each run of the end-to-end tests, you need to reset the database to a defined initial state.
+数据库需要填充预制的假数据。在每次运行端到端测试时，您需要将数据库重置为定义的初始状态。
 
-The back-end services need to answer requests with deterministic responses. Third-party dependencies need to be set up so they return realistic data but do not compromise production data.
+后端服务需要使用确定性响应来回应请求。第三方依赖项需要进行设置，以返回真实的数据，但不会危及生产数据。
 
-Since this guide is not about DevOps, we will not go into details here and focus on writing end-to-end tests.
+由于本指南不涉及DevOps，我们不会在此处详细介绍，而是专注于编写端到端测试。
 
-== How end-to-end tests work
+== 端到端测试的工作原理
 
-An end-to-end test mimics how a user interacts with the application. Typically, the test engine launches an ordinary browser and controls it remotely.
+端到端测试模拟用户与应用程序的交互方式。通常，测试引擎启动一个普通的浏览器，并远程控制它。
 
-TIP: Simulate user actions
+TIP: 模拟用户操作
 
-Once the browser is started, the end-to-end test navigates to the application’s URL, reads the page content and makes keyboard and pointer input. For example, the test fills out a form and clicks on the submit button.
+一旦浏览器启动，端到端测试会导航到应用程序的URL，读取页面内容，并进行键盘和鼠标输入。例如，测试会填写表单并点击提交按钮。
 
-Just like unit and integration tests, the end-to-end test then makes expectations: Does the page include the right content? Did the URL change? This way, whole features and user interfaces are examined.
+与单元测试和集成测试类似，端到端测试会进行断言：页面是否包含正确的内容？URL是否发生了变化？通过这种方式，整个功能和用户界面都会被检查。
 
-== End-to-end testing frameworks
+== 端到端测试框架
 
-Frameworks for end-to-end tests allow navigating to URLs, simulating user input and inspecting the page content. Apart from that, they have little in common. The test syntax and the way the tests are run differ widely.
+用于端到端测试的框架允许导航到URL、模拟用户输入和检查页面内容。除此之外，它们没有太多共同之处。测试语法和测试运行方式差异很大。
 
-There are two categories of end-to-end testing frameworks: Those that use WebDriver and those that do not.
+端到端测试框架可以分为两类：使用WebDriver的和不使用WebDriver的。
 
-TIP: Browser automation
+TIP: 浏览器自动化
 
-The *WebDriver protocol* allows to control a browser remotely with a set of commands. It originates from the Selenium browser automation project and is now developed at the World Wide Web Consortium (W3C).
+*WebDriver 协议(protocol)* 允许使用一组命令远程控制浏览器。它源自Selenium浏览器自动化项目，现在由万维网联盟（W3C）进行开发。
 
-All common browsers support the WebDriver protocol and can be controlled remotely. The most important WebDriver commands are:
+所有常见的浏览器都支持WebDriver协议，并可以进行远程控制。最重要的WebDriver命令包括：
 
-- Navigate to a given URL
-- Find one or more elements in the DOM
-- Get information about a found element:
-  - Get an element attribute or property
-  - Get the element’s text content
-- Click on an element
-- Send keyboard input to a form field
-- Execute arbitrary JavaScript code
+- 导航到给定的URL
+- 在DOM中查找一个或多个元素
+- 获取找到的元素的信息：
+  - 获取元素的属性或属性值
+  - 获取元素的文本内容
+- 点击一个元素
+- 向表单字段发送键盘输入
+- 执行任意的JavaScript代码
 
-WebDriver is a high-level, generic, HTTP-based protocol. It connects the test running on one machine with a browser possibly running on another machine. The level of control over the browser is limited.
+WebDriver是一个高级的通用的基于HTTP的协议。它将在一台机器上运行的测试与可能在另一台机器上运行的浏览器连接起来。对浏览器的控制程度有限。
 
-TIP: Flexibility vs. reliability
+TIP: 灵活性与可靠性
 
-The main benefit of WebDriver is that tests can be run in different browsers, even simultaneously. Yet only some end-to-end testing frameworks build on WebDriver. Those who do not are more directly integrated into the browser – either via plugins or by patching the browser source code. This makes them more reliable, but also less flexible since they only support certain browsers or custom browser builds.
+WebDriver的主要优点是测试可以在不同的浏览器中运行，甚至可以同时运行。然而，只有一些端到端测试框架建立在WebDriver上。那些不使用WebDriver的框架更直接地集成到浏览器中，可以通过插件或通过修改浏览器源代码来实现。这使得它们更可靠，但也更不灵活，因为它们只支持某些浏览器或定制的浏览器构建。
 
-Up until version 12, Angular used *Protractor* as its default end-to-end testing framework. Protractor was based on WebDriver. Since Angular 12, Protractor is deprecated. In new CLI projects, there is no default end-to-end testing solution configured.
+在Angular 12之前，Angular使用 *Protractor* 作为其默认的端到端测试框架。Protractor基于WebDriver。从Angular 12开始，Protractor已被弃用。在新的CLI项目中，默认未配置端到端测试解决方案。
 
-In this guide, we will learn to know *Cypress*, a mature end-to-end testing framework that does not use WebDriver.
-
-[NOTE]
-====
-- https://www.w3.org/TR/webdriver/[WebDriver protocol]
-- https://www.cypress.io/[Cypress: Official web site]
-====
-
-== Introducing Cypress
-
-Cypress is a testing framework that aims to improve the developer experience as well as the performance and reliability of end-to-end tests.
-
-Cypress is the product of one company. The test runner we are going to use is open source and free of charge. The company generates revenue with an additional paid service. The Cypress cloud dashboard manages test runs recorded in a continuous integration environment. You do not have to subscribe to this service to write and run Cypress tests.
-
-TIP: Architecture
-
-Since Cypress does not use WebDriver, it features a unique architecture. When starting Cypress, a Node.js application launches the browser. The browser is not controlled remotely, but the tests run directly inside the browser, supported by a browser plugin. The test runner provides a powerful user interface for inspecting and debugging tests right in the browser.
-
-TIP: Trade-offs
-
-From our perspective, Cypress has a few drawbacks.
-
-- In place of Jasmine, Cypress uses a combination of the libraries Mocha and Chai for writing tests. While both stacks serve the same purpose, you have to learn the subtle differences. If you use Jasmine for unit and integration tests, your Cypress tests will look similar but work differently in detail.
-- Cypress only supports Firefox as well as Chromium-based browsers like Google Chrome and Microsoft Edge. Cypress has experimental support for WebKit, the browser engine used by Safari. Cypress does not support legacy Edge or Internet Explorer.
-
-Cypress is not simply better than WebDriver-based frameworks. It tries to solve their problems by narrowing the scope and by making trade-offs.
-
-TIP: Recommended
-
-That being said, this guide *recommends to use Cypress for testing Angular applications*. Cypress is well-maintained and well-documented. With Cypress, you can write valuable end-to-end tests with little effort.
-
-In case you do need an up-to-date WebDriver-based framework, have a look at Webdriver.io instead.
+在本指南中，我们将了解**Cypress**，一个成熟的不使用WebDriver的端到端测试框架。
 
 [NOTE]
 ====
-- https://docs.cypress.io/guides/references/trade-offs[Cypress: Trade-offs]
-- https://docs.cypress.io/guides/overview/key-differences[Cypress: Key differences]
-- https://mochajs.org/[Mocha – JavaScript testing framework]
-- https://www.chaijs.com/[Chai – assertion library]
+- https://www.w3.org/TR/webdriver/[WebDriver协议]
+- https://www.cypress.io/[Cypress：官方网站]
+====
+
+== 介绍Cypress
+
+Cypress是一个旨在改善开发者体验以及端到端测试的性能和可靠性的测试框架。
+
+Cypress是一家公司的产品。我们将使用的测试运行器是开源且免费的。该公司通过额外的付费服务获得收入。Cypress云仪表板管理在持续集成环境中记录的测试运行。您无需订阅此服务即可编写和运行Cypress测试。
+
+TIP: 架构
+
+由于Cypress不使用WebDriver，它具有独特的架构。启动Cypress时，一个Node.js应用程序启动浏览器。浏览器不是远程控制的，而是测试直接在浏览器内部运行，由浏览器插件支持。测试运行器为在浏览器中检查和调试测试提供了强大的用户界面。
+
+TIP: 权衡
+
+从我们的角度来看，Cypress有一些缺点。
+
+- Cypress使用Mocha和Chai库的组合来编写测试，而不是使用Jasmine。虽然两个堆栈的目的相同，但您需要学习它们之间微小的区别。如果您在单元测试和集成测试中使用Jasmine，那么您的Cypress测试看起来可能相似，但在细节上会有所不同。
+- Cypress仅支持Firefox以及基于Chromium的浏览器，如Google Chrome和Microsoft Edge。Cypress对Safari使用的WebKit浏览器引擎具有实验性支持。Cypress不支持旧版Edge或Internet Explorer。
+
+Cypress并不简单地比基于WebDriver的框架更好。它通过缩小范围并做出权衡来解决它们的问题。
+
+TIP: 推荐
+
+话虽如此，本指南**建议在测试Angular应用程序时使用Cypress**。Cypress得到了很好的维护和文档支持。使用Cypress，您可以轻松编写有价值的端到端测试。
+
+如果您确实需要一个最新的基于WebDriver的框架，请考虑使用Webdriver.io。
+
+[NOTE]
+====
+- https://docs.cypress.io/guides/references/trade-offs[Cypress：权衡]
+- https://docs.cypress.io/guides/overview/key-differences[Cypress：主要区别]
+- https://mochajs.org/[Mocha - JavaScript测试框架]
+- https://www.chaijs.com/[Chai - 断言库]
 - https://webdriver.io/[Webdriver.io]
 ====
 
-== Installing Cypress
+== 安装Cypress
 
-An easy way to add Cypress to an existing Angular CLI project is the https://github.com/cypress-io/cypress/tree/master/npm/cypress-schematic#readme[Cypress Angular Schematic].
+向现有的Angular CLI项目添加Cypress的简单方法是使用 https://github.com/cypress-io/cypress/tree/master/npm/cypress-schematic#readme[Cypress Angular Schematic]。
 
-In your Angular project directory, run this shell command:
+在您的Angular项目目录中，运行以下命令：
 
 [source,]
 ----
 ng add @cypress/schematic
 ----
 
-This command does four important things:
+这个命令执行了四个重要的操作：
 
-1. Add Cypress and auxiliary npm packages to `package.json`.
-2. Add the Cypress configuration file `cypress.config.ts`.
-3. Change the `angular.json` configuration file in order to add `ng run` commands.
-4. Create a sub-directory named `cypress` with a scaffold for your tests.
+1. 将Cypress和辅助的npm包添加到``package.json``。
+2. 添加了Cypress配置文件``cypress.config.ts``。
+3. 修改``angular.json``配置文件以添加``ng run``命令。
+4. 创建一个名为``cypress``的子目录，其中包含测试的框架。
 
-The output looks like this:
+输出如下所示：
 
 [source,]
 ----
@@ -171,32 +171,32 @@ UPDATE angular.json (3643 bytes)
 ✔ Packages installed successfully.
 ----
 
-The installer asks if you would like the `ng e2e` command to start Cypress. If you are setting up a new project without end-to-end tests yet, it is safe to answer “Yes”.
+安装程序询问是否要使用``ng e2e``命令启动Cypress。如果您正在设置一个尚未具备端到端测试的新项目，可以安全地回答“是”。
 
-In Angular CLI prior to version 12, `ng e2e` used to start Protractor. If you have any legacy Protractor tests in the project and want to continue to run them using `ng e2e`, answer “No” to the question.
+在Angular CLI 12版本之前，``ng e2e``用于启动Protractor。如果您的项目中有任何遗留的Protractor测试，并且希望继续使用``ng e2e``运行它们，请回答“否”。
 
-== Writing an end-to-end test with Cypress
+== 使用Cypress编写端到端测试
 
-In the project directory, you will find a sub-directory called `cypress`. It contains:
+在项目目录中，您会找到一个名为``cypress``的子目录。它包含：
 
-- A `tsconfig.json` configuration for all TypeScript files specifically in this directory,
-- an `e2e` directory for the end-to-end tests,
-- a `support` directory for custom commands and other testing helpers,
-- a `fixtures` directory for test data.
+- 一个用于该目录中所有TypeScript文件的``tsconfig.json``配置，
+- 一个用于端到端测试的``e2e``目录，
+- 一个用于自定义命令和其他测试辅助工具的``support``目录，
+- 一个用于测试数据的``fixtures``目录。
 
-The test files reside in the `e2e` directory. Each test is TypeScript file with the extension `.cy.ts`.
+测试文件位于``e2e``目录中。每个测试是一个以``.cy.ts``为扩展名的TypeScript文件。
 
-The tests itself are structured with the test framework *Mocha*. The assertions (also called expectations) are written using *Chai*.
+测试本身是使用**Mocha**测试框架结构化的。断言（也称为期望）使用**Chai**编写。
 
-Mocha and Chai is a popular combination. They roughly do the same as Jasmine, but are much more flexible and rich in features.
+Mocha和Chai是一种常见的组合。它们的功能与Jasmine大致相同，但更加灵活且功能丰富。
 
-TIP: Test suites
+TIP: 测试套件
 
-If you have <<test-suites-with-jasmine#_test_suites_with_jasmine, written unit tests with Jasmine>> before, the Mocha structure will be familiar to you. A test file contains one or more suites declared with `describe('…', () => { /* … */})`. Typically, one file contains one `describe` block, possible with nested `describe` blocks.
+如果您以前 <<test-suites-with-jasmine#_使用jasmine编写测试套件,使用Jasmine编写过单元测试>>，Mocha的结构将会很熟悉。一个测试文件包含一个或多个使用 `describe('…', () => { /* … */})` 声明的测试套件。通常，一个文件包含一个``describe``块，可能带有嵌套的``describe``块。
 
-Inside `describe`, the blocks `beforeEach`, `afterEach`, `beforeAll`, `afterAll` and `it` can be used similar to Jasmine tests.
+在``describe``内部，可以类似于Jasmine测试使用``beforeEach``、`afterEach`、`beforeAll`、``afterAll``和``it``块。
 
-This brings us to the following end-to-end test structure:
+这将导致以下端到端测试结构：
 
 [source,typescript]
 ----
@@ -212,14 +212,14 @@ describe('… Feature description …', () => {
 });
 ----
 
-== Testing the counter Component
+== 测试计数器组件
 
-Step by step, we are going to write end-to-end tests for the counter example application.
+逐步进行，我们将为计数器示例应用程序编写端到端测试。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop[Counter Component: Source code]
-- https://9elements.github.io/angular-workshop/[Counter Component: Run the app]
+- https://github.com/9elements/angular-workshop[计数器组件：源代码]
+- https://9elements.github.io/angular-workshop/[计数器组件：运行应用程序]
 ====
 
 ++++
@@ -234,7 +234,7 @@ See the counter Component app in action
 </script>
 ++++
 
-As a start, let us write a minimal test that checks the document title. In the project directory, we create a file called `cypress/e2e/counter.cy.ts`. It looks like this:
+首先，让我们编写一个最小化的测试，检查文档标题。在项目目录中，我们创建一个名为 `cypress/e2e/counter.cy.ts` 的文件。其内容如下：
 
 [source,typescript]
 ----
@@ -249,283 +249,283 @@ describe('Counter', () => {
 });
 ----
 
-TIP: Commands
+TIP: 命令
 
-Cypress commands are methods of the `cy` namespace object. Here, we are using two commands, `visit` and `title`.
+Cypress命令是``cy``命名空间对象的方法。在这里，我们使用了两个命令，``visit``和``title``。
 
-`cy.visit` orders the browser to visit the given URL. Above, we use the path `/`. Cypress appends the path to the `baseUrl`. Per default, the `baseUrl` is set to `http://localhost:4200` in Cypress’ configuration file, `cypress.config.ts`.
+``cy.visit``命令指示浏览器访问给定的URL。在上面的例子中，我们使用路径``/``。Cypress会将路径追加到``baseUrl``上。默认情况下，``baseUrl``在Cypress的配置文件``cypress.config.ts``中设置为``http://localhost:4200``。
 
-TIP: Chainers
+TIP: 链式调用
 
-`cy.title` returns the page title. To be specific, it returns a Cypress *Chainer*. This is an asynchronous wrapper around an arbitrary value. Most of the time, a Chainer wraps DOM elements. In the case, `cy.title` wraps a string.
+``cy.title``返回页面标题。具体来说，它返回一个Cypress链式调用器（*Chainer*）。这是一个围绕任意值的异步包装器。大多数情况下，链式调用器包装DOM元素。在这种情况下，``cy.title``包装了一个字符串。
 
-TIP: Assertions
+TIP: 断言
 
-The Chainer has a `should` method for creating an assertion. Cypress relays the call to the Chai library to verify the assertion.
+链式调用器有一个``should``方法用于创建断言。Cypress会将该调用传递给Chai库以验证断言。
 
 [source,typescript]
 ----
 cy.title().should('equal', 'Angular Workshop: Counters');
 ----
 
-We pass two parameters, `'equal'` and the expected title string. `equal` creates an assertion that the subject value (the page title) equals to the given value (`'Angular Workshop: Counters'`). `equal` uses the familiar `===` comparison.
+我们传递了两个参数，`'equal'` 和预期的标题字符串。``equal``创建了一个断言，主题值（页面标题）等于给定的值（`'Angular Workshop: Counters'`）。``equal``使用熟悉的``===``比较。
 
-This `should` style of assertions differs from Jasmine expectations, which use the `expect(…).toBe(…)` style. In fact, Chai supports three different assertion styles: `should`, `assert`, but also `expect`. In Cypress you will typically use `should` on Chainers and `expect` on unwrapped values.
+这种``should``风格的断言与Jasmine的expectations不同，后者使用 `expect(…).toBe(…)` 的风格。实际上，Chai支持三种不同的断言风格：`should`、``assert``和``expect``。在Cypress中，通常会在链式调用器上使用``should``，在未包装的值上使用``expect``。
 
 [NOTE]
 ====
-- https://docs.cypress.io/api/commands/visit[Cypress API reference: cy.visit]
-- https://docs.cypress.io/api/commands/title[Cypress API reference: cy.title]
-- https://docs.cypress.io/guides/references/assertions[Cypress documentation: Assertions]
-- https://www.chaijs.com/api/bdd/[Chai API reference: should style assertions]
-- https://www.chaijs.com/api/bdd/#method_equal[Chai API reference: equal]
+- https://docs.cypress.io/api/commands/visit[Cypress API参考：cy.visit]
+- https://docs.cypress.io/api/commands/title[Cypress API参考：cy.title]
+- https://docs.cypress.io/guides/references/assertions[Cypress文档：断言]
+- https://www.chaijs.com/api/bdd/[Chai API参考：should风格的断言]
+- https://www.chaijs.com/api/bdd/#method_equal[Chai API参考：equal]
 ====
 
-== Running the Cypress tests
+== 运行Cypress测试
 
-Save the minimal test from the last chapter as `cypress/e2e/counter.cy.ts`.
+将上一章节中的最小测试保存为 `cypress/e2e/counter.cy.ts`。
 
-Cypress has two shell commands to run the end-to-end tests:
+Cypress有两个命令用于运行端到端测试：
 
-TIP: Test runner
+TIP: 测试运行器
 
-- *`npx cypress run` – Non-interactive test runner*. Runs the tests in a “headless” browser. This means the browser window is not visible.
+- *`npx cypress run` - 非交互式测试运行器*。在“headless”浏览器中运行测试。这意味着浏览器窗口不可见。
++
+测试运行一次，然后关闭浏览器并完成shell命令。您可以在shell输出中看到测试结果。
++
+该命令通常在持续集成环境中使用。
++
+- *`npx cypress open` - 交互式测试运行器*。打开一个窗口，您可以选择使用哪个浏览器和运行哪些测试。浏览器窗口是可见的，完成后仍然可见。
++
+您可以在浏览器窗口中看到测试结果。如果对测试文件进行更改，Cypress会自动重新运行测试。
++
+该命令通常在开发环境中使用。
 
-   The tests are run once, then the browser is closed and the shell command finishes. You can see the test results in the shell output.
+TIP: 启动并运行测试
 
-   This command is typically used in a continuous integration environment.
+我们安装的Cypress原理图会将这些命令包装起来，使其与Angular集成。
 
-- *`npx cypress open` – Interactive test runner*. Opens a window where you can select which browser to use and which tests to run. The browser window is visible and it remains visible after completion.
+- *`ng run $project-name$:cypress-run`* - 启动非交互式测试运行器。
+- *`ng run $project-name$:cypress-open`* - 启动交互式测试运行器。
 
-   You can see the test results the browser window. If you make changes on the test files, Cypress automatically re-runs the tests.
+`$project-name$`是一个占位符。请插入相应的Angular项目的名称。这通常与目录名相同。如果不是这样，可以在``angular.json``的``projects``对象中找到它。
 
-   This command is typically used in the development environment.
-
-TIP: Serve and run tests
-
-The Cypress schematic that we have installed wraps these commands so they integrate with Angular.
-
-- *`ng run $project-name$:cypress-run`* – Starts the non-interactive test runner.
-- *`ng run $project-name$:cypress-open`* – Starts the interactive test runner.
-
-`$project-name$` is a placeholder. Insert the name of the respective Angular project. This is typically the same as the directory name. If not, it can be found in `angular.json` in the `projects` object.
-
-For example, the Counter example has the project name `angular-workshop`. Hence, the commands read:
+例如，Counter示例的项目名称为``angular-workshop``。因此，命令如下：
 
 - `ng run angular-workshop:cypress-run`
 - `ng run angular-workshop:cypress-open`
 
-TIP: Development server
+TIP: 开发服务器
 
-The commands `npx cypress run`, `npx cypress open` and `ng run $project-name$:cypress-open` require you to start Angular’s development server with `ng serve` in a separate shell first. Cypress connects to the `baseUrl` (`http://localhost:4200`) and will let you know if the server is not reachable.
+命令 `npx cypress run`、``npx cypress open``和 `ng run $project-name$:cypress-open` 要求您首先在单独的shell中使用``ng serve``启动Angular的开发服务器。Cypress连接到``baseUrl``（`http://localhost:4200`），如果服务器无法访问，它会通知您。
 
-The command `ng run $project-name$:cypress-run` starts the development server, runs the tests and stops the server once the tests have completed.
+命令 `ng run $project-name$:cypress-run` 启动开发服务器，运行测试，并在测试完成后停止服务器。
 
-TIP: Launch window
+TIP: 启动窗口
 
-The `npx cypress open` command will open the test runner. First, you need to choose the type of testing, which is “E2E testing” in our case.
+命令 `npx cypress open` 将打开测试运行器。首先，您需要选择测试类型，在我们的例子中是“E2E测试”。
 
 image::cypress-choose-testing-type.png[]
 
-On the next screen, you need to choose the browser for running the tests.
+在下一个屏幕上，您需要选择运行测试的浏览器。
 
 image::cypress-choose-browser.png[]
 
-Cypress automatically lists all browsers it finds on your system. In addition, you can run your tests in Electron. Cypress’ user interface is an Electron application. Electron is based on Chromium, the open source foundation of the Chrome browser.
+Cypress会自动列出系统中找到的所有浏览器。此外，您还可以在Electron中运行测试。Cypress的用户界面是一个Electron应用程序。Electron基于Chromium，即Chrome浏览器的开源基础。
 
-Select a browser and click on the “Start E2E Testing” button. This launches the browser and opens the test runner, Cypress’ primary user interface. (The screenshot shows Chrome.)
+选择一个浏览器，然后点击“开始端到端测试”按钮。这将启动浏览器并打开测试运行器，即Cypress的主要用户界面。（截图显示的是Chrome浏览器。）
 
 image::cypress-tests.png[]
 
-In the main window pane, all tests are listed. To run a single test, click on it.
+在主窗格中，列出了所有的测试。要运行单个测试，请点击它。
 
-TIP: Test runner
+TIP: 测试运行器
 
-Suppose you run the tests in Chrome and run the test `counter.cy.ts`, the in-browser test runner looks like this:
+假设您在Chrome中运行测试，并运行了名为``counter.cy.ts``的测试，那么浏览器内的测试运行器将如下所示：
 
 image::cypress-runner.png[]
 
-In the “Specs” column, the tests of this test run are listed. For each test, you can see the specs.
+在“规范”列中，列出了此测试运行的测试。对于每个测试，您可以查看规范。
 
-On the right side, the web page under test is seen. The web page is scaled to fit into the window, but uses a default viewport width of 1000 pixels.
+在右侧，可以看到被测试的网页。网页会根据窗口进行缩放，但默认视口宽度为1000像素。
 
-TIP: Spec log
+TIP: 规范日志
 
-By clicking on a spec name, you can see all commands and assertions in the spec.
+通过点击规范名称，您可以查看规范中的所有命令和断言。
 
 image::cypress-spec.png[]
 
-You can watch Cypress running the specs command by command. This is especially useful when a spec fails. Let us break the spec on purpose to see Cypress’ output.
+您可以逐个命令地观察Cypress运行规范。当规范失败时，这特别有用。让我们故意修改规范，以查看Cypress的输出。
 
 [source,typescript]
 ----
 cy.title().should('equal', 'Fluffy Golden Retrievers');
 ----
 
-This change leads to a failing spec:
+这个改变导致规范失败：
 
 image::cypress-spec-failed.png[]
 
-Cypress provides a helpful error message, pointing to the assertion that failed. You can click on the file name with line and column, `cypress/e2e/counter.cy.ts:7:16` in the example, to jump right to the assertion in your code editor.
+Cypress提供了有用的错误信息，指出了失败的断言。您可以点击带有文件名、行号和列号的链接，例如在示例中是 `cypress/e2e/counter.cy.ts:7:16`，以直接跳转到代码编辑器中的断言位置。
 
-TIP: Time travel
+TIP: 时间旅行
 
-A unique feature of the in-browser test runner is the ability to see the state of the page at a certain point in time. Cypress creates DOM snapshot whenever a command is run or an assertion verified.
+浏览器内的测试运行器的一个独特功能是能够查看页面在某个时间点的状态。每当运行命令或验证断言时，Cypress会创建DOM快照。
 
-By hovering over a command or assertion, you can travel back in time. The page on the right side then reflects the page when the command or assertion was processed.
+通过将鼠标悬停在命令或断言上，您可以进行时间回溯。右侧的页面将反映出命令或断言被处理时的页面状态。
 
-The time travel feature is invaluable when writing and debugging end-to-end tests. Use it to understand how your test interacts with the application and how the application reacts. When a test fails, use it to reconstruct what circumstances lead to the failure.
-
-[NOTE]
-====
-- https://docs.cypress.io/guides/core-concepts/cypress-app#The-Test-Runner[Cypress documentation: The Test Runner]
-====
-
-== Asynchronous tests
-
-Every Cypress command takes some time to execute. But from the spec point of view, the execution happens instantly.
-
-TIP: Command queue
-
-In fact, Cypress commands are merely declarative. The execution happens asynchronously. By calling `cy.visit` and `cy.title`, we add commands to a queue. The queue is processed later, command after command.
-
-As a consequence, we do not need to wait for the result of `cy.visit`. Cypress automatically waits for the page to load before proceeding with the next command.
-
-For the same reason, `cy.title` does not immediately return a string, but a Chainer that allows more declarations.
-
-In the Jasmine unit and integration tests that we wrote before, we had to manage time ourselves. When dealing with asynchronous commands and values, we had to use `async` / `await`, `fakeAsync` and other means explicitly.
-
-This is not necessary when writing Cypress tests. The Cypress API is designed for expressiveness and readability. Cypress hides the fact that all commands take time.
-
-TIP: Synchronous assertions
-
-Sometimes it is necessary to access and inspect a value synchronously. Cypress allows this in form of callback functions that are executed after a certain command was processed. You can pass a callback function to the `should` command or the more general `then` command.
-
-Inside these callbacks, assertions on plain, unwrapped values are written using Chai’s `expect` function. We will get to know this practise later.
+时间旅行功能在编写和调试端到端测试时非常有价值。使用它来了解您的测试如何与应用程序交互以及应用程序的反应。当测试失败时，使用它来重现导致失败的情况。
 
 [NOTE]
 ====
-- https://docs.cypress.io/api/commands/should#Function[Cypress API reference: should with callback function]
-- https://docs.cypress.io/api/commands/then[Cypress API reference: then command]
+- https://docs.cypress.io/guides/core-concepts/cypress-app#The-Test-Runner[Cypress文档：测试运行器]
 ====
 
-== Automatic retries and waiting
+== 异步测试
 
-A key feature of Cypress is that it retries certain commands and assertions.
+每个Cypress命令都需要一些时间来执行。但从规范的角度来看，执行是瞬间完成的。
 
-For example, Cypress queries the document title and compares it with the expected title. If the title does not match straight away, Cypress will retry the `cy.title` command and the `should` assertion for four seconds. When the timeout is reached, the spec fails.
+TIP: 命令队列
 
-TIP: Wait automatically
+实际上，Cypress命令只是声明式的。执行是异步进行的。通过调用``cy.visit``和``cy.title``，我们将命令添加到队列中。队列稍后逐个处理命令。
 
-Other commands are not retried, but have a built-in waiting logic. For example, we are going to use Cypress’ `click` method to click on an element.
+因此，我们无需等待``cy.visit``的结果。Cypress会自动等待页面加载完成后再继续执行下一个命令。
 
-Cypress automatically waits for four seconds for the element to be clickable. Cypress scrolls the element into view and checks if it is visible and not disabled. After several other checks, the Cypress performs the click.
+出于同样的原因，``cy.title``不会立即返回一个字符串，而是返回一个Chainer，允许更多的声明。
 
-The retry and waiting timeout can be configured for all tests or individual commands.
+在之前编写的Jasmine单元测试和集成测试中，我们需要自己管理时间。在处理异步命令和值时，我们必须显式使用``async`` / `await`、``fakeAsync``和其他手段。
 
-TIP: Retry specs
+编写Cypress测试时，这是不必要的。Cypress API的设计注重表达力和可读性。Cypress隐藏了所有命令需要时间的事实。
 
-If a spec fails despite these retries and waiting, Cypress can be configured to retry the whole spec. This is the last resort if a particular spec produces inconsistent results.
+TIP: 同步断言
 
-These features makes end-to-end tests more reliable, but also easier to write. In other frameworks, you have to wait manually and there is no automatic retry of commands, assertions or specs.
+有时需要同步访问和检查一个值。Cypress通过回调函数的形式允许这样做，这些回调函数在特定命令处理完毕后执行。您可以将回调函数传递给``should``命令或更通用的``then``命令。
+
+在这些回调函数中，可以使用Chai的``expect``函数对普通的未封装值进行断言。稍后我们将了解到这种实践。
 
 [NOTE]
 ====
-- https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous[Cypress introduction: Commands are asynchronous]
-- https://docs.cypress.io/guides/core-concepts/interacting-with-elements[Cypress documentation: Interacting with Elements]
-- https://docs.cypress.io/guides/core-concepts/retry-ability[Cypress documentation: Retry-ability]
-- https://docs.cypress.io/guides/guides/test-retries[Cypress documentation: Test Retries]
+- https://docs.cypress.io/api/commands/should#Function[Cypress API参考：带有回调函数的should]
+- https://docs.cypress.io/api/commands/then[Cypress API参考：then命令]
 ====
 
-== Testing the counter increment
+== 自动重试和等待
 
-In our first Cypress test, we have checked the page title successfully. Let us test the counter’s increment feature.
+Cypress的一个关键特性是它会重试某些命令和断言。
 
-The test needs to perform the following steps:
+例如，Cypress查询文档标题并将其与预期标题进行比较。如果标题不立即匹配，Cypress将在四秒内重试``cy.title``命令和``should``断言。当达到超时时间时，规范失败。
 
-1. Navigate to “/”.
-2. Find the element with the current count and read its text content.
-3. Expect that the text is “5”, since this is the start count for the first counter.
-4. Find the increment button and click it.
-5. Find the element with the current count and read its text content (again).
-6. Expect that the text now reads “6”.
+TIP: 自动等待
 
-We have used `cy.visit('/')` to navigate to an address. The path “/” translates to `http://localhost:4200/` since this is the configured `baseUrl`.
+其他命令不会被重试，但具有内置的等待逻辑。例如，我们将使用Cypress的``click``方法单击一个元素。
 
-== Finding elements
+Cypress会自动等待四秒钟，以确保该元素可点击。Cypress将元素滚动到视图中并检查其是否可见且未禁用。经过几次其他检查后，Cypress执行点击操作。
 
-The next step is to find an element in the current page. Cypress provides several ways to find elements. We are going to use the `cy.get` method to find an element by CSS selector.
+重试和等待的超时时间可以为所有测试或单独的命令进行配置。
+
+TIP: 重试规范
+
+如果一个规范尽管重试和等待仍然失败，可以配置Cypress重试整个规范。这是一种最后的手段，用于处理产生不一致结果的特定规范。
+
+这些功能使端到端测试更可靠，同时也更容易编写。在其他框架中，您需要手动等待，并且没有命令、断言或规范的自动重试。
+
+[NOTE]
+====
+- https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous[Cypress简介：命令是异步的]
+- https://docs.cypress.io/guides/core-concepts/interacting-with-elements[Cypress文档：与元素交互]
+- https://docs.cypress.io/guides/core-concepts/retry-ability[Cypress文档：可重试性]
+- https://docs.cypress.io/guides/guides/test-retries[Cypress文档：测试重试]
+====
+
+== 测试计数器递增
+
+在我们的第一个Cypress测试中，我们成功检查了页面标题。现在让我们测试计数器的递增功能。
+
+测试需要执行以下步骤：
+
+1. 导航到“/”。
+2. 找到当前计数的元素并读取其文本内容。
+3. 期望文本为“5”，因为这是第一个计数器的起始计数。
+4. 找到递增按钮并点击它。
+5. 找到当前计数的元素并(再次)读取其文本内容。
+6. 期望文本现在显示为“6”。
+
+我们使用 `cy.visit('/')` 导航到一个地址。路径“/”转换为``http://localhost:4200/``，因为这是配置的``baseUrl``。
+
+== 查找元素
+
+下一步是在当前页面中查找元素。Cypress提供了几种查找元素的方法。我们将使用``cy.get``方法通过CSS选择器来查找元素。
 
 [source,typescript]
 ----
 cy.get('.example')
 ----
 
-`cy.get` returns a Chainer, an asynchronous wrapper around the found elements, enriched with useful methods.
+``cy.get``返回一个Chainer，它是对找到的元素的异步封装，附加了一些有用的方法。
 
-Just like with unit and integration test, the immediate question is: How should we find an element – by id, name, class or by other means?
+就像在单元测试和集成测试中一样，立即出现的问题是：我们应该如何找到一个元素 - 通过id、名称、类名还是其他方式？
 
-TIP: Find by test id
+TIP: 通过测试id查找
 
-As discussed in <<testing-components#_querying_the_dom_with_test_ids, querying the DOM with test ids>>, this guide recommends to mark elements with *test ids*.
+正如在 <<testing-components#_使用测试_id_查询_dom,使用测试id查询DOM>> 中所讨论的，本指南建议使用 *test ids* 标记元素。
 
-These are data attributes like `data-testid="example"`. In the test, we use a corresponding attribute selector to find the elements, for example:
+这些是类似于 `data-testid="example"` 的数据属性。在测试中，我们使用相应的属性选择器来找到这些元素，例如：
 
 [source,typescript]
 ----
 cy.get('[data-testid="example"]')
 ----
 
-TIP: Find by type
+TIP: 通过类型查找
 
-Test ids are recommended, but other ways to find elements are still useful in some cases. For example, you might want to check the presence and the content of an `h1` element. This element has a special meaning and you should not find it with an arbitrary test id.
+虽然推荐使用测试id来查找元素，但在某些情况下，其他查找元素的方式仍然很有用。例如，您可能希望检查``h1``元素的存在和内容。这个元素具有特殊的含义，您不应该使用任意的测试id来找到它。
 
-The benefit of a test id is that it can be used on any element. Using a test id means ignoring the element type (like `h1`) and other attributes. The test does not fail if those change.
+测试id的好处是它可以用于任何元素。使用测试id意味着忽略元素类型（如``h1``）和其他属性。如果这些发生了变化，测试不会失败。
 
-But if there is a reason for this particular element type or attribute, your test should verify the usage.
+但是，如果对于特定的元素类型或属性有特殊的原因，您的测试应该验证其使用情况。
 
 [NOTE]
 ====
-- https://docs.cypress.io/api/commands/get[Cypress API reference: cy.get]
-- https://docs.cypress.io/guides/references/best-practices#Selecting-Elements[Cypress Best Practices: Selecting Elements]
+- https://docs.cypress.io/api/commands/get[Cypress API参考：cy.get]
+- https://docs.cypress.io/guides/references/best-practices#Selecting-Elements[Cypress最佳实践：选择元素]
 ====
 
-== Interacting with elements
+== 与元素交互
 
-To test the counter Component, we want to verify that the start count for the first counter is “5”. The current count lives in an element with the test id `count`. So the element finder is:
+为了测试计数器组件，我们想要验证第一个计数器的起始计数是“5”。当前计数存储在具有测试id ``count``的元素中。因此，元素查找器为：
 
 [source,typescript]
 ----
 cy.get('[data-testid="count"]')
 ----
 
-TIP: Presence and content
+TIP: 存在性和内容
 
-The `cy.get` command already has an assertion built-in: It expects to find at least one element matching the selector. Otherwise, the spec fails.
+``cy.get``命令已经内置了一个断言：它期望至少找到一个与选择器匹配的元素。否则，规范将失败。
 
-Next, we check the element’s text content to verify the start count. Again, we use the `should` method to create an assertion.
+接下来，我们检查元素的文本内容以验证起始计数。同样，我们使用``should``方法来创建一个断言。
 
 [source,typescript]
 ----
 cy.get('[data-testid="count"]').should('have.text', '5');
 ----
 
-The `have.text` assertion compares the text content with the given string.
+``have.text``断言将文本内容与给定的字符串进行比较。
 
-We did it! We have found an element and checked its content.
+我们成功了！我们找到了一个元素并检查了它的内容。
 
-TIP: Click
+TIP: 点击
 
-Now let us increment the count. We find and click on the increment button (test id `increment-button`). Cypress offers the `cy.click` method for this purpose.
+现在让我们递增计数。我们找到并点击递增按钮（测试id为``increment-button``）。Cypress为此提供了``cy.click``方法。
 
 [source,typescript]
 ----
 cy.get('[data-testid="increment-button"]').click();
 ----
 
-The Angular code under test handles the click event. Finally, we verify that the visible count has increased by one. We repeat the `should('have.text', …)` command, but expect a higher number.
+被测试的Angular代码处理了点击事件。最后，我们验证可见的计数增加了一个。我们重复使用 `should('have.text', …)` 命令，但期望一个更高的数字。
 
-The test suite now looks like this:
+现在，测试套件看起来像这样：
 
 [source,typescript]
 ----
@@ -546,7 +546,7 @@ describe('Counter', () => {
 });
 ----
 
-The next feature we need to test is the decrement button. The spec works similar to the increment spec. It clicks on the decrement button (test id `decrement-button`) and checks that the count has decreased.
+我们需要测试的下一个功能是减少按钮。这个规范的工作方式类似于增加规范。它点击减少按钮（测试id为``decrement-button``）并检查计数是否减少了。
 
 [source,typescript]
 ----
@@ -556,20 +556,20 @@ it('decrements the count', () => {
 });
 ----
 
-Last but not least, we test the reset feature. The user can enter a new count into a form field (test id `reset-input`) and click on the reset button (test id `reset-button`) to set the new count.
+最后但同样重要的是，我们测试重置功能。用户可以在表单字段（测试id为``reset-input``）中输入一个新的计数，并点击重置按钮（测试id为``reset-button``）来设置新的计数。
 
-TIP: Fill out form
+TIP: 填写表单
 
-The Cypress Chainer has a generic method for sending keys to an element that the keyboard can interact with: `type`.
+Cypress的Chainer有一个通用的方法可以向可以与键盘进行交互的元素发送按键：`type`。
 
-To enter text into the form field, we pass a string to the `type` method.
+为了向表单字段输入文本，我们将一个字符串传递给``type``方法。
 
 [source,typescript]
 ----
 cy.get('[data-testid="reset-input"]').type('123');
 ----
 
-Next, we click on the reset button and finally expect the change.
+接下来，我们点击重置按钮，最后期望进行更改。
 
 [source,typescript]
 ----
@@ -580,7 +580,7 @@ it('resets the count', () => {
 });
 ----
 
-This is the full test suite:
+这是完整的测试套件：
 
 [source,typescript]
 ----
@@ -612,11 +612,11 @@ describe('Counter', () => {
 });
 ----
 
-On the start page of the counter project, there are in fact nine counter instances. The `cy.get` command therefore returns nine elements instead of one.
+在计数器项目的起始页面上，实际上有九个计数器实例。因此，``cy.get``命令返回的是九个元素，而不是一个。
 
-TIP: First match
+TIP: 首次匹配
 
-Commands like `type` and `click` can only operate on one element, so we need to reduce the element list to the first result. This is achieved by Cypress’ `first` command inserted in the chain.
+像``type``和``click``这样的命令只能操作一个元素，因此我们需要将元素列表减少到第一个结果。这可以通过Cypress的``first``命令插入到链中来实现。
 
 [source,typescript]
 ----
@@ -627,28 +627,28 @@ it('increments the count', () => {
 });
 ----
 
-This also applies to the other specs. If the element under test only appears once, the `first` command is not necessary, of course.
+这也适用于其他规范。如果测试的元素只出现一次，那么``第一个``命令当然是不必要的。
 
-All counter features are now tested. In the next chapters, we will refactor the code to improve its readability and maintainability.
+现在已经测试了所有计数器的功能。在接下来的章节中，我们将重构代码以提高其可读性和可维护性。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter.cy.ts[Counter E2E test code]
-- https://docs.cypress.io/api/commands/click[Cypress API reference: click]
-- https://docs.cypress.io/api/commands/type[Cypress API reference: type]
-- https://docs.cypress.io/api/commands/first[Cypress API reference: first]
-- https://docs.cypress.io/faq/questions/using-cypress-faq#How-do-I-get-an-element-s-text-contents[Cypress FAQ: How do I get an element’s text contents?]
+- https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter.cy.ts[计数器端到端测试代码]
+- https://docs.cypress.io/api/commands/click[Cypress API参考：click]
+- https://docs.cypress.io/api/commands/type[Cypress API参考：type]
+- https://docs.cypress.io/api/commands/first[Cypress API参考：first]
+- https://docs.cypress.io/faq/questions/using-cypress-faq#How-do-I-get-an-element-s-text-contents[Cypress常见问题解答：如何获取元素的文本内容？]
 ====
 
-== Custom Cypress commands
+== 自定义Cypress命令
 
-The test we wrote is quite repetitive. The pattern `cy.get('[data-testid="…"]')` is repeated over and over.
+我们编写的测试代码相当重复。模式 `cy.get('[data-testid="…"]')` 一次又一次地重复出现。
 
-The first improvement is to write a helper that hides this detail. We have already written two similar functions as <<testing-components#_testing_helpers, unit testing helpers>>, `findEl` and `findEls`.
+第一个改进是编写一个隐藏此细节的辅助函数。我们已经编写了两个类似的函数作为 <<testing-components#_测试辅助函数,单元测试的辅助函数>>，``findEl``和``findEls``。
 
-TIP: Find by test id
+TIP: 通过测试id查找
 
-The easiest way to create a Cypress helper for finding elements is a function.
+创建一个用于查找元素的Cypress辅助函数的最简单方法是编写一个函数。
 
 [source,typescript]
 ----
@@ -657,17 +657,17 @@ function findEl(testId: string): Cypress.Chainable<JQuery<HTMLElement>> {
 }
 ----
 
-This would allow us to write `findEl('count')` instead of `cy.get('[data-testid="count"]')`.
+这样我们就可以写 `findEl('count')`，而不是 `cy.get('[data-testid="count"]')`。
 
-TIP: Custom commands
+TIP: 自定义命令
 
-This works fine, but we opt for a another way. Cypress supports adding *custom commands* to the `cy` namespace. We are going to add the command `byTestId` so we can write `cy.byTestId('count')`.
+这种方式可以正常工作，但我们选择另一种方式。Cypress支持将**自定义命令**添加到``cy``命名空间中。我们将添加一个名为``byTestId``的命令，以便我们可以编写 `cy.byTestId('count')`。
 
-Custom commands are placed in `cypress/support/commands.ts`. This file is automatically created by the Angular schematic. Using `Cypress.Commands.add`, we add our own command as a method of `cy`. The first parameter is the command name, the second is the implementation as a function.
+自定义命令放置在 `cypress/support/commands.ts` 文件中。这个文件是由Angular模板自动创建的。使用``Cypress.Commands.add``，我们将自定义命令作为``cy``的方法添加进去。第一个参数是命令的名称，第二个参数是作为函数的实现。
 
 TIP: `cy.byTestId`
 
-The simplest version looks like this:
+最简单的版本如下所示：
 
 [source,typescript]
 ----
@@ -678,9 +678,9 @@ Cypress.Commands.add(
 );
 ----
 
-Now we can write `cy.byTestId('count')`. We can still fall back to `cy.get` if we want to find an element by other means.
+现在我们可以编写 `cy.byTestId('count')`。如果我们想通过其他方式查找元素，仍然可以回退到``cy.get``。
 
-`cy.byTestId` should have the same flexibility as the generic `cy.get`. So we add the second `options` parameter as well. We borrow the function signature from the official `cy.get` typings.
+``cy.byTestId``应该具有与通用``cy.get``相同的灵活性。因此，我们也添加了第二个``options``参数。我们从官方``cy.get``的类型定义中借用了函数签名。
 
 [source,typescript]
 ----
@@ -697,7 +697,7 @@ Cypress.Commands.add(
 );
 ----
 
-For proper type checking, we need to tell the TypeScript compiler that we have extended the `cy` namespace. In `commands.ts`, we extend the `Chainable` interface with a method declaration for `byTestId`.
+为了进行正确的类型检查，我们需要告诉TypeScript编译器我们已经扩展了``cy``命名空间。在``commands.ts``中，我们通过为``byTestId``声明一个方法来扩展``Chainable``接口。
 
 [source,typescript]
 ----
@@ -719,16 +719,16 @@ declare namespace Cypress {
 }
 ----
 
-You do not have to understand these type definitions in detail. They simply make sure that you can pass the same `options` to `cy.byTestId` that you can pass to `cy.get`.
+你不必详细了解这些类型定义。它们只是确保你可以像传递给``cy.get``一样传递相同的``选项``给``cy.byTestId``。
 
-Save `commands.ts`, then open `cypress/support/e2e.ts` and activate the line that imports `command.ts`.
+保存``commands.ts``，然后打开``cypress/support/e2e.ts``并激活导入``commands.ts``的行。
 
 [source,typescript]
 ----
 import './commands';
 ----
 
-This is it! We now have a strictly typed command `cy.byTestId`. Using the command, we can declutter the test.
+就是这样！现在我们有了一个严格类型的命令``cy.byTestId``。使用这个命令，我们可以简化测试代码。
 
 [source,typescript]
 ----
@@ -760,24 +760,24 @@ describe('Counter (with helpers)', () => {
 });
 ----
 
-Keep in mind that all these `first` calls are only necessary since there are multiple counters on the example page under test. If there is only one element with the given test id on the page, you do not need them.
+请记住，所有这些 `first` 调用只在被测试页面上有多个计数器的情况下才是必需的。如果页面上只有一个具有给定测试ID的元素，那么您不需要它们。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter-helpers.cy.ts[Counter E2E test with helpers]
-- https://github.com/9elements/angular-workshop/blob/main/cypress/support/commands.ts[Full code: commands.ts]
-- https://docs.cypress.io/api/cypress-api/custom-commands[Cypress documentation: Custom commands]
-- https://docs.cypress.io/guides/tooling/typescript-support#Types-for-Custom-Commands[Cypress documentation: Types for custom commands]
+- https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter-helpers.cy.ts[带有辅助函数的Counter E2E测试]
+- https://github.com/9elements/angular-workshop/blob/main/cypress/support/commands.ts[完整代码：commands.ts]
+- https://docs.cypress.io/api/cypress-api/custom-commands[Cypress文档：自定义命令]
+- https://docs.cypress.io/guides/tooling/typescript-support#Types-for-Custom-Commands[Cypress文档：自定义命令的类型]
 ====
 
-== Testing the Flickr search
+== 测试Flickr搜索
 
-We have learned the basics of Cypress by testing the counter app. Let us delve into end-to-end testing with Cypress by testing a more complex app, the Flickr search.
+通过测试计数器应用程序，我们已经学习了使用Cypress进行基本测试的基础知识。让我们通过测试一个更复杂的应用程序——Flickr搜索来深入了解使用Cypress进行端到端测试。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search[Flickr photo search: Source code]
-- https://9elements.github.io/angular-flickr-search/[Flickr photo search: Run the app]
+- https://github.com/9elements/angular-flickr-search[Flickr照片搜索：源代码]
+- https://9elements.github.io/angular-flickr-search/[Flickr照片搜索：运行应用程序]
 ====
 
 ++++
@@ -792,41 +792,41 @@ See the Flickr photo search in action
 </script>
 ++++
 
-Before writing any code, let us plan what the end-to-end test needs to do:
+在编写任何代码之前，让我们计划一下端到端测试需要做什么：
 
-1. Navigate to “/”.
-2. Find the search input field and enter a search term, e.g. “flower”.
-3. Find the submit button and click on it.
-4. Expect photo item links to flickr.com to appear.
-5. Click on a photo item.
-6. Expect the full photo details to appear.
+1. 导航到“/”。
+2. 找到搜索输入字段并输入搜索词，例如“flower”。
+3. 找到提交按钮并点击它。
+4. 期望Flickr.com上的照片项目链接出现。
+5. 点击一个照片项目。
+6. 期望完整的照片详细信息出现。
 
-TIP: Nondeterministic API
+TIP: 不确定性的API
 
-The application under test queries a third-party API with production data. The test searches for “flower” and with each test run, Flickr returns potentially different results.
+被测试的应用程序使用实际数据查询第三方API。该测试搜索“flower”，并且每次运行测试时，Flickr返回的结果可能不同。
 
-There are two ways to deal with this dependency during testing:
+在测试过程中处理这种依赖关系有两种方法：
 
-1. Test against the _real_ Flickr API.
-2. _Fake_ the Flickr API and return a fixed response.
+1. 针对__真实__的Flickr API进行测试。
+2. __模拟__Flickr API并返回固定的响应。
 
-If we test against the real Flickr API, we cannot be specific in our expectations due to changing search results. We can superficially test the search results and the full photo. We merely know that the clicked photo has “flower” in its title or tags.
+如果我们针对真实的Flickr API进行测试，由于搜索结果会发生变化，我们无法对期望结果进行具体的说明。我们可以对搜索结果和完整照片进行表面测试。我们只知道点击的照片的标题或标签中包含“flower”。
 
-TIP: Real vs. fake API
+TIP: 真实API vs. 模拟API
 
-This has pros and cons. Testing against the real Flickr API makes the test realistic, but less reliable. If the Flickr API has a short hiccup, the test fails although there is no bug in our code.
+这有优点和缺点。针对真实的Flickr API进行测试使得测试更加真实，但可靠性较低。如果Flickr API出现短暂故障，测试将失败，尽管我们的代码没有错误。
 
-Running the test against a fake API allows us to inspect the application deeply. Did the application render the photos the API returned? Are the photo details shown correctly?
+运行测试时针对模拟API可以使我们深入检查应用程序。应用程序是否渲染了API返回的照片？照片详细信息是否正确显示？
 
-Keep in mind that unit, integration and end-to-end tests complement each other. The Flickr search is also tested extensively using unit and integration tests.
+请记住，单元测试、集成测试和端到端测试相互补充。Flickr搜索还通过单元测试和集成测试进行了全面测试。
 
-Each type of test should do what it does best. The unit tests already put the different photo Components through their paces. The end-to-end test does not need to achieve that level of detail.
+每种类型的测试应该做到最好。单元测试已经对不同的照片组件进行了详细测试。端到端测试不需要达到那种细节水平。
 
-With Cypress, both type of tests are possible. For a start, we will test against the real Flickr API. Then, we will fake the API.
+使用Cypress，这两种类型的测试都是可行的。首先，我们将针对真实的Flickr API进行测试。然后，我们将模拟API。
 
-=== Testing the search form
+=== 测试搜索表单
 
-We create a file called `cypress/e2e/flickr-search.cy.ts`. We start with a test suite.
+我们创建一个名为 `cypress/e2e/flickr-search.cy.ts` 的文件。我们从一个测试套件开始。
 
 [source,typescript]
 ----
@@ -843,7 +843,7 @@ describe('Flickr search', () => {
 });
 ----
 
-We instruct the browser to enter “flower” into the search field (test id `search-term-input`). Then we click on the submit button (test id `submit-search`).
+我们指示浏览器在搜索字段（测试ID为 `search-term-input`）中输入“flower”。然后我们点击提交按钮（测试ID为 `submit-search`）。
 
 [source,typescript]
 ----
@@ -857,19 +857,19 @@ it('searches for a term', () => {
 });
 ----
 
-TIP: Clear, then type
+TIP: 清除后再输入
 
-The `type` command does not overwrite the form value with a new value, but sends keyboard input, key by key.
+`type` 命令不会用新值覆盖表单字段的值，而是逐个按键发送键盘输入。
 
-Before entering “flower”, we need to clear the field since it already has a pre-filled value. Otherwise we would append “flower” to the existing value. We use Cypress’ `clear` method for that purpose.
+在输入“flower”之前，我们需要清除字段，因为它已经有预填充的值。否则，我们会将“flower”附加到现有值上。为此，我们使用 Cypress 的 `clear` 方法。
 
-Clicking on the submit button starts the search. When the Flickr API has responded, we expect the search results to be appear.
+单击提交按钮开始搜索。当 Flickr API 做出响应时，我们期望搜索结果出现。
 
-TIP: Expect search results
+TIP: 期望搜索结果
 
-A search result consists of a link (`a` element, test id `photo-item-link`) and an image (`img` element, test id `photo-item-image`).
+搜索结果包含一个链接（`a` 元素，测试ID为 `photo-item-link`）和一张图片（`img` 元素，测试ID为 `photo-item-image`）。
 
-We expect 15 links to appear since this is amount of results requested from Flickr.
+由于从 Flickr 请求的结果数是15个，我们期望出现15个链接。
 
 [source,typescript]
 ----
@@ -877,13 +877,13 @@ cy.byTestId('photo-item-link')
   .should('have.length', 15)
 ----
 
-By writing `should('have.length', 15)`, we assert that there are 15 elements.
+通过编写 `should('have.length', 15)`，我们断言存在15个元素。
 
-Each link needs to have an `href` containing `https://www.flickr.com/photos/`. We cannot check for an exact URL since results are the dynamic. But we know that all Flickr photo URLs have the same structure.
+每个链接的 `href` 属性都应包含 `https://www.flickr.com/photos/`。我们无法检查确切的 URL，因为结果是动态的。但我们知道所有的 Flickr 照片 URL 具有相同的结构。
 
-There is no direct Chai assertion for checking that each link in the list has an `href` attribute containing `https://www.flickr.com/photos/`. We need to check each link in the list individually.
+Chai 断言中没有直接检查列表中的每个链接是否具有包含 `https://www.flickr.com/photos/` 的 `href` 属性的方法。我们需要逐个检查列表中的每个链接。
 
-The Chainer has an `each` method to call a function for each element. This works similar to JavaScript’s `forEach` array method.
+Chainer 提供了 `each` 方法，用于为每个元素调用一个函数。这类似于 JavaScript 的 `forEach` 数组方法。
 
 [source,typescript]
 ----
@@ -894,17 +894,17 @@ cy.byTestId('photo-item-link')
   });
 ----
 
-Cypress has three surprises for us.
+Cypress对我们来说有三个惊喜。
 
-TIP: Synchronous jQuery object
+TIP: 同步的jQuery对象
 
-1. `link` is a synchronous value. Inside the `each` callback, we are in synchronous JavaScript land. (We could do asynchronous operations here, but there is no need.)
+1. ``link``是一个同步值。在``each``回调内部，我们处于同步的JavaScript环境中。（我们可以在这里执行异步操作，但没有必要。）
 
-2. `link` has the type `JQuery<HTMLElement>`. This is an element wrapped with the popular jQuery library. Cypress chose jQuery because many JavaScript developers are already familiar with it. To read the `href` attribute, we use `link.attr('href')`.
+2. ``link``的类型是``JQuery<HTMLElement>``。这是一个使用流行的jQuery库封装的元素。Cypress选择了jQuery，因为许多JavaScript开发人员已经熟悉它。为了读取``href``属性，我们使用 `link.attr('href')`。
 
-3. We cannot use Cypress’ `should` method since it only exists on Cypress Chainers. But we are dealing with a jQuery object here. We have to use a standard Chai assertion. We use `expect` together with `to.contain`.
+3. 我们不能使用Cypress的``should``方法，因为它仅存在于Cypress Chainers上。但是在这里我们正在处理一个jQuery对象。我们必须使用标准的Chai断言。我们使用``expect``和``to.contain``。
 
-This brings us to:
+这将引出：
 
 [source,typescript]
 ----
@@ -917,7 +917,7 @@ cy.byTestId('photo-item-link')
   });
 ----
 
-The test now looks like this:
+测试现在如下所示：
 
 [source,typescript]
 ----
@@ -947,29 +947,29 @@ describe('Flickr search', () => {
 });
 ----
 
-To start the tests, we first start the development server with `ng serve` and then start Cypress:
+为了开始测试，我们首先使用 `ng serve` 命令启动开发服务器，然后再启动Cypress：
 
 [source,]
 ----
 ng run flickr-search:cypress-open
 ----
 
-This opens the test runner where we click on `flickr-search.cy.ts`.
+这将打开测试运行器，在其中我们点击 `flickr-search.cy.ts`。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts[Flickr search E2E test code]
-- https://docs.cypress.io/api/commands/clear[Cypress API reference: clear]
-- https://docs.cypress.io/api/commands/each[Cypress API reference: each]
-- https://api.jquery.com/attr/[jQuery API reference: attr]
-- https://www.chaijs.com/api/bdd/#method_include[Chai API reference: include (contain)]
+- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts[Flickr搜索端到端测试代码]
+- https://docs.cypress.io/api/commands/clear[Cypress API 参考文档：clear]
+- https://docs.cypress.io/api/commands/each[Cypress API 参考文档：each]
+- https://api.jquery.com/attr/[jQuery API 参考文档：attr]
+- https://www.chaijs.com/api/bdd/#method_include[Chai API 参考文档：include（contain）]
 ====
 
-=== Testing the full photo
+=== 测试完整的照片
 
-When the user clicks on a link in the result list, the click event is caught and the full photo details are shown next to the list. (If the user clicks with the control/command key pressed or right-clicks, they can follow the link to flickr.com.)
+当用户点击结果列表中的链接时，将捕获点击事件并在列表旁边显示完整的照片详细信息。（如果用户按住控制/命令键点击或右键点击，他们可以跟随链接访问 flickr.com。）
 
-In the end-to-end test, we add a spec to verify this behavior.
+在端到端测试中，我们添加一个规范来验证这种行为。
 
 [source,typescript]
 ----
@@ -978,7 +978,7 @@ it('shows the full photo', () => {
 });
 ----
 
-First, it searches for “flower”, just like the spec before.
+首先，它搜索“flower”，就像之前的规范一样。
 
 [source,typescript]
 ----
@@ -986,27 +986,27 @@ cy.byTestId('search-term-input').first().clear().type(searchTerm);
 cy.byTestId('submit-search').first().click();
 ----
 
-Then we find all photo item links, but not to inspect them, but to click on the first on:
+然后我们找到所有的照片项目链接，但不是为了检查它们，而是为了点击第一个链接：
 
 [source,typescript]
 ----
 cy.byTestId('photo-item-link').first().click();
 ----
 
-The click lets the photo details appear. As mentioned above, we cannot check for a specific title, a specific photo URL or specific tags. The clicked photo might be a different one with each test run.
+点击后，照片详细信息将出现。正如上面提到的，我们无法检查特定的标题、特定的照片URL或特定的标签。每次测试运行时，点击的照片可能是不同的。
 
-Since we have searched for “flower”, the term is either in the photo title or tags. We check the text content of the wrapper element with the test id `full-photo`.
+由于我们搜索了“flower”，该词要么在照片标题中，要么在标签中。我们检查具有测试ID `full-photo` 的包装元素的文本内容。
 
 [source,typescript]
 ----
 cy.byTestId('full-photo').should('contain', searchTerm);
 ----
 
-TIP: Contain vs. have&#xA0;text
+TIP: Contain vs. have text
 
-The `contain` assertion checks whether the given string is somewhere in the element’s text content. (In contrast, the `have.text` assertion checks whether the content equals the given string. It does not allow additional content.)
+``包含（contain）``断言检查给定的字符串是否出现在元素的文本内容中。（相比之下，``have.text``断言检查内容是否与给定的字符串相等。它不允许有额外的内容。）
 
-Next, we check that a title and some tags are present and not empty.
+接下来，我们检查是否存在标题和一些标签，并且它们不为空。
 
 [source,typescript]
 ----
@@ -1014,14 +1014,14 @@ cy.byTestId('full-photo-title').should('not.have.text', '');
 cy.byTestId('full-photo-tags').should('not.have.text', '');
 ----
 
-The image itself needs to be present. We cannot check the `src` attribute in detail.
+图片本身需要存在。我们无法详细检查``src``属性。
 
 [source,typescript]
 ----
 cy.byTestId('full-photo-image').should('exist');
 ----
 
-The spec now looks like this:
+现在规范的样子如下：
 
 [source,typescript]
 ----
@@ -1037,43 +1037,43 @@ it('shows the full photo', () => {
 });
 ----
 
-The assertions `contain`, `text` and `exist` are defined by Chai-jQuery, an assertion library for checking jQuery element lists.
+这里给出的断言（`contain`、``text``和``exist``）是由Chai-jQuery定义的，Chai-jQuery是一个用于检查jQuery元素列表的断言库。
 
-Congratulations, we have successfully tested the Flickr search! This example demonstrates several Cypress commands and assertions. We also caught a glimpse of Cypress internals.
+恭喜，我们已经成功测试了Flickr搜索！这个示例演示了几个Cypress命令和断言。我们也对Cypress的内部机制有了一瞥。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts[Flickr search E2E test code]
-- https://docs.cypress.io/guides/references/assertions#Chai-jQuery[Cypress documentation: Chai-jQuery assertions]
+- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts[Flickr搜索端到端测试代码]
+- https://docs.cypress.io/guides/references/assertions#Chai-jQuery[Cypress文档：Chai-jQuery断言]
 ====
 
-== Page objects
+== 页面对象
 
-The Flickr search end-to-end test we have written is fully functional. We can improve the code further to increase clarity and maintainability.
+我们编写的Flickr搜索端到端测试是完全可用的。我们可以进一步改进代码，以增加代码的清晰性和可维护性。
 
-We introduce a design pattern called *page object*. A design pattern is a proven code structure, a best practice to solve a common problem.
+我们引入了一种称为**页面对象**的设计模式。设计模式是一种经过验证的代码结构，是解决常见问题的最佳实践。
 
-TIP: High-level interactions
+TIP: 高级交互
 
-A page object represents the web page that is scrutinized by an end-to-end test. The page object provides a high-level interface for interacting with the page.
+页面对象表示受端到端测试审查的网页。页面对象提供了一个高级接口，用于与页面进行交互。
 
-So far, we have written low-level end-to-end tests. They find individual elements by hard-coded test id, check their content and click on them. This is fine for small tests.
+到目前为止，我们编写的是低级别的端到端测试。它们通过硬编码的测试ID查找单个元素，检查其内容并点击它们。这对于小型测试是可以的。
 
-But if the page logic is complex and there are diverse cases to test, the test becomes an unmanageable pile of low-level instructions. It is hard to find the gist of these tests and they are hard to change.
+但是，如果页面逻辑复杂，有多种测试情况，那么测试将变成一堆难以管理的低级指令。很难找到这些测试的要点，并且很难进行更改。
 
-A page object organizes numerous low-level instructions into a few high-level interactions. What are the high-level interactions in the Flickr search app?
+页面对象将众多低级指令组织成少数高级交互。Flickr搜索应用程序中的高级交互是什么？
 
-1. Search photos using a search term
-2. Read the photo list and interact with the items
-3. Read the photo details
+1. 使用搜索词搜索照片
+2. 读取照片列表并与列表项交互
+3. 读取照片详细信息
 
-Where possible, we group these interactions into methods of the page object.
+在可能的情况下，我们将这些交互分组为页面对象的方法。
 
-TIP: Plain class
+TIP: 普通类
 
-A page object is merely an abstract pattern – the exact implementation is up to you. Typically, the page object is declared as a class that is instantiated when the test starts.
+页面对象只是一个抽象模式，其具体实现取决于您。通常，页面对象被声明为在测试开始时实例化的类。
 
-Let us call the class `FlickrSearch` and save it in a separate file, `cypress/pages/flickr-search.page.ts`. The directory `pages` is reserved for page objects, and the `.page.ts` suffix marks the page object.
+我们将这个类称为``FlickrSearch``，并将其保存在一个单独的文件``cypress/pages/flickr-search.page.ts``中。``pages``目录专门用于页面对象，并且``.page.ts``后缀标记了页面对象。
 
 [source,typescript]
 ----
@@ -1084,9 +1084,9 @@ export class FlickrSearch {
 }
 ----
 
-The class has a `visit` method that opens the page that the page object represents.
+这个类有一个``visit``方法，用于打开页面，即页面对象所表示的页面。
 
-In the test, we import the class and create an instance in a `beforeEach` block.
+在测试中，我们导入这个类，并在``beforeEach``块中创建一个实例。
 
 [source,typescript]
 ----
@@ -1106,11 +1106,11 @@ describe('Flickr search (with page object)', () => {
 });
 ----
 
-The `FlickrSearch` instance is stored in a variable declared in the `describe` scope. This way, all specs can access the page object.
+``FlickrSearch``实例存储在``describe``作用域中声明的变量中。这样，所有的规范都可以访问页面对象。
 
-TIP: Search
+TIP: 搜索
 
-Let us implement the first high-level interaction on the page object: searching for photos. We move the relevant code from the test into a method of the page object.
+让我们在页面对象上实现第一个高级交互：搜索照片。我们将相关的代码从测试中移到页面对象的一个方法中。
 
 [source,typescript]
 ----
@@ -1120,11 +1120,11 @@ public searchFor(term: string): void {
 }
 ----
 
-The `searchFor` method expects a search term and performs all necessary steps.
+``searchFor``方法接受一个搜索词，并执行所有必要的步骤。
 
-TIP: Element queries
+TIP: 元素查询
 
-Other high-level interactions, like reading the photo list and the photo details, cannot be translated into page object methods. But we can move the test ids and element queries to the page object.
+其他高级交互，如读取照片列表和照片详情，无法转换为页面对象方法。但是，我们可以将测试ID和元素查询移动到页面对象中。
 
 [source,typescript]
 ----
@@ -1153,9 +1153,9 @@ public fullPhotoImage(): Cypress.Chainable<JQuery<HTMLElement>> {
 }
 ----
 
-These methods return element Chainers.
+这些方法返回元素链式调用器（element Chainers）。
 
-Next, we rewrite the end-to-end test to use the page object methods.
+接下来，我们将重写端到端测试，以使用页面对象的方法。
 
 [source,typescript]
 ----
@@ -1195,39 +1195,39 @@ describe('Flickr search (with page object)', () => {
 });
 ----
 
-For the Flickr search above, a page object is probably too much of a good thing. Still, the example demonstrates the key ideas of page objects:
+对于上面的Flickr搜索，使用页面对象可能有些过于复杂。然而，该示例展示了页面对象的关键思想：
 
-- Identify repetitive high-level interactions and map them to methods of the page object.
-- Move the finding of elements into the page object. The test ids, tag names, etc. used for finding should live in a central place.
+- 识别重复的高级交互并将其映射到页面对象的方法中。
+- 将元素的查找操作移动到页面对象中。用于查找的测试ID、标签名称等应该统一存放在一个集中的位置。
++
+当被测试页面的标记发生变化时，需要更新页面对象，但测试本身不应该改变。
+- 将所有断言（``should``和``expect``）保留在规范中，不要将它们移动到页面对象中。
 
-  When the markup of a page under test changes, the page object needs an update, but the test should remain unchanged.
-- Leave all assertions (`should` and `expect`) in the specs. Do not move them to the page object.
+TIP: 高级测试
 
-TIP: High-level tests
+在编写端到端测试时，很容易陷入技术细节的困扰：查找元素、点击元素、填写表单字段、检查字段的值和文本内容。但是端到端测试不应该围绕这些低级细节展开。它们应该描述用户在高层次上的行为流程。
 
-When writing end-to-end tests, you get lost in technical details quickly: finding elements, clicking them, filling out form fields, checking fields values and text content. But end-to-end tests should not revolve around these low-level details. They should describe the user journey on a high level.
+重构的目标不是为了简洁。使用页面对象并不一定会导致代码量减少。页面对象的目的是将低级细节（如通过测试ID查找元素）与高级用户在应用程序中的行为流程分离。这使得规范更易阅读和维护。
 
-The goal of this refactoring is not brevity. Using page objects does not necessarily lead to less code. The purpose of page objects is to separate low-level details – like finding elements by test ids – from the high-level user journey through the application. This makes the specs easier to read and the easier to maintain.
-
-You can use the page object pattern when you feel the need to tidy up complex, repetitive tests. Once you are familiar with the pattern, it also helps you to avoid writing such tests in the first place.
+当您感觉需要整理复杂、重复的测试时，可以使用页面对象模式。一旦您熟悉了这种模式，它也有助于您在首次编写测试时避免编写这样的测试。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-with-po.cy.ts[Flickr search E2E test with page object]
-- https://github.com/9elements/angular-flickr-search/blob/main/cypress/pages/flickr-search.page.ts[Flickr search page object]
+- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-with-po.cy.ts[带页面对象的Flickr搜索端到端测试]
+- https://github.com/9elements/angular-flickr-search/blob/main/cypress/pages/flickr-search.page.ts[Flickr搜索页面对象]
 ====
 
-== Faking the Flickr API
+== 伪造Flickr API
 
-The end-to-end test we wrote for the Flickr search uses the real Flickr API. As discussed, this makes the test realistic.
+我们为Flickr搜索编写的端到端测试使用了真实的Flickr API。如前所述，这使得测试更加真实可信。
 
-The test provides confidence that the application works hand in hand with the third-party API. But it makes the test slower and only allows unspecific assertions.
+该测试确保应用程序与第三方API紧密配合。但它使得测试变慢，并且只允许进行不太具体的断言。
 
-TIP: Intercept HTTP requests
+TIP: 拦截HTTP请求
 
-With Cypress, we can uncouple the dependency. Cypress allows us to intercept HTTP requests and respond with fake data.
+使用Cypress，我们可以解除对API的依赖。Cypress允许我们拦截HTTP请求并使用虚假数据进行响应。
 
-First of all, we need to set up the fake data. We have already created fake photo objects for the <<testing-services#_testing_a_service_that_sends_http_requests, `FlickrService` unit test>>. For simplicity, we just import them:
+首先，我们需要设置虚假数据。我们已经为 <<testing-services#_测试发送http请求的服务,``FlickrService``单元测试>> 创建了虚假的照片对象。为简单起见，我们只需导入它们：
 
 [source,typescript]
 ----
@@ -1239,7 +1239,7 @@ import {
 } from '../../src/app/spec-helpers/photo.spec-helper';
 ----
 
-Using the fake photos, we create a fake response object that mimics the relevant part of the Flickr response.
+使用虚假照片，我们创建一个模仿Flickr响应中相关部分的虚假响应对象。
 
 [source,typescript]
 ----
@@ -1250,9 +1250,9 @@ const flickrResponse = {
 };
 ----
 
-TIP: Fake server with route
+TIP: 使用路由创建虚假服务器
 
-Now we instruct Cypress to intercept the Flickr API request and answer it with fake data. This setup happens in the test’s `beforeEach` block. The corresponding Cypress command is `cy.intercept`.
+现在，我们指示Cypress拦截Flickr API请求，并用虚假数据进行响应。这个设置在测试的``beforeEach``块中完成。相应的Cypress命令是``cy.intercept``。
 
 [source,typescript]
 ----
@@ -1285,24 +1285,24 @@ beforeEach(() => {
 });
 ----
 
-`cy.intercept` can be called in different ways. Here, we pass two objects:
+``cy.intercept``可以以不同的方式调用。在这里，我们传递了两个对象：
 
-1. A _route matcher_ describing the requests to intercept. It contains the HTTP GET method, the base URL and a whole bunch of query string parameters. In the URL and the `api_key` query parameter, the `*` character is a wildcard that matches any string.
-2. A _route handler_ describing the response Cypress should send. As JSON response body, we pass the `flickrResponse` fake object.
+1. 一个__路由匹配器__，描述要拦截的请求。它包含HTTP GET方法、基本URL和一堆查询字符串参数。在URL和``api_key``查询参数中，``*``字符是一个通配符，可以匹配任意字符串。
+2. 一个__路由处理器__，描述Cypress应该发送的响应。我们将``flickrResponse``虚假对象作为JSON响应主体传递。
 +
-Since the request to Flickr is cross-origin, we need to set the `Access-Control-Allow-Origin: *` header. This allows our Angular application at the origin `http://localhost:4200` to read the response from the origin `https://www.flickr.com/`.
+由于对Flickr的请求是跨域的，我们需要设置 `Access-Control-Allow-Origin: *` 头部。这允许我们的源自``http://localhost:4200``的Angular应用程序读取来自``https://www.flickr.com``的响应。
 
-TIP: Alias
+TIP: 别名
 
-Finally, we give the request an _alias_ by calling `.as('flickrSearchRequest')`. This makes it possible to refer to the request later using the `@flickrSearchRequest` alias.
+最后，我们通过调用 `.as('flickrSearchRequest')` 为请求设置一个__别名(alias)__。这使得以后可以使用``@flickrSearchRequest``别名引用该请求。
 
-After this setup, Cypress intercepts the request to Flickr and handles it by itself. The original Flickr API is not reached.
+设置完成后，Cypress会拦截对Flickr的请求并自行处理。原始的Flickr API不会被访问。
 
-The existing, rather generic specs still pass. Before we make them more specific, we need to verify that Cypress found a match and intercepted the HTTP request. Because if it did not, the test would still pass.
+现有的相对通用的规范仍然通过。在我们使它们更具体之前，我们需要验证Cypress是否找到了匹配并拦截了HTTP请求。因为如果没有拦截，测试仍然会通过。
 
-TIP: Wait for request
+TIP: 等待请求
 
-We can achieve this by explicitly waiting for the request after starting the search.
+我们可以通过在启动搜索后显式等待请求来实现这一点。
 
 [source,typescript]
 ----
@@ -1316,16 +1316,16 @@ it('searches for a term', () => {
 });
 ----
 
-`cy.wait('@flickrSearchRequest')` tells Cypress to wait for a request that matches the specified criteria. `@flickrSearchRequest` refers to the alias we have defined above.
+`cy.wait('@flickrSearchRequest')` 告诉Cypress等待满足指定条件的请求。``@flickrSearchRequest``是我们之前定义的别名。
 
-If Cypress does not find a matching request until a timeout, the test fails. If Cypress caught the request,
-we know that the Angular application received the photos specified in the `photos` array.
+如果Cypress在超时时间内找不到匹配的请求，测试将失败。如果Cypress捕获了该请求，
+我们就知道Angular应用程序接收了``photos``数组中指定的照片。
 
-TIP: Specific assertions
+TIP: 具体断言
 
-By faking the Flickr API, we gain complete control over the response. We chose to return fixed data. The application under test processes the data deterministically. As discussed, this allows us to verify that the application correctly renders the photos the API returned.
+通过伪造Flickr API，我们对响应拥有完全控制权。我们选择返回固定数据。被测试的应用程序以确定性的方式处理数据。如前所述，这使我们能够验证应用程序是否正确地呈现了API返回的照片。
 
-Let us write specific assertions that compare the photos in the result list with those in the `photos` array.
+让我们编写具体的断言，将结果列表中的照片与``photos``数组中的照片进行比较。
 
 [source,typescript]
 ----
@@ -1350,9 +1350,9 @@ it('searches for a term', () => {
 });
 ----
 
-Here, we walk through the links and images to ensure that the URLs originate from the fake data. Previously, when testing against the real API, we tested the links only superficially. We could not test the image URLs at all.
+在这里，我们遍历链接和图片，以确保URL来自虚假数据。之前，在针对真实API进行测试时，我们只对链接进行了表面测试。我们根本无法测试图片URL。
 
-Likewise, for the full photo spec, we make the assertions more specific.
+同样地，对于完整照片规范，我们将断言更具体。
 
 [source,typescript]
 ----
@@ -1371,38 +1371,38 @@ it('shows the full photo', () => {
 });
 ----
 
-The specs now ensure that the application under test outputs the data from the Flickr API. `have.text` checks an element’s text content, whereas `have.attr` checks the `src` and `href` attributes.
+现在，规范确保被测试的应用程序输出来自Flickr API的数据。``have.text``检查元素的文本内容，而``have.attr``检查``src``和``href``属性。
 
-We are done! Our end-to-end test intercepts an API request and responds with fake data in order to inspect the application deeply.
+我们完成了！我们的端到端测试拦截了API请求，并以虚假数据作出响应，以深入检查应用程序。
 
-TIP: Intercept all requests
+TIP: 拦截所有请求
 
-In the case of the Flickr search, we have intercepted an HTTP request to a third-party API. Cypress allows to fake any request, including those to your own HTTP APIs.
+对于Flickr搜索而言，我们已经拦截了对第三方API的HTTP请求。Cypress允许伪造任何请求，包括对自己的HTTP API的请求。
 
-This is useful for returning deterministic responses crucial for the feature under test. But it is also useful for suppressing requests that are irrelevant for your test, like marginal images and web analytics.
-
-[NOTE]
-====
-- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-stub-network-intercept.cy.ts[Flickr search E2E test with cy.intercept]
-- https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[Photo spec helper]
-- https://docs.cypress.io/guides/guides/network-requests[Cypress documentation: Network Requests]
-- https://docs.cypress.io/api/commands/intercept[Cypress API reference: intercept]
-- https://docs.cypress.io/api/commands/wait[Cypress API reference: wait]
-====
-
-== End-to-end testing: Summary
-
-End-to-end tests used to be expensive while the outcome was poor. It was hard to write tests that reliably pass even when the application is working correctly. This time could not be invested in writing useful tests that uncover bugs and regressions.
-
-For years, Protractor was the end-to-end testing framework many Angular developers relied on. With Cypress, a framework arose that sets new standards.
-
-This guide recommends to start with Cypress because it excels in developer experience and cost-effectiveness. Still, WebDriver-based frameworks like Webdriver.io are useful if you need to test a broad range of browsers.
-
-Even with Cypress, end-to-end tests are much more complex and error-prone than unit and integration tests with Jasmine and Karma. Then again, end-to-end tests are highly effective to test a feature under realistic circumstances.
+这对于返回对于被测试功能至关重要的确定性响应非常有用。但它还可以用于抑制对于测试无关的请求，比如边缘图像和网络分析。
 
 [NOTE]
 ====
-- https://github.com/9elements/angular-workshop/tree/main/cypress[Counter: Cypress tests]
-- https://github.com/9elements/angular-flickr-search/tree/main/cypress[Flickr search: Cypress tests]
+- https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-stub-network-intercept.cy.ts[具有cy.intercept的Flickr搜索端到端测试]
+- https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts[照片规范辅助函数]
+- https://docs.cypress.io/guides/guides/network-requests[Cypress文档：网络请求]
+- https://docs.cypress.io/api/commands/intercept[Cypress API参考：intercept]
+- https://docs.cypress.io/api/commands/wait[Cypress API参考：wait]
+====
+
+== 端到端测试：总结
+
+过去，端到端测试成本高昂，而结果却不理想。很难编写测试，即使应用程序正常工作，也能可靠地通过测试。这些时间无法投入到编写发现错误和回归的有用测试中。
+
+多年来，Protractor一直是许多Angular开发人员依赖的端到端测试框架。随着Cypress的出现，它树立了新的标准。
+
+本指南建议从Cypress开始，因为它在开发者体验和成本效益方面表现出色。然而，如果您需要测试广泛的浏览器范围，基于WebDriver的框架如Webdriver.io也是有用的。
+
+即使使用Cypress，端到端测试比Jasmine和Karma的单元和集成测试要复杂得多，并且容易出错。然而，端到端测试在真实环境下测试功能非常有效。
+
+[NOTE]
+====
+- https://github.com/9elements/angular-workshop/tree/main/cypress[计数器：Cypress测试]
+- https://github.com/9elements/angular-flickr-search/tree/main/cypress[Flickr搜索：Cypress测试]
 ====
 
