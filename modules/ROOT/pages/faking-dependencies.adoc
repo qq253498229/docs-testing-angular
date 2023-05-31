@@ -282,7 +282,7 @@ TIP: 捕获错误
 
 在 _Assert_ 阶段，我们再次进行两个断言。与验证返回值不同，我们确保捕获的错误是 `Error` 实例，并具有有用的错误消息。最后，我们验证 spy 是否已使用正确的值调用，就像成功情况的规范中一样。
 
-再次强调，这是一个纯 TypeScript 示例，用于说明 spy 的用法。通常，Angular 服务不直接使用 `fetch`，而是使用 `HttpClient`。我们将在后面介绍如何测试这一点（请参阅 <<testing-services#_testing_a_service_that_sends_http_requests, 发送 HTTP 请求的服务的测试>>）。
+再次强调，这是一个纯 TypeScript 示例，用于说明 spy 的用法。通常，Angular 服务不直接使用 `fetch`，而是使用 `HttpClient`。我们将在后面介绍如何测试这一点（请参阅 <<testing-services#_测试发送http请求的服务, 发送 HTTP 请求的服务的测试>>）。
 
 [NOTE]
 ====

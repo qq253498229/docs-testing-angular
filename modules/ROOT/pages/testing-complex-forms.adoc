@@ -303,14 +303,14 @@ TIP: 实现细节
 哪些注册表单的重要部分需要进行测试？
 
 1. 表单提交
-  - xref:_successful_form_submission[成功提交]
-  - xref:_invalid_form[不要提交无效的表单]
-  - xref:_form_submission_failure[提交失败]
-2. xref:_required_fields[必填字段被标记为必填，并显示错误消息]
-3. xref:_asynchronous_validators[对用户名、电子邮件和密码进行异步验证]
-4. xref:_dynamic_field_relations[动态字段关系]
-5. xref:_password_type_toggle[密码类型切换]
-6. xref:_testing_form_accessibility[表单结构、字段标签和错误消息的可访问性]
+  - xref:_成功提交表单[成功提交]
+  - xref:_无效的表单[不要提交无效的表单]
+  - xref:_表单提交失败[提交失败]
+2. xref:_必填字段[必填字段被标记为必填，并显示错误消息]
+3. xref:_异步验证器[对用户名、电子邮件和密码进行异步验证]
+4. xref:_动态字段关系[动态字段关系]
+5. xref:_密码类型切换[密码类型切换]
+6. xref:_测试表单的可访问性[表单结构、字段标签和错误消息的可访问性]
 
 == 测试设置
 

@@ -56,7 +56,7 @@ Angular团队已经为你做出了决策：使用 https://jasmine.github.io/[Jas
 
 TIP: 其他选择
 
-例如，一些Angular开发者使用 https://jestjs.io/[Jest] 而不是Jasmine和Karma。一些开发者使用 <<testing-components-with-spectator#_testing_components_with_spectator, Spectator>> 或 https://github.com/testing-library/angular-testing-library[Angular Testing Library]，而不是直接使用 `TestBed`。
+例如，一些Angular开发者使用 https://jestjs.io/[Jest] 而不是Jasmine和Karma。一些开发者使用 <<testing-components-with-spectator#_测试时使用spectator库简化组件, Spectator>> 或 https://github.com/testing-library/angular-testing-library[Angular Testing Library]，而不是直接使用 `TestBed`。
 
 这些替代方案并不是更好或更差，它们只是做出不同的权衡。本指南在单元测试和集成测试中使用Jasmine和Karma。稍后，你将学习有关Spectator的内容。
 
@@ -120,7 +120,7 @@ TIP: 测试运行器
 
 启动的浏览器导航到 `http://localhost:9876/`。正如前面提到的，该网站提供测试运行器和测试bundle。测试会立即开始运行。您可以在浏览器和终端中跟踪进度并查看结果。
 
-在运行 <<example-applications#_the_counter_component,counter项目>> 的测试时，浏览器的输出如下所示：
+在运行 <<example-applications#_计数器组件,counter项目>> 的测试时，浏览器的输出如下所示：
 
 image::karma-success.png[]
 
@@ -222,7 +222,7 @@ Karma 的另一个重要概念是 *报告器*。它们用于格式化和输出�
 +
 image::karma-jasmine-html-reporter.png[]
 
-3. 代码覆盖率报告器（npm 包: `karma-coverage`）会生成测试覆盖率报告。详见 <<measuring-code-coverage#_measuring_code_coverage,测量代码覆盖率>>。
+3. 代码覆盖率报告器（npm 包: `karma-coverage`）会生成测试覆盖率报告。详见 <<measuring-code-coverage#_代码覆盖率测量,测量代码覆盖率>>。
 
 通过编辑 `reporters` 数组，您可以添加报告器或替换现有的报告器：
 
@@ -278,7 +278,7 @@ client: {
 },
 ----
 
-本指南建议激活一个有用的 Jasmine 配置选项：`failSpecWithNoExpectations`。如果测试中没有至少一个期望（<<test-suites-with-jasmine#_expectations,expectation>>），则会导致测试失败（有关期望的更多内容稍后会详细介绍）。在几乎所有情况下，没有期望的规范往往源于测试代码的错误。
+本指南建议激活一个有用的 Jasmine 配置选项：`failSpecWithNoExpectations`。如果测试中没有至少一个期望（<<test-suites-with-jasmine#_期望,expectation>>），则会导致测试失败（有关期望的更多内容稍后会详细介绍）。在几乎所有情况下，没有期望的规范往往源于测试代码的错误。
 
 [source,javascript]
 ----

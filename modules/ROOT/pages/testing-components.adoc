@@ -856,7 +856,7 @@ it('resets the count', () => {
 });
 ----
 
-尽管重置功能很简单，但这是如何测试大多数表单逻辑的方式。稍后，我们将学习如何 <<testing-complex-forms#_testing_complex_forms, 测试复杂的表单>>。
+尽管重置功能很简单，但这是如何测试大多数表单逻辑的方式。稍后，我们将学习如何 <<testing-complex-forms#_测试复杂表单, 测试复杂的表单>>。
 
 TIP: 无效输入
 
