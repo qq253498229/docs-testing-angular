@@ -13,7 +13,7 @@
 * xref:testing-complex-forms.adoc[测试复杂表单,leveloffset=-1]
 * xref:testing-components-with-spectator.adoc[测试时使用Spectator库简化组件,leveloffset=-1]
 * xref:testing-services.adoc[测试服务,leveloffset=-1]
-* xref:testing-pipes.adoc[Testing Pipes,leveloffset=-1]
+* xref:testing-pipes.adoc[测试管道,leveloffset=-1]
 * xref:testing-directives.adoc[Testing Directives,leveloffset=-1]
 * xref:testing-modules.adoc[Testing Modules,leveloffset=-1]
 * xref:measuring-code-coverage.adoc[Measuring code coverage,leveloffset=-1]

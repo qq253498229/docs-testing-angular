@@ -1,34 +1,34 @@
-= Testing Pipes
+= 测试管道
 
-Learning objectives
+学习目标
 
-- Verifying the output of synchronous, pure Pipes
-- Testing asynchronous, impure Pipes that load data from a Service
+- 验证同步、纯粹管道的输出
+- 测试从服务加载数据的异步、非纯粹管道
 
-An Angular Pipe is a special function that is called from a Component template. Its purpose is to transform a value: You pass a value to the Pipe, the Pipe computes a new value and returns it.
+Angular管道是从组件模板中调用的特殊函数。它的目的是转换一个值：您将一个值传递给管道，管道计算出一个新值并返回。
 
-The name Pipe originates from the vertical bar “\|” that sits between the value and the Pipe’s name. The concept as well as the “\|” syntax originate from Unix pipes and Unix shells.
+管道的名称源自位于值和管道名称之间的竖线 “\|” 。这个概念以及 “\|” 语法来自Unix管道和Unix shell。
 
-In this example, the value from `user.birthday` is transformed by the `date` Pipe:
+在这个例子中，``user.birthday``的值通过 `date` 管道进行转换：
 
 [source,]
 ----
 {% raw %}{{ user.birthday | date }}{% endraw %}
 ----
 
-TIP: Formatting
+TIP: 格式化
 
-Pipes are often used for internationalization, including translation of labels and messages, formatting of dates, times and various numbers. In these cases, the Pipe input value should not be shown to the user. The output value is user-readable.
+管道经常用于国际化，包括标签和消息的翻译，日期、时间和各种数字的格式化。在这些情况下，管道的输入值不应该显示给用户。输出值是可读的。
 
-Examples for built-in Pipes are `DatePipe`, `CurrencyPipe` and `DecimalPipe`. They format dates, amounts of money and numbers, respectively, according to the localization settings. Another well-known Pipe is the `AsyncPipe` which unwraps an Observable or Promise.
+内置管道的示例包括``DatePipe``、``CurrencyPipe``和``DecimalPipe``。它们分别根据本地化设置格式化日期、金额和数字。另一个著名的管道是``AsyncPipe``，它用于解析Observable或Promise。
 
-TIP: Pure Pipes
+TIP: 纯粹管道
 
-Most Pipes are _pure_, meaning they merely take a value and compute a new value. They do not have _side effects_: They do not change the input value and they do not change the state of other application parts. Like pure functions, pure Pipes are relatively easy to test.
+大多数管道都是__纯粹(pure)__的，意味着它们仅仅接受一个值并计算一个新值。它们没有__副作用(side effects)__：它们不改变输入值，也不改变其他应用程序部分的状态。像纯函数一样，纯粹的管道相对容易测试。
 
 == GreetPipe
 
-Let us study the structure of a Pipe first to find ways to test it. In essence, a Pipe is class with a public `transform` method. Here is a simple Pipe that expects a name and greets the user.
+让我们首先研究管道的结构，找到测试它的方法。本质上，管道是一个具有公共``transform``方法的类。下面是一个简单的管道，它期望一个名称并向用户打招呼。
 
 [source,typescript]
 ----
@@ -42,34 +42,33 @@ export class GreetPipe implements PipeTransform {
 }
 ----
 
-In a Component template, we transform a value using the Pipe:
+在组件模板中，我们使用管道来转换一个值：
 
 [source,]
 ----
 {% raw %}{{ 'Julie' | greet }}{% endraw %}
 ----
 
-The `GreetPipe` take the string `'Julie'` and computes a new string, `'Hello, Julie!'`.
+``GreetPipe``接受字符串 `'Julie'` 并计算一个新的字符串，`'Hello, Julie!'`。
 
-TIP: Simple vs. complex setup
+TIP: 简单设置 vs 复杂设置
 
-There are two important ways to test a Pipe:
+有两种重要的方法来测试管道：
 
-1. Create an instance of the Pipe class manually. Then call the `transform` method.
+1. 手动创建一个Pipe类的实例，然后调用``transform``方法。
++
+这种方式快速而直接。它需要最小的设置。
+2. 设置一个``TestBed``。渲染一个使用该管道的宿主组件，然后检查DOM中的文本内容。
++
+这种方式紧密模拟了管道在实践中的使用方式。它还测试了管道的名称，如``@Pipe()``装饰器中声明的名称。
 
-   This way is fast and straight-forward. It requires minimal setup.
+这两种方式都允许测试依赖于服务的管道。我们可以提供原始依赖项来编写集成测试。或者我们可以提供虚拟依赖项来编写单元测试。
 
-2. Set up a `TestBed`. Render a host Component that uses the Pipe. Then check the text content in the DOM.
+== GreetPipe 测试
 
-   This way closely mimics how the Pipe is used in practice. It also tests the name of the Pipe, as declared in the `@Pipe()` decorator.
+``GreetPipe``没有任何依赖项。我们选择第一种方式，编写一个单元测试来检查单个实例。
 
-Both ways allow to test Pipes that depend on Services. Either we provide the original dependencies, writing an integration test. Or we provide fake dependencies, writing a unit test.
-
-== GreetPipe test
-
-The `GreetPipe` does not have any dependencies. We opt for the first way and write a unit test that examines the single instance.
-
-First, we create a Jasmine test suite. In a `beforeEach` block, we create an instance of `GreetPipe`. In the specs, we scrutinize the `transform` method.
+首先，我们创建一个Jasmine测试套件。在``beforeEach``块中，我们创建一个``GreetPipe``的实例。在规范中，我们详细检查``transform``方法。
 
 [source,typescript]
 ----
@@ -86,20 +85,20 @@ describe('GreetPipe', () => {
 });
 ----
 
-We call the `transform` method with the string `'Julie'` and expect the output `'Hello, Julie!'`.
+我们使用字符串 `'Julie'` 调用``transform``方法，并期望输出 `'Hello, Julie!'`。
 
-This is everything that needs to be tested in the `GreetPipe` example. If the `transform` method contains more logic that needs to be tested, we add more specs that call the method with different input.
+这是在``GreetPipe``示例中需要进行测试的全部内容。如果``transform``方法包含需要测试的更多逻辑，我们将添加更多的规格来使用不同的输入调用该方法。
 
-== Testing Pipes with dependencies
+== 测试具有依赖关系的管道
 
-Many Pipes depend on local settings, including the user interface language, date and number formatting rules, as well as the selected country, region or currency.
+许多管道依赖于本地设置，包括用户界面语言、日期和数字格式规则，以及所选的国家、地区或货币。
 
-We are introducing and testing the `TranslatePipe`, a complex Pipe with a Service dependency.
+我们正在引入并测试``TranslatePipe``，这是一个具有服务依赖性的复杂管道。
 
 [NOTE]
 ====
-- https://github.com/molily/translate-pipe[TranslatePipe: Source code]
-- https://molily.github.io/translate-pipe/[TranslatePipe: Run the app]
+- https://github.com/molily/translate-pipe[TranslatePipe：源代码]
+- https://molily.github.io/translate-pipe/[TranslatePipe：运行应用程序]
 ====
 
 ++++
@@ -114,15 +113,15 @@ See the TranslatePipe in action
 </script>
 ++++
 
-The example application lets you change the user interface language during runtime. A popular solution for this task is the https://github.com/ngx-translate/core[ngx-translate] library. For the purpose of this guide, we will adopt ngx-translate’s proven approach but implement and test the code ourselves.
+示例应用程序允许您在运行时更改用户界面语言。解决这个任务的一种流行解决方案是 https://github.com/ngx-translate/core[ngx-translate] 库。为了本指南的目的，我们将采用ngx-translate已经证明有效的方法，但自己实现和测试代码。
 
 === TranslateService
 
-The current language is stored in the `TranslateService`. This Service also loads and holds the translations for the current language.
+当前语言存储在``TranslateService``中。该服务还加载并保存当前语言的翻译内容。
 
-The translations are stored in a map of keys and translation strings. For example, the key `greeting` translates to “Hello!” if the current language is English.
+翻译内容以键和翻译字符串的映射形式存储。例如，如果当前语言是英语，键``greeting``将翻译为“Hello!”。
 
-The `TranslateService` looks like this:
+``TranslateService``的代码如下所示：
 
 [source,typescript]
 ----
@@ -180,32 +179,32 @@ export class TranslateService {
 }
 ----
 
-This is what the Service provides:
+这是服务提供的功能：
 
-1. `use` method: Set the current language and load the translations as JSON via HTTP.
-2. `get` method: Get the translation for a key.
-3. `onTranslationChange` `EventEmitter`: Observing changes on the translations as a result of `use`.
+1. ``use``方法：设置当前语言并通过HTTP加载翻译的JSON。
+2. ``get``方法：获取键的翻译。
+3. ``onTranslationChange`` `事件发射器(EventEmitter)`：观察翻译 `use` 的变化结果。
 
-In the example project, the `AppComponent` depends on the `TranslateService`. On creation, the Service loads the English translations. The `AppComponent` renders a select field allowing the user to change the language.
+在示例项目中，``AppComponent``依赖于``TranslateService``。在创建时，该服务加载英语翻译。``AppComponent``渲染一个选择字段，允许用户更改语言。
 
 [NOTE]
 ====
-- https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.ts[TranslateService: implementation code]
-- https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.spec.ts[TranslateService: test code]
+- https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.ts[TranslateService：实现代码]
+- https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.spec.ts[TranslateService：测试代码]
 ====
 
 === TranslatePipe
 
-To show a translated label, a Component could call the Service’s `get` method manually for each translation key. Instead, we introduce the `TranslatePipe` to do the heavy lifting. It lets us write:
+为了显示一个已翻译的标签，一个组件可以为每个翻译键手动调用服务的``get``方法。相反，我们引入``TranslatePipe``来完成繁重的工作。它允许我们编写：
 
 [source,]
 ----
 {% raw %}{{ 'greeting' | translate }}{% endraw %}
 ----
 
-This translates the key `'greeting'`.
+这将翻译键 `'greeting'`。
 
-Here is the code:
+以下是代码：
 
 [source,typescript]
 ----
@@ -270,31 +269,31 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
 }
 ----
 
-TIP: Async translation
+TIP: 异步翻译
 
-The `TranslatePipe` is _impure_ because the translations are loaded asynchronously. When called the first time, the `transform` method cannot return the correct translation synchronously. It calls the `TranslateService`’s `get` method which returns an Observable.
+``TranslatePipe``是__不完美(impure)__的，因为翻译是异步加载的。当第一次调用时，``transform``方法无法同步返回正确的翻译。它调用``TranslateService``的``get``方法，该方法返回一个Observable。
 
-TIP: Trigger change detection
+TIP: 触发变更检测
 
-Once the translation is loaded, the `TranslatePipe` saves it and notifies the Angular change detector. In particular, it marks the corresponding view as changed by calling https://angular.io/api/core/ChangeDetectorRef#markForCheck[`ChangeDetectorRef`’s `markForCheck`] method.
+一旦翻译加载完成，``TranslatePipe``会保存它并通知Angular变更检测器。特别是，它通过调用 https://angular.io/api/core/ChangeDetectorRef#markForCheck[``ChangeDetectorRef``的markForCheck] 方法将相应的视图标记为已更改。
 
-In turn, Angular re-evaluates every expression that uses the Pipe, like `'greeting' | translate`, and calls the `transform` method again. Finally, `transform` returns the right translation synchronously.
+然后，Angular会重新评估使用该管道的每个表达式，比如 `'greeting' | translate`，并再次调用``transform``方法。最后，``transform``同步返回正确的翻译结果。
 
-TIP: Translation changes
+TIP: 翻译变更
 
-The same process happens when the user changes the language and new translations are loaded. The Pipe subscribes to `TranslateService`’s `onTranslationChange` and calls the `TranslateService` again to get the new translation.
+当用户更改语言并加载新的翻译时，同样的过程会发生。该管道订阅``TranslateService``的``onTranslationChange``事件，并再次调用``TranslateService``来获取新的翻译。
 
 [NOTE]
 ====
-- https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.ts[TranslatePipe: implementation code]
-- https://angular.io/api/core/ChangeDetectorRef[Angular API reference: ChangeDetectorRef]
+- https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.ts[TranslatePipe：实现代码]
+- https://angular.io/api/core/ChangeDetectorRef[Angular API参考：ChangeDetectorRef]
 ====
 
-=== TranslatePipe test
+=== TranslatePipe 测试
 
-Now let us test the `TranslatePipe`! We can either write a test that integrates the `TranslateService` dependency. Or we write a unit test that replaces the dependency with a fake.
+现在让我们来测试``TranslatePipe``！我们可以编写一个整合``TranslateService``依赖的测试。或者我们编写一个使用虚拟对象替代依赖的单元测试。
 
-`TranslateService` performs HTTP requests to load the translations. We should avoid these side effects when testing `TranslatePipe`. So let us fake the Service to write a unit test.
+``TranslateService``执行HTTP请求来加载翻译。在测试``TranslatePipe``时，我们应该避免这些副作用。因此，让我们使用虚拟对象来替代Service来编写一个单元测试。
 
 [source,typescript]
 ----
@@ -310,13 +309,13 @@ translateService = {
 };
 ----
 
-The fake is a partial implementation of the original. The `TranslatePipe` under test only needs the `onTranslationChange` property and the `get` method. The latter returns a fake translation including the key so we can test that the key was passed correctly.
+虚拟对象是对原始对象的部分实现。我们只需要测试``TranslatePipe``中的``onTranslationChange``属性和``get``方法。后者返回一个包含键的虚拟翻译，这样我们就可以测试键是否被正确传递。
 
-TIP: Host Component
+TIP: 宿主组件
 
-Now we need to decide whether to test the Pipe directly or within a host Component. Neither solution is significantly easier or more robust. You will find both solutions in the example project. In this guide, we will discuss the solution with `TestBed` and host Component.
+现在我们需要决定是直接测试管道还是在宿主组件中测试。两种解决方案都没有明显的更简单或更健壮的优势。在示例项目中，您会发现这两种解决方案。在本指南中，我们将讨论使用``TestBed``和宿主组件的解决方案。
 
-Let us start with the host Component:
+让我们从宿主组件开始：
 
 [source,typescript]
 ----
@@ -331,9 +330,9 @@ class HostComponent {
 }
 ----
 
-This Component uses the `TranslatePipe` to translate its `key` property. Per default, it is set to `key1`. There is also a second constant `key2` for testing the key change later.
+该组件使用``TranslatePipe``来翻译其``key``属性。默认情况下，它被设置为``key1``。还有第二个常量``key2``，用于测试后续键的更改。
 
-Let us set up the test suite:
+让我们设置测试套件：
 
 [source,typescript]
 ----
@@ -366,16 +365,16 @@ describe('TranslatePipe: with TestBed and HostComponent', () => {
 });
 ----
 
-In the testing Module, we declare the Pipe under test and the `HostComponent`. For the `TranslateService`, we provide a fake object instead. Just like in a Component test, we create the Component and examine the rendered DOM.
+在测试模块中，我们声明要测试的管道和 `宿主组件(HostComponent)`。对于``TranslateService``，我们提供一个虚拟对象。就像在组件测试中一样，我们创建组件并检查渲染的DOM。
 
-TIP: Sync and async translation
+TIP: 同步和异步翻译
 
-What needs to be tested? We need to check that `{% raw %}{{ key | translate }}{% endraw %}` evaluates to `Translation for key1`. There are two cases that need to be tested though:
+需要测试什么？我们需要检查 `{% raw %}{{ key | translate }}{% endraw %}` 是否计算为 `key1的翻译`。但是有两种需要测试的情况：
 
-1. The translations are already loaded. The Pipe’s `transform` method returns the correct translation synchronously. The Observable returned by `TranslateService`’s `get` emits the translation and completes immediately.
-2. The translations are pending. `transform` returns `null` (or an outdated translation). The Observable completes at any time later. Then, the change detection is triggered, `transform` is called the second time and returns the correct translation.
+1. 翻译已加载完成。管道的``transform``方法立即同步返回正确的翻译。``TranslateService``的``get``返回的Observable立即发出翻译并完成。
+2. 翻译正在进行中。``transform``方法返回``null``（或过时的翻译）。Observable随后在任意时间完成。然后，触发变更检测，``transform``方法第二次被调用并返回正确的翻译。
 
-In the test, we write specs for both scenarios:
+在测试中，我们为这两种情况编写规格：
 
 [source,typescript]
 ----
@@ -383,7 +382,7 @@ it('translates the key, sync service response', /* … */);
 it('translates the key, async service response', /* … */);
 ----
 
-Let us start with the first case. The spec is straight-forward.
+让我们从第一种情况开始。规格很简单。
 
 [source,typescript]
 ----
@@ -393,32 +392,32 @@ it('translates the key, sync service response', () => {
 });
 ----
 
-Remember, the `TranslateService` fake returns an Observable created with `of`.
+请记住，``TranslateService``虚拟对象返回使用``of``创建的Observable。
 
 [source,typescript]
 ----
 return of(`Translation for ${key}`);
 ----
 
-This Observable emits one value and completes immediately. This mimics the case in which the Service has already loaded the translations.
+这个Observable发出一个值并立即完成。这模拟了服务已经加载完翻译的情况。
 
-We merely need to call `detectChanges`. Angular calls the Pipe’s `transform` method, which calls `TranslateService`’s `get`. The Observable emits the translation right away and `transform` passes it through.
+我们只需要调用``detectChanges``。Angular会调用管道的``transform``方法，该方法调用``TranslateService``的``get``方法。Observable立即发出翻译，``transform``将其传递出去。
 
-Finally, we use the https://github.com/molily/translate-pipe/blob/main/src/app/spec-helpers/element.spec-helper.ts[`expectContent` Component helper] to test the DOM output.
+最后，我们使用 https://github.com/molily/translate-pipe/blob/main/src/app/spec-helpers/element.spec-helper.ts[``expectContent``组件辅助函数] 来测试DOM输出。
 
-TIP: Simulate delay
+TIP: 模拟延迟
 
-Testing the second case is trickier because the Observable needs to emit asynchronously. There are numerous ways to achieve this. We will use the https://rxjs.dev/api/operators/delay[RxJS `delay` operator] for simplicity.
+测试第二种情况比较棘手，因为Observable需要异步发出。有很多方法可以实现这一点。为了简单起见，我们将使用 https://rxjs.dev/api/operators/delay[RxJS的``delay``] 操作符。
 
-At the same time, we are writing an asynchronous spec. That is, Jasmine needs to wait for the Observable and the expectations before the spec is finished.
+同时，我们正在编写一个异步的规格。也就是说，Jasmine需要等待Observable和断言完成后才能完成规格。
 
-TIP: `fakeAsync` and `tick`
+TIP: `fakeAsync` 和 `tick`
 
-Again, there are several ways how to accomplish this. We are going to use Angular’s `fakeAsync` and `tick` functions. We have introduced them when <<testing-complex-forms#_successful_form_submission, testing a form with async validators>>.
+同样，有几种方法可以实现这一点。我们将使用Angular的``fakeAsync``和``tick``函数。我们在 <<testing-complex-forms#_成功提交表单,测试具有异步验证器的表单时>> 介绍过它们。
 
-A quick recap: `fakeAsync` freezes time and prevents asynchronous tasks from being executed. The `tick` function then simulates the passage of time, executing the scheduled tasks.
+简单回顾一下：``fakeAsync``会冻结时间并阻止异步任务的执行。然后，``tick``函数模拟时间的流逝，执行计划的任务。
 
-`fakeAsync` wraps the function passed to `it`:
+``fakeAsync``包装传递给 `it` 的函数：
 
 [source,typescript]
 ----
@@ -427,7 +426,7 @@ it('translates the key, async service response', fakeAsync(() => {
 });
 ----
 
-Next, we need to change the `TranslateService`’s `get` method to make it asynchronous.
+接下来，我们需要将``TranslateService``的``get``方法更改为异步方法。
 
 [source,typescript]
 ----
@@ -438,11 +437,11 @@ it('translates the key, async service response', fakeAsync(() => {
 });
 ----
 
-TIP: Delay Observable
+TIP: 延迟 Observable
 
-We still use `of`, but we delay the output by 100 milliseconds. The exact number does not matter as long as there is _some_ delay greater or equal 1.
+我们仍然使用``of``，但是我们将输出延迟100毫秒。具体的数字并不重要，只要有__一些__大于或等于1的延迟即可。
 
-Now, we can call `detectChanges` for the first time.
+现在，我们可以第一次调用``detectChanges``。
 
 [source,typescript]
 ----
@@ -454,9 +453,9 @@ it('translates the key, async service response', fakeAsync(() => {
 });
 ----
 
-The Pipe’s `transform` method is called for the first time and returns `null` since the Observable does not emit a value immediately.
+第一次调用管道的``transform``方法，由于Observable不会立即发出值，所以返回``null``。
 
-So we expect that the output is empty:
+因此，我们期望输出为空：
 
 [source,typescript]
 ----
@@ -469,9 +468,9 @@ it('translates the key, async service response', fakeAsync(() => {
 });
 ----
 
-TIP: Let time pass
+TIP: 让时间流逝
 
-Here comes the interesting part. We want the Observable to emit a value now. We simulate the passage of 100 milliseconds with `tick(100)`.
+下面有趣的部分来了。我们希望Observable现在发出一个值。我们使用 `tick(100)` 来模拟经过了100毫秒的时间。
 
 [source,typescript]
 ----
@@ -486,9 +485,9 @@ it('translates the key, async service response', fakeAsync(() => {
 });
 ----
 
-This causes the Observable to emit the translation and complete. The Pipe receives the translation and saves it.
+这导致Observable发出翻译并完成。管道接收到翻译并保存起来。
 
-To see a change in the DOM, we start a second change detection. The Pipe’s `transform` method is called for the second time and returns the correct translation.
+为了在DOM中看到变化，我们进行第二次变更检测。管道的``transform``方法第二次被调用并返回正确的翻译。
 
 [source,typescript]
 ----
@@ -504,9 +503,9 @@ it('translates the key, async service response', fakeAsync(() => {
 }));
 ----
 
-Testing these details may seem pedantic at first. But the logic in `TranslatePipe` exists for a reason.
+一开始测试这些细节可能显得过于琐碎。但是``TranslatePipe``中的逻辑是有原因的。
 
-There are two specs left to write:
+还有两个规格需要编写：
 
 [source,typescript]
 ----
@@ -514,11 +513,11 @@ it('translates a changed key', /* … */);
 it('updates on translation change', /* … */);
 ----
 
-The `TranslatePipe` receives the translation asynchronously and stores both the key and the translation. When Angular calls `transform` with the _same key_ again, the Pipe returns the translation synchronously. Since the Pipe is marked as _impure_, Angular does not cache the `transform` result.
+``TranslatePipe``异步接收到翻译并存储了键和翻译。当Angular再次使用__相同的键(key)__调用``transform``时，管道会同步返回翻译。由于管道被标记为__impure__，Angular不会缓存``transform``的结果。
 
-TIP: Different key
+TIP: 不同的键
 
-When `translate` is called with a _different key_, the Pipe needs to fetch the new translation. We simulate this case by changing the `HostComponent`’s `key` property from `key1` to `key2`.
+当使用__不同的键(key)__调用``translate``时，管道需要获取新的翻译。我们通过将``HostComponent``的``key``属性从``key1``更改为``key2``来模拟这种情况。
 
 [source,typescript]
 ----
@@ -530,13 +529,13 @@ it('translates a changed key', () => {
 });
 ----
 
-After a change detection, the DOM contains the updated translation for `key2`.
+经过一次变更检测后，DOM中包含了``key2``的更新翻译。
 
-TIP: Translation change
+TIP: 翻译更改
 
-Last but no least, the Pipe needs to fetch a new translation from the `TranslateService` when the user changes the language and new translations have been loaded. For this purpose, the Pipe subscribes to the Service’s `onTranslationChange` emitter.
+最后但并非最不重要的是，当用户更改语言并加载了新的翻译时，管道需要从``TranslateService``获取新的翻译。为此，管道订阅了服务的``onTranslationChange``事件发射器。
 
-Our `TranslateService` fake supports `onTranslationChange` as well, hence we call the `emit` method to simulate a translation change. Before, we let the Service return a different translation in order to see a change in the DOM.
+我们的``TranslateService``虚拟对象也支持``onTranslationChange``，因此我们调用``emit``方法来模拟翻译更改。在此之前，我们让服务返回不同的翻译，以便在DOM中看到变化。
 
 [source,typescript]
 ----
@@ -550,16 +549,16 @@ it('updates on translation change', () => {
 });
 ----
 
-We made it! Writing these specs is challenging without doubt.
+我们成功完成了！毫无疑问，编写这些规格是具有挑战性的。
 
-`TranslateService` and `TranslatePipe` are non-trivial examples with a proven API. The original classes from ngx-translate are more powerful. If you look for a robust and flexible solution, you should use the ngx-translate library directly.
+``TranslateService``和``TranslatePipe``是具有经过验证的API的非平凡示例。ngx-translate的原始类更加强大。如果您正在寻找一个稳健且灵活的解决方案，应该直接使用ngx-translate库。
 
 [NOTE]
 ====
-- https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.spec.ts[TranslatePipe: test code]
-- https://angular.io/api/core/testing/fakeAsync[Angular API reference: fakeAsync]
-- https://angular.io/api/core/testing/tick[Angular API reference: tick]
-- https://rxjs.dev/api/operators/delay[RxJS: delay operator]
+- https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.spec.ts[TranslatePipe：测试代码]
+- https://angular.io/api/core/testing/fakeAsync[Angular API 参考：fakeAsync]
+- https://angular.io/api/core/testing/tick[Angular API 参考：tick]
+- https://rxjs.dev/api/operators/delay[RxJS：delay 操作符]
 - https://github.com/ngx-translate/core[ngx-translate]
 ====
 
