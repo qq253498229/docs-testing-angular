@@ -1,25 +1,25 @@
-= Testing Modules
+= 测试模块
 
-Learning objectives
+学习目标
 
-- Deciding whether and how to test Angular Modules
-- Writing smoke tests to catch Module errors early
+- 决定是否以及如何测试Angular模块
+- 编写冒烟测试以尽早捕捉模块错误
 
-Modules are central parts of Angular applications. Often they contain important setup code. Yet they are hard to test since there is no typical logic, only sophisticated configuration.
+模块是Angular应用程序的核心部分。它们通常包含重要的设置代码。然而，由于没有典型的逻辑，只有复杂的配置，因此它们很难进行测试。
 
-TIP: Only metadata
+TIP: 仅元数据
 
-Angular Modules are classes, but most of the time, the class itself is empty. The essence lies in the metadata set with `@NgModule({ … })`.
+Angular模块是类，但大多数情况下，类本身是空的。其实质在于使用 `@NgModule({ … })` 设置的元数据。
 
-We could sneak into the metadata and check whether certain Services are provided, whether third-party Modules are imported and whether Components are exported.
+我们可以窥探元数据，检查是否提供了特定的服务，是否导入了第三方模块，以及是否导出了组件。
 
-But such a test would simply *mirror the implementation*. Code duplication does not give you more confidence, it only increases the cost of change.
+但这样的测试只是__复制实现__。代码重复不会增加你的信心，只会增加变更的成本。
 
-Should we write tests for Modules at all? If there is a reference error in the Module, the compilation step (`ng build`) fails before the automated tests scrutinize the build. “Failing fast” is good from a software quality perspective.
+我们应该为模块编写测试吗？如果模块中存在引用错误，在自动化测试检查构建之前，编译步骤（`ng build`）就会失败。“快速失败”从软件质量的角度来看是好的。
 
-TIP: Smoke test
+TIP: 冒烟测试(smoke test)
 
-There are certain Module errors that only surface during runtime. These can be caught with a _smoke test_. Given this Module:
+在运行时，有些模块错误只会暴露出来。可以使用__冒烟测试__来捕捉这些错误。假设有以下模块：
 
 [source,typescript]
 ----
@@ -34,7 +34,7 @@ import { ExampleComponent } from './example.component';
 export class FeatureModule {}
 ----
 
-We write this smoke test:
+我们编写以下冒烟测试：
 
 [source,typescript]
 ----
@@ -55,5 +55,5 @@ describe('FeatureModule', () => {
 });
 ----
 
-The integration test uses the `TestBed` to import the Module under test. It verifies that no error occurs when importing the Module.
+这个集成测试使用``TestBed``来导入待测试的模块。它验证在导入模块时是否出现错误。
 
