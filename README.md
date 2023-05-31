@@ -5,7 +5,7 @@
 
 中文翻译存放在 [gitee 仓库](https://gitee.com/consolelog/docs-testing-angular.git) 中， 在线地址为:
 
-`https://docs.codeforfun.cn/docs-testing-angular/%E4%B8%AD%E6%96%87/start.html`
+https://docs.codeforfun.cn/docs-testing-angular/%E4%B8%AD%E6%96%87/start.html
 
 如果有闲钱可以打赏几块钱请我喝杯蜜雪冰城，多谢多谢！
 
