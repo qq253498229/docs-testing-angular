@@ -24,3 +24,4 @@
 * xref:acknowledgements.adoc[鸣谢,leveloffset=-1]
 * xref:about.adoc[关于,leveloffset=-1]
 * xref:license.adoc[许可证,leveloffset=-1]
+* xref:other.adoc[其它,leveloffset=-1]
