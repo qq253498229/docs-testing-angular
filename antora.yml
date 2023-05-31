@@ -1,5 +1,5 @@
 name: docs-testing-angular
-title: Testing Angular
+title: Angular 测试指南
 version: '中文'
 start_page: ROOT:start.adoc
 nav:

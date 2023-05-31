@@ -136,7 +136,7 @@ const fixture = TestBed.createComponent(CounterComponent);
 
 `createComponent` 返回一个 `ComponentFixture`，它实质上是围绕组件的一个包装器，提供了有用的测试工具。我们将在后面更详细地了解 `ComponentFixture`。
 
-`createComponent` 将组件渲染到 HTML DOM 中的一个 `div` 容器元素中。然而，还有一些东西缺失。组件没有完全渲染出来。所有静态的 HTML 存在，但动态的 HTML 却缺失了。模板绑定，如示例中的 `{% raw %}{{ count }}{% endraw %}`，没有被计算。
+`createComponent` 将组件渲染到 HTML DOM 中的一个 `div` 容器元素中。然而，还有一些东西缺失。组件没有完全渲染出来。所有静态的 HTML 存在，但动态的 HTML 却缺失了。模板绑定，如示例中的 `{{ count }}`，没有被计算。
 
 TIP: 手动触发变更检测
 
@@ -415,7 +415,7 @@ TIP: 没有事件冒泡
 
 [source,html]
 ----
-{% raw %}<strong>{{ count }}</strong>{% endraw %}
+<strong>{{ count }}</strong>
 ----
 
 TIP: 通过测试id查找元素
@@ -424,7 +424,7 @@ TIP: 通过测试id查找元素
 
 [source,html]
 ----
-{% raw %}<strong data-testid="count">{{ count }}</strong>{% endraw %}
+<strong data-testid="count">{{ count }}</strong>
 ----
 
 现在我们可以像往常一样找到该元素：
@@ -502,7 +502,7 @@ CounterComponent increments the count FAILED
 
 TIP: 手动进行变更检测
 
-我们已经提到在测试环境中，Angular不会自动检测变更以更新DOM。点击增加按钮会更改组件实例的 `count` 属性。要更新模板绑定 `{% raw %}{{ count }}{% endraw %}`，我们需要 _手动触发变更检测_。
+我们已经提到在测试环境中，Angular不会自动检测变更以更新DOM。点击增加按钮会更改组件实例的 `count` 属性。要更新模板绑定 `{{ count }}`，我们需要 _手动触发变更检测_。
 
 [source,typescript]
 ----

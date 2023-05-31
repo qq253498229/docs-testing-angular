@@ -367,7 +367,7 @@ See the PaginateDirective in action
 ----
 <ul>
   <li *appPaginate="let item of items">
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ul>
 ----
@@ -380,7 +380,7 @@ See the PaginateDirective in action
 ----
 <ng-template appPaginate let-item [appPaginateOf]="items">
   <li>
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ng-template>
 ----
@@ -418,7 +418,7 @@ TIP: 指令输入
 ----
 <ul>
   <li *appPaginate="let item of items; perPage: 5">
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ul>
 ----
@@ -433,7 +433,7 @@ TIP: 指令输入
   [appPaginateOf]="items"
   [appPaginatePerPage]="5">
   <li>
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ng-template>
 ----
@@ -480,7 +480,7 @@ TIP: 传递另一个模板
   <button (click)="previousPage()">
     Previous page
   </button>
-  {% raw %}{{ page }} / {{ pages }}{% endraw %}
+  {{ page }} / {{ pages }}
   <button (click)="nextPage()">
     Next page
   </button>
@@ -526,7 +526,7 @@ let-nextPage="nextPage"
 <button (click)="previousPage()">
   Previous page
 </button>
-{% raw %}{{ page }} / {{ pages }}{% endraw %}
+{{ page }} / {{ pages }}
 <button (click)="nextPage()">
   Next page
 </button>
@@ -538,7 +538,7 @@ let-nextPage="nextPage"
 ----
 <ul>
   <li *appPaginate="let item of items; perPage: 5; controls: controls">
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ul>
 ----
@@ -554,7 +554,7 @@ let-nextPage="nextPage"
   [appPaginatePerPage]="5"
   [appPaginateControls]="controls">
   <li>
-    {% raw %}{{ item }}{% endraw %}
+    {{ item }}
   </li>
 </ng-template>
 ----
@@ -606,7 +606,7 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         *appPaginate="let item of items; perPage: 3"
         data-testid="item"
       >
-        {% raw %}{{ item }}{% endraw %}
+        {{ item }}
       </li>
     </ul>
   `,
@@ -631,7 +631,7 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         *appPaginate="let item of items; perPage: 3; controls: controls"
         data-testid="item"
       >
-        {% raw %}{{ item }}{% endraw %}
+        {{ item }}
       </li>
     </ul>
     <ng-template
@@ -646,9 +646,9 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         data-testid="previousPage">
         Previous page
       </button>
-      <span data-testid="page">{% raw %}{{ page }}{% endraw %}</span>
+      <span data-testid="page">{{ page }}</span>
       /
-      <span data-testid="pages">{% raw %}{{ pages }}{% endraw %}</span>
+      <span data-testid="pages">{{ pages }}</span>
       <button
         (click)="nextPage()"
         data-testid="nextPage">
@@ -832,7 +832,7 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         *appPaginate="let item of items; perPage: 3; controls: controls"
         data-testid="item"
       >
-        {% raw %}{{ item }}{% endraw %}
+        {{ item }}
       </li>
     </ul>
     <ng-template
@@ -845,9 +845,9 @@ const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       <button (click)="previousPage()" data-testid="previousPage">
         Previous page
       </button>
-      <span data-testid="page">{% raw %}{{ page }}{% endraw %}</span>
+      <span data-testid="page">{{ page }}</span>
       /
-      <span data-testid="pages">{% raw %}{{ pages }}{% endraw %}</span>
+      <span data-testid="pages">{{ pages }}</span>
       <button (click)="nextPage()" data-testid="nextPage">
         Next page
       </button>

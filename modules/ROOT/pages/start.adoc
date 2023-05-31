@@ -1,4 +1,4 @@
-= Testing Angular
+= Angular 测试指南
 
 _一本关于增强Angular应用程序健壮性的指南_
 

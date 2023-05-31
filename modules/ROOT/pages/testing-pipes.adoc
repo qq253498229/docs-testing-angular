@@ -13,7 +13,7 @@ Angular管道是从组件模板中调用的特殊函数。它的目的是转换�
 
 [source,]
 ----
-{% raw %}{{ user.birthday | date }}{% endraw %}
+{{ user.birthday | date }}
 ----
 
 TIP: 格式化
@@ -46,7 +46,7 @@ export class GreetPipe implements PipeTransform {
 
 [source,]
 ----
-{% raw %}{{ 'Julie' | greet }}{% endraw %}
+{{ 'Julie' | greet }}
 ----
 
 ``GreetPipe``接受字符串 `'Julie'` 并计算一个新的字符串，`'Hello, Julie!'`。
@@ -199,7 +199,7 @@ export class TranslateService {
 
 [source,]
 ----
-{% raw %}{{ 'greeting' | translate }}{% endraw %}
+{{ 'greeting' | translate }}
 ----
 
 这将翻译键 `'greeting'`。
@@ -323,7 +323,7 @@ const key1 = 'key1';
 const key2 = 'key2';
 
 @Component({
-  template: '{% raw %}{{ key | translate }}{% endraw %}',
+  template: '{{ key | translate }}',
 })
 class HostComponent {
   public key = key1;
@@ -369,7 +369,7 @@ describe('TranslatePipe: with TestBed and HostComponent', () => {
 
 TIP: 同步和异步翻译
 
-需要测试什么？我们需要检查 `{% raw %}{{ key | translate }}{% endraw %}` 是否计算为 `key1的翻译`。但是有两种需要测试的情况：
+需要测试什么？我们需要检查 `{{ key | translate }}` 是否计算为 `key1的翻译`。但是有两种需要测试的情况：
 
 1. 翻译已加载完成。管道的``transform``方法立即同步返回正确的翻译。``TranslateService``的``get``返回的Observable立即发出翻译并完成。
 2. 翻译正在进行中。``transform``方法返回``null``（或过时的翻译）。Observable随后在任意时间完成。然后，触发变更检测，``transform``方法第二次被调用并返回正确的翻译。

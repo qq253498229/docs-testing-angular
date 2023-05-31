@@ -1275,7 +1275,7 @@ public showPassword = false;
   type="button"
   (click)="showPassword = !showPassword"
 >
-  {% raw  %}{{ showPassword ? '🔒 Hide password' : '👁️ Show password' }}{% endraw  %}
+  {{ showPassword ? '🔒 Hide password' : '👁️ Show password' }}
 </button>
 ----
 
