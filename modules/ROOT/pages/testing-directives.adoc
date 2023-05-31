@@ -1,45 +1,45 @@
-= Testing Directives
+= 测试指令
 
-Learning objectives
+学习目标
 
-- Testing the effect of an Attribute Directive
-- Testing complex Structural Directives with Inputs and templates
-- Providing a host Component for testing Attribute and Structural Directives
+- 测试属性指令的效果
+- 测试具有输入和模板的复杂结构性指令
+- 为测试属性指令和结构性指令提供主机组件
 
-Angular beginners quickly encounter four core concepts: Modules, Components, Services and Pipes. A lesser known core concept are Directives. Without knowing, even beginners are using Directives, because Directives are everywhere.
+Angular初学者很快会遇到四个核心概念：模块、组件、服务和管道。一个不太知名的核心概念是指令。即使是初学者也在不知不觉中使用了指令，因为指令无处不在。
 
-In Angular, there are three types of Directives:
+在Angular中，有三种类型的指令：
 
-1. A *Component* is a Directive with a template. A Component typically uses an element type selector, like `app-counter`. Angular then looks for `app-counter` elements and renders the Component template into these host elements.
-2. An *Attribute Directive* adds logic to an existing host element in the DOM. Examples for built-in Attribute Directives are `NgClass` and `NgStyle`.
-3. A *Structural Directive* alters the structure of the DOM, meaning it adds and removes elements programmatically. Examples for built-in Structural Directives are `NgIf`, `NgFor` and `NgSwitch`.
+1. **组件(Component)**是带有模板的指令。组件通常使用元素类型选择器，比如``app-counter``。Angular然后查找``app-counter``元素，并将组件模板渲染到这些宿主元素中。
+2. **属性指令(Attribute Directive)**在DOM中的现有宿主元素上添加逻辑。内置的属性指令示例包括``NgClass``和``NgStyle``。
+3. **结构性指令(Structural Directive)**改变DOM的结构，也就是以编程方式添加和删除元素。内置的结构性指令示例包括``NgIf``、``NgFor``和``NgSwitch``。
 
-We have already tested Components. We have yet to test the two other types of Directives.
+我们已经测试了组件。我们还需要测试其他两种类型的指令。
 
-== Testing Attribute Directives
+== 测试属性指令
 
-The name Attribute Directive comes from the attribute selector, for example `[ngModel]`. An Attribute Directive does not have a template and cannot alter the DOM structure.
+属性指令的名称来自于属性选择器，例如``[ngModel]``。属性指令没有模板，不能改变DOM结构。
 
-We have already mentioned the built-in Attribute Directives `NgClass` and `NgStyle`. In addition, both Template-driven and Reactive Forms rely heavily on Attribute Directives: `NgForm`, `NgModel`, `FormGroupDirective`, `FormControlName`, etc.
+我们已经提到了内置的属性指令``NgClass``和``NgStyle``。此外，模板驱动和响应式表单都严重依赖属性指令：`NgForm`、`NgModel`、`FormGroupDirective`、``FormControlName``等。
 
-TIP: Styling logic
+TIP: 样式逻辑
 
-Attributes Directives are often used for changing the style of an element, either directly with inline styles or indirectly with classes.
+属性指令经常用于更改元素的样式，可以直接使用内联样式或间接使用类。
 
-Most styling logic can be implemented using CSS alone, no JavaScript code is necessary. But sometimes JavaScript is required to set inline styles or add classes programmatically.
+大多数样式逻辑可以仅使用CSS来实现，不需要JavaScript代码。但有时需要使用JavaScript来设置内联样式或以编程方式添加类。
 
 === ThresholdWarningDirective
 
-None of our <<example-applications#_example_applications, example applications>> contain an Attribute Directive, so we are introducing and testing the *`ThresholdWarningDirective`*.
+我们的 <<example-applications#_示例应用程序,示例应用程序>> 中都不包含属性指令，因此我们将引入和测试**`ThresholdWarningDirective`**。
 
-This Directive applies to `<input type="number">` elements. It toggles a class if the picked number exceeds a given threshold. If the number is higher than the threshold, the field should be marked visually.
+该指令适用于 `<input type="number">` 元素。如果选择的数字超过给定的阈值，则切换类。如果数字高于阈值，则应在视觉上标记该字段。
 
-Note that numbers above the threshold are valid input. The `ThresholdWarningDirective` does not add a form control validator. We merely want to warn the user so they check the input twice.
+请注意，阈值以上的数字是有效的输入。``ThresholdWarningDirective``不添加表单控件验证器。我们只是想提醒用户，以便他们检查输入两次。
 
 [NOTE]
 ====
-- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts[ThresholdWarningDirective: Source code]
-- https://molily.github.io/threshold-warning-directive/[ThresholdWarningDirective: Run the app]
+- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts[ThresholdWarningDirective：源代码]
+- https://molily.github.io/threshold-warning-directive/[ThresholdWarningDirective：运行应用]
 ====
 
 ++++
@@ -54,9 +54,9 @@ See the ThresholdWarningDirective in action
 </script>
 ++++
 
-Enter a number greater than 10 to see the effect.
+输入一个大于10的数字以查看效果。
 
-This is the Directive’s code:
+这是该指令的代码：
 
 [source,typescript]
 ----
@@ -85,16 +85,16 @@ export class ThresholdWarningDirective {
 }
 ----
 
-This is how we apply the Directive to an element:
+这是我们如何将指令应用于元素：
 
 [source,typescript]
 ----
 <input type="number" [appThresholdWarning]="10" />
 ----
 
-This means: If the user enters a number that is greater than 10, mark the field with a visual warning.
+这意味着：如果用户输入的数字大于10，则用视觉警告标记该字段。
 
-One bit is missing: the styles for the visual warning.
+还缺少一点：视觉警告的样式。
 
 [source,css]
 ----
@@ -103,11 +103,11 @@ input[type='number'].overThreshold {
 }
 ----
 
-Before we write the test for the Directive, let us walk through the implementation parts.
+在编写指令的测试之前，让我们逐步了解实现的部分。
 
-TIP: Input of the same name
+TIP: 同名输入
 
-The `ThresholdWarningDirective` is applied with an attribute binding `[appThresholdWarning]="…"`. It receives the attribute value as an Input of the same name. This is how the threshold is configured.
+`ThresholdWarningDirective` 使用属性绑定 `[appThresholdWarning]="…"` 进行应用。它以相同名称的输入属性接收属性值。这是配置阈值的方式。
 
 [source,typescript]
 ----
@@ -115,11 +115,11 @@ The `ThresholdWarningDirective` is applied with an attribute binding `[appThresh
 public appThresholdWarning: number | null = null;
 ----
 
-TIP: `input` event
+TIP: `input` 事件
 
-Using `HostListener`, the Directive listens for `input` event on the host element. When the user changes the field value, the `inputHandler` method is called.
+使用 `HostListener`，该指令在宿主元素上监听 `input` 事件。当用户更改字段的值时，将调用 `inputHandler` 方法。
 
-The `inputHandler` gets the field value and checks whether it is over the threshold. The result is stored in the `overThreshold` boolean property.
+`inputHandler` 方法获取字段的值并检查其是否超过了阈值。结果存储在 `overThreshold` 布尔属性中。
 
 [source,typescript]
 ----
@@ -131,13 +131,13 @@ public inputHandler(): void {
 }
 ----
 
-TIP: Read value
+TIP: 读取值
 
-To access the host element, we use the `ElementRef` dependency. `ElementRef` is a wrapper around the host element’s DOM node. `this.elementRef.nativeElement` yields the `input` element’s DOM node. `valueAsNumber` contains the input value as a number.
+为了访问宿主元素，我们使用 `ElementRef` 依赖项。`ElementRef` 是宿主元素 DOM 节点的包装器。`this.elementRef.nativeElement` 返回 `input` 元素的 DOM 节点。`valueAsNumber` 包含输入值作为数字的值。
 
-TIP: Toggle class
+TIP: 切换类
 
-Last but not least, the `overThreshold` property is bound to a class of the same name using `HostBinding`. This is how the class is toggled.
+最后，通过使用 `HostBinding`，将 `overThreshold` 属性绑定到具有相同名称的类上。这是如何切换类的方式。
 
 [source,typescript]
 ----
@@ -145,13 +145,13 @@ Last but not least, the `overThreshold` property is bound to a class of the same
 public overThreshold = false;
 ----
 
-=== ThresholdWarningDirective test
+=== ThresholdWarningDirective 测试
 
-Now that we understand what is going on, we need to replicate the workflow in our test.
+现在我们了解了发生了什么，我们需要在我们的测试中复制这个工作流程。
 
-TIP: Host Component
+TIP: 宿主组件
 
-First of all, Attribute and Structural Directives need an existing host element they are applied to. When testing these Directives, we use a *host Component* that renders the host element. For example, the `ThresholdWarningDirective` needs an `<input type="number">` host element.
+首先，属性指令和结构指令需要一个已经存在的宿主元素来应用它们。在测试这些指令时，我们使用一个**宿主组件(host Component)**来渲染宿主元素。例如，`ThresholdWarningDirective` 需要一个 `<input type="number">` 宿主元素。
 
 [source,typescript]
 ----
@@ -164,7 +164,7 @@ First of all, Attribute and Structural Directives need an existing host element 
 class HostComponent {}
 ----
 
-We are going to render this Component. We need a standard <<testing-components#_configuring_the_testing_module, Component test setup>> using the `TestBed`.
+我们将渲染这个组件。我们需要使用 `TestBed` 进行标准的 <<testing-components#_配置测试模块,组件测试设置>>。
 
 [source,typescript]
 ----
@@ -184,13 +184,13 @@ describe('ThresholdWarningDirective', () => {
 });
 ----
 
-When configuring the testing Module, we declare both the Directive under test and the host Component. Just like in a Component test, we render the Component and obtain a `ComponentFixture`.
+在配置测试模块时，我们声明了要测试的指令和宿主组件。就像在组件测试中一样，我们渲染了组件并获得了一个 `ComponentFixture`。
 
-TIP: Find input element
+TIP: 找到输入元素
 
-In the following specs, we need to access the input element. We use the standard approach: a `data-testid` attribute and the `findEl` <<testing-components#_testing_helpers, testing helper>>.
+在接下来的规范中，我们需要访问输入元素。我们使用标准的方法：使用 `data-testid` 属性和 `findEl` <<testing-components#_测试辅助函数,测试助手>>。
 
-For convenience, we pick the input element in the `beforeEach` block. We save it in a shared variable named `input`.
+为了方便起见，我们在 `beforeEach` 块中选择了输入元素。我们将其保存在一个名为 `input` 的共享变量中。
 
 [source,typescript]
 ----
@@ -222,9 +222,9 @@ describe('ThresholdWarningDirective', () => {
 });
 ----
 
-TIP: Check class
+TIP: 检查类
 
-The first spec ensures that the Directive does nothing when the user has not touched the input. Using the element’s https://developer.mozilla.org/en-US/docs/Web/API/Element/classList[classList], we expect the class `overThreshold` to be absent.
+第一个规范确保当用户未触摸输入时，指令不起作用。使用元素的 https://developer.mozilla.org/en-US/docs/Web/API/Element/classList[classList]，我们期望``overThreshold``类不存在。
 
 [source,typescript]
 ----
@@ -233,7 +233,7 @@ it('does not set the class initially', () => {
 });
 ----
 
-The next spec enters a number over the threshold. To simulate the user input, we use our handy testing helper `setFieldValue`. Then, the spec expects the class to be present.
+下一个规范输入一个超过阈值的数字。为了模拟用户输入，我们使用了我们方便的测试助手``setFieldValue``。然后，该规范期望该类存在。
 
 [source,typescript]
 ----
@@ -244,9 +244,9 @@ it('adds the class if the number is over the threshold', () => {
 });
 ----
 
-`setFieldValue` triggers a fake `input` event. This triggers the Directive’s event handler. `11` is greater than the threshold `10`, so the class is added. We still need to call `detectChanges` so the DOM is updated.
+``setFieldValue``触发了一个伪造的 `input` 事件。这会触发指令的事件处理程序。``11``大于阈值``10``，所以添加了该类。我们仍然需要调用``detectChanges``以便更新DOM。
 
-The last spec makes sure that the threshold is still considered as a safe value. No warning should be shown.
+最后一个规范确保阈值仍然被视为安全值。不应该显示任何警告。
 
 [source,typescript]
 ----
@@ -257,9 +257,9 @@ it('removes the class if the number is at the threshold', () => {
 });
 ----
 
-This is it! Testing the `ThresholdWarningDirective` is like testing a Component. The difference is that the Component serves as a host for the Directive.
+就是这样了！测试``ThresholdWarningDirective``就像测试一个组件一样。不同之处在于组件作为指令的宿主。
 
-The full spec for the `ThresholdWarningDirective` looks like this:
+``ThresholdWarningDirective``的完整规范如下：
 
 [source,typescript]
 ----
@@ -312,39 +312,39 @@ describe('ThresholdWarningDirective', () => {
 
 [NOTE]
 ====
-- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts [ThresholdWarningDirective: implementation code]
-- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.spec.ts[ThresholdWarningDirective: test code]
+- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts [ThresholdWarningDirective: 实现代码]
+- https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.spec.ts[ThresholdWarningDirective: 测试代码]
 ====
 
-== Testing Structural Directives
+== 测试结构型指令
 
-A Structural Directive does not have a template like a Component, but operates on an internal `ng-template`. The Directive renders the template into the DOM programmatically, passing context data to the template.
+结构指令没有像组件那样的模板，而是在内部使用``ng-template``进行操作。该指令以编程方式将模板呈现到DOM中，并将上下文数据传递给模板。
 
 TIP: Render template programmatically
 
-The prime examples emonstrate what Structural Directives are capable of:
+以NgIf指令和NgFor指令为例，它们展示了结构指令的功能：
 
-- The `NgIf` Directive decides whether the template is rendered or not.
-- The `NgFor` Directive walks over a list of items and renders the template repeatedly for each item.
+- ``NgIf``指令决定是否呈现模板。
+- ``NgFor``指令遍历一个项目列表，并针对每个项目重复呈现模板。
 
-A Structural Directive uses an attribute selector, like `[ngIf]`. The attribute is applied to a host element with the special asterisk syntax, for example `*ngIf`. Internally, this is translated to `<ng-template [ngIf]="…"> … </ng-template>`.
+结构指令使用属性选择器，例如``[ngIf]``。属性应用于具有特殊星号语法的宿主元素，例如``*ngIf``。在内部，这将被转换为 `<ng-template [ngIf]="…"> … </ng-template>`。
 
-This guide assumes that you roughly understand how Structural Directives work and how the microsyntax translates to Directive Inputs. Please refer to the https://angular.io/guide/structural-directives[comprehensive official guide on Structural Directives].
+本指南假设您大致了解结构指令的工作原理以及微语法如何转换为指令输入。请参考 https://angular.io/guide/structural-directives[官方全面的结构指令指南]。
 
 === PaginateDirective
 
-We are introducing and testing the `PaginateDirective`, a complex Structural Directive.
+我们将介绍和测试``PaginateDirective``，这是一个复杂的结构指令。
 
-TIP: `NgFor` with Pagination
+TIP: 分页的 `NgFor`
 
-`PaginateDirective` works similar to `NgFor`, but does not render all list items at once. It spreads the items over pages, usually called *pagination*.
+``PaginateDirective``的工作方式类似于``NgFor``，但不会一次渲染所有列表项。它将项目分散到页面上，通常称为 *分页(pagination)*。
 
-Per default, only ten items are rendered. The user can turn the pages by clicking on “next” or “previous” buttons.
+默认情况下，只呈现十个项目。用户可以通过点击“下一页”或“上一页”按钮来切换页面。
 
 [NOTE]
 ====
-- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts[PaginateDirective: Source code]
-- https://molily.github.io/paginate-directive/[PaginateDirective: Run the app]
+- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts[PaginateDirective: 源代码]
+- https://molily.github.io/paginate-directive/[PaginateDirective: 运行应用程序]
 ====
 
 ++++
@@ -359,9 +359,9 @@ See the PaginateDirective in action
 </script>
 ++++
 
-Before writing the test, we need to understand the outer structure of `PaginateDirective` first.
+在编写测试之前，我们首先需要了解``PaginateDirective``的外部结构。
 
-The simplest use of the Directive looks like this:
+最简单的使用方式如下：
 
 [source,html]
 ----
@@ -372,9 +372,9 @@ The simplest use of the Directive looks like this:
 </ul>
 ----
 
-This is similar to the `NgFor` directive. Assuming that `items` is an array of numbers (`[1, 2, 3, …]`), the example above renders the first 10 numbers in the array.
+这类似于``NgFor``指令。假设``items``是一个数字数组（`[1, 2, 3, …]`），上面的示例将渲染数组中的前10个数字。
 
-The asterisk syntax `_appPaginate` and the so-called _microsyntax_ `let item of items` is _syntactic sugar*. This is a shorter and nicer way to write something complex. Internally, Angular translates the code to the following:
+星号语法__appPaginate__和所谓的__微语法__``let item of items``是语法糖。这是一种更简短、更美观的写法，用于表示复杂的结构。在内部，Angular将代码转换为以下形式：
 
 [source,html]
 ----
@@ -385,13 +385,13 @@ The asterisk syntax `_appPaginate` and the so-called _microsyntax_ `let item of 
 </ng-template>
 ----
 
-There is an `ng-template` with an attribute `appPaginate` and an attribute binding `appPaginateOf`. Also there is a template input variable called `item`.
+有一个带有属性``appPaginate``和属性绑定``appPaginateOf``的``ng-template``。还有一个名为``item``的模板输入变量。
 
-TIP: Render template for each item
+TIP: 为每个项目渲染模板
 
-As mentioned, a Structural Directive does not have its own template, but operates on an `ng-template` and renders it programmatically. Our `PaginateDirective` works with the `ng-template` shown above. The Directive renders the template for each item on the current page.
+如上所述，结构性指令没有自己的模板，而是在``ng-template``上进行操作，并以编程方式进行渲染。我们的``PaginateDirective``与上述``ng-template``一起工作。该指令为当前页面上的每个项目渲染模板。
 
-Now that we have seen Angular’s internal representation, we can understand the structure of the `PaginateDirective` class:
+既然我们已经看到了Angular的内部表示，我们可以理解``PaginateDirective``类的结构：
 
 [source,typescript]
 ----
@@ -406,13 +406,13 @@ export class PaginateDirective<T> implements OnChanges {
 }
 ----
 
-The Directive uses the `[appPaginate]` attribute selector and has an Input called `appPaginateOf`. By writing the microsyntax `*appPaginate="let item of items"`, we actually set the `appPaginateOf` Input to the value `items`.
+该指令使用``[appPaginate]``属性选择器，并具有名为``appPaginateOf``的输入。通过编写微语法 `*appPaginate="let item of items"`，实际上将``appPaginateOf``输入设置为``items``的值。
 
-TIP: Directive Inputs
+TIP: 指令输入
 
-The `PaginateDirective` has a configuration option named `perPage`. It specifies how many items are visible per page.
+``PaginateDirective``具有一个名为``perPage``的配置选项。它指定每页可见的项目数。
 
-Per default, there are ten items on a page. To change it, we set `perPage: …` in the microsyntax:
+默认情况下，每页有十个项目。要更改它，我们在微语法中设置 `perPage: …`：
 
 [source,html]
 ----
@@ -423,7 +423,7 @@ Per default, there are ten items on a page. To change it, we set `perPage: …` 
 </ul>
 ----
 
-This translates to:
+这将被翻译为：
 
 [source,html]
 ----
@@ -438,7 +438,7 @@ This translates to:
 </ng-template>
 ----
 
-`perPage` translates to an Input named `appPaginatePerPage` in the Directive’s code:
+``perPage``在Directive的代码中会被翻译为名为``appPaginatePerPage``的输入属性：
 
 [source,typescript]
 ----
@@ -456,17 +456,17 @@ export class PaginateDirective<T> implements OnChanges {
 }
 ----
 
-This is how built-in Structural Directives like `NgIf` and `NgFor` work as well.
+这也是内置的结构性指令（例如 `NgIf` 和 `NgFor`）的工作方式。
 
-Now it gets more complicated. Since we want to paginate the items, we need user controls to turn the pages – in addition to rendering the items.
+现在情况变得更加复杂。由于我们想要对项目进行分页，除了渲染项目之外，我们还需要用户控制来翻页。
 
-Again, a Structural Directive lacks a template. `PaginateDirective` cannot render the “next” and “previous” buttons itself. And to remain flexible, it should not render specific markup. The Component that uses the Directive should decide how the controls look.
+同样，Structural Directive缺少模板。``PaginateDirective``不能自己渲染“next”和“previous”按钮。为了保持灵活性，它不应该渲染特定的标记。使用该Directive的Component应该决定控件的外观。
 
-TIP: Pass another template
+TIP: 传递另一个模板
 
-We solve this by passing the controls as a template to the Directive. In particular, we pass a reference to a separate `ng-template`. This will be the second template the Directive operates on.
+通过传递一个模板给Directive，我们解决了这个问题。具体来说，我们将一个独立的``ng-template``的引用传递给Directive。这将成为Directive操作的第二个模板。
 
-This is how the controls template could look like:
+控件模板可能如下所示：
 
 [source,html]
 ----
@@ -487,11 +487,11 @@ This is how the controls template could look like:
 </ng-template>
 ----
 
-`#controls` sets a https://angular.io/guide/template-reference-variables[template reference variable]. This means we can further reference the template by the name `controls`.
+`#controls` 设置一个 https://angular.io/guide/template-reference-variables[模板引用变量]。这意味着我们可以通过名称``controls``进一步引用模板。
 
-TIP: Context object
+TIP: 上下文对象
 
-The Directive renders the controls template with a _context_ object that implements the following TypeScript interface:
+该指令使用实现以下TypeScript接口的__上下文__对象呈现控件模板：
 
 [source,typescript]
 ----
@@ -503,11 +503,11 @@ interface ControlsContext {
 }
 ----
 
-`page` is the current page number. `pages` is the total number of pages. `previousPage` and `nextPage` are functions for turning the pages.
+`page` 是当前页码，`pages` 是总页数。`previousPage` 和 `nextPage` 是用于翻页的函数。
 
-TIP: Use properties from context
+TIP: 使用上下文中的属性
 
-The `ng-template` takes these properties from the context and saves them in local variables of the same name:
+``ng-template``从上下文中获取这些属性，并将它们保存在同名的本地变量中：
 
 [source,]
 ----
@@ -517,9 +517,9 @@ let-pages="pages"
 let-nextPage="nextPage"
 ----
 
-This means: Take the context property `previousPage` and make it available in the template under the name `previousPage`. And so on.
+这意味着：将上下文属性``previousPage``提取出来，在模板中以``previousPage``的名称进行访问。其他属性也是如此。
 
-The content of the template is rather simple. It renders two buttons for the page turning, using the functions as click handlers. It outputs the current page number and the number of total pages.
+模板的内容相当简单。它呈现了两个按钮用于翻页，使用这些函数作为点击事件处理程序。它输出当前页码和总页数。
 
 [source,html]
 ----
@@ -532,7 +532,7 @@ The content of the template is rather simple. It renders two buttons for the pag
 </button>
 ----
 
-Last but not least, we pass the template to the `PaginateDirective` using the microsyntax:
+最后但同样重要的是，我们使用微语法将模板传递给``PaginateDirective``。
 
 [source,html]
 ----
@@ -543,7 +543,7 @@ Last but not least, we pass the template to the `PaginateDirective` using the mi
 </ul>
 ----
 
-This translates to:
+这将被翻译为：
 
 [source,html]
 ----
@@ -559,7 +559,7 @@ This translates to:
 </ng-template>
 ----
 
-`controls: …` in the microsyntax translates to an Input named `appPaginateControls`. This concludes the Directive‘s outer structure:
+在微语法中，`controls: …` 被翻译为一个名为 `appPaginateControls` 的输入。这完成了指令的外部结构。
 
 [source,typescript]
 ----
@@ -580,20 +580,20 @@ export class PaginateDirective<T> implements OnChanges {
 }
 ----
 
-The inner workings of the `PaginateDirective` are not relevant for testing, so we will not discuss them in detail here. Please refer to the Angular guide https://angular.io/guide/structural-directives#creating-a-structural-directive[Write a structural directive] for a general explanation.
+``PaginateDirective``的内部工作对于测试来说并不相关，因此我们不会在这里详细讨论它们。请参考Angular指南中的 https://angular.io/guide/structural-directives#creating-a-structural-directive[编写结构型指令] 以获取一般说明。
 
 [NOTE]
 ====
-- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts[PaginateDirective: implementation code]
+- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts[PaginateDirective：实现代码]
 ====
 
-=== PaginateDirective test
+=== PaginateDirective 测试
 
-We have explored all features of `PaginateDirective` and are now ready to test them!
+我们已经探索了``PaginateDirective``的所有功能，现在准备好进行测试！
 
-TIP: Host Component
+TIP: 宿主组件
 
-First, we need a host Component that applies the Structural Directive under test. We let it render a list of ten numbers, three numbers on each page.
+首先，我们需要一个宿主组件来应用正在测试的结构指令。我们让它呈现一个包含十个数字的列表，每页显示三个数字。
 
 [source,typescript]
 ----
@@ -616,9 +616,9 @@ class HostComponent {
 }
 ----
 
-TIP: Controls template
+TIP: 控件模板
 
-Since we also want to test the custom controls feature, we need to pass a controls template. We will use the simple controls discussed above.
+由于我们还想测试自定义控件功能，我们需要传递一个控件模板。我们将使用上面讨论过的简单控件。
 
 [source,typescript]
 ----
@@ -662,11 +662,11 @@ class HostComponent {
 }
 ----
 
-The template code already contains `data-testid` attributes. This is how we find and examine the elements in the test (see <<testing-components#_querying_the_dom_with_test_ids, Querying the DOM with test ids>>).
+模板代码已经包含了``data-testid``属性。这是我们在测试中查找和检查元素的方式（请参阅 <<testing-components#_使用测试_id_查询_dom,使用测试ID查询DOM>>）。
 
-This is quite a setup, but after all, we want to test the `PaginateDirective` under realistic conditions.
+这是相当复杂的设置，但毕竟，我们希望在实际条件下测试``PaginateDirective``。
 
-The test suite configures a testing Module, declares both the `HostComponent` and the `PaginateDirective` and renders the `HostComponent`:
+测试套件配置了一个测试模块，声明了 `宿主组件(HostComponent)` 和``PaginateDirective``，并渲染了宿主组件：
 
 [source,typescript]
 ----
@@ -686,15 +686,15 @@ describe('PaginateDirective', () => {
 });
 ----
 
-This is a standard Component test setup – nothing special yet.
+这是一个标准的组件测试设置-暂时没有特殊之处。
 
-The first spec verifies that the Directive renders the items on the first page, in our case the numbers 1, 2 and 3.
+第一个规范验证指令在第一页上呈现项目，对于我们来说，是数字1、2和3。
 
-We have marked the item element with `data-testid="item"`. We use the https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[`findEls` test helper] to find all elements with said test id.
+我们使用 `data-testid="item"` 标记了项目元素。我们使用 https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts[``findEls``测试助手] 来查找具有该测试ID的所有元素。
 
-TIP: Expect rendered items
+TIP: 预期渲染的项目
 
-We expect to find three items. Then we examine the text content of each item and expect that it matches the item in the number list, respectively.
+我们期望找到三个项目。然后，我们检查每个项目的文本内容，并期望它与数字列表中的项目相匹配。
 
 [source,typescript]
 ----
@@ -708,7 +708,7 @@ it('renders the items of the first page', () => {
 });
 ----
 
-Already, the expectations are repetitive and hard to read. So we introduce a little helper function.
+目前，期望值重复且难以阅读。因此，我们引入一个小的辅助函数。
 
 [source,typescript]
 ----
@@ -723,7 +723,7 @@ function expectItems(
 }
 ----
 
-This lets us rewrite the spec so it is easier to grasp:
+这样，我们可以重新编写规范，使其更易于理解：
 
 [source,typescript]
 ----
@@ -734,11 +734,11 @@ it('renders the items of the first page', () => {
 });
 ----
 
-TIP: Check controls
+TIP: 检查控件
 
-The next spec proves that the controls template is rendered passing the current page and the total number of pages.
+下一个规范证明了控件模板被渲染，并传递了当前页和总页数。
 
-The elements have have a `data-testid="page"` and `data-testid="pages"`, respectively. We use the <<testing-components#_testing_helpers, `expectText` testing helper>> to check their text content.
+这些元素分别具有 `data-testid="page"` 和 `data-testid="pages"` 属性。我们使用 <<testing-components#_测试辅助函数,``expectText``测试助手>> 来检查它们的文本内容。
 
 [source,typescript]
 ----
@@ -748,7 +748,7 @@ it('renders the current page and total pages', () => {
 });
 ----
 
-Three more specs deal with the controls for turning pages. Let us start with the “next” button.
+另外还有三个规范处理翻页控件。让我们先从“下一页”按钮开始。
 
 [source,typescript]
 ----
@@ -762,13 +762,13 @@ it('shows the next page', () => {
 });
 ----
 
-TIP: Turn pages
+TIP: 翻页操作
 
-We simulate a click on the “next” button using the `click` testing helper. Then we start Angular’s change detection so the Component together with the Directive are re-rendered.
+我们使用 `click` 测试助手模拟点击“下一页”按钮。然后，我们启动Angular的变更检测，以便重新渲染组件和指令。
 
-Finally, we verify that the Directive has rendered the next three items, the numbers 4, 5 and 6.
+最后，我们验证指令是否已经渲染了接下来的三个项目，即数字4、5和6。
 
-The spec for the “previous” button looks similar. First, we jump to the second page, then back to the first page.
+“上一页”按钮的规范看起来类似。首先，我们跳转到第二页，然后返回到第一页。
 
 [source,typescript]
 ----
@@ -783,9 +783,9 @@ it('shows the previous page', () => {
 });
 ----
 
-TIP: Stress test
+TIP: 压力测试
 
-We have now covered the Directive’s important behavior. Time for testing edge cases! Does the Directive behave correctly if we click on the “previous” button on the first page and the “next” button on the last page?
+我们现在已经涵盖了指令的重要行为。是时候测试边缘情况了！如果我们在第一页点击“上一页”按钮，在最后一页点击“下一页”按钮，指令是否能正确地处理？
 
 [source,typescript]
 ----
@@ -807,9 +807,9 @@ it('checks the pages bounds', () => {
 });
 ----
 
-By clicking on the buttons, we jump forward to the last page and backward to the first page again.
+通过点击按钮，我们前进到最后一页，然后再回到第一页。
 
-This is it! Here is the full test code:
+就是这样！以下是完整的测试代码：
 
 [source,typescript]
 ----
@@ -927,11 +927,11 @@ describe('PaginateDirective', () => {
 });
 ----
 
-`PaginateDirective` is a complex Structural Directive that requires a complex test setup. Once we have created a suitable host Component, we can test it using our familiar testing helpers. The fact that the logic resides in the Directive is not relevant for the specs.
+``PaginateDirective``是一个复杂的结构型指令，需要一个复杂的测试设置。一旦我们创建了一个合适的宿主组件，我们就可以使用我们熟悉的测试助手对其进行测试。指令中的逻辑事实对于规范来说并不重要。
 
 [NOTE]
 ====
-- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts[PaginateDirective: implementation code]
-- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.spec.ts[PaginateDirective: test code]
+- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.tsPaginateDirective：实现代码]
+- https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.spec.tsPaginateDirective：测试代码]
 ====
 
