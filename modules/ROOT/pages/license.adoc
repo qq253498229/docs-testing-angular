@@ -1,13 +1,13 @@
-= License
+= 许可证
 
-License: https://creativecommons.org/licenses/by-sa/4.0/[Creative Commons Attribution-ShareAlike (CC BY-SA 4.0)]
+许可证: https://creativecommons.org/licenses/by-sa/4.0/[Creative Commons Attribution-ShareAlike (CC BY-SA 4.0)]
 
-The example code is released into the public domain. See https://unlicense.org/[Unlicense].
+示例代码发布至公共领域。参见 https://unlicense.org/[Unlicense].
 
 The https://github.com/9elements/angular-flickr-search[Flickr search example application] uses the https://www.flickr.com/services/api/[Flickr API] but is not endorsed or certified by Flickr, Inc. or SmugMug, Inc. Flickr is a trademark of Flickr, Inc. The displayed photos are property of their respective owners.
 
-Online book cover photo: Flying probes testing a printed circuit board by genkur, https://www.istockphoto.com/photo/printed-circuit-board-during-a-flying-probe-test-gm1144549508-307752215[licensed from iStock].
+在线书籍封面照片: Flying probes testing a printed circuit board by genkur, https://www.istockphoto.com/photo/printed-circuit-board-during-a-flying-probe-test-gm1144549508-307752215[licensed from iStock].
 
-E-book cover and favicon: https://angular.io/presskit[Official Angular logo] by Google, licensed under https://creativecommons.org/licenses/by/4.0/[Creative Commons Attribution (CC BY 4.0)].
+电子书封面和站点图标: https://angular.io/presskit[Official Angular logo] by Google, licensed under https://creativecommons.org/licenses/by/4.0/[Creative Commons Attribution (CC BY 4.0)].
 
-Legal notice: https://molily.de/impressum/[Impressum und Datenschutz]
+法律声明: https://molily.de/impressum/[Impressum und Datenschutz]
