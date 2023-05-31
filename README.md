@@ -9,5 +9,5 @@
 
 如果有闲钱可以打赏几块钱请我喝杯蜜雪冰城，多谢多谢！
 
-<img src="modules/ROOT/images/alipay-qrcode.png" alt="Image" width="300" height="200">
+<img src="modules/ROOT/images/alipay-qrcode.png" alt="Image" width="400" height="600">
 
