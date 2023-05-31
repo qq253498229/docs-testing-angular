@@ -73,8 +73,8 @@ TIP: `TestBed`
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/TestBed[Angular API 参考文档：TestBed]
-- https://angular.io/guide/testing-utility-apis#testbed-class-summary[测试实用工具 API：TestBed]
+- https://angular.cn/api/core/testing/TestBed[Angular API 参考文档：TestBed]
+- https://angular.cn/guide/testing-utility-apis#testbed-class-summary[测试实用工具 API：TestBed]
 ====
 
 == 配置测试模块
@@ -153,7 +153,7 @@ fixture.detectChanges();
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/ComponentFixture[Angular API 参考文档：ComponentFixture]
+- https://angular.cn/api/core/testing/ComponentFixture[Angular API 参考文档：ComponentFixture]
 ====
 
 == TestBed 和 Jasmine
@@ -262,8 +262,8 @@ console.log(nativeElement.innerHTML);
 
 [NOTE]
 ====
-- https://angular.io/api/core/testing/ComponentFixture[Angular API 参考文档: ComponentFixture]
-- https://angular.io/api/core/DebugElement[Angular API 参考文档: DebugElement]
+- https://angular.cn/api/core/testing/ComponentFixture[Angular API 参考文档: ComponentFixture]
+- https://angular.cn/api/core/DebugElement[Angular API 参考文档: DebugElement]
 ====
 
 == 编写第一个组件规范
@@ -368,7 +368,7 @@ TIP: 建立一个约定
 
 [NOTE]
 ====
-- https://angular.io/api/platform-browser/By[Angular API参考文档：By.css]
+- https://angular.cn/api/platform-browser/By[Angular API参考文档：By.css]
 ====
 
 == 触发事件处理程序

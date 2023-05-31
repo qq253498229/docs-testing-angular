@@ -80,7 +80,7 @@ ng test --include **/counter.component.spec.ts
 ====
 - https://jasmine.github.io/api/edge/global.html#fdescribe[Jasmine API 参考：fdescribe]
 - https://jasmine.github.io/api/edge/global.html#fit[Jasmine API 参考：fit]
-- https://angular.io/cli/test[Angular CLI 参考：ng test]
+- https://angular.cn/cli/test[Angular CLI 参考：ng test]
 - https://timdeschryver.dev/blog/dont-commit-focused-tests[Tim Deschryver: 不要提交测试焦点(fit)代码]
 ====
 

@@ -76,7 +76,7 @@ TIP: 响应式表单
 
 `SignupFormComponent` 是一个**响应式表单**，它在组件类中显式创建组和控件。这样，更容易指定自定义验证器并设置动态字段关联。
 
-与其他 Angular 核心概念一样，本指南假定您对响应式表单有基本的了解。请参考 https://angular.io/guide/reactive-forms[官方的响应式表单指南]以加深您的知识。
+与其他 Angular 核心概念一样，本指南假定您对响应式表单有基本的了解。请参考 https://angular.cn/guide/reactive-forms[官方的响应式表单指南]以加深您的知识。
 
 `SignupFormComponent` 类的重要部分如下所示：
 
@@ -131,7 +131,7 @@ export class SignupFormComponent {
 
 TIP: Form groups and controls
 
-使用Angular的 https://angular.io/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls[FormBuilder]，我们创建了``form``属性，即最顶层的表单组。内部有另一个用于地址相关字段的表单组。
+使用Angular的 https://angular.cn/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls[FormBuilder]，我们创建了``form``属性，即最顶层的表单组。内部有另一个用于地址相关字段的表单组。
 
 表单控件通过指定其初始值和验证器进行声明。例如，密码控件：
 
@@ -199,7 +199,7 @@ SignupService``的``signup``方法接受``SignupData``并将其发送到服务�
 [NOTE]
 ====
 - https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/[SignupFormComponent：完整代码]
-- https://angular.io/guide/reactive-forms[Angular文档：响应式表单]
+- https://angular.cn/guide/reactive-forms[Angular文档：响应式表单]
 ====
 
 == 表单验证和错误
@@ -290,7 +290,7 @@ TIP: 实现细节
 
 [NOTE]
 ====
-- https://angular.io/guide/form-validation[Angular指南：验证表单输入]
+- https://angular.cn/guide/form-validation[Angular指南：验证表单输入]
 - https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA[MDN：ARIA简介]
 - https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid[MDN：aria-invalid]
 - https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage[ARIA规范：aria-errormessage]
@@ -556,7 +556,7 @@ it('submits the form successfully', async () => {
 });
 ----
 
-接下来，让我们尝试立即提交表单。被测试的表单在``form``元素上监听 https://angular.io/api/forms/NgForm#listening-for-form-submission[``ngSubmit``事件]，这实际上是一个原生的``submit``事件。
+接下来，让我们尝试立即提交表单。被测试的表单在``form``元素上监听 https://angular.cn/api/forms/NgForm#listening-for-form-submission[``ngSubmit``事件]，这实际上是一个原生的``submit``事件。
 
 TIP: 提交表单
 
@@ -698,8 +698,8 @@ it('submits the form successfully', fakeAsync(async () => {
 [NOTE]
 ====
 - https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.tsSignupFormComponent：测试代码]
-- https://angular.io/api/core/testing/fakeAsyncAngular API参考：fakeAsync]
-- https://angular.io/api/core/testing/tickAngular API参考：tick]
+- https://angular.cn/api/core/testing/fakeAsyncAngular API参考：fakeAsync]
+- https://angular.cn/api/core/testing/tickAngular API参考：tick]
 ====
 
 == 无效的表单
@@ -1129,7 +1129,7 @@ it('fails if the username is taken', fakeAsync(async () => {
 [NOTE]
 ====
 - https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts[SignupFormComponent: 测试代码]
-- https://angular.io/guide/form-validation#creating-asynchronous-validators[Angular文档: 创建异步验证器]
+- https://angular.cn/guide/form-validation#creating-asynchronous-validators[Angular文档: 创建异步验证器]
 ====
 
 == 动态字段关系

@@ -358,7 +358,7 @@ TIP: 针对生产环境的请求
 
 TIP: 拦截请求
 
-在``FlickrService``的情况下，我们最好编写**单元测试**。Angular具有用于测试依赖于``HttpClient``的代码的强大辅助程序： https://angular.io/guide/http#testing-http-requests[`HttpClientTestingModule`]。
+在``FlickrService``的情况下，我们最好编写**单元测试**。Angular具有用于测试依赖于``HttpClient``的代码的强大辅助程序： https://angular.cn/guide/http#testing-http-requests[`HttpClientTestingModule`]。
 
 对于具有依赖关系的服务进行测试，使用``new``实例化服务是很繁琐的。相反，我们使用``TestBed``来设置一个测试模块。
 
@@ -388,10 +388,10 @@ TIP: 查找、响应、验证
 
 [NOTE]
 ====
-- https://angular.io/guide/http[Angular指南：使用HTTP与后端服务通信]
-- https://angular.io/api/common/http/HttpClient[Angular API参考：HttpClient]
-- https://angular.io/guide/http#testing-http-requests[Angular指南：测试HTTP请求]
-- https://angular.io/api/common/http/testing/HttpClientTestingModule[Angular API参考：HttpClientTestingModule]
+- https://angular.cn/guide/http[Angular指南：使用HTTP与后端服务通信]
+- https://angular.cn/api/common/http/HttpClient[Angular API参考：HttpClient]
+- https://angular.cn/guide/http#testing-http-requests[Angular指南：测试HTTP请求]
+- https://angular.cn/api/common/http/testing/HttpClientTestingModule[Angular API参考：HttpClientTestingModule]
 ====
 
 === 调用被测方法
@@ -428,7 +428,7 @@ describe('FlickrService', () => {
 
 === 查找挂起的请求
 
-在第二步中，我们使用  https://angular.io/api/common/http/testing/HttpTestingController[`HttpTestingController`]查找挂起的请求。这个类是 ``HttpClientTestingModule``的一部分。我们通过调用 `TestBed.inject(HttpTestingController)` 来获取实例。
+在第二步中，我们使用  https://angular.cn/api/common/http/testing/HttpTestingController[`HttpTestingController`]查找挂起的请求。这个类是 ``HttpClientTestingModule``的一部分。我们通过调用 `TestBed.inject(HttpTestingController)` 来获取实例。
 
 TIP: `expectOne`
 
@@ -471,8 +471,8 @@ describe('FlickrService', () => {
 
 [NOTE]
 ====
-- https://angular.io/api/common/http/testing/HttpTestingController[Angular API参考文档：HttpTestingController]
-- https://angular.io/api/common/http/testing/TestRequest[Angular API参考文档：TestRequest]
+- https://angular.cn/api/common/http/testing/HttpTestingController[Angular API参考文档：HttpTestingController]
+- https://angular.cn/api/common/http/testing/TestRequest[Angular API参考文档：TestRequest]
 ====
 
 === 使用虚假数据响应
@@ -737,7 +737,7 @@ it('passes through search errors', () => {
 [NOTE]
 ====
 - https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/[FlickrService：实现和测试]
-- https://angular.io/api/common/http/HttpErrorResponse[Angular API参考：HttpErrorResponse]
+- https://angular.cn/api/common/http/HttpErrorResponse[Angular API参考：HttpErrorResponse]
 - https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent[MDN参考：ErrorEvent]
 ====
 
@@ -776,7 +776,7 @@ controller.expectOne(
 
 这个判断函数会对每个请求进行调用，决定候选请求是否匹配，并返回一个布尔值。
 
-这使您能够以编程方式筛选所有请求并检查所有条件。候选请求是一个具有诸如``method``、`url`、`headers`、`body`、``params``等属性的 https://angular.io/api/common/http/HttpRequest[HttpRequest] 实例。
+这使您能够以编程方式筛选所有请求并检查所有条件。候选请求是一个具有诸如``method``、`url`、`headers`、`body`、``params``等属性的 https://angular.cn/api/common/http/HttpRequest[HttpRequest] 实例。
 
 有两种可能的方法：要么您使用具有多个条件的``expectOne``，就像谓词示例中一样。如果某个请求细节不匹配，``expectOne``会抛出异常并导致测试失败。
 
@@ -844,8 +844,8 @@ requests[1].flush({ success: true });
 
 [NOTE]
 ====
-- https://angular.io/api/common/http/HttpRequest[Angular API参考：HttpRequest]
-- https://angular.io/api/common/http/testing/TestRequest[Angular API参考：TestRequest]
+- https://angular.cn/api/common/http/HttpRequest[Angular API参考：HttpRequest]
+- https://angular.cn/api/common/http/testing/TestRequest[Angular API参考：TestRequest]
 ====
 
 == 测试服务：概述
@@ -858,5 +858,5 @@ TIP: 预定义的测试模块
 
 Angular提供了一些关键的服务，这些服务通常在您自己的服务中使用。由于Angular旨在具有可测试性，Angular还提供了用于将这些服务替换为虚拟化版本的工具。
 
-我们在测试依赖于``HttpClient``的服务时使用了``HttpClientTestingModule``。再举一个例子，还有 https://angular.io/api/router/testing/RouterTestingModule[`RouterTestingModule`] 用于测试依赖于``Router``和``Location``的服务。
+我们在测试依赖于``HttpClient``的服务时使用了``HttpClientTestingModule``。再举一个例子，还有 https://angular.cn/api/router/testing/RouterTestingModule[`RouterTestingModule`] 用于测试依赖于``Router``和``Location``的服务。
 

@@ -8,6 +8,6 @@ The https://github.com/9elements/angular-flickr-search[Flickr search example app
 
 在线书籍封面照片: Flying probes testing a printed circuit board by genkur, https://www.istockphoto.com/photo/printed-circuit-board-during-a-flying-probe-test-gm1144549508-307752215[licensed from iStock].
 
-电子书封面和站点图标: https://angular.io/presskit[Official Angular logo] by Google, licensed under https://creativecommons.org/licenses/by/4.0/[Creative Commons Attribution (CC BY 4.0)].
+电子书封面和站点图标: https://angular.cn/presskit[Official Angular logo] by Google, licensed under https://creativecommons.org/licenses/by/4.0/[Creative Commons Attribution (CC BY 4.0)].
 
 法律声明: https://molily.de/impressum/[Impressum und Datenschutz]

@@ -41,7 +41,7 @@ TIP: 原始或模拟
 
 [NOTE]
 ====
-- https://angular.io/guide/dependency-injection[Angular 指南：依赖注入]
+- https://angular.cn/guide/dependency-injection[Angular 指南：依赖注入]
 ====
 
 == 测试工具
@@ -50,7 +50,7 @@ Angular提供了强大的测试工具。当使用命令行界面创建Angular项
 
 TIP: 平衡的默认设置
 
-Angular团队已经为你做出了决策：使用 https://jasmine.github.io/[Jasmine] 作为测试框架，使用 https://karma-runner.github.io/[Karma] 作为测试运行器。实现代码和测试代码使用 https://webpack.js.org[Webpack] 进行打包。应用程序部分通常在Angular的 https://angular.io/api/core/testing/TestBed[TestBed] 中进行测试。
+Angular团队已经为你做出了决策：使用 https://jasmine.github.io/[Jasmine] 作为测试框架，使用 https://karma-runner.github.io/[Karma] 作为测试运行器。实现代码和测试代码使用 https://webpack.js.org[Webpack] 进行打包。应用程序部分通常在Angular的 https://angular.cn/api/core/testing/TestBed[TestBed] 中进行测试。
 
 这个设置是一种权衡，有其优势和劣势。由于这只是测试Angular应用程序的一种可能方式，你可以自己编译自己的测试工具链。
 
@@ -147,7 +147,7 @@ TIP: 红绿循环
 
 [NOTE]
 ====
-- https://angular.io/cli/test[Angular CLI参考文档：ng test]
+- https://angular.cn/cli/test[Angular CLI参考文档：ng test]
 ====
 
 == 配置Karma和Jasmine

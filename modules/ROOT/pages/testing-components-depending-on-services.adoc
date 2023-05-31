@@ -394,7 +394,7 @@ describe('ServiceCounterComponent: unit test', () => {
 [NOTE]
 ====
 - https://github.com/9elements/angular-workshop/tree/main/src/app/components/service-counter[ServiceCounterComponent：实现和测试代码]
-- https://angular.io/guide/dependency-injection-providers[Angular 指南：依赖项提供者]
+- https://angular.cn/guide/dependency-injection-providers[Angular 指南：依赖项提供者]
 ====
 
 == 具有最小逻辑的伪造服务

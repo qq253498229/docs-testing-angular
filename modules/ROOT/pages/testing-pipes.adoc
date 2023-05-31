@@ -275,7 +275,7 @@ TIP: 异步翻译
 
 TIP: 触发变更检测
 
-一旦翻译加载完成，``TranslatePipe``会保存它并通知Angular变更检测器。特别是，它通过调用 https://angular.io/api/core/ChangeDetectorRef#markForCheck[``ChangeDetectorRef``的markForCheck] 方法将相应的视图标记为已更改。
+一旦翻译加载完成，``TranslatePipe``会保存它并通知Angular变更检测器。特别是，它通过调用 https://angular.cn/api/core/ChangeDetectorRef#markForCheck[``ChangeDetectorRef``的markForCheck] 方法将相应的视图标记为已更改。
 
 然后，Angular会重新评估使用该管道的每个表达式，比如 `'greeting' | translate`，并再次调用``transform``方法。最后，``transform``同步返回正确的翻译结果。
 
@@ -286,7 +286,7 @@ TIP: 翻译变更
 [NOTE]
 ====
 - https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.ts[TranslatePipe：实现代码]
-- https://angular.io/api/core/ChangeDetectorRef[Angular API参考：ChangeDetectorRef]
+- https://angular.cn/api/core/ChangeDetectorRef[Angular API参考：ChangeDetectorRef]
 ====
 
 === TranslatePipe 测试
@@ -556,8 +556,8 @@ it('updates on translation change', () => {
 [NOTE]
 ====
 - https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.spec.ts[TranslatePipe：测试代码]
-- https://angular.io/api/core/testing/fakeAsync[Angular API 参考：fakeAsync]
-- https://angular.io/api/core/testing/tick[Angular API 参考：tick]
+- https://angular.cn/api/core/testing/fakeAsync[Angular API 参考：fakeAsync]
+- https://angular.cn/api/core/testing/tick[Angular API 参考：tick]
 - https://rxjs.dev/api/operators/delay[RxJS：delay 操作符]
 - https://github.com/ngx-translate/core[ngx-translate]
 ====
