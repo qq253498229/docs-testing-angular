@@ -1,14 +1,14 @@
-= About
+= 关于
 
-Author: https://molily.de[Mathias Schäfer (molily)]
+作者: https://molily.de[Mathias Schäfer (molily)]
 
-Mathias is a software developer with a focus on web development and JavaScript web applications.
+Mathias是一位专注于Web开发和JavaScript Web应用程序的软件开发人员。
 
-Mathias is working for https://9elements.com[9elements], a software and design agency.
+Mathias在 https://9elements.com[9elements] 工作，这是一家软件和设计机构。
 
 https://mastodon.social/@molily[@molily on Mastodon], https://twitter.com/molily[@molily on Twitter].
 
-*Please send feedback and corrections to mailto:molily@mailbox.org[molily@mailbox.org] or https://github.com/molily/testing-angular/[file an issue on GitHub].*
+*请将反馈和修正发送至 mailto:molily@mailbox.org[molily@mailbox.org]，或在 https://github.com/molily/testing-angular/[GitHub] 上提交问题。*
 
-First published on February 17th, 2021.
+首次发布于2021年2月17日。
 

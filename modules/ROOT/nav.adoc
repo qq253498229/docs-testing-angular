@@ -22,5 +22,5 @@
 * xref:index-of-example-applications.adoc[示例应用程序索引,leveloffset=-1]
 * xref:references.adoc[参考资料,leveloffset=-1]
 * xref:acknowledgements.adoc[鸣谢,leveloffset=-1]
-* xref:about.adoc[About,leveloffset=-1]
+* xref:about.adoc[关于,leveloffset=-1]
 * xref:license.adoc[License,leveloffset=-1]
