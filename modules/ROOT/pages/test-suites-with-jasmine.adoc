@@ -5,7 +5,7 @@
 - 介绍Jasmine测试框架
 - 编写测试套件、规范和断言
 - 使用"安排（Arrange）、行动（Act）、断言（Assert）"结构组织规范
-- 使用设置（setup）和拆卸（teardown）逻辑创建高效的测试套件
+- 使用初始化（setup）和销毁（teardown）逻辑创建高效的测试套件
 
 Angular内置了Jasmine，这是一个JavaScript框架，可以编写和执行单元测试和集成测试。Jasmine由三个重要部分组成：
 
@@ -182,7 +182,7 @@ TIP: 匹配器（Matchers）
 
 `toBe` 是适用于所有可能的 JavaScript 值的最简单的匹配器。它在内部使用了 JavaScript 的严格相等运算符 `===`。`expect(actualValue).toBe(expectedValue)` 本质上运行的是 `actualValue === expectedValue`。
 
-`toBe` 适用于比较字符串、数字和布尔值等原始值。对于对象，`toBe` 仅在实际值和期望值完全相同的对象时匹配。即使两个对象恰好具有相同的属性和值，如果它们不是完全相同的对象，`toBe` 会失败。
+`toBe` 适用于比较字符串、数字和布尔值等基本类型。对于对象，`toBe` 仅在实际值和期望值完全相同的对象时匹配。即使两个对象恰好具有相同的属性和值，如果它们不是完全相同的对象，`toBe` 会失败。
 
 如果要检查两个对象的深层相等性，Jasmine 提供了 `toEqual` 匹配器。下面的示例说明了它们之间的区别：
 
@@ -199,7 +199,7 @@ Jasmine内置了许多有用的匹配器，其中 `toBe` 和 `toEqual` 是最常
 
 TIP: 可读的句子
 
-模式 `expect(actualValue).toEqual(expectedValue)` 再次源自行为驱动开发（BDD）。`expect` 函数调用和匹配器方法形成了一个可读的句子：“期望实际值等于期望值。”目标是编写一个规范，它像纯文本一样可读，但可以自动验证。
+模式 `expect(actualValue).toEqual(expectedValue)` 再次源自行为驱动开发（BDD）。`expect` 函数调用和匹配器方法形成了一个可读的句子：“期望实际值等于期望值”。目标是编写一个规范，它像纯文本一样可读，但可以自动验证。
 
 [NOTE]
 ====
@@ -213,9 +213,9 @@ TIP: 可读的句子
 
 TIP: 重复的设置
 
-这种设置反复出现，因此应该在一个中心位置定义一次。您可以编写一个 `设置` 函数，并在每个规范的开头调用它。但是使用 Jasmine，您可以声明在每个规范之前和之后，或在所有规范之前和之后调用的代码。
+这种设置反复出现，因此应该在一个中心位置定义一次。您可以编写一个 `setup` 函数，并在每个规范的开头调用它。但是使用 Jasmine，您可以声明在每个规范之前和之后，或在所有规范之前和之后调用的代码。
 
-为此，Jasmine 提供了四个函数：`beforeEach`、`afterEach`、`beforeAll` 和 `afterAll`。它们在 `describe` 块内部调用，就像 `it` 一样。它们都接受一个参数，即在给定阶段调用的函数。
+为实现这个目的，Jasmine 为我们提供了四个函数：`beforeEach`、`afterEach`、`beforeAll` 和 `afterAll`。它们在 `describe` 块内部调用，就像 `it` 一样。它们都接受一个参数，即在给定阶段调用的函数。
 
 [source,typescript]
 ----
@@ -243,7 +243,7 @@ describe('Suite description', () => {
 });
 ----
 
-这个套件有两个规范，并定义了共享的安排（setup）和清理（teardown）代码。输出结果如下：
+这个套件有两个规范，并定义了共享的初始化（setup）和销毁（teardown）代码。输出结果如下：
 
 [source,]
 ----
@@ -257,5 +257,5 @@ Called after each spec is run
 Called after all specs are run
 ----
 
-我们将要编写的大多数测试都将包含一个 `beforeEach` 块来承载安排（_Arrange_）代码。
+我们要编写的大多数测试都将包含一个 `beforeEach` 块来承载安排（_Arrange_）代码。
 

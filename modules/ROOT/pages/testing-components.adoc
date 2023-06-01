@@ -61,15 +61,15 @@ TIP: 计数器的功能
 
 == TestBed
 
-即使是简单的计数器组件，在 Angular 中渲染组件也需要进行一些准备工作。如果你查看典型 Angular 应用程序的 https://github.com/9elements/angular-workshop/blob/main/src/main.ts[main.ts] 和 https://github.com/9elements/angular-workshop/blob/main/src/app/app.module.ts[AppModule]，你会发现创建了一个“平台”，声明了一个模块，并对该模块进行了引导。
+即使是简单的计数器组件，在 Angular 中渲染组件也需要进行一些准备工作。如果你查看典型 Angular 应用程序的 https://github.com/9elements/angular-workshop/blob/main/src/main.ts[main.ts] 和 https://github.com/9elements/angular-workshop/blob/main/src/app/app.module.ts[AppModule]，你会发现创建了一个“平台”，声明了一个模块，并对该模块进行了初始化。
 
-Angular 编译器将模板转换为 JavaScript 代码。为了准备渲染，会创建组件的实例，解析和注入依赖项，并设置输入属性。
+Angular 编译器将模板转换为 JavaScript 代码。为了准备渲染，会创建组件的实例，解析并注入依赖项，然后设置输入属性。
 
 最后，将模板渲染到 DOM 中。在测试中，你可以手动完成所有这些操作，但你需要深入了解 Angular 的内部实现。
 
 TIP: `TestBed`
 
-相反，Angular 团队提供了 `TestBed` 来简化单元测试。`TestBed` 创建和配置了一个 Angular 环境，因此你可以安全且轻松地测试特定的应用程序部分，如组件和服务。
+作为替代，Angular 团队提供了 `TestBed` 来简化单元测试。`TestBed` 创建并配置了一个 Angular 环境，因此你可以安全且轻松地测试特定的应用程序部分，如组件和服务。
 
 [NOTE]
 ====
