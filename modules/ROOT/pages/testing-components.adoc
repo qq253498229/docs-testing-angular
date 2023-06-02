@@ -203,7 +203,7 @@ TIP: `async` 和 `await`
 
 `TestBed.createComponent(CounterComponent)` 返回一个 fixture，即 `ComponentFixture` 的实例。fixture 是什么，它提供了什么功能？
 
-夹具(fixture) 这个术语来源于对机械部件或电子设备的现实世界测试。一个夹具是一个标准化的框架，用于安装测试对象。夹具持有对象并连接到电气接点，以提供电源和进行测量。
+夹具(fixture) 这个术语来源于对机械部件或电子设备的现实世界测试。一个夹具是一个标准化的框架，用于安装测试对象。夹具持有对象并连接到电子接点，以提供电源以及进行测量。
 
 TIP: ComponentFixture
 
