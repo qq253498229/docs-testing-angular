@@ -7,6 +7,8 @@
 
 `https://docs.codeforfun.cn/docs-testing-angular/%E4%B8%AD%E6%96%87/start.html`
 
+如果有哪里翻译的有错误或者是不准确，麻烦提个issue告知！
+
 如果有闲钱可以打赏几块钱请我喝杯蜜雪冰城，多谢多谢！
 
 image::alipay-qrcode.png[width=400,height=600]
