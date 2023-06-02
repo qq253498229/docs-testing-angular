@@ -14,4 +14,4 @@ Angular框架是基于Web技术的企业级应用程序的成熟和全面的解�
 
 除了组件外，本书还说明了如何测试其他应用程序部分：服务、管道、指令以及模块。最后但并非最不重要的，它还涵盖了使用Cypress进行端到端测试。
 
-https://testing-angular.com/assets/testing-angular.epub[下载本指南的 EPUB (2 MB)]
+https://testing-angular.com/assets/testing-angular.epub[下载本指南的英语原版文档 EPUB (2 MB)]

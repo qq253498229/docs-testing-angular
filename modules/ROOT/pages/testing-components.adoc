@@ -585,11 +585,11 @@ it('decrements the count', () => {
 });
 ----
 
-在此我们没有新内容，只是测试标识、变量名和预期输出发生了变化。
+这里我们会发现，这个规范没有新内容，只不过是测试标识、变量名和预期输出发生了变化。
 
 TIP: 重复的模式
 
-现在我们有两个几乎相同的规范。代码是重复的，信噪比(signal-to-noise ratio)很低，也就是说很多代码只起到了很少的作用。让我们识别出这里重复的模式：
+现在我们有两个几乎完全相同的规范，代码的重复度很高，信噪比(signal-to-noise ratio)很低，也就是说很多代码只起到了很少的作用。让我们识别出这里重复的模式：
 
 1. 通过测试标识查找元素
 2. 点击通过测试标识找到的元素
@@ -671,11 +671,11 @@ export function makeClickEvent(
 
 这个函数返回一个部分的 https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent[MouseEvent] 模拟对象，其中包含真实点击事件的最重要的方法和属性。它适用于在指针位置和修饰键不重要的情况下点击按钮和链接。
 
-TIP: 点击意味着激活
+TIP: 点击意味着激活(activate)
 
-`点击` 测试助手可用于具有 `(click)="…"` 事件处理程序的每个元素。为了辅助功能，请确保元素可以聚焦和激活。对于按钮（`button` 元素）和链接（`a` 元素）来说，这已经是默认情况。
+`点击(click)` 测试助手可用于每个具有 `(click)="…"` 事件处理程序的元素。为了辅助功能，请确保元素可以聚焦(focussed)和激活(activated)。对于按钮（`button` 元素）和链接（`a` 元素）来说，这已经是默认情况。
 
-从历史上看，`点击` 事件只由鼠标输入触发。但是现在，它是一个通用的“激活”事件。它还可以由触摸输入（“轻触”）、键盘输入或语音输入触发。
+从历史上看，`点击(click)` 事件只由鼠标输入触发。但是现在，它是一个通用的“激活(activate)”事件。它还可以由触摸输入（“轻触(tap)”）、键盘输入或语音输入触发。
 
 因此，在组件中，您不需要单独监听触摸或键盘事件。在测试中，通常只需要一个通用的 `点击` 事件即可。
 
@@ -713,7 +713,7 @@ it('decrements the count', () => {
 });
 ----
 
-这样的代码读起来更好，写起来也更少！一眼就能看出规范在做什么。
+这样的代码读起来更清晰，写起来也更简洁！一眼就能看出规范在做什么。
 
 [NOTE]
 ====
@@ -751,7 +751,7 @@ const resetInputEl = findEl(fixture, 'reset-input').nativeElement;
 resetInputEl.value = '123';
 ----
 
-这样可以通过编程的方式填充值。
+这样可以通过编程的方式对值进行填充。
 
 在 `CounterComponent` 的模板中，重置输入字段有一个 _模板引用变量_，`#resetInput`:
 
@@ -881,7 +881,7 @@ it('does not reset if the value is not a number', () => {
 
 在这个规范中的小差异是，我们将字段值设置为“not a number”，这是一个无法解析为数字的字符串，并期望计数保持不变。
 
-就是这样！我们已经使用有效和无效的输入测试了重置表单。
+就是这样！我们已经分别使用有效和无效的输入值，对重置表单功能进行了测试。
 
 [NOTE]
 ====
@@ -891,13 +891,13 @@ it('does not reset if the value is not a number', () => {
 
 == 测试输入
 
-`CounterComponent` 有一个名为 `startCount` 的 Input，用于设置初始计数值。我们需要测试计数器如何正确处理这个 Input。
+`CounterComponent` 有一个 `@Input()`: `startCount` ，用于设置初始count值。我们需要测试计数器如何正确处理这个 `@Input()`。
 
-例如，如果我们将 `startCount` 设置为 `123`，渲染的计数也应该是 `123`。如果输入为空，渲染的计数应该是 `0`，即默认值。
+例如，如果我们将 `startCount` 设置为 `123`，渲染的count也应该是 `123`。如果输入为空，渲染的count则应该是 `0`，即默认值。
 
-TIP: 设置 Input 值
+TIP: 设置 `@Input()` 值
 
-Input 是组件实例的特殊属性。我们可以在 _Arrange_ 阶段设置这个属性。
+`@Input()` 是组件实例的特殊属性。我们可以在 _Arrange_ 阶段设置这个属性。
 
 [source,typescript]
 ----
@@ -905,13 +905,13 @@ const component = fixture.componentInstance;
 component.startCount = 10;
 ----
 
-在组件中最好不要改变 Input 的值。Input 属性应始终反映父组件传入的数据。
+在组件中最好不要改变 `@Input()` 的值。`@Input()` 属性应始终反映父组件传入的数据。
 
-TIP: Input 与组件状态
+TIP: `@Input()` 与组件状态
 
-这就是为什么 `CounterComponent` 既有一个名为 `startCount` 的公共 Input，又有一个名为 `count` 的内部属性。当用户点击增加或减少按钮时，`count` 会发生变化，但 `startCount` 保持不变。
+这就是为什么 `CounterComponent` 既有一个名为 `startCount` 的公共 `@Input()`，又有一个名为 `count` 的内部属性。当用户点击增加或减少按钮时，`count` 会发生变化，但 `startCount` 保持不变。
 
-每当 `startCount` Input 发生变化时，`count` 需要被设置为 `startCount` 的值。最安全的做法是在 `ngOnChanges` 生命周期方法中进行设置：
+每当 `startCount` `@Input()` 发生变化时，`count` 需要被设置为 `startCount` 的值。最安全的做法是在 `ngOnChanges` 生命周期方法中进行设置：
 
 [source,typescript]
 ----
@@ -922,7 +922,7 @@ public ngOnChanges(): void {
 
 `ngOnChanges` 在“数据绑定属性”发生变化时被调用，包括 Inputs。
 
-让我们为 `startCount` Input 编写一个测试。我们在 `beforeEach` 块中设置 Input，在调用 `detectChanges` 之前。规范本身检查正确的计数是否被渲染出来。
+让我们为 `startCount` `@Input()` 编写一个测试。我们在 `beforeEach` 块中设置 `@Input()`，在调用 `detectChanges` 之前。规范本身检查正确的计数是否被渲染出来。
 
 [source,typescript]
 ----
@@ -950,9 +950,9 @@ CounterComponent > shows the start count
 
 TIP: `ngOnChanges`
 
-这里出了什么问题？我们是不是忘记再次调用 `detectChanges` 了？不是的，但我们忘记调用 `ngOnChanges`！
+这里出了什么问题？我们是不是再次忘记了调用 `detectChanges` ？不是的，我们忘记了调用 `ngOnChanges`！
 
-在测试环境中，`ngOnChanges` 不会自动调用。我们必须在设置完 Input 后手动调用它。
+在测试环境中，`ngOnChanges` 不会自动调用。我们必须在设置完 `@Input()` 后手动调用它。
 
 以下是修正后的示例：
 
@@ -985,7 +985,7 @@ describe('CounterComponent', () => {
 });
 ----
 
-`CounterComponent` 期望一个 `number` 输入，并将其渲染到 DOM 中。当从 DOM 中读取文本时，我们总是处理字符串。这就是为什么我们传入一个数字 `123`，但期望找到字符串 `'123'` 的原因。
+`CounterComponent` 期望一个 `number` 输入，并将其渲染到 DOM 中。当从 DOM 中读取文本时，我们处理的却总是字符串。这就是为什么我们传入一个数字 `123`，但期望找到字符串 `'123'` 的原因。
 
 [NOTE]
 ====
@@ -994,7 +994,7 @@ describe('CounterComponent', () => {
 
 == 测试输出
 
-虽然输入将数据从父组件传递到子组件，但输出将数据从子组件发送到父组件。结合起来，一个组件可以只使用所需的数据执行特定的操作。
+输入(`@Input()`)将数据从父组件传递到子组件，输出(`@Output()`)将数据从子组件发送到父组件。结合起来，一个组件可以只使用所需的数据执行特定的操作。
 
 例如，一个组件可以呈现一个表单，以便用户可以编辑或审查数据。一旦完成，组件就会将数据作为输出发出。
 
@@ -1096,9 +1096,9 @@ it('emits countChange events on increment', () => {
 
 TIP: 始终执行断言
 
-这种方法也是可行的。但是，如果被测试的功能出现故障，输出不会发出，那么 1 就不会被调用。
+这种方法也是可行的。但是想象一下，如果被测试的功能出现故障，输出发不出来，那么 `expect` 就不会被调用了。
 
-默认情况下，Jasmine 会警告您该规范没有期望值，但将该规范视为成功（参见 <<angular-testing-principles#_配置karma和jasmine, 配置 Karma 和 Jasmine>>）。在这种情况下，我们希望该规范明确失败，以确保始终运行期望值。
+默认情况下，Jasmine 会警告您该规范没有期望值，但将该规范视为成功（参见 <<angular-testing-principles#_配置karma和jasmine, 配置 Karma 和 Jasmine>>）。在这种情况下，我们希望该规范的失败结果明确地显示出来，以确保期望值始终能被执行。
 
 现在，我们已经验证了在点击增加按钮时 `countChange` 是否发出。我们还需要证明输出在减少和重置时也会发出。我们可以通过添加两个更多的规范来实现，这两个规范与现有规范相同：
 
@@ -1143,25 +1143,25 @@ it('emits countChange events on reset', () => {
 
 == 重复的组件规范
 
-使用三个规范测试 `countChange` 输出效果很好，但代码非常重复。测试辅助函数可以减少重复。关于重复测试代码是否成问题，专家们有不同的意见。
+使用三个规范测试 `countChange` ，这样的输出效果很好，但代码重复度却很高。测试辅助函数虽然可以进一步减少重复代码的，但是关于重复的测试代码是否成问题，是否真的有必要减少这些重复，专家们有不同的意见。
 
-一方面，很难抓住重复规范的本质。测试辅助函数形成了一种自定义语言，可以清晰而简洁地表达测试指令。例如，如果您的规范通过测试 ID 查找 DOM 元素，测试辅助函数会建立惯例并隐藏实现细节。
+一方面，很难抓住重复规范的核心(共同点)。测试辅助函数形成了一种自定义语言，可以清晰而简洁地表达测试指令。例如，如果您的规范通过测试 ID 查找 DOM 元素，测试辅助函数会建立约定并隐藏实现细节。
 
-另一方面，像辅助函数这样的抽象会使测试变得更复杂，因此更难理解。阅读规范的开发人员首先需要熟悉测试辅助函数。毕竟，测试应该比实现代码更易读。
+另一方面，像辅助函数这样的抽象会使测试变得更复杂，因此会更难理解。阅读规范的开发人员首先需要熟悉测试辅助函数的逻辑。毕竟，测试应该比实现代码更易读才对。
 
 TIP: 重复与抽象
 
-在软件开发中，有关重复和抽象价值的问题存在争议。https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction[正如 Sandi Metz 所说]，“重复比错误的抽象要便宜得多”。
+在软件开发中，有关重复和抽象价值的问题存在争议。 https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction[正如 Sandi Metz 所说]，“重复比错误的抽象要好得多”。
 
-当编写规范时，这一点尤为正确。您应该尝试使用 `beforeEach`/`beforeAll`、简单的辅助函数甚至测试库来消除重复和样板代码。但是不要试图将您的优化习惯和技巧应用于测试代码。
+当编写规范时，这一点尤为正确。您应该尝试使用 `beforeEach`/`beforeAll`、更简单的辅助函数甚至是测试库来消除重复代码和样板代码。但是不要试图将您在业务实现代码上的优化习惯和技巧应用在测试代码上。
 
-测试应该重现所有相关的逻辑情况。为所有这些不同的、有时是互斥的情况找到合适的抽象通常是徒劳的。
+测试应该重现所有相关的逻辑情况。为这些不同的、有时甚至是互斥的情况提取出合适的抽象，通常没什么用。
 
 TIP: 谨慎地减少重复
 
 对于这个问题，您的实践可能会有所不同。为了完整起见，让我们讨论一下如何减少 `countChange` 输出规范中的重复。
 
-输出是一个 `EventEmitter`，它是一个完全功能的 RxJS `Observable`。这使得我们可以按照自己的方式转换 `Observable`。具体来说，我们可以点击所有三个按钮，然后期望 `countChange` 输出已发出三个值。
+`@Output()` 是一个 `EventEmitter`，它是一个有完全功能的 RxJS `Observable`。这使得我们可以按照自己的方式转换 `Observable`。具体来说，我们可以点击所有三个按钮，然后期望 `countChange` 输出已发出三个值。
 
 [source,typescript]
 ----
