@@ -37,7 +37,7 @@ TIP: 浅渲染 vs. 深渲染
 
 == 浅渲染 vs. 深渲染
 
-在计数器示例应用程序中，https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.ts[`HomeComponent`] 包含 `CounterComponent`、`ServiceCounterComponent` 和 `NgRxCounterComponent`。
+在计数器示例应用程序中， https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.ts[`HomeComponent`] 包含 `CounterComponent`、`ServiceCounterComponent` 和 `NgRxCounterComponent`。
 
 ++++
 <button class="load-iframe">
@@ -124,9 +124,12 @@ TIP: 未知的自定义元素
 
 从 Angular 9 开始，这个测试规范通过了，但是在控制台上产生了一系列警告信息：
 
-`'app-counter' is not a known element:`<br>
-`1. If 'app-counter' is an Angular component, then verify that it is part of this module.`<br>
-`2. If 'app-counter' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.`
+[source,shell]
+----
+'app-counter' is not a known element:
+1. If 'app-counter' is an Angular component, then verify that it is part of this module.
+2. If 'app-counter' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+----
 
 我们在 `app-service-counter` 和 `app-ngrx-counter` 中也得到了同样的警告。还有另一个警告信息：
 
