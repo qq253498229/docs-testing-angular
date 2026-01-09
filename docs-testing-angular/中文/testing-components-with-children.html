@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试带有子组件的组件 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="testing-components-with-children.html">测试带有子组件的组件</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">测试带有子组件的组件</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>渲染带有或不带子组件的组件</p>
+</li>
+<li>
+<p>检查父组件及其子组件的正确连接</p>
+</li>
+<li>
+<p>使用虚拟组件替换子组件</p>
+</li>
+<li>
+<p>使用 ng-mocks 库来模拟依赖关系</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+展示型组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>到目前为止，我们已经测试了一个独立的组件，它只渲染了普通的 HTML 元素，没有包含子组件。这种低级组件是 Angular 应用程序的核心组成部分。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>它们直接呈现给用户看到并与之交互的内容。</p>
+</li>
+<li>
+<p>它们通常是高度通用和可重用的。</p>
+</li>
+<li>
+<p>它们通过输入属性进行控制，并使用输出属性进行反馈。</p>
+</li>
+<li>
+<p>它们的依赖性很少或几乎没有。</p>
+</li>
+<li>
+<p>它们易于理解，因此易于测试。</p>
+</li>
+<li>
+<p>测试这些组件的首选方式是单元测试。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>这些组件被称为 <strong>展示型组件</strong> ，因为它们直接使用 HTML 和 CSS 展示用户界面的一部分。展示型组件需要组合和连接在一起，形成一个工作的用户界面。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+容器组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这是 <strong>容器组件</strong> 的职责。这些高级组件将多个低级组件组合在一起。它们从不同的来源（如服务和状态管理器）获取数据，并将其分发给它们的子组件。</p>
+</div>
+<div class="paragraph">
+<p>容器组件有几种类型的依赖关系。它们依赖于嵌套的子组件，还依赖于可注入对象。可注入对象是通过依赖注入提供的类、函数、对象等，比如服务。这些依赖关系使得测试容器组件变得复杂。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+浅渲染 vs. 深渲染
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有两种基本的测试带有子组件的组件的方式：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用 <strong>浅渲染</strong> 进行单元测试。子组件不会被渲染。</p>
+</li>
+<li>
+<p>使用 <strong>深渲染</strong> 进行集成测试。子组件会被渲染。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>同样，这两种方法都是有效的，我们将进行讨论。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_浅渲染_vs_深渲染"><a class="anchor" href="#_浅渲染_vs_深渲染"></a>浅渲染 vs. 深渲染</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在计数器示例应用程序中， <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.ts"><code>HomeComponent</code></a> 包含 <code>CounterComponent</code>、<code>ServiceCounterComponent</code> 和 <code>NgRxCounterComponent</code>。</p>
+</div>
+<button class="load-iframe">
+观察 HomeComponent 的实际效果
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://9elements.github.io/angular-workshop/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>从 <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.html">模板</a> 中:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;app-counter
+  [startCount]="5"
+  (countChange)="handleCountChange($event)"
+&gt;&lt;/app-counter&gt;
+&lt;!-- … --&gt;
+&lt;app-service-counter&gt;&lt;/app-service-counter&gt;
+&lt;!-- … --&gt;
+&lt;app-ngrx-counter&gt;&lt;/app-ngrx-counter&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些自定义的 <code>app-<em></code> 元素最终出现在 DOM 树中。它们成为子组件的 _宿主元素</em>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+仅检查连接
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>HomeComponent</code> 的 <strong>单元测试</strong> 不会渲染这些子组件。宿主元素被渲染，但保持为空。你可能会想，这样的测试有什么意义？它到底做了什么呢？</p>
+</div>
+<div class="paragraph">
+<p>从 <code>HomeComponent</code> 的角度来看，其子组件的内部工作并不重要。我们需要测试模板是否包含这些子组件。此外，我们还需要检查 <code>HomeComponent</code> 及其子组件是否使用输入和输出正确地进行了连接。</p>
+</div>
+<div class="paragraph">
+<p>特别是，<code>HomeComponent</code> 的单元测试检查是否存在 <code>app-counter</code> 元素，<code>startCount</code> 输入是否正确传递，以及 <code>HomeComponent</code> 是否处理了 <code>countChange</code> 事件。对于其他子组件，如 <code>app-service-counter</code> 和 <code>app-ngrx-counter</code>，也是同样的做法。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+渲染子组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong><code>HomeComponent</code> 的集成测试</strong> 会渲染子组件。宿主元素将分别填充 <code>CounterComponent</code>、<code>ServiceCounterComponent</code> 和 <code>NgRxCounterComponent</code> 的输出内容。这个集成测试实际上测试了这四个组件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试协同工作
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们需要确定测试嵌套组件的详细程度。如果它们有单独的单元测试，我们就不需要点击每个相应的增加按钮。毕竟，集成测试需要证明这四个组件可以协同工作，而不涉及子组件的细节。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/tree/main/src/app/components/home">HomeComponent：实现和测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_单元测试"><a class="anchor" href="#_单元测试"></a>单元测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>让我们先为 <code>HomeComponent</code> 编写一个单元测试。设置过程与 <code>CounterComponent</code> 的测试套件相似。我们使用 <code>TestBed</code> 来配置一个测试模块，并渲染要测试的组件。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('HomeComponent', () =&gt; {
+  let fixture: ComponentFixture&lt;HomeComponent&gt;;
+  let component: HomeComponent;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [HomeComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('renders without errors', () =&gt; {
+    expect(component).toBeTruthy();
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+冒烟测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这个测试套件包含一个 <em>冒烟测试</em> 规范。它检查组件实例的存在性，但并不对组件的具体行为进行断言。它只是验证组件能够在没有错误的情况下正常渲染。</p>
+</div>
+<div class="paragraph">
+<p>如果冒烟测试失败，说明测试设置存在问题。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+未知的自定义元素
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>从 Angular 9 开始，这个测试规范通过了，但是在控制台上产生了一系列警告信息：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">'app-counter' is not a known element:
+1. If 'app-counter' is an Angular component, then verify that it is part of this module.
+2. If 'app-counter' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们在 <code>app-service-counter</code> 和 <code>app-ngrx-counter</code> 中也得到了同样的警告。还有另一个警告信息：</p>
+</div>
+<div class="paragraph">
+<p><code>无法绑定到 'startCount'，因为它不是 'app-counter' 的已知属性。</code></p>
+</div>
+<div class="paragraph">
+<p>这些警告的含义是什么呢？Angular 无法识别自定义元素 <code>app-counter</code>、<code>app-service-counter</code> 和 <code>app-ngrx-counter</code>，因为我们没有声明与这些选择器匹配的组件。警告指向了两个解决方案：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>要么在测试模块中声明子组件，<strong>将测试转为集成测试</strong>；</p>
+</li>
+<li>
+<p>要么告诉 Angular 忽略这些未知元素，<strong>将测试保持为单元测试</strong>。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+忽略子元素
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>由于我们计划编写的是单元测试，我们选择了第二个解决方案。</p>
+</div>
+<div class="paragraph">
+<p>在配置测试模块时，我们可以指定 <code>schemas</code> 来告诉 Angular 如何处理那些未被指令或组件处理的元素。</p>
+</div>
+<div class="paragraph">
+<p>警告建议使用 <code>CUSTOM_ELEMENTS_SCHEMA</code>，但是这些元素并不是 Web 组件。我们希望 Angular 简单地忽略这些元素。因此，我们使用 <code>NO_ERRORS_SCHEMA</code>，这是一个“允许任何元素上的任何属性”的模式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">await TestBed.configureTestingModule({
+  declarations: [HomeComponent],
+  schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>加上这个配置后，我们的冒烟测试通过了。</p>
+</div>
+<div class="paragraph">
+<p>现在让我们编写一个更有意义的规范！我们从嵌套的 <code>app-counter</code> 开始。这是我们需要覆盖的代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;app-counter
+  [startCount]="5"
+  (countChange)="handleCountChange($event)"
+&gt;&lt;/app-counter&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+子元素存在性测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>首先，我们需要测试独立计数器 <code>app-counter</code> 的存在。我们创建一个新的规范来完成这个目的：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders an independent counter', () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了验证在 DOM 中存在一个 <code>app-counter</code> 元素，我们使用最顶层的 <code>DebugElement</code> 的熟悉的 <code>query</code> 方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const { debugElement } = fixture;
+const counter = debugElement.query(By.css('app-counter'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这段代码使用了 <code>app-counter</code> 类型选择器来查找元素。你可能会想，为什么不使用测试 ID 和 <code>findEl</code> 辅助函数呢？</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+通过元素类型查找
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在这种罕见的情况下，我们需要强制使用 <code>app-counter</code> 元素，因为这是 <code>CounterComponent</code> 的选择器。</p>
+</div>
+<div class="paragraph">
+<p>使用测试 ID 会使元素类型变得任意。这在其他情况下可以使测试更加健壮。然而，在测试子组件存在性时，正是元素类型调用了子组件。</p>
+</div>
+<div class="paragraph">
+<p>我们的测试还缺少一个期望值。query 方法返回一个 <code>DebugElement</code> 或 <code>null</code>。我们只需期望返回值为真值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders an independent counter', () =&gt; {
+  const { debugElement } = fixture;
+  const counter = debugElement.query(By.css('app-counter'));
+  expect(counter).toBeTruthy();
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>查找子组件是一个常见的任务。这样重复的模式是测试辅助函数的好候选对象。不是因为它是很多代码，而是因为代码具有特定的含义，我们希望传达出来。</p>
+</div>
+<div class="paragraph">
+<p><code>debugElement.query(By.css('app-counter'))</code> 并不特别描述性。读者需要花一点时间才能意识到这段代码试图找到一个嵌套的组件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>findComponent</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>因此，让我们引入一个名为 <code>findComponent</code> 的辅助函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export function findComponent&lt;T&gt;(
+  fixture: ComponentFixture&lt;T&gt;,
+  selector: string,
+): DebugElement {
+  return fixture.debugElement.query(By.css(selector));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的规范现在如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders an independent counter', () =&gt; {
+  const counter = findComponent(fixture, 'app-counter');
+  expect(counter).toBeTruthy();
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+检查输入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>接下来，我们需要测试的是 <code>startCount</code> 输入。特别是 <code>HomeComponent</code> 模板中的属性绑定 <code>[startCount]="5"</code>。让我们创建一个新的规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('passes a start count', () =&gt; {
+  const counter = findComponent(fixture, 'app-counter');
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>properties</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们如何读取输入值？每个 <code>DebugElement</code> 都有一个 <code>properties</code> 对象，其中包含DOM属性及其值。此外，它还包含特定的属性绑定（类型为 <code>{ [key: string]: any }</code>）。</p>
+</div>
+<div class="paragraph">
+<p>在使用浅层渲染的单元测试中，<code>properties</code> 包含子组件的输入。首先，我们找到 <code>app-counter</code> 以获取相应的 <code>DebugElement</code>。然后，我们检查输入值 <code>properties.startCount</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('passes a start count', () =&gt; {
+  const counter = findComponent(fixture, 'app-counter');
+  expect(counter.properties.startCount).toBe(5);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>那非常简单！最后但同样重要的是，我们需要测试输出事件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+输出事件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>从 <code>HomeComponent</code> 的角度来看，对输出事件的反应就像处理 <code>app-counter</code> 元素上的事件一样。模板使用了熟悉的 <code>(event)="handler($event)"</code> 语法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;app-counter
+  [startCount]="5"
+  (countChange)="handleCountChange($event)"
+&gt;&lt;/app-counter&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>handleCountChange</code> 方法在组件类中定义。它只是调用 <code>console.log</code> 来证明子组件和父组件之间的通信成功了：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export class HomeComponent {
+  public handleCountChange(count: number): void {
+    console.log('countChange event from CounterComponent', count);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们添加一个新的规范来测试输出（Output）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('listens for count changes', () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该规范需要执行两个步骤：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>Act:</em> 找到子组件，并让 <code>countChange</code> 输出（Output）发出一个值。</p>
+</li>
+<li>
+<p><em>Assert:</em> 检查 <code>console.log</code> 是否已被调用。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>从父组件的角度来看，<code>countChange</code> 只是一个事件。浅渲染意味着没有 <code>CounterComponent</code> 实例，也没有名为 <code>countChange</code> 的 <code>EventEmitter</code>。Angular只会看到一个元素 <code>app-counter</code> ，带有一个事件处理器 <code>(countChange)="handleCountChange($event)"</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+模拟输出（Output）
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在这种设置中，我们可以使用已知的 <code>triggerEventHandler</code> 方法来模拟输出（Output）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('listens for count changes', () =&gt; {
+  /* … */
+  const counter = findComponent(fixture, 'app-counter');
+  const count = 5;
+  counter.triggerEventHandler('countChange', 5);
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该规范找到 <code>app-counter</code> 元素并触发 <code>countChange</code> 事件处理程序。</p>
+</div>
+<div class="paragraph">
+<p>第二个 <code>triggerEventHandler</code> 参数 <code>5</code> 不是我们从DOM事件（如 <code>click</code>）中所了解的事件对象。它是一个输出（Output）将会发出的值。<code>countChange</code> 输出的类型是 <code>EventEmitter&lt;number&gt;</code>，因此我们在测试中使用固定的数字 <code>5</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+输出效果
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在内部，<code>triggerEventHandler</code> 使用 <code>$event</code> 为 <code>5</code> 运行 <code>handleCountChange($event)</code>。<code>handleCountChange</code> 调用 <code>console.log</code>。这是我们需要测试的可观察效果。</p>
+</div>
+<div class="paragraph">
+<p>如何验证是否已调用 <code>console.log</code>？我们可以使用Jasmine的 <code>spyOn</code> 来 <a href="faking-dependencies.html#_对现有方法进行间谍操作" class="xref page">对现有方法进行监听</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">spyOn(console, 'log');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在整个测试运行期间，这将使用spy覆盖 <code>console.log</code>。我们需要在测试规范的开始处，在 <em>Arrange</em> 阶段设置spy。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('listens for count changes', () =&gt; {
+  spyOn(console, 'log');
+  const counter = findComponent(fixture, 'app-counter');
+  const count = 5;
+  counter.triggerEventHandler('countChange', count);
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <em>断言(Assert)</em> 阶段，我们期望该spy已被调用，并传入特定的文本和Output所发出的数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('listens for count changes', () =&gt; {
+  spyOn(console, 'log');
+  const counter = findComponent(fixture, 'app-counter');
+  const count = 5;
+  counter.triggerEventHandler('countChange', count);
+  expect(console.log).toHaveBeenCalledWith(
+    'countChange event from CounterComponent',
+    count,
+  );
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>至此我们已经测试了 <code>CounterComponent</code> 子组件。<code>HomeComponent</code> 还会以类似以下方式渲染 <code>ServiceCounterComponent</code> <code>和NgRxCounterComponent</code>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;app-service-counter&gt;&lt;/app-service-counter&gt;
+&lt;!-- … --&gt;
+&lt;app-ngrx-counter&gt;&lt;/app-ngrx-counter&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+子组件存在性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>由于它们没有输入或输出，我们只需测试它们是否在模板中被提及。我们添加两个额外的规范，分别检查这些 <code>app-service-counter</code> 和 <code>app-ngrx-counter</code> 元素的存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders a service counter', () =&gt; {
+  const serviceCounter = findComponent(fixture, 'app-service-counter');
+  expect(serviceCounter).toBeTruthy();
+});
+
+it('renders a NgRx counter', () =&gt; {
+  const ngrxCounter = findComponent(fixture, 'app-ngrx-counter');
+  expect(ngrxCounter).toBeTruthy();
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样了！我们使用浅渲染编写了一个单元测试，证明了 <code>HomeComponent</code> 正确嵌入了几个子组件。</p>
+</div>
+<div class="paragraph">
+<p>请注意，这只是一种可能的测试方法。和全面的集成测试相比，设置工作很少。规范可以使用Angular的 <code>DebugElement</code> 抽象来测试存在性以及输入和输出。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+单元测试的可信度
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>然而，单元测试对于 <code>HomeComponent</code> 在生产环境中的正常工作并没有太多的信心。我们已经指示Angular忽略了元素 <code>app-counter</code>、<code>app-service-counter</code> 和<code>app-ngrx-counter</code>。</p>
+</div>
+<div class="paragraph">
+<p>如果<code>HomeComponent</code> 使用了错误的元素名称，并且测试复制了该错误，那么测试将错误地通过。我们需要将涉及的组件一起渲染，以便发现错误。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/home">HomeComponent: 实现和测试代码</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts">元素规范辅助函数: 完整代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_模拟子组件"><a class="anchor" href="#_模拟子组件"></a>模拟子组件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在天真的单元测试和集成测试之间有一种中间地带。我们可以使用 <em>假</em> 的子组件来渲染，而不是使用空的自定义元素。</p>
+</div>
+<div class="paragraph">
+<p>假组件具有相同的选择器、输入和输出，但没有依赖项，也不需要渲染任何内容。当测试带有子组件的组件时，我们可以用假组件替换子组件。</p>
+</div>
+<div class="paragraph">
+<p>让我们将<code>CounterComponent</code>简化为一个什么都不做但提供相同公共API的空壳子：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Component({
+  selector: 'app-counter',
+  template: '',
+})
+class FakeCounterComponent implements Partial&lt;CounterComponent&gt; {
+  @Input()
+  public startCount = 0;
+
+  @Output()
+  public countChange = new EventEmitter&lt;number&gt;();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个伪造的组件缺少模板和任何逻辑，但具有相同的选择器、输入和输出。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+相同的公共API
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>还记得 <a href="faking-dependencies.html#_伪造依赖" class="xref page">伪造依赖关系的规则</a> 吗？我们需要确保伪造的组件与原始组件相似。<code>FakeCounterComponent 实现 Partial&lt;CounterComponent&gt;</code> 要求该类实现 <code>CounterComponent</code> 的一个子集。TypeScript 会强制要求给定的属性和方法具有与原始类相同的类型。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+声明伪造组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在我们的测试套件中，我们将 <code>FakeCounterComponent</code> 放置在 <code>describe</code> 块之前。下一步是将该组件添加到测试模块中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">TestBed.configureTestingModule({
+  declarations: [HomeComponent, FakeCounterComponent],
+  schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当 Angular 遇到 <code>app-counter</code> 元素时，它会实例化并挂载一个 <code>FakeCounterComponent</code>。由于伪造的模板也是空的，因此该元素保持为空。<code>startCount</code> 输入属性被设置，并且父级 <code>HomeComponent</code> 订阅 <code>countChange</code> 输出。</p>
+</div>
+<div class="paragraph">
+<p>现在，由于子组件被渲染，我们需要调整测试套件。我们不再搜索 <code>app-counter</code> 元素并检查其属性，而是显式搜索 <code>FakeCounterComponent</code> 实例。</p>
+</div>
+<div class="paragraph">
+<p>到目前为止，我们使用了 <code>DebugElement</code> 的 <code>query</code> 方法来查找嵌套元素。例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const element = fixture.debugElement.query(By.css('…'));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们的辅助函数 <code>findEl</code> 和 <code>findComponent</code> 也使用了这种模式。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+通过指令查找
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在我们想要找到一个嵌套的组件。我们可以使用 <code>query</code> 方法和 <code>By.directive</code> 这个断言函数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const counterEl = fixture.debugElement.query(
+  By.directive(FakeCounterComponent)
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>By.directive</code> 可以找到各种类型的指令，组件也是指令的一种。</p>
+</div>
+<div class="paragraph">
+<p><code>query</code> 方法会返回一个 <code>DebugElement</code>，如果没有找到匹配的元素，则返回 <code>null</code>。正如我们所了解的，<code>DebugElement</code> 总是包装了一个原生的 DOM 元素。当我们查询 <code>FakeCounterComponent</code> 时，我们会得到一个包装了 <code>app-counter</code> 元素的 <code>DebugElement</code>，就像 <code>By.css('app-counter')</code> 一样。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+获取子组件实例
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>不同的是，现在我们可以通过 <code>componentInstance</code> 属性访问渲染的 <code>FakeCounterComponent</code> 的实例：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const counterEl = fixture.debugElement.query(
+  By.directive(FakeCounterComponent)
+);
+const counter: CounterComponent = counterEl.componentInstance;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>由于 Angular 不知道组件的类型，<code>componentInstance</code> 的类型是 <code>any</code>。因此，我们添加了一个显式的类型注释。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+子组件的存在
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有了对子组件实例的访问权限，我们可以对其进行断言。首先，我们验证其是否存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders an independent counter', () =&gt; {
+  const counterEl = fixture.debugElement.query(
+    By.directive(FakeCounterComponent)
+  );
+  const counter: CounterComponent = counterEl.componentInstance;
+
+  expect(counter).toBeTruthy();
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个冒烟测试，如果没有找到 <code>FakeCounterComponent</code> 的实例，它将会提前失败。<code>query</code> 会返回 <code>null</code>，并且 <code>counterEl.componentInstance</code> 会因为 <code>TypeError: counterEl is null</code> 而失败。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+检查输入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>第二个规范检查输入。输入是组件实例的一个属性，因此 <code>counter.startCount</code> 可以给出 <code>startCount</code> 输入的值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('passes a start count', () =&gt; {
+  const counterEl = fixture.debugElement.query(
+    By.directive(FakeCounterComponent)
+  );
+  const counter: CounterComponent = counterEl.componentInstance;
+
+  expect(counter.startCount).toBe(5);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第三个规范检查输出的处理：如果计数器发出一个值，<code>HomeComponent</code> 将其传递给 <code>console.log</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+触发输出
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>正如之前提到的，输出是组件实例上的 <code>EventEmitter</code> 属性。之前我们使用 <code>triggerEventHandler</code> 抽象来模拟输出事件。现在我们可以直接访问输出，并调用其 <code>emit</code> 方法，就像子组件中的代码一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('listens for count changes', () =&gt; {
+  const counterEl = fixture.debugElement.query(
+    By.directive(FakeCounterComponent)
+  );
+  const counter: CounterComponent = counterEl.componentInstance;
+
+  spyOn(console, 'log');
+  const count = 5;
+  counter.countChange.emit(5);
+  expect(console.log).toHaveBeenCalledWith(
+    'countChange event from CounterComponent',
+    count,
+  );
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们完成了！这是对 <code>CounterComponent</code> 子组件进行验证的 <code>HomeComponent</code> 测试套件。为了减少重复和噪音，我们将查询部分移到 <code>beforeEach</code> 块中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Component({
+  selector: 'app-counter',
+  template: '',
+})
+class FakeCounterComponent implements Partial&lt;CounterComponent&gt; {
+  @Input()
+  public startCount = 0;
+
+  @Output()
+  public countChange = new EventEmitter&lt;number&gt;();
+}
+
+describe('HomeComponent (faking a child Component)', () =&gt; {
+  let fixture: ComponentFixture&lt;HomeComponent&gt;;
+  let component: HomeComponent;
+  let counter: FakeCounterComponent;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [HomeComponent, FakeCounterComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    const counterEl = fixture.debugElement.query(
+      By.directive(FakeCounterComponent)
+    );
+    counter = counterEl.componentInstance;
+  });
+
+  it('renders an independent counter', () =&gt; {
+    expect(counter).toBeTruthy();
+  });
+
+  it('passes a start count', () =&gt; {
+    expect(counter.startCount).toBe(5);
+  });
+
+  it('listens for count changes', () =&gt; {
+    spyOn(console, 'log');
+    const count = 5;
+    counter.countChange.emit(count);
+    expect(console.log).toHaveBeenCalledWith(
+      'countChange event from CounterComponent',
+      count,
+    );
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们总结一下使用这种方式测试 <code>HomeComponent</code> 所获得的收益。</p>
+</div>
+<div class="paragraph">
+<p>我们用一个行为相同的伪造组件替代了一个组件依赖项，就 <code>HomeComponent</code> 来说，它们的行为是一样的。伪造的子组件被渲染，但模板可能是空的。</p>
+</div>
+<div class="paragraph">
+<p>原始的子组件 <code>CounterComponent</code> 仅被导入用于创建衍生的伪造组件。我们的测试仍然是一个快速、简短的单元测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+优势
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>与其搜索名为 <code>app-counter</code> 的元素，我们搜索组件实例。这样更加稳健。主机元素的存在是一个很好的指示，但更重要的是组件是否已被渲染到该元素中。</p>
+</div>
+<div class="paragraph">
+<p>使用组件实例比使用 <code>DebugElement</code> 抽象更直观。我们可以读取组件的属性来了解输入和输出。基本的 JavaScript 和 Angular 知识足以编写针对这种实例的规范。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+手动伪造的缺点
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们简单的伪造子组件方法有其缺点。我们手动创建了伪造组件。这是繁琐和耗时的，同时也存在风险。伪造组件只与原始组件部分相关。</p>
+</div>
+<div class="paragraph">
+<p>例如，如果原始组件更改了其选择器 <code>app-counter</code>，测试应该失败，并提醒我们调整模板。然而，由于我们没有继承组件元数据 <code>{ selector: 'app-counter', … }</code>，而是在测试中复制了它，因此测试会通过而不是失败。</p>
+</div>
+<div class="paragraph">
+<p>在下一章中，我们将解决这些缺点。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home.component.fake-child.spec.ts">伪造子组件的 HomeComponent 规范</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用_ng_mocks_伪造子组件"><a class="anchor" href="#_使用_ng_mocks_伪造子组件"></a>使用 ng-mocks 伪造子组件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们手动创建了一个组件伪造。这是一个重要的练习，用于理解如何伪造组件，但它不能产生一个稳健、多用途的伪造组件。在本指南中，我们无法讨论创建严密伪造组件所需的所有要点和细节。</p>
+</div>
+<div class="paragraph">
+<p>相反，我们将使用一个成熟的解决方案： <a href="https://github.com/help-me-mom/ng-mocks">ng-mocks</a> 是一个功能丰富的库，用于使用伪造依赖项测试组件。
+（请记住，本指南使用总称“伪造(fake)”而其他文章和工具使用“模拟(mock)”或“存根(stub)”等术语。）</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+从原始组件创建伪造组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>ng-mocks 帮助创建伪造组件以替代子组件，是其中的一项功能。<code>MockComponent</code> 函数接受原始组件并返回一个类似原始组件的伪造组件。</p>
+</div>
+<div class="paragraph">
+<p>我们不再创建 <code>FakeCounterComponent</code>，而是调用 <code>MockComponent(CounterComponent)</code> 并将伪造组件添加到测试模块中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { MockComponent } from 'ng-mocks';</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">beforeEach(async () =&gt; {
+  await TestBed.configureTestingModule({
+    declarations: [HomeComponent, MockComponent(CounterComponent)],
+    schemas: [NO_ERRORS_SCHEMA],
+  }).compileComponents();
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后，我们可以查询渲染的 DOM 来查找 <code>CounterComponent</code> 的实例。找到的实例实际上是由 ng-mocks 创建的伪造组件。
+尽管如此，我们仍然可以声明类型 <code>CounterComponent</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('HomeComponent with ng-mocks', () =&gt; {
+  let fixture: ComponentFixture&lt;HomeComponent&gt;;
+  let component: HomeComponent;
+  // Original type!
+  let counter: CounterComponent;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [HomeComponent, MockComponent(CounterComponent)],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    const counterEl = fixture.debugElement.query(
+      // Original class!
+      By.directive(CounterComponent)
+    );
+    counter = counterEl.componentInstance;
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从 TypeScript 的角度来看，伪造组件符合 <code>CounterComponent</code> 类型。TypeScript 使用结构类型系统，检查是否满足所有类型要求。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+类型等价性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>对于 <code>CounterComponent</code> 适用的每个命题也适用于伪造组件。伪造组件具有与原始组件相同的所有属性和方法。这就是为什么我们可以安全地用伪造组件替换原始组件，并在测试中将伪造组件视为相同的原始组件。</p>
+</div>
+<div class="paragraph">
+<p>完整代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('HomeComponent with ng-mocks', () =&gt; {
+  let fixture: ComponentFixture&lt;HomeComponent&gt;;
+  let component: HomeComponent;
+  let counter: CounterComponent;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [HomeComponent, Mock(CounterComponent)],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    const counterEl = fixture.debugElement.query(
+      By.directive(CounterComponent)
+    );
+    counter = counterEl.componentInstance;
+  });
+
+  it('renders an independent counter', () =&gt; {
+    expect(counter).toBeTruthy();
+  });
+
+  it('passes a start count', () =&gt; {
+    expect(counter.startCount).toBe(5);
+  });
+
+  it('listens for count changes', () =&gt; {
+    spyOn(console, 'log');
+    const count = 5;
+    counter.countChange.emit(count);
+    expect(console.log).toHaveBeenCalledWith(
+      'countChange event from CounterComponent',
+      count,
+    );
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们消除了手动创建的 <code>FakeCounterComponent</code>。我们使用 <code>MockComponent(CounterComponent)</code> 来创建伪造组件，并使用原始的 <code>CounterComponent</code> 类。测试本身并没有改变。</p>
+</div>
+<div class="paragraph">
+<p>这只是 ng-mocks 的一个简单示例。该库不仅帮助处理嵌套组件，还提供了高级的辅助方法来设置 Angular 测试环境。ng-mocks 可以替代传统的 <code>TestBed.configureTestingModule</code> 设置，并帮助伪造模块、组件、指令、管道和服务。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/home/home-component.ng-mocks.spec.ts">使用 ng-mocks 的 HomeComponent 测试用例</a></p>
+</li>
+<li>
+<p><a href="https://github.com/help-me-mom/ng-mocks">ng-mocks</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

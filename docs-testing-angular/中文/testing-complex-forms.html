@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试复杂表单 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="testing-complex-forms.html">测试复杂表单</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">测试复杂表单</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在组件测试中填写和提交表单</p>
+</li>
+<li>
+<p>测试同步和异步字段验证和错误消息</p>
+</li>
+<li>
+<p>测试动态表单逻辑</p>
+</li>
+<li>
+<p>使用工具确保表单对所有人都是可访问的</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>表单是大型 Web 应用程序的核心。特别是企业应用程序围绕通过表单输入和编辑数据展开。因此，实现复杂表单是 Angular 框架的一个重要功能。</p>
+</div>
+<div class="paragraph">
+<p>我们已经学习了如何在测试计数器组件时 <a href="testing-components.html#_填充表单" class="xref page">填写表单字段</a>。在此过程中，我们开发了 setFieldValue 测试辅助函数。</p>
+</div>
+<div class="paragraph">
+<p>我们处理的简单表单旨在输入一个值。我们通过填写字段并提交表单来进行测试。现在我们将看一个更复杂的示例。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+注册表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们将引入和测试一个虚构在线服务的<strong>注册表单</strong>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing">注册表单：源代码</a></p>
+</li>
+<li>
+<p><a href="https://molily.github.io/angular-form-testing/">注册表单：运行应用程序</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the sign-up form in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://molily.github.io/angular-form-testing/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>注册表单的功能包括：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>不同类型的输入字段：文本、单选按钮、复选框、下拉框</p>
+</li>
+<li>
+<p>同步和异步验证器的字段验证</p>
+</li>
+<li>
+<p>可访问的表单结构、字段标签和错误消息</p>
+</li>
+<li>
+<p>字段之间的动态关联</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>该表单包含四个部分：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>计划选择：“个人”、“商业”或“教育及非营利”</p>
+</li>
+<li>
+<p>登录凭据：用户名、电子邮件和密码</p>
+</li>
+<li>
+<p>账单地址</p>
+</li>
+<li>
+<p>服务条款和提交按钮</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+非实用性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>请注意，此表单仅用于演示目的。虽然它遵循了验证和可访问性的最佳实践，但从设计和用户体验的角度来看，它并不实用。其中包括，对于新用户来说过于复杂。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+客户端和服务器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>与其他示例存储库不同，这个示例被分成了一个 <code>客户端</code> 目录和一个 <code>服务器</code> 目录：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://github.com/molily/angular-form-testing/tree/main/client"><code>客户端</code>目录</a>包含使用 Angular CLI 创建的标准 Angular 应用程序。</p>
+</li>
+<li>
+<p>The <a href="https://github.com/molily/angular-form-testing/tree/main/server"><code>服务器</code>目录</a>包含一个简单的 Node.js 服务，模拟用户管理和账户创建。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>同样，Node.js 服务仅用于演示目的。该服务将创建的用户帐户保存在内存中，并在停止时丢弃。请勿在生产环境中使用它。</p>
+</div>
+<div class="paragraph">
+<p>尽管注册表单只有12个表单控件，并不特别大。但是，我们将要探索一些微妙的细节。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_注册表单组件"><a class="anchor" href="#_注册表单组件"></a>注册表单组件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>表单逻辑位于 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.ts"><code>SignupFormComponent</code></a> 中。该组件依赖于 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts"><code>SignupService</code></a> 与后端服务进行通信。</p>
+</div>
+<div class="paragraph">
+<p>您可能记得，在 Angular 中，有两种基本的表单方法：<em>模板驱动表单</em>和<em>响应式表单</em>。</p>
+</div>
+<div class="paragraph">
+<p>虽然这两种方法在实践中看起来非常不同，但它们基于相同的基本概念：表单组（<code>FormGroup</code> 对象）和表单控件（<code>FormControl</code> 对象）。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+响应式表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>SignupFormComponent</code> 是一个<strong>响应式表单</strong>，它在组件类中显式创建组和控件。这样，更容易指定自定义验证器并设置动态字段关联。</p>
+</div>
+<div class="paragraph">
+<p>与其他 Angular 核心概念一样，本指南假定您对响应式表单有基本的了解。请参考 <a href="https://angular.cn/guide/reactive-forms">官方的响应式表单指南</a>以加深您的知识。</p>
+</div>
+<div class="paragraph">
+<p><code>SignupFormComponent</code> 类的重要部分如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Component({
+  selector: 'app-signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.scss'],
+})
+export class SignupFormComponent {
+  /* … */
+  public form = this.formBuilder.group({
+    plan: ['personal', required],
+    username: [
+      null,
+      [required, pattern('[a-zA-Z0-9.]+'), maxLength(50)],
+      (control: AbstractControl) =&gt;
+        this.validateUsername(control.value),
+    ],
+    email: [
+      null,
+      [required, email, maxLength(100)],
+      (control: AbstractControl) =&gt;
+        this.validateEmail(control.value),
+    ],
+    password: [
+      null,
+      required,
+      () =&gt; this.validatePassword()
+    ],
+    tos: [null, requiredTrue],
+    address: this.formBuilder.group({
+      name: [null, required],
+      addressLine1: [null],
+      addressLine2: [null, required],
+      city: [null, required],
+      postcode: [null, required],
+      region: [null],
+      country: [null, required],
+    }),
+  });
+  /* … */
+  constructor(
+    private signupService: SignupService,
+    private formBuilder: FormBuilder) {
+    /* … */
+  }
+  /* … */
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Form groups and controls
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>使用Angular的 <a href="https://angular.cn/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls">FormBuilder</a>，我们创建了<code>form</code>属性，即最顶层的表单组。内部有另一个用于地址相关字段的表单组。</p>
+</div>
+<div class="paragraph">
+<p>表单控件通过指定其初始值和验证器进行声明。例如，密码控件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">password: [
+  // The initial value (null means empty)
+  null,
+  // The synchronous validator
+  required,
+  // The asynchronous validator
+  () =&gt; this.validatePassword()
+],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html"><code>SignupFormComponent</code> 模板</a> 使用<code>formGroup</code>、<code>formGroupName</code>和<code>formControlName</code>指令分别将元素与表单组或控件关联起来。</p>
+</div>
+<div class="paragraph">
+<p>只有一个控件的简化表单结构如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;form [formGroup]="form"&gt;
+  &lt;fieldset formGroupName="address"&gt;
+    &lt;label&gt;
+      Full name
+      &lt;input type="text" formControlName="name" /&gt;
+    &lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+表单提交
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当表单填写正确且所有验证通过时，用户可以提交表单。它会生成一个由 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/services/signup.service.ts"><code>SignupData</code>接口</a>描述的对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export interface SignupData {
+  plan: Plan;
+  username: string;
+  email: string;
+  password: string;
+  tos: true;
+  address: {
+    name: string;
+    addressLine1?: string;
+    addressLine2: string;
+    city: string;
+    postcode: string;
+    region?: string;
+    country: string;
+  };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Plan</code>是一个字符串的联合类型：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export type Plan = 'personal' | 'business' | 'non-profit';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>SignupService<code>的</code>signup<code>方法接受</code>SignupData``并将其发送到服务器。出于安全原因，服务器再次验证数据。但在本指南中，我们将专注于前端。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/">SignupFormComponent：完整代码</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/guide/reactive-forms">Angular文档：响应式表单</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_表单验证和错误"><a class="anchor" href="#_表单验证和错误"></a>表单验证和错误</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+同步验证器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>几个表单控件具有同步验证器。<code>required</code>、<code>email</code>、<code>maxLength</code>、<code>pattern</code>等都是Angular提供的内置同步验证器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { Validators } from '@angular/forms';
+
+const {
+  email, maxLength, pattern, required, requiredTrue
+} = Validators;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些验证器接受控件值，大多数情况下是一个字符串，并返回一个包含可能的错误消息的<code>ValidationErrors</code>对象。验证在客户端同步进行。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+异步验证器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>对于用户名、电子邮件和密码，存在自定义的异步验证器。它们检查用户名和电子邮件是否可用，以及密码是否足够强大。</p>
+</div>
+<div class="paragraph">
+<p>异步验证器使用 <code>SignupService</code> 与后端服务进行通信。这些HTTP请求使验证变成了异步操作。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+错误呈现
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当验证器返回任何错误时，相应的错误消息会显示在表单控件下方。这个重复的任务被外包给另一个组件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+invalid &amp;&amp; (touched || dirty)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当表单控件<em>无效</em>且<em>被触摸</em>或<em>被修改</em>时，https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors[<code>ControlErrorsComponent</code>] 会显示错误。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>touched</em>表示用户已经聚焦到控件上，但又失去了焦点（触发了<code>blur</code>事件）。</p>
+</li>
+<li>
+<p><em>dirty</em>表示用户已经修改了值。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>例如，对于 <code>name</code> 控件，<code>input</code> 元素和<code>ControlErrorsComponent</code>之间的交互如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;label&gt;
+  Full name
+  &lt;input
+    type="text"
+    formControlName="name"
+    aria-required="true"
+    appErrorMessage="name-errors"
+  /&gt;
+&lt;/label&gt;
+&lt;!-- … --&gt;
+&lt;app-control-errors controlName="name" id="name-errors"&gt;
+  &lt;ng-template let-errors&gt;
+    &lt;ng-container *ngIf="errors.required"&gt;
+      Name must be given.
+    &lt;/ng-container&gt;
+  &lt;/ng-template&gt;
+&lt;/app-control-errors&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+ARIA 属性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>appErrorMessage</code> 属性会激活 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts"><code>ErrorMessageDirective</code></a>。当表单控件无效且被触摸或被修改时，该指令会添加<code>aria-invalid</code>和<code>aria-errormessage</code>属性。</p>
+</div>
+<div class="paragraph">
+<p><code>aria-invalid</code>将控件标记为辅助技术（如屏幕阅读器）中的无效控件。<code>aria-errormessage</code>指向包含错误消息的另一个元素。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+将控件与错误信息关联起来
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在出现错误时，该指令将<code>aria-errormessage</code>设置为相应的<code>app-control-errors</code>元素的id。在上面的示例中，该id为<code>name-errors</code>。这样，屏幕阅读器用户可以快速找到关联的错误消息。</p>
+</div>
+<div class="paragraph">
+<p>控件特定的错误消息仍然位于<code>signup-form.component.html</code>中。它们作为<code>ng-template</code>传递给<code>ControlErrorsComponent</code>。<code>ControlErrorsComponent</code>动态地渲染模板，并将<code>errors</code>对象作为变量传递进去：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ng-template let-errors&gt;
+  &lt;ng-container *ngIf="errors.required"&gt;
+    Name must be given.
+  &lt;/ng-container&gt;
+&lt;/ng-template&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>您不需要理解这个特定实现的细节。在注册表单中，解决方案只是显示错误、避免重复并为可访问性设置ARIA属性的可能性之一。</p>
+</div>
+<div class="paragraph">
+<p>从用户和测试的角度来看，实现错误消息的渲染方式并不重要——只要它们存在并且可访问即可。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+实现细节
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们将在<strong>黑盒集成测试</strong>中测试<code>SignupFormComponent</code>与<code>ControlErrorsComponent</code>和<code>ErrorMessageDirective</code>的配合使用。对于这个测试，后两者将是无关紧要的实现细节。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/guide/form-validation">Angular指南：验证表单输入</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN：ARIA简介</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid">MDN：aria-invalid</a></p>
+</li>
+<li>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-errormessage">ARIA规范：aria-errormessage</a></p>
+</li>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/directives/error-message.directive.ts">ErrorMessageDirective：完整代码</a></p>
+</li>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/tree/main/client/src/app/components/control-errors">ControlErrorsComponent：完整代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试计划"><a class="anchor" href="#_测试计划"></a>测试计划</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>哪些注册表单的重要部分需要进行测试？</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>表单提交</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_成功提交表单">成功提交</a></p>
+</li>
+<li>
+<p><a href="#_无效的表单">不要提交无效的表单</a></p>
+</li>
+<li>
+<p><a href="#_表单提交失败">提交失败</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="#_必填字段">必填字段被标记为必填，并显示错误消息</a></p>
+</li>
+<li>
+<p><a href="#_异步验证器">对用户名、电子邮件和密码进行异步验证</a></p>
+</li>
+<li>
+<p><a href="#_动态字段关系">动态字段关系</a></p>
+</li>
+<li>
+<p><a href="#_密码类型切换">密码类型切换</a></p>
+</li>
+<li>
+<p><a href="#_测试表单的可访问性">表单结构、字段标签和错误消息的可访问性</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试设置"><a class="anchor" href="#_测试设置"></a>测试设置</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts"><code>signup-form.component.spec.ts</code></a>中编写各个规范之前，我们需要设置测试套件。让我们从测试模块配置开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">await TestBed.configureTestingModule({
+  imports: [ReactiveFormsModule],
+  declarations: [
+    SignupFormComponent,
+    ControlErrorsComponent,
+    ErrorMessageDirective
+  ],
+  providers: [
+    { provide: SignupService, useValue: signupService }
+  ],
+}).compileComponents();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>被测试的组件包含一个响应式表单。这就是为什么我们导入了<code>ReactiveFormsModule</code>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">imports: [ReactiveFormsModule],</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+深度渲染
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如描述的那样，我们正在编写一个集成测试，所以我们声明组件及其子组件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">declarations: [
+  SignupFormComponent,
+  ControlErrorsComponent,
+  ErrorMessageDirective
+],</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+虚拟服务
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>SignupFormComponent</code>依赖于<code>SignupService</code>。当测试运行时，我们不希望向后端发送HTTP请求，因此我们 <a href="testing-components-depending-on-services.html#_虚拟服务依赖" class="xref page">将该服务替换为一个虚拟实例</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">providers: [
+  { provide: SignupService, useValue: signupService }
+],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个可能的<code>SignupService</code>虚拟实例如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const signupService:
+  Pick&lt;SignupService, keyof SignupService&gt; = {
+  isUsernameTaken() {
+    return of(false);
+  },
+  isEmailTaken() {
+    return of(false);
+  },
+  getPasswordStrength() {
+    return of(strongPassword);
+  },
+  signup() {
+    return of({ success: true });
+  },
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个虚拟实例实现了<em>成功的情况</em>：用户名和电子邮件可用，密码足够强大，并且表单提交成功。</p>
+</div>
+<div class="paragraph">
+<p>由于我们还将测试其他错误情况，我们需要动态创建<code>SignupService</code>的虚拟实例。此外，我们还需要使用Jasmine的spy来验证Service方法是否被正确调用。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>createSpyObj</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这就是Jasmine的<code>createSpyObj</code>的用途（参见 <a href="testing-components-depending-on-services.html#_虚拟服务依赖" class="xref page">虚拟服务依赖</a>）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const signupService = jasmine.createSpyObj&lt;SignupService&gt;(
+  'SignupService',
+  {
+    // Successful responses per default
+    isUsernameTaken: of(false),
+    isEmailTaken: of(false),
+    getPasswordStrength: of(strongPassword),
+    signup: of({ success: true }),
+  }
+);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+设置函数
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>与测试模块配置一起，我们将这段代码放入一个设置函数中。为了调整<code>SignupService</code>虚拟实例的行为，我们允许传递方法的返回值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('SignupFormComponent', () =&gt; {
+  let fixture: ComponentFixture&lt;SignupFormComponent&gt;;
+  let signupService: jasmine.SpyObj&lt;SignupService&gt;;
+
+  const setup = async (
+    signupServiceReturnValues?:
+      jasmine.SpyObjMethodNames&lt;SignupService&gt;,
+  ) =&gt; {
+    signupService = jasmine.createSpyObj&lt;SignupService&gt;(
+      'SignupService',
+      {
+        // Successful responses per default
+        isUsernameTaken: of(false),
+        isEmailTaken: of(false),
+        getPasswordStrength: of(strongPassword),
+        signup: of({ success: true }),
+        // Overwrite with given return values
+        ...signupServiceReturnValues,
+      }
+    );
+
+    await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
+      declarations: [
+        SignupFormComponent,
+        ControlErrorsComponent,
+        ErrorMessageDirective
+      ],
+      providers: [
+        { provide: SignupService, useValue: signupService }
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SignupFormComponent);
+    fixture.detectChanges();
+  };
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在所有接下来的规范中，我们将首先调用 <code>setup</code> 函数。如果我们简单地编写<code>async setup()</code>，则<code>SignupService</code>虚拟实例将返回成功的响应。</p>
+</div>
+<div class="paragraph">
+<p>我们可以传递一个带有不同返回值的对象来模拟失败。例如，在测试用户名已被使用时：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">await setup({
+  // Let the API return that the username is taken
+  isUsernameTaken: of(true),
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样的 <code>setup</code> 函数只是创建伪造数据并避免重复的一种方式。您可以提出其他解决方案，以达到相同的目的。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent：测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_成功提交表单"><a class="anchor" href="#_成功提交表单"></a>成功提交表单</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们需要测试的第一个情况是成功提交表单。如果用户填写了所有必填字段并且验证通过，我们期望该组件调用<code>SignupService</code>的<code>signup</code>方法，并将输入的表单数据作为参数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试数据
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>第一步是定义<em>有效的测试数据</em>，我们可以填充到表单中。我们将其放在一个单独的文件中，https://github.com/molily/angular-form-testing/blob/main/client/src/app/spec-helpers/signup-data.spec-helper.ts[signup-data.spec-helper.ts]：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export const username = 'quickBrownFox';
+export const password = 'dog lazy the over jumps fox brown quick the';
+export const email = 'quick.brown.fox@example.org';
+export const name = 'Mr. Fox';
+export const addressLine1 = '';
+export const addressLine2 = 'Under the Tree 1';
+export const city = 'Farmtown';
+export const postcode = '123456';
+export const region = 'Upper South';
+export const country = 'Luggnagg';
+
+export const signupData: SignupData = {
+  plan: 'personal',
+  username,
+  email,
+  password,
+  address: {
+    name, addressLine1, addressLine2,
+    city, postcode, region, country
+  },
+  tos: true,
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.html">signup-form.component.html</a>模板中，所有的字段元素都需要用测试ID标记，以便我们可以通过程序找到它们并输入值。</p>
+</div>
+<div class="paragraph">
+<p>例如，用户名输入框使用测试ID <code>username</code>，电子邮件输入框使用 <code>email</code>，依此类推。</p>
+</div>
+<div class="paragraph">
+<p>回到<code>signup-form.component.spec.ts</code>中，我们创建一个新的规范(spec)，并调用设置函数(setup function)。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', async () =&gt; {
+    await setup();
+
+    /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+填写表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>接下来，我们用有效的值填写所有必填字段。由于我们需要在接下来的几个规范(spec)中都进行这样的操作，让我们创建一个可重复使用的函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const fillForm = () =&gt; {
+  setFieldValue(fixture, 'username', username);
+  setFieldValue(fixture, 'email', email);
+  setFieldValue(fixture, 'password', password);
+  setFieldValue(fixture, 'name', name);
+  setFieldValue(fixture, 'addressLine1', addressLine1);
+  setFieldValue(fixture, 'addressLine2', addressLine2);
+  setFieldValue(fixture, 'city', city);
+  setFieldValue(fixture, 'postcode', postcode);
+  setFieldValue(fixture, 'region', region);
+  setFieldValue(fixture, 'country', country);
+  checkField(fixture, 'tos', true);
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>fillForm</code>函数位于<code>describe</code>的作用域内，因此它可以访问<code>fixture</code>变量。它使用<code>setFieldValue</code>和<code>checkField</code> <a href="testing-components.html#_测试辅助函数" class="xref page">元素测试助手</a>。</p>
+</div>
+<div class="paragraph">
+<p>在规范(spec)中，我们调用<code>fillForm</code>函数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', async () =&gt; {
+    await setup();
+
+    fillForm();
+
+    /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，让我们尝试立即提交表单。被测试的表单在<code>form</code>元素上监听 <a href="https://angular.cn/api/forms/NgForm#listening-for-form-submission"><code>ngSubmit</code>事件</a>，这实际上是一个原生的<code>submit</code>事件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+提交表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们通过其测试ID找到 <code>form</code> 元素，并模拟一个<code>submit</code>事件（参见 <a href="testing-components.html#_触发事件处理程序" class="xref page">触发事件处理程序</a>）。</p>
+</div>
+<div class="paragraph">
+<p>然后，我们期望<code>signup</code> spy已经被调用，并使用输入的数据作为参数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', async () =&gt; {
+    await setup();
+
+    fillForm();
+
+    findEl(fixture, 'form').triggerEventHandler('submit', {});
+
+    expect(signupService.signup).toHaveBeenCalledWith(signupData);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果我们运行这个规范(spec)，我们会发现它失败了：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Expected spy SignupService.signup to have been called with:
+  [ Object({ plan: 'personal', … }) ]
+but it was never called.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>规范(spec)失败是因为尽管我们正确填写了所有字段，但表单仍处于<em>无效</em>状态。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+异步验证器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>造成问题的是用户名、电子邮件和密码的<strong>异步验证器</strong>。当用户停止在这些字段中输入时，它们会等待一秒钟，然后向服务器发送请求。</p>
+</div>
+<div class="paragraph">
+<p>在实际生产环境中，HTTP请求需要额外的时间，但我们的伪造<code>SignupService</code>立即返回响应。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+一秒的防抖
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这种减少请求量的技术称为<em>防抖(debouncing)</em>。例如，输入用户名"fox"应该发送<em>一个</em>带有"fox"的请求，而不是连续发送<em>三个</em>带有"f"、"fo"、"fox"的请求。</p>
+</div>
+<div class="paragraph">
+<p>上述规范在填写字段后立即提交表单。在这个时间点上，异步验证器已经被调用，但尚未返回值。它们仍在等待防抖期过去。</p>
+</div>
+<div class="paragraph">
+<p>因此，测试需要等待一秒钟以等待异步验证器。一种简单的方法是编写一个使用 <code>setTimeout(() &#8658; { /* … */}, 1000)</code> 的异步测试。但这会减慢我们的规范(spec)的执行速度。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>fakeAsync</code> 和 <code>tick</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>相反，我们将使用Angular的<code>fakeAsync</code>和<code>tick</code>函数来<em>模拟</em>时间的流逝。它们是测试异步行为的强大组合。</p>
+</div>
+<div class="paragraph">
+<p><code>fakeAsync</code>冻结时间。它会钩入由定时器、间隔、Promises和Observables创建的异步任务的处理过程。它防止这些任务被执行。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+模拟时间的流逝
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在<code>fakeAsync</code>创建的时间扭曲中，我们使用<code>tick</code>函数来模拟时间的流逝。计划的任务将被执行，我们可以测试它们的效果。</p>
+</div>
+<div class="paragraph">
+<p><code>fakeAsync</code>和<code>tick</code>的特殊之处在于时间的流逝只是虚拟的。即使在模拟中经过一秒钟，规范仍然在几毫秒内完成。</p>
+</div>
+<div class="paragraph">
+<p><code>fakeAsync</code>包装了规范函数，该函数由于 <code>setup</code> 调用而也是一个<code>异步</code>函数。在填写表单后，我们使用 <code>tick(1000)</code> 来模拟等待的时间。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', fakeAsync(async () =&gt; {
+  await setup();
+
+  fillForm();
+
+  // Wait for async validators
+  tick(1000);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+
+  expect(signupService.signup).toHaveBeenCalledWith(signupData);
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个规范(spec)通过了！现在我们应该添加一些期望来测试细节。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们期望异步验证器调用<code>SignupService</code>的方法，并使用用户输入作为参数。这些方法是<code>isUsernameTaken</code>、<code>isEmailTaken</code>和<code>getPasswordStrength</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', fakeAsync(async () =&gt; {
+  await setup();
+
+  fillForm();
+
+  // Wait for async validators
+  tick(1000);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+
+  expect(signupService.isUsernameTaken).toHaveBeenCalledWith(username);
+  expect(signupService.isEmailTaken).toHaveBeenCalledWith(email);
+  expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
+  expect(signupService.signup).toHaveBeenCalledWith(signupData);
+}));</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+提交按钮
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>接下来，我们要确保提交按钮最初处于禁用状态。在成功验证后，按钮将启用。（提交按钮使用测试ID <code>submit</code>。）</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+状态消息
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>此外，当表单成功提交时，需要出现状态消息"Sign-up successful!"。（状态消息使用测试ID <code>status</code>。）</p>
+</div>
+<div class="paragraph">
+<p>这将带我们进入最终的规范(spec)：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('submits the form successfully', fakeAsync(async () =&gt; {
+  await setup();
+
+  fillForm();
+  fixture.detectChanges();
+
+  expect(findEl(fixture, 'submit').properties.disabled).toBe(true);
+
+  // Wait for async validators
+  tick(1000);
+  fixture.detectChanges();
+
+  expect(findEl(fixture, 'submit').properties.disabled).toBe(false);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+  fixture.detectChanges();
+
+  expectText(fixture, 'status', 'Sign-up successful!');
+
+  expect(signupService.isUsernameTaken).toHaveBeenCalledWith(username);
+  expect(signupService.isEmailTaken).toHaveBeenCalledWith(email);
+  expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
+  expect(signupService.signup).toHaveBeenCalledWith(signupData);
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>因为我们正在测试DOM的变化，所以我们必须在每个 <em>Act</em> 阶段之后调用<code>detectChanges</code>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.tsSignupFormComponent：测试代码" class="bare">https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.tsSignupFormComponent：测试代码</a>]</p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/core/testing/fakeAsyncAngular" class="bare">https://angular.cn/api/core/testing/fakeAsyncAngular</a> API参考：fakeAsync]</p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/core/testing/tickAngular" class="bare">https://angular.cn/api/core/testing/tickAngular</a> API参考：tick]</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_无效的表单"><a class="anchor" href="#_无效的表单"></a>无效的表单</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>现在我们已经测试了成功提交表单的情况，让我们来检查无效表单的处理。如果我们没有填写任何字段，但提交表单会发生什么？</p>
+</div>
+<div class="paragraph">
+<p>我们为这种情况创建一个新的规范(spec)：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('does not submit an invalid form', fakeAsync(async () =&gt; {
+  await setup();
+
+  // Wait for async validators
+  tick(1000);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+
+  expect(signupService.isUsernameTaken).not.toHaveBeenCalled();
+  expect(signupService.isEmailTaken).not.toHaveBeenCalled();
+  expect(signupService.getPasswordStrength).not.toHaveBeenCalled();
+  expect(signupService.signup).not.toHaveBeenCalled();
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个规范(spec)比之前的规范要简单。我们等待一秒钟，然后在不输入数据的情况下提交表单。最后，我们期望没有调用任何<code>SignupService</code>方法。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent：测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_表单提交失败"><a class="anchor" href="#_表单提交失败"></a>表单提交失败</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们已经测试了成功提交表单的情况。现在让我们测试表单提交失败的情况。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+失败原因
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>尽管输入正确，提交可能因为以下几个原因而失败：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>网络不可用</p>
+</li>
+<li>
+<p>后端处理了请求，但返回了错误：</p>
+</li>
+<li>
+<p>服务器端验证失败</p>
+</li>
+<li>
+<p>请求的结构与预期不符</p>
+</li>
+<li>
+<p>服务器代码有错误、崩溃或冻结</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Observable
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当用户提交表单时，被测试的组件调用<code>SignupService</code>的<code>signup</code>方法。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在<em>成功情况</em>下，<code>signup</code>方法返回一个发出值为 <code>{ success: true }</code> 的Observable，并完成。表单显示状态消息"Sign-up successful!"。</p>
+</li>
+<li>
+<p>在<em>错误情况下</em>，Observable会失败并抛出一个错误。表单显示状态消息"Sign-up error"。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>让我们在一个新的规范(spec)中测试后一种情况。其结构类似于成功提交的规范。但我们配置伪造的<code>signup</code>方法返回一个失败的Observable。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { throwError } from 'rxjs';</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('handles signup failure', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API report a failure
+    signup: throwError(new Error('Validation failed')),
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们填写表单，等待验证器完成，然后提交表单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">fillForm();
+
+// Wait for async validators
+tick(1000);
+
+findEl(fixture, 'form').triggerEventHandler('submit', {});
+fixture.detectChanges();</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+状态消息
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最后，我们期望出现"Sign-up error"的状态消息。此外，我们还验证相关的<code>SignupService</code>方法是否已被调用。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">expectText(fixture, 'status', 'Sign-up error');
+
+expect(signupService.isUsernameTaken).toHaveBeenCalledWith(username);
+expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
+expect(signupService.signup).toHaveBeenCalledWith(signupData);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>完整的规范(spec)如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('handles signup failure', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API report a failure
+    signup: throwError(new Error('Validation failed')),
+  });
+
+  fillForm();
+
+  // Wait for async validators
+  tick(1000);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+  fixture.detectChanges();
+
+  expectText(fixture, 'status', 'Sign-up error');
+
+  expect(signupService.isUsernameTaken).toHaveBeenCalledWith(username);
+  expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
+  expect(signupService.signup).toHaveBeenCalledWith(signupData);
+}));</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent: 测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_必填字段"><a class="anchor" href="#_必填字段"></a>必填字段</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一个关键的表单逻辑是某些字段是必填的，并且用户界面清楚地传达了这个事实。让我们编写一个规范(spec)来检查是否将必填字段标记为必填。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+要求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>要求如下：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>必填字段具有<code>aria-required</code>属性。</p>
+</li>
+<li>
+<p>必填但无效的字段具有<code>aria-errormessage</code>属性。它包含另一个元素的id。</p>
+</li>
+<li>
+<p>该元素包含错误消息 “… must be given”（“Terms of Services”复选框的文本为“Please accept the Terms and Services”）。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>我们的规范(spec)需要验证所有必填字段，因此我们编制了一个它们各自的测试ID列表：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const requiredFields = [
+  'username',
+  'email',
+  'name',
+  'addressLine2',
+  'city',
+  'postcode',
+  'country',
+  'tos',
+];</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+invalid &amp;&amp; (touched || dirty)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在检查字段之前，我们需要触发表单错误的显示。如 <a href="#_表单验证和错误">表单验证和错误</a> 中所述，当字段无效且<em>已触摸(touched)</em>或<em>已修改(dirty)</em>时，错误消息会显示出来。</p>
+</div>
+<div class="paragraph">
+<p>幸运的是，空的但是必填的字段已经是无效的。输入文本会使它们变为<em>dirty</em>，但也是<em>有效</em>的。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+标记为已触摸(touched)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>因此，我们需要<em>触摸(touch)</em>这些字段。如果一个字段被聚焦并再次失去焦点，Angular将认为它已<em>被触摸(touched)</em>。在幕后，Angular会监听<em>blur</em>事件。</p>
+</div>
+<div class="paragraph">
+<p>在我们的规范(spec)中，我们使用<code>dispatchFakeEvent</code>测试助手来模拟<code>blur</code>事件。让我们将调用放在一个可重用的函数中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const markFieldAsTouched = (element: DebugElement) =&gt; {
+  dispatchFakeEvent(element.nativeElement, 'blur');
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们现在可以编写规范(spec)的 <em>安排(Arrange)</em> 和 <em>执行(Act)</em>阶段：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('marks fields as required', async () =&gt; {
+  await setup();
+
+  // Mark required fields as touched
+  requiredFields.forEach((testId) =&gt; {
+    markFieldAsTouched(findEl(fixture, testId));
+  });
+  fixture.detectChanges();
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个<code>forEach</code>循环遍历必填字段的测试ID，找到相应的元素并将字段标记为已触摸。然后我们调用<code>detectChanges</code>，以便错误消息出现。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>aria-required</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>接下来是 <em>断言(Assert)</em> 阶段。再次遍历必填字段，逐个检查它们。让我们从<code>aria-required</code>属性开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">requiredFields.forEach((testId) =&gt; {
+  const el = findEl(fixture, testId);
+
+  // Check aria-required attribute
+  expect(el.attributes['aria-required']).toBe(
+    'true',
+    `${testId} must be marked as aria-required`,
+  );
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>findEl</code>函数返回一个具有<code>attributes</code>属性的<code>DebugElement</code>。该属性包含模板设置的所有属性。我们期望 <code>aria-required="true"</code> 属性存在。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>aria-errormessage</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下一部分测试错误消息，包含三个步骤：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>读取<code>aria-errormessage</code>属性。期望它被设置。</p>
+</li>
+<li>
+<p>找到<code>aria-errormessage</code>引用的元素。期望它存在。</p>
+</li>
+<li>
+<p>读取文本内容。期望得到一个错误消息。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>步骤1如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Check aria-errormessage attribute
+const errormessageId = el.attributes['aria-errormessage'];
+if (!errormessageId) {
+  throw new Error(`Error message id for ${testId} not present`);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通常情况下，我们会使用Jasmine的expectation，如 <code>expect(errormessageId).toBeDefined()</code>。但是<code>，errormessageId</code>的类型是<code>string | null</code>，而我们需要一个 <code>string</code> 类型的值来进行后续的操作。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+类型断言
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们需要一个TypeScript的类型断言，将<code>null</code>的情况排除，并将类型缩小为 <code>string</code> 类型。如果该属性不存在或为空，我们会抛出异常。这将使测试失败，并显示给定的错误信息，并确保<code>errormessageId</code>在规范(spec)的其余部分是一个字符串类型。</p>
+</div>
+<div class="paragraph">
+<p>第2步找到错误消息元素：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Check element with error message
+const errormessageEl = document.getElementById(errormessageId);
+if (!errormessageEl) {
+  throw new Error(`Error message element for ${testId} not found`);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们使用原生的DOM方法<code>document.getElementById</code>来找到元素。<code>errormessageEl</code>的类型是<code>HTMLElement | null</code>，所以我们排除了<code>null</code>的情况，以便使用<code>errormessageEl</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+错误消息
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最后，我们确保该元素包含一个错误消息，并对“Terms and Services”消息进行特殊处理。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">if (errormessageId === 'tos-errors') {
+  expect(errormessageEl.textContent).toContain(
+    'Please accept the Terms and Services',
+  );
+} else {
+  expect(errormessageEl.textContent).toContain('must be given');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>完整的规范(spec)如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('marks fields as required', async () =&gt; {
+  await setup();
+
+  // Mark required fields as touched
+  requiredFields.forEach((testId) =&gt; {
+    markFieldAsTouched(findEl(fixture, testId));
+  });
+  fixture.detectChanges();
+
+  requiredFields.forEach((testId) =&gt; {
+    const el = findEl(fixture, testId);
+
+    // Check aria-required attribute
+    expect(el.attributes['aria-required']).toBe(
+      'true',
+      `${testId} must be marked as aria-required`,
+    );
+
+    // Check aria-errormessage attribute
+    const errormessageId = el.attributes['aria-errormessage'];
+    if (!errormessageId) {
+      throw new Error(
+        `Error message id for ${testId} not present`
+      );
+    }
+    // Check element with error message
+    const errormessageEl = document.getElementById(errormessageId);
+    if (!errormessageEl) {
+      throw new Error(
+        `Error message element for ${testId} not found`
+      );
+    }
+    if (errormessageId === 'tos-errors') {
+      expect(errormessageEl.textContent).toContain(
+        'Please accept the Terms and Services',
+      );
+    } else {
+      expect(errormessageEl.textContent).toContain('must be given');
+    }
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent: 测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_异步验证器"><a class="anchor" href="#_异步验证器"></a>异步验证器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>注册表单中的用户名、电子邮件和密码都有异步验证器。它们是异步的，因为它们等待一秒钟并进行HTTP请求。在底层，它们使用RxJS Observables来实现。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+异步验证失败
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们已经覆盖了“正常路径”，其中输入的用户名和电子邮件都可用，密码也足够强大。我们需要为错误情况编写三个规范(spec)：用户名或电子邮件已被使用，以及密码太弱。</p>
+</div>
+<div class="paragraph">
+<p>这些验证器调用了<code>SignupService</code>的方法。默认情况下，<code>SignupService</code>的fake返回成功的响应。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const setup = async (
+  signupServiceReturnValues?:
+    jasmine.SpyObjMethodNames&lt;SignupService&gt;,
+) =&gt; {
+  signupService = jasmine.createSpyObj&lt;SignupService&gt;(
+    'SignupService',
+    {
+      // Successful responses per default
+      isUsernameTaken: of(false),
+      isEmailTaken: of(false),
+      getPasswordStrength: of(strongPassword),
+      signup: of({ success: true }),
+      // Overwrite with given return values
+      ...signupServiceReturnValues,
+    }
+  );
+
+  /* … */
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>setup</code>函数允许我们覆盖虚拟行为。它接受一个包含<code>SignupService</code>方法返回值的对象。</p>
+</div>
+<div class="paragraph">
+<p>我们添加三个规范(spec)，以相应地配置虚拟行为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('fails if the username is taken', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API return that the username is taken
+    isUsernameTaken: of(true),
+  });
+  /* … */
+}));</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('fails if the email is taken', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API return that the email is taken
+    isEmailTaken: of(true),
+  });
+  /* … */
+}));</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('fails if the password is too weak', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API return that the password is weak
+    getPasswordStrength: of(weakPassword),
+  });
+  /* … */
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>其余的部分对于所有三个规范(spec)都是相同的。下面是第一个规范(spec)：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('fails if the username is taken', fakeAsync(async () =&gt; {
+  await setup({
+    // Let the API return that the username is taken
+    isUsernameTaken: of(true),
+  });
+
+  fillForm();
+
+  // Wait for async validators
+  tick(1000);
+  fixture.detectChanges();
+
+  expect(findEl(fixture, 'submit').properties.disabled).toBe(true);
+
+  findEl(fixture, 'form').triggerEventHandler('submit', {});
+
+  expect(signupService.isUsernameTaken).toHaveBeenCalledWith(username);
+  expect(signupService.isEmailTaken).toHaveBeenCalledWith(email);
+  expect(signupService.getPasswordStrength).toHaveBeenCalledWith(password);
+  expect(signupService.signup).not.toHaveBeenCalled();
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们填写表单，等待异步验证器并尝试提交表单。</p>
+</div>
+<div class="paragraph">
+<p>我们期望这三个异步验证器调用相应的<code>SignupService</code>方法。</p>
+</div>
+<div class="paragraph">
+<p>用户名验证失败，所以我们期望组件阻止表单提交。<code>signup</code>方法不应该被调用。</p>
+</div>
+<div class="paragraph">
+<p>如上所述，另外两个规范(spec) <code>it('fails if the email is taken', /* … <strong>/)</code> 和 <code>it('fails if the password is too weak', /</strong> … */)</code> 除了虚拟设置之外，看起来是相同的。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent: 测试代码</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/guide/form-validation#creating-asynchronous-validators">Angular文档: 创建异步验证器</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_动态字段关系"><a class="anchor" href="#_动态字段关系"></a>动态字段关系</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>注册表单有一组固定的字段。但是<code>addressLine1</code>字段取决于<code>plan</code>字段的值：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>如果选择的计划是“个人”，则该字段是可选的，标签显示为“地址行1”。</p>
+</li>
+<li>
+<p>如果选择的计划是“商业”，则该字段是必需的，标签显示为“公司”。</p>
+</li>
+<li>
+<p>如果选择的计划是“教育与非营利”，则该字段是必需的，标签显示为“组织”。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在组件类中的实现如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">this.plan.valueChanges.subscribe((plan: Plan) =&gt; {
+  if (plan !== this.PERSONAL) {
+    this.addressLine1.setValidators(required);
+  } else {
+    this.addressLine1.setValidators(null);
+  }
+  this.addressLine1.updateValueAndValidity();
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们监听<code>plan</code>控件的值变化。根据选择，我们要么给<code>addressLine1</code>控件添加 <code>必需(required)</code> 验证器，要么移除所有验证器。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们需要告诉Angular重新验证字段值，现在验证器已经改变。</p>
+</div>
+<div class="paragraph">
+<p>让我们编写一个规范(spec)来确保对于某些计划，<code>addressLine1</code>是必需的。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('requires address line 1 for business and non-profit plans', async () =&gt; {
+  await setup();
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先，我们需要检查初始状态：选择了“个人”计划，<code>addressLine1</code>是可选的。</p>
+</div>
+<div class="paragraph">
+<p>我们通过查看<code>addressLine1</code>字段元素的属性来进行检查：<code>ng-invalid</code>类和<code>aria-required</code>属性必须不存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Initial state (personal plan)
+const addressLine1El = findEl(fixture, 'addressLine1');
+expect('ng-invalid' in addressLine1El.classes).toBe(false);
+expect('aria-required' in addressLine1El.attributes).toBe(false);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>从这个基线出发，让我们将计划从“个人”更改为“商业”。我们使用<code>checkField</code>规范助手来激活相应的单选按钮。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Change plan to business
+checkField(fixture, 'plan-business', true);
+fixture.detectChanges();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了看到更改的效果，我们需要告诉Angular更新DOM。然后我们期望<code>ng-invalid</code>类和<code>aria-required</code>存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">expect(addressLine1El.attributes['aria-required']).toBe('true');
+expect(addressLine1El.classes['ng-invalid']).toBe(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们对“教育和非营利”计划执行相同的检查。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Change plan to non-profit
+checkField(fixture, 'plan-non-profit', true);
+fixture.detectChanges();
+
+expect(addressLine1El.attributes['aria-required']).toBe('true');
+expect(addressLine1El.classes['ng-invalid']).toBe(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样！这就是完整的规格说明：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('requires address line 1 for business and non-profit plans', async () =&gt; {
+  await setup();
+
+  // Initial state (personal plan)
+  const addressLine1El = findEl(fixture, 'addressLine1');
+  expect('ng-invalid' in addressLine1El.classes).toBe(false);
+  expect('aria-required' in addressLine1El.attributes).toBe(false);
+
+  // Change plan to business
+  checkField(fixture, 'plan-business', true);
+  fixture.detectChanges();
+
+  expect(addressLine1El.attributes['aria-required']).toBe('true');
+  expect(addressLine1El.classes['ng-invalid']).toBe(true);
+
+  // Change plan to non-profit
+  checkField(fixture, 'plan-non-profit', true);
+  fixture.detectChanges();
+
+  expect(addressLine1El.attributes['aria-required']).toBe('true');
+  expect(addressLine1El.classes['ng-invalid']).toBe(true);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当测试 <a href="#_必填字段">必填字段</a>时，我们已经检查了<code>aria-required</code>属性的存在。为了一致性，我们在此规格中也检查<code>aria-required</code>。</p>
+</div>
+<div class="paragraph">
+<p>作为第二个指标，我们检查<code>ng-invalid</code>类的存在。这个类是Angular自己在无效的表单字段上设置的，而不需要我们通过模板添加它。请注意，仅有该类的存在并不意味着无效状态已经以视觉方式传达。</p>
+</div>
+<div class="paragraph">
+<p>或者，我们可以检查错误消息的存在，就像在必填字段规格中所做的那样。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent：测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_密码类型切换"><a class="anchor" href="#_密码类型切换"></a>密码类型切换</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>密码类型切换 注册表单的另一个小功能是密码类型切换器。此按钮切换输入密码的可见性。在幕后，它会将输入类型从 <code>password</code> 更改为 <code>text</code> ，反之亦然。</p>
+</div>
+<div class="paragraph">
+<p>组件类将可见性存储在布尔属性中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">public showPassword = false;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在模板中，输入类型取决于属性（简化的代码）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;input [type]="showPassword ? 'text' : 'password'" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，按钮切换布尔值（简化的代码）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;button
+  type="button"
+  (click)="showPassword = !showPassword"
+&gt;
+  {{ showPassword ? '🔒 Hide password' : '👁️ Show password' }}
+&lt;/button&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了测试这个特性，我们创建一个新的规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('toggles the password display', async () =&gt; {
+  await setup();
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最初，该字段具有 <code>password</code> 类型，因此输入的文本被模糊化。让我们测试这个基线。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们在字段中输入密码。这并不是严格必要的，但可以使测试更加真实，也更容易进行调试。（密码字段具有测试 id <code>password</code>。）</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">setFieldValue(fixture, 'password', 'top secret');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们再次通过测试 id 查找输入元素，以检查其 <code>type</code> 属性。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const passwordEl = findEl(fixture, 'password');
+expect(passwordEl.attributes.type).toBe('password');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们第一次单击切换按钮。我们让 Angular 更新 DOM，并再次检查输入类型。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">click(fixture, 'show-password');
+fixture.detectChanges();
+
+expect(passwordEl.attributes.type).toBe('text');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们期望类型已经从 <code>password</code> 更改为 <code>text</code>。密码现在可见。</p>
+</div>
+<div class="paragraph">
+<p>通过第二次单击切换按钮，类型将切换回 <code>password</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">click(fixture, 'show-password');
+fixture.detectChanges();
+
+expect(passwordEl.attributes.type).toBe('password');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是整个规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('toggles the password display', async () =&gt; {
+  await setup();
+
+  setFieldValue(fixture, 'password', 'top secret');
+  const passwordEl = findEl(fixture, 'password');
+  expect(passwordEl.attributes.type).toBe('password');
+
+  click(fixture, 'show-password');
+  fixture.detectChanges();
+
+  expect(passwordEl.attributes.type).toBe('text');
+
+  click(fixture, 'show-password');
+  fixture.detectChanges();
+
+  expect(passwordEl.attributes.type).toBe('password');
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/angular-form-testing/blob/main/client/src/app/components/signup-form/signup-form.component.spec.ts">SignupFormComponent: 测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试表单的可访问性"><a class="anchor" href="#_测试表单的可访问性"></a>测试表单的可访问性</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Web可访问性意味着所有人都可以使用网站，无论他们的身体或精神能力或网络访问技术如何。它是一个称为包容性设计的更大努力的一部分，这是创建考虑到具有不同能力和需求的人的信息系统的过程。</p>
+</div>
+<div class="paragraph">
+<p>设计Web表单是一个可用性和可访问性的挑战。Web表单经常对残疾人和辅助技术用户构成障碍。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+可访问表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>注册表单有几个可访问性特征，其中包括：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>该表单结构良好，具有标题，<code>字段集(fieldset)</code> 和 <code>图例(legend)</code> 元素。</p>
+</li>
+<li>
+<p>所有字段都有适当的标签，例如“用户名（必填）”。</p>
+</li>
+<li>
+<p>某些字段有其他描述。这些描述与<code>aria-describedby</code>属性链接。</p>
+</li>
+<li>
+<p>必填字段标有 <code>aria-required="true"</code>。</p>
+</li>
+<li>
+<p>无效字段标有 <code>aria-invalid="true"</code>。错误消息与<code>aria-errormessage</code>属性链接。</p>
+</li>
+<li>
+<p>提交表单时，使用 <code>role="status"</code> 的状态消息通知结果。</p>
+</li>
+<li>
+<p>结构和样式清楚地传达了当前焦点以及有效状态。</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+自动化可访问性测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>还有许多我们没有提到的可访问性要求和最佳实践。由于本指南的主要目的不是创建可访问的表单，因此让我们探讨如何<strong>以自动化方式测试可访问性</strong>。</p>
+</div>
+<div class="paragraph">
+<p>我们已经在<code>SignupFormComponent</code>的集成测试中测试了上述一些功能。让我们使用适当的工具测试可访问性，而不是手动编写更多的可访问性需求规范。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://inclusivedesignprinciples.org/">包容性设计原则</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_pa11y"><a class="anchor" href="#_pa11y"></a>pa11y</h3>
+<div class="paragraph">
+<p>在本指南中，我们将看看<strong>pa11y</strong>，这是一个Node.js程序，用于检查Web页面的可访问性。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+在Chrome中进行测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>pa11y启动并远程控制Chrome或Chromium浏览器。浏览器导航到测试页面。然后，pa11y注入了<em>axe-core</em>和<em>HTML CodeSniffer</em>两个可访问性测试引擎。</p>
+</div>
+<div class="paragraph">
+<p>这些引擎检查是否符合Web内容可访问性指南（WCAG），这是Web可访问性的权威技术标准。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+CLI vs. CI
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>pa11y有两种操作模式：针对一个Web页面的命令行界面（CLI）和针对多个Web页面的持续集成（CI）模式。</p>
+</div>
+<div class="paragraph">
+<p>要快速测试您的Angular应用程序的单个页面，请使用命令行界面。定期测试整个应用程序时，请使用持续集成模式。</p>
+</div>
+<div class="paragraph">
+<p>要使用命令行界面，请将pa11y安装为全局npm模块：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install -g pa11y</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试单个页面
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这将安装全局命令<code>pa11y</code>。要在本地Angular开发服务器上测试页面，请运行：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">pa11y http://localhost:4200/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于注册表单，pa11y没有报告任何错误：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Welcome to Pa11y
+
+ &gt; Running Pa11y on URL http://localhost:4200/
+
+No issues found!</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+错误报告
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果表单字段中有一个没有正确的标签，pa11y将会报错：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs"> • Error: This textinput element does not have a name available to
+   an accessibility API. Valid names are: label element,
+   title undefined, aria-label undefined, aria-labelledby undefined.
+   ├── WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputText.Name
+   ├── html &gt; body &gt; app-root &gt; main &gt; app-signup-form &gt; form &gt; fieldset:nth-child(2) &gt; div:nth-child(2) &gt; p &gt; span &gt; input
+   └── &lt;input _ngcontent-srr-c42="" type="text" formcontrolname="username" …
+
+ • Error: This form field should be labelled in some way.
+   Use the label element (either with a "for" attribute or
+   wrapped around the form field), or "title", "aria-label"
+   or "aria-labelledby" attributes as appropriate.
+   ├── WCAG2AA.Principle1.Guideline1_3.1_3_1.F68
+   ├── html &gt; body &gt; app-root &gt; main &gt; app-signup-form &gt; form &gt; fieldset:nth-child(2) &gt; div:nth-child(2) &gt; p &gt; span &gt; input
+   └── &lt;input _ngcontent-srr-c42="" type="text" formcontrolname="username" …</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>每个错误消息都包含了违反的WCAG规则、违反元素的DOM路径和HTML代码。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://pa11y.org/">pa11y：无障碍测试工具</a></p>
+</li>
+<li>
+<p><a href="https://github.com/dequelabs/axe-core">axe-core：自动化Web UI测试的无障碍引擎</a></p>
+</li>
+<li>
+<p><a href="https://github.com/squizlabs/HTML_CodeSniffer">HTML CodeSniffer：无障碍审计器</a></p>
+</li>
+<li>
+<p><a href="https://www.w3.org/TR/WCAG21/">Web内容无障碍指南（WCAG）2.1</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pa11y_ci"><a class="anchor" href="#_pa11y_ci"></a>pa11y-ci</h3>
+<div class="paragraph">
+<p>为了在开发和构建服务器上进行全面的测试运行，我们将在连续集成模式下设置pa11y。</p>
+</div>
+<div class="paragraph">
+<p>在您的Angular项目目录中，安装<code>pa11y-ci</code>包：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install pa11y-ci</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>pa11y-ci期望在项目目录中存在名为 <code>.pa11yci</code> 的配置文件。创建该文件并粘贴以下JSON内容:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "defaults": {
+    "runner": [
+      "axe",
+      "htmlcs"
+    ]
+  },
+  "urls": [
+    "http://localhost:4200"
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试多个URL
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这个配置告诉pa11y检查URL <a href="http://localhost:4200，并使用可用的测试引擎" class="bare">http://localhost:4200，并使用可用的测试引擎</a><code>axe</code>和<code>htmlcs</code>。您可以将许多URL添加到<code>urls</code>数组中。</p>
+</div>
+<div class="paragraph">
+<p>现在我们可以使用以下命令运行pa11y-ci:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npx pa11y-ci</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于注册表单，我们得到以下输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Running Pa11y on 1 URLs:
+&gt; http://localhost:4200 - 0 errors
+
+✔ 1/1 URLs passed</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/pa11y/pa11y-ci">pa11y-ci：面向CI的可访问性测试运行器</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_启动服务器并运行pa11y_ci"><a class="anchor" href="#_启动服务器并运行pa11y_ci"></a>启动服务器并运行pa11y-ci</h3>
+<div class="paragraph">
+<p>上述配置期望开发服务器已在http://localhost:4200上运行。在开发和构建服务器上都可以启动Angular服务器、运行可访问性测试，然后再停止服务器，这非常有用。</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用另一个方便的Node.js包<code>start-server-and-test</code>来实现这一点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install start-server-and-test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>start-server-and-test</code>首先运行一个npm脚本，该脚本应该启动一个HTTP服务器。然后等待服务器启动。一旦给定的URL可用，它就会运行另一个npm脚本。</p>
+</div>
+<div class="paragraph">
+<p>在我们的情况下，第一个脚本是<code>start</code>，它是<code>ng serve</code>的别名。我们需要创建第二个脚本来运行<code>pa11y-ci</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+npm脚本
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们编辑package.json，并添加两个脚本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "scripts": {
+    "a11y": "start-server-and-test start http-get://localhost:4200/ pa11y-ci",
+    "pa11y-ci": "pa11y-ci"
+  },
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，<code>npm run a11y</code>会启动Angular开发服务器，然后运行pa11y-ci，最后停止服务器。审核结果将写入标准输出。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/bahmutov/start-server-and-test">start-server-and-test：启动服务器，等待URL，然后运行测试命令</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_表格可访问性总结"><a class="anchor" href="#_表格可访问性总结"></a>表格可访问性：总结</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>pa11y是一套功能强大的工具，有许多选项。我们仅仅触及了它的一些特点。</p>
+</div>
+<div class="paragraph">
+<p>自动化可访问性测试是单元测试、集成测试和端到端测试的有价值的补充。您应该对您的Angular应用程序的页面运行像pa11y这样的可访问性测试器。确保复杂表单的可访问性特别有帮助。</p>
+</div>
+<div class="paragraph">
+<p>请记住，自动化测试只会指出可以以编程方式检测到的某些可访问性障碍。</p>
+</div>
+<div class="paragraph">
+<p>Web内容可访问性指南（Web Content Accessibility Guidelines&#8201;&#8212;&#8201;WCAG）从抽象到具体地建立了<em>原则(principles)</em>、<em>指南(guidelines)</em>和<em>成功标准(success criteria)</em>。后者是一些实际规则，其中一些可以自动检查。</p>
+</div>
+<div class="paragraph">
+<p>WCAG的成功标准伴随着HTML、CSS、JavaScript等<em>技术</em>。对于JavaScript Web应用程序，ARIA等技术特别相关。</p>
+</div>
+<div class="paragraph">
+<p>总之，您需要先了解可访问性和包容性设计，应用规则来设计和实现应用程序。然后手动和自动检查符合性。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.w3.org/TR/WCAG21/">Web内容可访问性指南（WCAG）2.1</a></p>
+</li>
+<li>
+<p><a href="https://www.w3.org/WAI/WCAG21/quickref/">快速参考：如何满足WCAG</a></p>
+</li>
+<li>
+<p><a href="https://webaim.org/techniques/aria/">WebAIM：ARIA介绍-可访问的富互联网应用程序</a></p>
+</li>
+<li>
+<p><a href="https://www.w3.org/WAI/tutorials/forms/">Web可访问性教程：表单</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

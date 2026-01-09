@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试服务 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="testing-services.html">测试服务</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">测试服务</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>编写具有内部状态的服务的测试</p>
+</li>
+<li>
+<p>测试服务返回的可观察对象</p>
+</li>
+<li>
+<p>验证HTTP请求和有效负载处理</p>
+</li>
+<li>
+<p>涵盖HTTP成功和错误情况</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在Angular应用程序中，服务负责获取、存储和处理数据。服务是单例，意味着在运行时只有一个服务实例。它们适用于中央数据存储、HTTP和WebSocket通信以及数据验证。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+单例
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>单个服务实例在组件和其他应用程序部分之间共享。因此，在不是父子关系的组件之间需要通信和交换数据时，使用服务。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+可注入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>“服务”是指任何作为依赖项注入并提供特定功能的对象的总称。从技术上讲，服务没有什么共同之处。没有关于服务结构或行为的规则。</p>
+</div>
+<div class="paragraph">
+<p>通常，服务是类，但不一定。虽然模块、组件和指令带有相应的装饰器（<code>@Module</code>、<code>@Component</code>、<code>@Directive</code>），但服务使用通用的 <code>@Injectable</code> 装饰器。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+职责
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>那么服务是做什么的，我们如何测试它呢？服务是多样化的，但一些模式是普遍的。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>服务有公共方法返回值。</p>
+<div class="paragraph">
+<p>在测试中，我们检查方法是否返回正确的数据。</p>
+</div>
+</li>
+<li>
+<p>服务存储数据。它们保持一种内部状态。我们可以获取或设置该状态。</p>
+<div class="paragraph">
+<p>在测试中，我们检查状态是否正确地更改。由于状态应该保存在私有属性中，因此我们不能直接访问状态。我们通过调用公共方法来测试状态变化。我们不应窥视 <a href="testing-principles.html#_黑盒测试与白盒测试" class="xref page">黑盒</a>。</p>
+</div>
+</li>
+<li>
+<p>服务与依赖项交互。这些通常是其他服务。例如，服务可能通过Angular的<code>HttpClient</code>发送HTTP请求。</p>
+<div class="paragraph">
+<p>在单元测试中，我们用返回预先设定响应的虚拟对象替换依赖项。</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试一个具有内部状态的服务"><a class="anchor" href="#_测试一个具有内部状态的服务"></a>测试一个具有内部状态的服务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>让我们从测试 <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.ts"><code>CounterService</code></a> 开始。现在，您应该对服务已经很熟悉了。作为提醒，这里是一段包括私有成员的代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">class CounterService {
+  private count: number;
+  private subject: BehaviorSubject&lt;number&gt;;
+  public getCount(): Observable&lt;number&gt; { /* … */ }
+  public increment(): void { /* … */ }
+  public decrement(): void { /* … */ }
+  public reset(newCount: number): void { /* … */ }
+  private notify(): void { /* … */ }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们需要确定该服务的功能，需要测试什么以及如何进行测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+它的功能
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>该服务保存一个内部状态，即私有 <code>计数(count)</code> 和 <code>主题(subject)</code> 属性。我们不能也不应该在测试中访问这些属性。</p>
+</li>
+<li>
+<p>为了读取状态，该服务有一个名为<code>getCount</code>的方法。它不返回同步值，而是一个RxJS可观察对象。我们将使用<code>getCount</code>来获取当前计数，并订阅更改。</p>
+</li>
+<li>
+<p>为了改变状态，该服务提供了 <code>增加(increment)</code>，<code>减少(decrement)</code> 和 <code>重置(reset)</code> 的方法。我们将调用它们并检查状态是否相应地改变。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>让我们编写测试代码！我们创建一个名为<code>counter.service.spec.ts</code>的文件，并填充测试套件样板代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('CounterService', () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们已经知道该服务的功能以及需要测试什么。因此，我们为所有功能添加规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('CounterService', () =&gt; {
+  it('returns the count', () =&gt; { /* … */ });
+  it('increments the count', () =&gt; { /* … */ });
+  it('decrements the count', () =&gt; { /* … */ });
+  it('resets the count', () =&gt; { /* … */ });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+不使用 <code>TestBed</code> 实例化
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在<em>Arrange</em>阶段，每个规范都需要创建<code>CounterService</code>的一个实例。最简单的方法是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const counterService = new CounterService();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于没有依赖关系的简单服务，这样做是可以的。对于具有依赖关系的服务进行测试，稍后我们将使用<code>TestBed</code>。</p>
+</div>
+<div class="paragraph">
+<p>我们在<code>beforeEach</code>块中创建新实例，因为每个规范都需要它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('CounterService', () =&gt; {
+  let counterService: CounterService;
+
+  beforeEach(() =&gt; {
+    counterService = new CounterService();
+  });
+
+  it('returns the count', () =&gt; { /* … */ });
+  it('increments the count', () =&gt; { /* … */ });
+  it('decrements the count', () =&gt; { /* … */ });
+  it('resets the count', () =&gt; { /* … */ });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们从编写规范 <code>it('returns the count', /* … */)</code> 开始。它测试返回Observable的<code>getCount</code>方法。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+更改变量值
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>为了测试Observable，我们使用了与 <a href="testing-components.html#_测试输出" class="xref page">测试组件输出</a> 相同的模式：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>我们声明一个变量<code>actualCount</code>，最初为undefined。</p>
+</li>
+<li>
+<p>我们订阅Observable。我们将发射的值赋给<code>actualCount</code>变量。</p>
+</li>
+<li>
+<p>最后，在订阅函数的外部，我们将实际值与期望值进行比较。</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('returns the count', () =&gt; {
+  let actualCount: number | undefined;
+  counterService.getCount().subscribe((count) =&gt; {
+    actualCount = count;
+  });
+  expect(actualCount).toBe(0);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是行得通的，因为Observable由一个<code>BehaviorSubject</code>支持，它存储最新的值并立即将其发送给新的订阅者。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+状态更改
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下一个规范测试<code>increment</code>方法。我们调用该方法并验证计数状态是否已更改。</p>
+</div>
+<div class="paragraph">
+<p>如前所述，出于此目的，我们无法访问私有属性。就像上面的规范一样，我们需要使用公共的<code>getCount</code>方法来读取计数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('increments the count', () =&gt; {
+  counterService.increment();
+
+  let actualCount: number | undefined;
+  counterService.getCount().subscribe((count) =&gt; {
+    actualCount = count;
+  });
+  expect(actualCount).toBe(1);
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+期望更改的值
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这里的顺序很重要：首先，我们调用<code>increment</code>，然后我们订阅Observable以读取并验证更改后的值。同样，<code>BehaviorSubject</code>将当前值同步地发送给新的订阅者。</p>
+</div>
+<div class="paragraph">
+<p>剩下的两个规范几乎相同。我们只是调用了相应的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('decrements the count', () =&gt; {
+  counterService.decrement();
+
+  let actualCount: number | undefined;
+  counterService.getCount().subscribe((count) =&gt; {
+    actualCount = count;
+  });
+  expect(actualCount).toBe(-1);
+});
+
+it('resets the count', () =&gt; {
+  const newCount = 123;
+  counterService.reset(newCount);
+
+  let actualCount: number | undefined;
+  counterService.getCount().subscribe((count) =&gt; {
+    actualCount = count;
+  });
+  expect(actualCount).toBe(newCount);
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+重复的模式
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们很快就会注意到这些规范非常重复且嘈杂。在每个规范的<em>Assert</em>阶段，我们都使用这个模式来检查服务状态：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">let actualCount: number | undefined;
+counterService.getCount().subscribe((count) =&gt; {
+  actualCount = count;
+});
+expect(actualCount).toBe(/* … */);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个很好的助手函数候选项。我们称其为<code>expectCount</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">function expectCount(count: number): void {
+  let actualCount: number | undefined;
+  counterService.getCount().subscribe((actualCount2) =&gt; {
+    actualCount = actualCount2;
+  });
+  expect(actualCount).toBe(count);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个模式有一个可变的位，即期望的数量，这就是为什么助手函数只有一个参数的原因。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+取消订阅
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在我们已经将代码提取到一个中央助手函数中，我们应该添加一个优化。 RxJS Observables的第一条规则是：“任何订阅者都必须取消订阅”。</p>
+</div>
+<div class="paragraph">
+<p>在<code>expectCount</code>中，我们只需要获取当前计数一次。我们不想创建一个长期持续的订阅。我们对未来的更改不感兴趣。</p>
+</div>
+<div class="paragraph">
+<p>如果我们每个规范只调用一次<code>expectCount</code>，这不是一个很大的问题。如果我们编写一个更复杂的规范，有几个<code>expectCount</code>调用，我们将创建无意义的订阅。这很可能在调试订阅函数时引起混淆。</p>
+</div>
+<div class="paragraph">
+<p>简而言之，我们想要获取计数，然后取消订阅以减少不必要的订阅。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+手动取消订阅
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>一个可能的解决方案是立即在订阅后取消订阅。 <code>subscribe</code>方法返回一个<code>Subscription</code>，其中包含有用的<code>unsubscribe</code>方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">function expectCount(count: number): void {
+  let actualCount: number | undefined;
+  counterService
+    .getCount()
+    .subscribe((actualCount2) =&gt; {
+      actualCount = actualCount2;
+    })
+    .unsubscribe();
+  expect(actualCount).toBe(count);
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+RxJS操作符
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>更符合惯用方式的方法是使用一个RxJS操作符，它在第一个值之后就完成Observable： <a href="https://rxjs.dev/api/operators/first"><code>first</code></a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { first } from 'rxjs/operators';
+
+function expectCount(count: number): void {
+  let actualCount: number | undefined;
+  counterService
+    .getCount()
+    .pipe(first())
+    .subscribe((actualCount2) =&gt; {
+      actualCount = actualCount2;
+    });
+  expect(actualCount).toBe(count);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您不熟悉这个神秘的RxJS魔法，不要担心。在简单的<code>CounterService</code>测试中，取消订阅并不是必须的。但这是一个良好的实践，可以避免在测试使用Observables的更复杂的服务时出现奇怪的错误。</p>
+</div>
+<div class="paragraph">
+<p>完整的测试套件现在如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('CounterService', () =&gt; {
+  let counterService: CounterService;
+
+  function expectCount(count: number): void {
+    let actualCount: number | undefined;
+    counterService
+      .getCount()
+      .pipe(first())
+      .subscribe((actualCount2) =&gt; {
+        actualCount = actualCount2;
+      });
+    expect(actualCount).toBe(count);
+  }
+
+  beforeEach(() =&gt; {
+    counterService = new CounterService();
+  });
+
+  it('returns the count', () =&gt; {
+    expectCount(0);
+  });
+
+  it('increments the count', () =&gt; {
+    counterService.increment();
+    expectCount(1);
+  });
+
+  it('decrements the count', () =&gt; {
+    counterService.decrement();
+    expectCount(-1);
+  });
+
+  it('resets the count', () =&gt; {
+    const newCount = 123;
+    counterService.reset(newCount);
+    expectCount(newCount);
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/services/counter.service.spec.ts">计数器服务：测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试发送http请求的服务"><a class="anchor" href="#_测试发送http请求的服务"></a>测试发送HTTP请求的服务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>没有依赖关系的服务，如 <code>CounterService</code>，相对容易测试。让我们来看一个具有依赖关系的更复杂的服务。</p>
+</div>
+<div class="paragraph">
+<p>在 <a href="example-applications.html#_flickr_图片搜索" class="xref page">Flickr搜索</a> 中，https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.ts[FlickrService]负责通过Flickr API搜索照片。它向www.flickr.com发送一个HTTP GET请求。服务器以JSON格式响应。以下是完整的代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Injectable()
+export class FlickrService {
+  constructor(private http: HttpClient) {}
+
+  public searchPublicPhotos(searchTerm: string): Observable&lt;Photo[]&gt; {
+    return this.http
+      .get&lt;FlickrAPIResponse&gt;(
+        'https://www.flickr.com/services/rest/',
+        {
+          params: {
+            tags: searchTerm,
+            method: 'flickr.photos.search',
+            format: 'json',
+            nojsoncallback: '1',
+            tag_mode: 'all',
+            media: 'photos',
+            per_page: '15',
+            extras: 'tags,date_taken,owner_name,url_q,url_m',
+            api_key: 'XYZ',
+          },
+        }
+      )
+      .pipe(map((response) =&gt; response.photos.photo));
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该服务标有<code>@Injectable()</code>，因此它参与Angular的依赖注入。它依赖于Angular标准的HTTP库，即 <code>@angular/common/http</code> 包中的<code>HttpClient</code>。大多数Angular应用程序使用<code>HttpClient</code>与HTTP API通信。</p>
+</div>
+<div class="paragraph">
+<p>有两种测试<code>FlickrService</code>的方法：集成测试或单元测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+针对生产环境的请求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>集成测试</strong>提供真正的<code>HttpClient</code>。这会导致在运行测试时向Flickr API发送HTTP请求。这使整个测试不可靠。</p>
+</div>
+<div class="paragraph">
+<p>网络或Web服务可能会很慢或不可用。此外，Flickr API端点针对每个请求返回不同的响应。如果输入未知，则很难期望某个<code>FlickrService</code>的行为。</p>
+</div>
+<div class="paragraph">
+<p>在测试环境中，针对第三方生产API的请求意义不大。如果要为进行HTTP请求的服务编写集成测试，请使用返回固定数据的专用测试API。此API可以在同一台计算机或本地网络上运行。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+拦截请求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在<code>FlickrService</code>的情况下，我们最好编写<strong>单元测试</strong>。Angular具有用于测试依赖于<code>HttpClient</code>的代码的强大辅助程序： <a href="https://angular.cn/guide/http#testing-http-requests"><code>HttpClientTestingModule</code></a>。</p>
+</div>
+<div class="paragraph">
+<p>对于具有依赖关系的服务进行测试，使用<code>new</code>实例化服务是很繁琐的。相反，我们使用<code>TestBed</code>来设置一个测试模块。</p>
+</div>
+<div class="paragraph">
+<p>我们导入<code>HttpClientTestingModule</code>来代替<code>HttpClient</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">TestBed.configureTestingModule({
+  imports: [HttpClientTestingModule],
+  providers: [FlickrService],
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>HttpClientTestingModule</code>提供了一个假的<code>HttpClient</code>实现。它实际上不会发送HTTP请求，而只是拦截并在内部记录它们。</p>
+</div>
+<div class="paragraph">
+<p>在测试中，我们检查HTTP请求的记录。我们使用虚假数据手动响应未决请求。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+查找、响应、验证
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们的测试将执行以下步骤：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>调用发送HTTP请求的被测方法</p>
+</li>
+<li>
+<p>查找未决请求</p>
+</li>
+<li>
+<p>使用虚假数据响应这些请求</p>
+</li>
+<li>
+<p>检查方法调用的结果</p>
+</li>
+<li>
+<p>验证所有请求都已得到回答</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/guide/http">Angular指南：使用HTTP与后端服务通信</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/common/http/HttpClient">Angular API参考：HttpClient</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/guide/http#testing-http-requests">Angular指南：测试HTTP请求</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/common/http/testing/HttpClientTestingModule">Angular API参考：HttpClientTestingModule</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_调用被测方法"><a class="anchor" href="#_调用被测方法"></a>调用被测方法</h3>
+<div class="paragraph">
+<p>在第一步中，我们调用被测方法<code>searchPublicPhotos</code>。搜索词仅为固定字符串。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const searchTerm = 'dragonfly';
+
+describe('FlickrService', () =&gt; {
+  let flickrService: FlickrService;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [FlickrService],
+    });
+    flickrService = TestBed.inject(FlickrService);
+  });
+
+  it('searches for public photos', () =&gt; {
+    flickrService.searchPublicPhotos(searchTerm).subscribe(
+      (actualPhotos) =&gt; {
+        /* … */
+      }
+    );
+    /* … */
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们订阅了由<code>searchPublicPhotos</code>返回的Observable，从而发送了（虚假的）HTTP请求。我们稍后会在第四步中调查响应<code>actualPhotos</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_查找挂起的请求"><a class="anchor" href="#_查找挂起的请求"></a>查找挂起的请求</h3>
+<div class="paragraph">
+<p>在第二步中，我们使用  <a href="https://angular.cn/api/common/http/testing/HttpTestingController"><code>HttpTestingController</code></a>查找挂起的请求。这个类是 <code>HttpClientTestingModule</code>的一部分。我们通过调用 <code>TestBed.inject(HttpTestingController)</code> 来获取实例。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>expectOne</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>该控制器具有按不同条件查找请求的方法。最简单的是<code>expectOne</code>。它查找与给定条件匹配的请求，并期望恰好有一个匹配项。</p>
+</div>
+<div class="paragraph">
+<p>在我们的情况下，我们搜索Flickr API的给定URL的请求。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const searchTerm = 'dragonfly';
+const expectedUrl = `https://www.flickr.com/services/rest/?tags=${searchTerm}&amp;method=flickr.photos.search&amp;format=json&amp;nojsoncallback=1&amp;tag_mode=all&amp;media=photos&amp;per_page=15&amp;extras=tags,date_taken,owner_name,url_q,url_m&amp;api_key=XYZ`;
+
+describe('FlickrService', () =&gt; {
+  let flickrService: FlickrService;
+  let controller: HttpTestingController;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [FlickrService],
+    });
+    flickrService = TestBed.inject(FlickrService);
+    controller = TestBed.inject(HttpTestingController);
+  });
+
+  it('searches for public photos', () =&gt; {
+    flickrService.searchPublicPhotos(searchTerm).subscribe(
+      (actualPhotos) =&gt; {
+        /* … */
+      }
+    );
+
+    const request = controller.expectOne(expectedUrl);
+    /* … */
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>expectOne</code>返回找到的请求，它是<code>TestRequest</code>的实例。如果没有匹配URL的挂起请求，<code>expectOne</code>会抛出异常，导致测试失败。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/api/common/http/testing/HttpTestingController">Angular API参考文档：HttpTestingController</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/common/http/testing/TestRequest">Angular API参考文档：TestRequest</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_使用虚假数据响应"><a class="anchor" href="#_使用虚假数据响应"></a>使用虚假数据响应</h3>
+<div class="paragraph">
+<p>现在我们手头有挂起的请求，我们使用一个对象来响应它，这个对象模仿了原始的API响应。Flickr API返回一个复杂的对象，其中深度包含一组照片对象。在<code>FlickrService</code>测试中，我们只关心有效载荷，即照片数组。</p>
+</div>
+<div class="paragraph">
+<p>Flickr搜索存储库包含用于整个测试的 <a href="https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts">虚假照片对象</a>。对于<code>FlickrService</code>测试，我们导入具有两个虚假照片对象的<code>照片(photos)</code>数组。</p>
+</div>
+<div class="paragraph">
+<p>我们使用请求的<code>flush</code>方法来响应虚假数据。这模拟了一个成功的“200 OK”服务器响应。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">request.flush({ photos: { photo: photos } });</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_检查方法调用的结果"><a class="anchor" href="#_检查方法调用的结果"></a>检查方法调用的结果</h3>
+<div class="paragraph">
+<p>该规范已经证明<code>searchPublicPhotos</code>向预期的URL发出了请求。它仍然需要证明该方法传递了所需的API响应部分。特别是，它需要证明Observable发出了<code>照片(photos)</code>数组。</p>
+</div>
+<div class="paragraph">
+<p>我们已经订阅了Observable：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">flickrService.searchPublicPhotos(searchTerm).subscribe(
+  (actualPhotos) =&gt; {
+    /* … */
+  }
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们期望Observable发出的照片数组与API响应中的数组相等：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">flickrService.searchPublicPhotos(searchTerm).subscribe(
+  (actualPhotos) =&gt; {
+    expect(actualPhotos).toEqual(photos);
+  }
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这会导致一个已知的 <a href="testing-components.html#_测试输出" class="xref page">测试输出</a> 问题：如果正在测试的代码出现问题，那么Observable将不会发出任何内容。因此，<code>expect</code>中的 <code>下一个(next)</code> 回调函数将不会被调用。尽管出现了缺陷，Jasmine仍然认为一切正常。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+期望值的变化
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有几种方法可以解决这个问题。我们选择了一个最初为<code>undefined</code>的变量，并分配了一个值。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">let actualPhotos: Photo[] | undefined;
+flickrService.searchPublicPhotos(searchTerm).subscribe(
+  (otherPhotos) =&gt; {
+    actualPhotos = otherPhotos;
+  }
+);
+
+const request = controller.expectOne(expectedUrl);
+// Answer the request so the Observable emits a value.
+request.flush({ photos: { photo: photos } });
+
+// Now verify emitted valued.
+expect(actualPhotos).toEqual(photos);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>expect</code>调用位于<code>next</code>回调函数之外，以确保它被确实调用。如果Observable没有发出任何值或错误的值，那么该规范(spec)将会失败。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_验证所有请求都已得到回应"><a class="anchor" href="#_验证所有请求都已得到回应"></a>验证所有请求都已得到回应</h3>
+<div class="paragraph">
+<p>在最后一步，我们确保没有任何未处理的请求。我们期望被测试的方法向特定的URL发起一个请求。我们使用<code>expectOne</code>找到请求并使用<code>flush</code>回答它。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们调用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">controller.verify();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果有任何未处理的请求，这会导致测试失败。</p>
+</div>
+<div class="paragraph">
+<p><code>verify</code>保证被测试的代码不会发出多余的请求。但它也保证您的规范(spec)检查所有请求，例如通过检查它们的URL。</p>
+</div>
+<div class="paragraph">
+<p>将所有部分整合起来，完整的测试套件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const searchTerm = 'dragonfly';
+const expectedUrl = `https://www.flickr.com/services/rest/?tags=${searchTerm}&amp;method=flickr.photos.search&amp;format=json&amp;nojsoncallback=1&amp;tag_mode=all&amp;media=photos&amp;per_page=15&amp;extras=tags,date_taken,owner_name,url_q,url_m&amp;api_key=XYZ`;
+
+describe('FlickrService', () =&gt; {
+  let flickrService: FlickrService;
+  let controller: HttpTestingController;
+
+  beforeEach(() =&gt; {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [FlickrService],
+    });
+    flickrService = TestBed.inject(FlickrService);
+    controller = TestBed.inject(HttpTestingController);
+  });
+
+  it('searches for public photos', () =&gt; {
+    let actualPhotos: Photo[] | undefined;
+    flickrService.searchPublicPhotos(searchTerm).subscribe(
+      (otherPhotos) =&gt; {
+        actualPhotos = otherPhotos;
+      }
+    );
+
+    const request = controller.expectOne(expectedUrl);
+    request.flush({ photos: { photo: photos } });
+    controller.verify();
+
+    expect(actualPhotos).toEqual(photos);
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/flickr.service.spec.ts">FlickrService: 测试代码</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts">照片测试助手</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试错误情况"><a class="anchor" href="#_测试错误情况"></a>测试错误情况</h3>
+<div class="paragraph">
+<p>我们是否已经完成了对<code>searchPublicPhotos</code>的测试？我们已经在服务器返回<code>200 OK</code>的成功情况下进行了测试。但我们尚未测试错误情况！</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+不良路径
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>searchPublicPhotos</code>通过从<code>HttpClient</code>传递错误。如果<code>this.http.get</code>返回的Observable失败，则由<code>searchPublicPhotos</code>返回的Observable也会因相同的错误而失败。</p>
+</div>
+<div class="paragraph">
+<p>无论服务中是否有自定义错误处理，都应该测试<em>不良路径</em>。</p>
+</div>
+<div class="paragraph">
+<p>让我们模拟“500内部服务器错误”。我们不会使用<code>flush</code>响应请求，而是通过调用<code>error</code>来让其失败。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const status = 500;
+const statusText = 'Internal Server Error';
+const errorEvent = new ErrorEvent('API error');
+/* … */
+const request = controller.expectOne(expectedUrl);
+request.error(
+  errorEvent,
+  { status, statusText }
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TestRequest</code>的<code>error</code>方法需要一个<code>ErrorEvent</code>和一个可选的options对象。</p>
+</div>
+<div class="paragraph">
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent"><code>ErrorEvent</code></a>是一种特殊的 <code>错误(Error)</code> 类型。为了测试目的，我们使用 <code>new ErrorEvent('…')</code> 创建一个实例。构造函数参数是描述错误情况的字符串消息。</p>
+</div>
+<div class="paragraph">
+<p>第二个参数，options对象，允许我们设置HTTP <code>状态(status)</code>（如<code>500</code>），<code>状态文本(statusText)</code>（如 <code>'Internal Server Error'</code>）和响应头。在上面的示例中，我们设置了 <code>状态(status)</code> 和 <code>状态文本(statusText)</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+期望Observable出错
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在我们检查返回的Observable是否正确地行为。它不应该发出下一个值，也不应该完成。它必须失败并出现错误。</p>
+</div>
+<div class="paragraph">
+<p>我们通过订阅<code>next</code>、<code>error</code>和<code>complete</code>事件来实现这一点：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">flickrService.searchPublicPhotos(searchTerm).subscribe(
+  () =&gt; {
+    /* next handler must not be called! */
+  },
+  (error) =&gt; {
+    /*
+    error handler must be called!
+    Also, we need to inspect the error.
+    */
+  },
+  () =&gt; {
+    /* complete handler must not be called! */
+  },
+);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>fail</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当调用<code>next</code>或<code>complete</code>处理程序时，规范必须立即失败。为此，有一个方便的全局Jasmine函数：<code>fail</code>。</p>
+</div>
+<div class="paragraph">
+<p>为了检查错误，我们使用与上面相同的模式，在外部作用域中将错误保存在变量中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">let actualError: HttpErrorResponse | undefined;
+
+flickrService.searchPublicPhotos(searchTerm).subscribe(
+  () =&gt; {
+    fail('next handler must not be called');
+  },
+  (error) =&gt; {
+    actualError = error;
+  },
+  () =&gt; {
+    fail('complete handler must not be called');
+  },
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在回答请求时发生服务器错误后，我们会检查错误是否被传递。<code>error</code> 处理程序接收到一个包含<code>ErrorEvent</code>和状态信息的<code>HttpErrorResponse</code>对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">if (!actualError) {
+  throw new Error('Error needs to be defined');
+}
+expect(actualError.error).toBe(errorEvent);
+expect(actualError.status).toBe(status);
+expect(actualError.statusText).toBe(statusText);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+类型守卫
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>由于<code>actualError</code>被定义为 <code>HttpErrorResponse | undefined</code>，我们需要在访问属性之前先排除<code>undefined</code>的情况。</p>
+</div>
+<div class="paragraph">
+<p>使用 <code>expect(actualError).toBeDefined()</code> 可以实现这一点。但是TypeScript编译器不知道这将排除<code>undefined</code>的情况。因此，我们需要手动抛出异常。</p>
+</div>
+<div class="paragraph">
+<p>以下是完整的错误情况规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('passes through search errors', () =&gt; {
+  const status = 500;
+  const statusText = 'Server error';
+  const errorEvent = new ErrorEvent('API error');
+
+  let actualError: HttpErrorResponse | undefined;
+
+  flickrService.searchPublicPhotos(searchTerm).subscribe(
+    () =&gt; {
+      fail('next handler must not be called');
+    },
+    (error) =&gt; {
+      actualError = error;
+    },
+    () =&gt; {
+      fail('complete handler must not be called');
+    },
+  );
+
+  controller.expectOne(expectedUrl).error(
+    errorEvent,
+    { status, statusText }
+  );
+
+  if (!actualError) {
+    throw new Error('Error needs to be defined');
+  }
+  expect(actualError.error).toBe(errorEvent);
+  expect(actualError.status).toBe(status);
+  expect(actualError.statusText).toBe(statusText);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个例子有意地冗长。它向您展示了如何测试所有细节。它会快速失败并提供有用的错误消息。</p>
+</div>
+<div class="paragraph">
+<p>这种方法适用于具有专门错误处理的服务方法。例如，服务可能区分成功的响应（如“200 OK”）、客户端错误（如“404 Not Found”）和服务器错误（如“500 Server error”）。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/src/app/services/">FlickrService：实现和测试</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/common/http/HttpErrorResponse">Angular API参考：HttpErrorResponse</a></p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent">MDN参考：ErrorEvent</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_查找待处理请求的替代方法"><a class="anchor" href="#_查找待处理请求的替代方法"></a>查找待处理请求的替代方法</h3>
+<div class="paragraph">
+<p>我们使用了<code>controller.expectOne</code>来查找与预期URL匹配的请求。有时需要指定更多的条件，如方法（<code>GET</code>、<code>POST</code>等）、头部或请求体。</p>
+</div>
+<div class="paragraph">
+<p><code>expectOne</code>有几种签名。我们使用了最简单的签名，一个被解释为URL的字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">controller.expectOne('https://www.example.org')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>要搜索具有特定方法和URL的请求，请传递一个包含这些属性的对象：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">controller.expectOne({
+  method: 'GET',
+  url: 'https://www.example.org'
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>如果您需要通过查看请求的详细信息来查找一个请求，可以传递一个函数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">controller.expectOne(
+  (requestCandidate) =&gt;
+    requestCandidate.method === 'GET' &amp;&amp;
+    requestCandidate.url === 'https://www.example.org' &amp;&amp;
+    requestCandidate.headers.get('Accept') === 'application/json',
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个判断函数会对每个请求进行调用，决定候选请求是否匹配，并返回一个布尔值。</p>
+</div>
+<div class="paragraph">
+<p>这使您能够以编程方式筛选所有请求并检查所有条件。候选请求是一个具有诸如<code>method</code>、<code>url</code>、<code>headers</code>、<code>body</code>、<code>params</code>等属性的 <a href="https://angular.cn/api/common/http/HttpRequest">HttpRequest</a> 实例。</p>
+</div>
+<div class="paragraph">
+<p>有两种可能的方法：要么您使用具有多个条件的<code>expectOne</code>，就像谓词示例中一样。如果某个请求细节不匹配，<code>expectOne</code>会抛出异常并导致测试失败。</p>
+</div>
+<div class="paragraph">
+<p>要么您使用具有少量条件的<code>expectOne</code>，传递 <code>{ method: '…', url: '…' }</code>。要检查请求的详细信息，仍然可以使用Jasmine的断言。</p>
+</div>
+<div class="paragraph">
+<p><code>expectOne</code>返回一个<code>TestRequest</code>实例。该对象只有用于响应请求的方法，但没有关于请求的直接信息。使用<code>request</code>属性来访问底层的<code>HttpRequest</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Get the TestRequest.
+const request = controller.expectOne({
+  method: 'GET',
+  url: 'https://www.example.org'
+});
+// Get the underlying HttpRequest. Yes, this is confusing.
+const httpRequest = request.request;
+expect(httpRequest.headers.get('Accept')).toBe('application/json');
+request.flush({ success: true });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这与上面判断的示例相等，但如果标头不正确，则会给出更具体的错误消息。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>match</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>除了<code>expectOne</code>之外，还有一个<code>match</code>方法可用于找到满足特定条件的多个请求。它返回一个请求数组。如果没有匹配项，数组为空，但规范不会失败。因此，您需要添加Jasmine的断言来检查数组和其中的请求。</p>
+</div>
+<div class="paragraph">
+<p>假设存在一个名为<code>CommentService</code>的服务，其中有一个名为<code>postTwoComments</code>的方法。被测试的代码发起两个请求到相同的URL，但请求体不同。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Injectable()
+class CommentService() {
+  constructor(private http: HttpClient) {}
+  public postTwoComments(firstComment: string, secondComment: string) {
+    return combineLatest([
+      this.http.post('/comments/new', { comment: firstComment }),
+      this.http.post('/comments/new', { comment: secondComment }),
+    ]);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>规范可以包含以下内容：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const firstComment = 'First comment!';
+const secondComment = 'Second comment!';
+commentService
+  .postTwoComments(firstComment, secondComment)
+  .subscribe();
+
+const requests = controller.match({
+  method: 'POST',
+  url: '/comments/new',
+});
+expect(requests.length).toBe(2);
+expect(requests[0].request.body).toEqual({ comment: firstComment });
+expect(requests[1].request.body).toEqual({ comment: secondComment });
+requests[0].flush({ success: true });
+requests[1].flush({ success: true });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们验证请求的数量以及每个请求的请求体。如果这些检查通过，我们回答每个请求。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/api/common/http/HttpRequest">Angular API参考：HttpRequest</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/common/http/testing/TestRequest">Angular API参考：TestRequest</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试服务概述"><a class="anchor" href="#_测试服务概述"></a>测试服务：概述</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>总体而言，测试服务比测试其他Angular应用程序部分更容易。大多数服务都有明确的目的和明确定义的公共API。</p>
+</div>
+<div class="paragraph">
+<p>如果要测试的服务依赖于另一个服务，单元测试需要对依赖进行虚拟化。这可能是最困难的部分，但与虚拟化组件依赖的服务所需的工作量相同。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+预定义的测试模块
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Angular提供了一些关键的服务，这些服务通常在您自己的服务中使用。由于Angular旨在具有可测试性，Angular还提供了用于将这些服务替换为虚拟化版本的工具。</p>
+</div>
+<div class="paragraph">
+<p>我们在测试依赖于<code>HttpClient</code>的服务时使用了<code>HttpClientTestingModule</code>。再举一个例子，还有 <a href="https://angular.cn/api/router/testing/RouterTestingModule"><code>RouterTestingModule</code></a> 用于测试依赖于<code>Router</code>和<code>Location</code>的服务。</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

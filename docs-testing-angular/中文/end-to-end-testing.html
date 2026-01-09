@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>端到端测试 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="end-to-end-testing.html">端到端测试</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">端到端测试</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>编写有价值的测试覆盖应用程序的所有部分</p>
+</li>
+<li>
+<p>了解不同的端到端测试方法</p>
+</li>
+<li>
+<p>设置Cypress来测试您的Angular项目</p>
+</li>
+<li>
+<p>编排Web浏览器来加载和检查您的应用程序</p>
+</li>
+<li>
+<p>拦截API调用以返回固定数据</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>我们已经成功地使用Karma、Jasmine和Angular的自有测试工具编写了单元测试和集成测试。这些精确的测试能够确保单个应用程序部分（如组件或服务）或一组连接的部分按照预期工作。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+用户角度
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Karma和Jasmine测试从技术角度进行。它们仅关注前端JavaScript代码，并在受控且隔离的测试环境中运行。然而，真正重要的是整个应用程序<strong>对用户</strong>是否有效。</p>
+</div>
+<div class="paragraph">
+<p>确保应用程序正常工作的最有效和可靠的方式是<em>手动测试</em>：专门的软件测试人员根据测试计划逐个功能、逐个案例地测试应用程序。</p>
+</div>
+<div class="paragraph">
+<p>手动测试速度慢、劳动密集且不能经常重复。从开发人员的角度来看，它们不具备特定性：如果测试失败，我们不能轻易确定应用程序的哪个部分负责或哪个代码更改导致了回归。</p>
+</div>
+<div class="paragraph">
+<p>我们需要采用用户的角度进行自动化测试。这就是<strong>端到端（E2E）测试</strong>的作用。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_端到端测试的优势"><a class="anchor" href="#_端到端测试的优势"></a>端到端测试的优势</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>如在 <a href="testing-principles.html#_测试工作的分配" class="xref page">测试工作的分配</a> 中所讨论的，所有类型的自动化测试都有其优缺点。单元测试和集成测试速度快、可靠，但不能保证应用程序正常工作。端到端测试速度较慢，经常出现错误，但可以评估整个应用程序的适用性。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+真实条件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当应用程序的所有部分集合在一起时，会出现一种新类型的错误。这些错误通常与事件的时间和顺序有关，例如网络延迟和竞态条件。</p>
+</div>
+<div class="paragraph">
+<p>我们编写的单元测试和集成测试使用了一个假的后端。我们发送假的HTTP请求并用假的数据进行响应。我们努力使原始数据和假数据保持一致。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+前端和后端
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>让前端代码与实际的API端点和后端的响应保持同步要困难得多。即使前端和后端共享有关传输数据的类型信息，仍然会出现不匹配。</p>
+</div>
+<div class="paragraph">
+<p>端到端测试的目标是捕获这些无法通过其他自动化测试捕获的错误。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_端到端测试的部署"><a class="anchor" href="#_端到端测试的部署"></a>端到端测试的部署</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>端到端测试需要一个与生产环境密切相似的测试环境。您需要部署完整的应用程序，包括前端和相关的后端部分。为此，后端框架通常支持不同环境的配置，如开发、测试和生产环境。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+确定性环境
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>数据库需要填充预制的假数据。在每次运行端到端测试时，您需要将数据库重置为定义的初始状态。</p>
+</div>
+<div class="paragraph">
+<p>后端服务需要使用确定性响应来回应请求。第三方依赖项需要进行设置，以返回真实的数据，但不会危及生产数据。</p>
+</div>
+<div class="paragraph">
+<p>由于本指南不涉及DevOps，我们不会在此处详细介绍，而是专注于编写端到端测试。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_端到端测试的工作原理"><a class="anchor" href="#_端到端测试的工作原理"></a>端到端测试的工作原理</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>端到端测试模拟用户与应用程序的交互方式。通常，测试引擎启动一个普通的浏览器，并远程控制它。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+模拟用户操作
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>一旦浏览器启动，端到端测试会导航到应用程序的URL，读取页面内容，并进行键盘和鼠标输入。例如，测试会填写表单并点击提交按钮。</p>
+</div>
+<div class="paragraph">
+<p>与单元测试和集成测试类似，端到端测试会进行断言：页面是否包含正确的内容？URL是否发生了变化？通过这种方式，整个功能和用户界面都会被检查。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_端到端测试框架"><a class="anchor" href="#_端到端测试框架"></a>端到端测试框架</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>用于端到端测试的框架允许导航到URL、模拟用户输入和检查页面内容。除此之外，它们没有太多共同之处。测试语法和测试运行方式差异很大。</p>
+</div>
+<div class="paragraph">
+<p>端到端测试框架可以分为两类：使用WebDriver的和不使用WebDriver的。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+浏览器自动化
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>WebDriver 协议(protocol)</strong> 允许使用一组命令远程控制浏览器。它源自Selenium浏览器自动化项目，现在由万维网联盟（W3C）进行开发。</p>
+</div>
+<div class="paragraph">
+<p>所有常见的浏览器都支持WebDriver协议，并可以进行远程控制。最重要的WebDriver命令包括：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>导航到给定的URL</p>
+</li>
+<li>
+<p>在DOM中查找一个或多个元素</p>
+</li>
+<li>
+<p>获取找到的元素的信息：</p>
+</li>
+<li>
+<p>获取元素的属性或属性值</p>
+</li>
+<li>
+<p>获取元素的文本内容</p>
+</li>
+<li>
+<p>点击一个元素</p>
+</li>
+<li>
+<p>向表单字段发送键盘输入</p>
+</li>
+<li>
+<p>执行任意的JavaScript代码</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WebDriver是一个高级的通用的基于HTTP的协议。它将在一台机器上运行的测试与可能在另一台机器上运行的浏览器连接起来。对浏览器的控制程度有限。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+灵活性与可靠性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>WebDriver的主要优点是测试可以在不同的浏览器中运行，甚至可以同时运行。然而，只有一些端到端测试框架建立在WebDriver上。那些不使用WebDriver的框架更直接地集成到浏览器中，可以通过插件或通过修改浏览器源代码来实现。这使得它们更可靠，但也更不灵活，因为它们只支持某些浏览器或定制的浏览器构建。</p>
+</div>
+<div class="paragraph">
+<p>在Angular 12之前，Angular使用 <strong>Protractor</strong> 作为其默认的端到端测试框架。Protractor基于WebDriver。从Angular 12开始，Protractor已被弃用。在新的CLI项目中，默认未配置端到端测试解决方案。</p>
+</div>
+<div class="paragraph">
+<p>在本指南中，我们将了解<strong>Cypress</strong>，一个成熟的不使用WebDriver的端到端测试框架。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.w3.org/TR/webdriver/">WebDriver协议</a></p>
+</li>
+<li>
+<p><a href="https://www.cypress.io/">Cypress：官方网站</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_介绍cypress"><a class="anchor" href="#_介绍cypress"></a>介绍Cypress</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cypress是一个旨在改善开发者体验以及端到端测试的性能和可靠性的测试框架。</p>
+</div>
+<div class="paragraph">
+<p>Cypress是一家公司的产品。我们将使用的测试运行器是开源且免费的。该公司通过额外的付费服务获得收入。Cypress云仪表板管理在持续集成环境中记录的测试运行。您无需订阅此服务即可编写和运行Cypress测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+架构
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>由于Cypress不使用WebDriver，它具有独特的架构。启动Cypress时，一个Node.js应用程序启动浏览器。浏览器不是远程控制的，而是测试直接在浏览器内部运行，由浏览器插件支持。测试运行器为在浏览器中检查和调试测试提供了强大的用户界面。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+权衡
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>从我们的角度来看，Cypress有一些缺点。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cypress使用Mocha和Chai库的组合来编写测试，而不是使用Jasmine。虽然两个堆栈的目的相同，但您需要学习它们之间微小的区别。如果您在单元测试和集成测试中使用Jasmine，那么您的Cypress测试看起来可能相似，但在细节上会有所不同。</p>
+</li>
+<li>
+<p>Cypress仅支持Firefox以及基于Chromium的浏览器，如Google Chrome和Microsoft Edge。Cypress对Safari使用的WebKit浏览器引擎具有实验性支持。Cypress不支持旧版Edge或Internet Explorer。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cypress并不简单地比基于WebDriver的框架更好。它通过缩小范围并做出权衡来解决它们的问题。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+推荐
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>话虽如此，本指南<strong>建议在测试Angular应用程序时使用Cypress</strong>。Cypress得到了很好的维护和文档支持。使用Cypress，您可以轻松编写有价值的端到端测试。</p>
+</div>
+<div class="paragraph">
+<p>如果您确实需要一个最新的基于WebDriver的框架，请考虑使用Webdriver.io。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/guides/references/trade-offs">Cypress：权衡</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/overview/key-differences">Cypress：主要区别</a></p>
+</li>
+<li>
+<p><a href="https://mochajs.org/">Mocha - JavaScript测试框架</a></p>
+</li>
+<li>
+<p><a href="https://www.chaijs.com/">Chai - 断言库</a></p>
+</li>
+<li>
+<p><a href="https://webdriver.io/">Webdriver.io</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_安装cypress"><a class="anchor" href="#_安装cypress"></a>安装Cypress</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>向现有的Angular CLI项目添加Cypress的简单方法是使用 <a href="https://github.com/cypress-io/cypress/tree/master/npm/cypress-schematic#readme">Cypress Angular Schematic</a>。</p>
+</div>
+<div class="paragraph">
+<p>在您的Angular项目目录中，运行以下命令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ng add @cypress/schematic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个命令执行了四个重要的操作：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>将Cypress和辅助的npm包添加到<code>package.json</code>。</p>
+</li>
+<li>
+<p>添加了Cypress配置文件<code>cypress.config.ts</code>。</p>
+</li>
+<li>
+<p>修改<code>angular.json</code>配置文件以添加<code>ng run</code>命令。</p>
+</li>
+<li>
+<p>创建一个名为<code>cypress</code>的子目录，其中包含测试的框架。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>输出如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ℹ Using package manager: npm
+✔ Found compatible package version: @cypress/schematic@2.5.0.
+✔ Package information loaded.
+
+The package @cypress/schematic@2.5.0 will be installed and executed.
+Would you like to proceed? Yes
+✔ Packages successfully installed.
+? Would you like the default `ng e2e` command to use Cypress? [ Protractor to Cypress Migration Guide: https://on.cypress.io/protractor-to-cypress?cli=true ] Yes
+? Would you like to add Cypress component testing?  This will add all files needed for Cypress component testing. No
+CREATE cypress.config.ts (134 bytes)
+CREATE cypress/tsconfig.json (139 bytes)
+CREATE cypress/e2e/spec.cy.ts (143 bytes)
+CREATE cypress/fixtures/example.json (85 bytes)
+CREATE cypress/support/commands.ts (1377 bytes)
+CREATE cypress/support/e2e.ts (649 bytes)
+UPDATE package.json (1187 bytes)
+UPDATE angular.json (3643 bytes)
+✔ Packages installed successfully.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>安装程序询问是否要使用<code>ng e2e</code>命令启动Cypress。如果您正在设置一个尚未具备端到端测试的新项目，可以安全地回答“是”。</p>
+</div>
+<div class="paragraph">
+<p>在Angular CLI 12版本之前，<code>ng e2e</code>用于启动Protractor。如果您的项目中有任何遗留的Protractor测试，并且希望继续使用<code>ng e2e</code>运行它们，请回答“否”。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用cypress编写端到端测试"><a class="anchor" href="#_使用cypress编写端到端测试"></a>使用Cypress编写端到端测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在项目目录中，您会找到一个名为<code>cypress</code>的子目录。它包含：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>一个用于该目录中所有TypeScript文件的<code>tsconfig.json</code>配置，</p>
+</li>
+<li>
+<p>一个用于端到端测试的<code>e2e</code>目录，</p>
+</li>
+<li>
+<p>一个用于自定义命令和其他测试辅助工具的<code>support</code>目录，</p>
+</li>
+<li>
+<p>一个用于测试数据的<code>fixtures</code>目录。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>测试文件位于<code>e2e</code>目录中。每个测试是一个以<code>.cy.ts</code>为扩展名的TypeScript文件。</p>
+</div>
+<div class="paragraph">
+<p>测试本身是使用<strong>Mocha</strong>测试框架结构化的。断言（也称为期望）使用<strong>Chai</strong>编写。</p>
+</div>
+<div class="paragraph">
+<p>Mocha和Chai是一种常见的组合。它们的功能与Jasmine大致相同，但更加灵活且功能丰富。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试套件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果您以前 <a href="test-suites-with-jasmine.html#_使用jasmine编写测试套件" class="xref page">使用Jasmine编写过单元测试</a>，Mocha的结构将会很熟悉。一个测试文件包含一个或多个使用 <code>describe('…', () &#8658; { /* … */})</code> 声明的测试套件。通常，一个文件包含一个<code>describe</code>块，可能带有嵌套的<code>describe</code>块。</p>
+</div>
+<div class="paragraph">
+<p>在<code>describe</code>内部，可以类似于Jasmine测试使用<code>beforeEach</code>、<code>afterEach</code>、<code>beforeAll</code>、<code>afterAll</code>和<code>it</code>块。</p>
+</div>
+<div class="paragraph">
+<p>这将导致以下端到端测试结构：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('… Feature description …', () =&gt; {
+  beforeEach(() =&gt; {
+    // Navigate to the page
+  });
+
+  it('… User interaction description …', () =&gt; {
+    // Interact with the page
+    // Assert something about the page content
+  });
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试计数器组件"><a class="anchor" href="#_测试计数器组件"></a>测试计数器组件</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>逐步进行，我们将为计数器示例应用程序编写端到端测试。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop">计数器组件：源代码</a></p>
+</li>
+<li>
+<p><a href="https://9elements.github.io/angular-workshop/">计数器组件：运行应用程序</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the counter Component app in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://9elements.github.io/angular-workshop/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>首先，让我们编写一个最小化的测试，检查文档标题。在项目目录中，我们创建一个名为 <code>cypress/e2e/counter.cy.ts</code> 的文件。其内容如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Counter', () =&gt; {
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it('has the correct title', () =&gt; {
+    cy.title().should('equal', 'Angular Workshop: Counters');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+命令
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Cypress命令是<code>cy</code>命名空间对象的方法。在这里，我们使用了两个命令，<code>visit</code>和<code>title</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>cy.visit</code>命令指示浏览器访问给定的URL。在上面的例子中，我们使用路径<code>/</code>。Cypress会将路径追加到<code>baseUrl</code>上。默认情况下，<code>baseUrl</code>在Cypress的配置文件<code>cypress.config.ts</code>中设置为<code><a href="http://localhost:4200" class="bare">http://localhost:4200</a></code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+链式调用
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>cy.title</code>返回页面标题。具体来说，它返回一个Cypress链式调用器（<strong>Chainer</strong>）。这是一个围绕任意值的异步包装器。大多数情况下，链式调用器包装DOM元素。在这种情况下，<code>cy.title</code>包装了一个字符串。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+断言
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>链式调用器有一个<code>should</code>方法用于创建断言。Cypress会将该调用传递给Chai库以验证断言。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.title().should('equal', 'Angular Workshop: Counters');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们传递了两个参数，<code>'equal'</code> 和预期的标题字符串。<code>equal</code>创建了一个断言，主题值（页面标题）等于给定的值（<code>'Angular Workshop: Counters'</code>）。<code>equal</code>使用熟悉的<code>===</code>比较。</p>
+</div>
+<div class="paragraph">
+<p>这种<code>should</code>风格的断言与Jasmine的expectations不同，后者使用 <code>expect(…).toBe(…)</code> 的风格。实际上，Chai支持三种不同的断言风格：<code>should</code>、<code>assert</code>和<code>expect</code>。在Cypress中，通常会在链式调用器上使用<code>should</code>，在未包装的值上使用<code>expect</code>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/visit">Cypress API参考：cy.visit</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/title">Cypress API参考：cy.title</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/references/assertions">Cypress文档：断言</a></p>
+</li>
+<li>
+<p><a href="https://www.chaijs.com/api/bdd/">Chai API参考：should风格的断言</a></p>
+</li>
+<li>
+<p><a href="https://www.chaijs.com/api/bdd/#method_equal">Chai API参考：equal</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运行cypress测试"><a class="anchor" href="#_运行cypress测试"></a>运行Cypress测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>将上一章节中的最小测试保存为 <code>cypress/e2e/counter.cy.ts</code>。</p>
+</div>
+<div class="paragraph">
+<p>Cypress有两个命令用于运行端到端测试：</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试运行器
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>npx cypress run</code> - 非交互式测试运行器</strong>。在“headless”浏览器中运行测试。这意味着浏览器窗口不可见。</p>
+<div class="paragraph">
+<p>测试运行一次，然后关闭浏览器并完成shell命令。您可以在shell输出中看到测试结果。</p>
+</div>
+<div class="paragraph">
+<p>该命令通常在持续集成环境中使用。</p>
+</div>
+</li>
+<li>
+<p><strong><code>npx cypress open</code> - 交互式测试运行器</strong>。打开一个窗口，您可以选择使用哪个浏览器和运行哪些测试。浏览器窗口是可见的，完成后仍然可见。</p>
+<div class="paragraph">
+<p>您可以在浏览器窗口中看到测试结果。如果对测试文件进行更改，Cypress会自动重新运行测试。</p>
+</div>
+<div class="paragraph">
+<p>该命令通常在开发环境中使用。</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+启动并运行测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们安装的Cypress原理图会将这些命令包装起来，使其与Angular集成。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>ng run $project-name$:cypress-run</code></strong> - 启动非交互式测试运行器。</p>
+</li>
+<li>
+<p><strong><code>ng run $project-name$:cypress-open</code></strong> - 启动交互式测试运行器。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>`$project-name$`是一个占位符。请插入相应的Angular项目的名称。这通常与目录名相同。如果不是这样，可以在<code>angular.json</code>的<code>projects</code>对象中找到它。</p>
+</div>
+<div class="paragraph">
+<p>例如，Counter示例的项目名称为<code>angular-workshop</code>。因此，命令如下：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ng run angular-workshop:cypress-run</code></p>
+</li>
+<li>
+<p><code>ng run angular-workshop:cypress-open</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+开发服务器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>命令 <code>npx cypress run</code>、<code>npx cypress open</code>和 <code>ng run $project-name$:cypress-open</code> 要求您首先在单独的shell中使用<code>ng serve</code>启动Angular的开发服务器。Cypress连接到<code>baseUrl</code>（<code><a href="http://localhost:4200" class="bare">http://localhost:4200</a></code>），如果服务器无法访问，它会通知您。</p>
+</div>
+<div class="paragraph">
+<p>命令 <code>ng run $project-name$:cypress-run</code> 启动开发服务器，运行测试，并在测试完成后停止服务器。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+启动窗口
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>命令 <code>npx cypress open</code> 将打开测试运行器。首先，您需要选择测试类型，在我们的例子中是“E2E测试”。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-choose-testing-type.png" alt="cypress choose testing type">
+</div>
+</div>
+<div class="paragraph">
+<p>在下一个屏幕上，您需要选择运行测试的浏览器。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-choose-browser.png" alt="cypress choose browser">
+</div>
+</div>
+<div class="paragraph">
+<p>Cypress会自动列出系统中找到的所有浏览器。此外，您还可以在Electron中运行测试。Cypress的用户界面是一个Electron应用程序。Electron基于Chromium，即Chrome浏览器的开源基础。</p>
+</div>
+<div class="paragraph">
+<p>选择一个浏览器，然后点击“开始端到端测试”按钮。这将启动浏览器并打开测试运行器，即Cypress的主要用户界面。（截图显示的是Chrome浏览器。）</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-tests.png" alt="cypress tests">
+</div>
+</div>
+<div class="paragraph">
+<p>在主窗格中，列出了所有的测试。要运行单个测试，请点击它。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试运行器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>假设您在Chrome中运行测试，并运行了名为<code>counter.cy.ts</code>的测试，那么浏览器内的测试运行器将如下所示：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-runner.png" alt="cypress runner">
+</div>
+</div>
+<div class="paragraph">
+<p>在“规范”列中，列出了此测试运行的测试。对于每个测试，您可以查看规范。</p>
+</div>
+<div class="paragraph">
+<p>在右侧，可以看到被测试的网页。网页会根据窗口进行缩放，但默认视口宽度为1000像素。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+规范日志
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>通过点击规范名称，您可以查看规范中的所有命令和断言。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-spec.png" alt="cypress spec">
+</div>
+</div>
+<div class="paragraph">
+<p>您可以逐个命令地观察Cypress运行规范。当规范失败时，这特别有用。让我们故意修改规范，以查看Cypress的输出。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.title().should('equal', 'Fluffy Golden Retrievers');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个改变导致规范失败：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/cypress-spec-failed.png" alt="cypress spec failed">
+</div>
+</div>
+<div class="paragraph">
+<p>Cypress提供了有用的错误信息，指出了失败的断言。您可以点击带有文件名、行号和列号的链接，例如在示例中是 <code>cypress/e2e/counter.cy.ts:7:16</code>，以直接跳转到代码编辑器中的断言位置。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+时间旅行
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>浏览器内的测试运行器的一个独特功能是能够查看页面在某个时间点的状态。每当运行命令或验证断言时，Cypress会创建DOM快照。</p>
+</div>
+<div class="paragraph">
+<p>通过将鼠标悬停在命令或断言上，您可以进行时间回溯。右侧的页面将反映出命令或断言被处理时的页面状态。</p>
+</div>
+<div class="paragraph">
+<p>时间旅行功能在编写和调试端到端测试时非常有价值。使用它来了解您的测试如何与应用程序交互以及应用程序的反应。当测试失败时，使用它来重现导致失败的情况。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/guides/core-concepts/cypress-app#The-Test-Runner">Cypress文档：测试运行器</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_异步测试"><a class="anchor" href="#_异步测试"></a>异步测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>每个Cypress命令都需要一些时间来执行。但从规范的角度来看，执行是瞬间完成的。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+命令队列
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>实际上，Cypress命令只是声明式的。执行是异步进行的。通过调用<code>cy.visit</code>和<code>cy.title</code>，我们将命令添加到队列中。队列稍后逐个处理命令。</p>
+</div>
+<div class="paragraph">
+<p>因此，我们无需等待<code>cy.visit</code>的结果。Cypress会自动等待页面加载完成后再继续执行下一个命令。</p>
+</div>
+<div class="paragraph">
+<p>出于同样的原因，<code>cy.title</code>不会立即返回一个字符串，而是返回一个Chainer，允许更多的声明。</p>
+</div>
+<div class="paragraph">
+<p>在之前编写的Jasmine单元测试和集成测试中，我们需要自己管理时间。在处理异步命令和值时，我们必须显式使用<code>async</code> / <code>await</code>、<code>fakeAsync</code>和其他手段。</p>
+</div>
+<div class="paragraph">
+<p>编写Cypress测试时，这是不必要的。Cypress API的设计注重表达力和可读性。Cypress隐藏了所有命令需要时间的事实。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+同步断言
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有时需要同步访问和检查一个值。Cypress通过回调函数的形式允许这样做，这些回调函数在特定命令处理完毕后执行。您可以将回调函数传递给<code>should</code>命令或更通用的<code>then</code>命令。</p>
+</div>
+<div class="paragraph">
+<p>在这些回调函数中，可以使用Chai的<code>expect</code>函数对普通的未封装值进行断言。稍后我们将了解到这种实践。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/should#Function">Cypress API参考：带有回调函数的should</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/then">Cypress API参考：then命令</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_自动重试和等待"><a class="anchor" href="#_自动重试和等待"></a>自动重试和等待</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cypress的一个关键特性是它会重试某些命令和断言。</p>
+</div>
+<div class="paragraph">
+<p>例如，Cypress查询文档标题并将其与预期标题进行比较。如果标题不立即匹配，Cypress将在四秒内重试<code>cy.title</code>命令和<code>should</code>断言。当达到超时时间时，规范失败。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+自动等待
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>其他命令不会被重试，但具有内置的等待逻辑。例如，我们将使用Cypress的<code>click</code>方法单击一个元素。</p>
+</div>
+<div class="paragraph">
+<p>Cypress会自动等待四秒钟，以确保该元素可点击。Cypress将元素滚动到视图中并检查其是否可见且未禁用。经过几次其他检查后，Cypress执行点击操作。</p>
+</div>
+<div class="paragraph">
+<p>重试和等待的超时时间可以为所有测试或单独的命令进行配置。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+重试规范
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果一个规范尽管重试和等待仍然失败，可以配置Cypress重试整个规范。这是一种最后的手段，用于处理产生不一致结果的特定规范。</p>
+</div>
+<div class="paragraph">
+<p>这些功能使端到端测试更可靠，同时也更容易编写。在其他框架中，您需要手动等待，并且没有命令、断言或规范的自动重试。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Commands-Are-Asynchronous">Cypress简介：命令是异步的</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/core-concepts/interacting-with-elements">Cypress文档：与元素交互</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/core-concepts/retry-ability">Cypress文档：可重试性</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/guides/test-retries">Cypress文档：测试重试</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试计数器递增"><a class="anchor" href="#_测试计数器递增"></a>测试计数器递增</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在我们的第一个Cypress测试中，我们成功检查了页面标题。现在让我们测试计数器的递增功能。</p>
+</div>
+<div class="paragraph">
+<p>测试需要执行以下步骤：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>导航到“/”。</p>
+</li>
+<li>
+<p>找到当前计数的元素并读取其文本内容。</p>
+</li>
+<li>
+<p>期望文本为“5”，因为这是第一个计数器的起始计数。</p>
+</li>
+<li>
+<p>找到递增按钮并点击它。</p>
+</li>
+<li>
+<p>找到当前计数的元素并(再次)读取其文本内容。</p>
+</li>
+<li>
+<p>期望文本现在显示为“6”。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们使用 <code>cy.visit('/')</code> 导航到一个地址。路径“/”转换为<code><a href="http://localhost:4200/" class="bare">http://localhost:4200/</a></code>，因为这是配置的<code>baseUrl</code>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_查找元素"><a class="anchor" href="#_查找元素"></a>查找元素</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>下一步是在当前页面中查找元素。Cypress提供了几种查找元素的方法。我们将使用<code>cy.get</code>方法通过CSS选择器来查找元素。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('.example')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>cy.get</code>返回一个Chainer，它是对找到的元素的异步封装，附加了一些有用的方法。</p>
+</div>
+<div class="paragraph">
+<p>就像在单元测试和集成测试中一样，立即出现的问题是：我们应该如何找到一个元素 - 通过id、名称、类名还是其他方式？</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+通过测试id查找
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>正如在 <a href="testing-components.html#_使用测试_id_查询_dom" class="xref page">使用测试id查询DOM</a> 中所讨论的，本指南建议使用 <strong>test ids</strong> 标记元素。</p>
+</div>
+<div class="paragraph">
+<p>这些是类似于 <code>data-testid="example"</code> 的数据属性。在测试中，我们使用相应的属性选择器来找到这些元素，例如：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('[data-testid="example"]')</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+通过类型查找
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>虽然推荐使用测试id来查找元素，但在某些情况下，其他查找元素的方式仍然很有用。例如，您可能希望检查<code>h1</code>元素的存在和内容。这个元素具有特殊的含义，您不应该使用任意的测试id来找到它。</p>
+</div>
+<div class="paragraph">
+<p>测试id的好处是它可以用于任何元素。使用测试id意味着忽略元素类型（如<code>h1</code>）和其他属性。如果这些发生了变化，测试不会失败。</p>
+</div>
+<div class="paragraph">
+<p>但是，如果对于特定的元素类型或属性有特殊的原因，您的测试应该验证其使用情况。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/get">Cypress API参考：cy.get</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/references/best-practices#Selecting-Elements">Cypress最佳实践：选择元素</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_与元素交互"><a class="anchor" href="#_与元素交互"></a>与元素交互</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>为了测试计数器组件，我们想要验证第一个计数器的起始计数是“5”。当前计数存储在具有测试id <code>count</code>的元素中。因此，元素查找器为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('[data-testid="count"]')</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+存在性和内容
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>cy.get</code>命令已经内置了一个断言：它期望至少找到一个与选择器匹配的元素。否则，规范将失败。</p>
+</div>
+<div class="paragraph">
+<p>接下来，我们检查元素的文本内容以验证起始计数。同样，我们使用<code>should</code>方法来创建一个断言。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('[data-testid="count"]').should('have.text', '5');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>have.text</code>断言将文本内容与给定的字符串进行比较。</p>
+</div>
+<div class="paragraph">
+<p>我们成功了！我们找到了一个元素并检查了它的内容。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+点击
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在让我们递增计数。我们找到并点击递增按钮（测试id为<code>increment-button</code>）。Cypress为此提供了<code>cy.click</code>方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('[data-testid="increment-button"]').click();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>被测试的Angular代码处理了点击事件。最后，我们验证可见的计数增加了一个。我们重复使用 <code>should('have.text', …)</code> 命令，但期望一个更高的数字。</p>
+</div>
+<div class="paragraph">
+<p>现在，测试套件看起来像这样：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Counter', () =&gt; {
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it.only('has the correct title', () =&gt; {
+    cy.title().should('equal', 'Angular Workshop: Counters');
+  });
+
+  it('increments the count', () =&gt; {
+    cy.get('[data-testid="count"]').should('have.text', '5');
+    cy.get('[data-testid="increment-button"]').click();
+    cy.get('[data-testid="count"]').should('have.text', '6');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们需要测试的下一个功能是减少按钮。这个规范的工作方式类似于增加规范。它点击减少按钮（测试id为<code>decrement-button</code>）并检查计数是否减少了。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('decrements the count', () =&gt; {
+  cy.get('[data-testid="decrement-button"]').click();
+  cy.get('[data-testid="count"]').should('have.text', '4');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后但同样重要的是，我们测试重置功能。用户可以在表单字段（测试id为<code>reset-input</code>）中输入一个新的计数，并点击重置按钮（测试id为<code>reset-button</code>）来设置新的计数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+填写表单
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Cypress的Chainer有一个通用的方法可以向可以与键盘进行交互的元素发送按键：<code>type</code>。</p>
+</div>
+<div class="paragraph">
+<p>为了向表单字段输入文本，我们将一个字符串传递给<code>type</code>方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.get('[data-testid="reset-input"]').type('123');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，我们点击重置按钮，最后期望进行更改。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('resets the count', () =&gt; {
+  cy.get('[data-testid="reset-input"]').type('123');
+  cy.get('[data-testid="reset-button"]').click();
+  cy.get('[data-testid="count"]').should('have.text', '123');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是完整的测试套件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Counter', () =&gt; {
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it('has the correct title', () =&gt; {
+    cy.title().should('equal', 'Angular Workshop: Counters');
+  });
+
+  it('increments the count', () =&gt; {
+    cy.get('[data-testid="count"]').should('have.text', '5');
+    cy.get('[data-testid="increment-button"]').click();
+    cy.get('[data-testid="count"]').should('have.text', '6');
+  });
+
+  it('decrements the count', () =&gt; {
+    cy.get('[data-testid="decrement-button"]').click();
+    cy.get('[data-testid="count"]').should('have.text', '4');
+  });
+
+  it('resets the count', () =&gt; {
+    cy.get('[data-testid="reset-input"]').type('123');
+    cy.get('[data-testid="reset-button"]').click();
+    cy.get('[data-testid="count"]').should('have.text', '123');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在计数器项目的起始页面上，实际上有九个计数器实例。因此，<code>cy.get</code>命令返回的是九个元素，而不是一个。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+首次匹配
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>像<code>type</code>和<code>click</code>这样的命令只能操作一个元素，因此我们需要将元素列表减少到第一个结果。这可以通过Cypress的<code>first</code>命令插入到链中来实现。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('increments the count', () =&gt; {
+  cy.get('[data-testid="count"]').first().should('have.text', '5');
+  cy.get('[data-testid="increment-button"]').first().click();
+  cy.get('[data-testid="count"]').first().should('have.text', '6');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这也适用于其他规范。如果测试的元素只出现一次，那么<code>第一个</code>命令当然是不必要的。</p>
+</div>
+<div class="paragraph">
+<p>现在已经测试了所有计数器的功能。在接下来的章节中，我们将重构代码以提高其可读性和可维护性。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter.cy.ts">计数器端到端测试代码</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/click">Cypress API参考：click</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/type">Cypress API参考：type</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/first">Cypress API参考：first</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/faq/questions/using-cypress-faq#How-do-I-get-an-element-s-text-contents">Cypress常见问题解答：如何获取元素的文本内容？</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_自定义cypress命令"><a class="anchor" href="#_自定义cypress命令"></a>自定义Cypress命令</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们编写的测试代码相当重复。模式 <code>cy.get('[data-testid="…"]')</code> 一次又一次地重复出现。</p>
+</div>
+<div class="paragraph">
+<p>第一个改进是编写一个隐藏此细节的辅助函数。我们已经编写了两个类似的函数作为 <a href="testing-components.html#_测试辅助函数" class="xref page">单元测试的辅助函数</a>，<code>findEl</code>和<code>findEls</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+通过测试id查找
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>创建一个用于查找元素的Cypress辅助函数的最简单方法是编写一个函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">function findEl(testId: string): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.get(`[data-testid="${testId}"]`);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样我们就可以写 <code>findEl('count')</code>，而不是 <code>cy.get('[data-testid="count"]')</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+自定义命令
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这种方式可以正常工作，但我们选择另一种方式。Cypress支持将<strong>自定义命令</strong>添加到<code>cy</code>命名空间中。我们将添加一个名为<code>byTestId</code>的命令，以便我们可以编写 <code>cy.byTestId('count')</code>。</p>
+</div>
+<div class="paragraph">
+<p>自定义命令放置在 <code>cypress/support/commands.ts</code> 文件中。这个文件是由Angular模板自动创建的。使用<code>Cypress.Commands.add</code>，我们将自定义命令作为<code>cy</code>的方法添加进去。第一个参数是命令的名称，第二个参数是作为函数的实现。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>cy.byTestId</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最简单的版本如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">Cypress.Commands.add(
+  'byTestId',
+  (id: string) =&gt;
+    cy.get(`[data-testid="${id}"]`)
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在我们可以编写 <code>cy.byTestId('count')</code>。如果我们想通过其他方式查找元素，仍然可以回退到<code>cy.get</code>。</p>
+</div>
+<div class="paragraph">
+<p><code>cy.byTestId</code>应该具有与通用<code>cy.get</code>相同的灵活性。因此，我们也添加了第二个<code>options</code>参数。我们从官方<code>cy.get</code>的类型定义中借用了函数签名。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">Cypress.Commands.add(
+  'byTestId',
+  // Borrow the signature from cy.get
+  &lt;E extends Node = HTMLElement&gt;(
+    id: string,
+    options?: Partial&lt;
+      Cypress.Loggable &amp; Cypress.Timeoutable &amp; Cypress.Withinable &amp; Cypress.Shadow
+    &gt;,
+  ): Cypress.Chainable&lt;JQuery&lt;E&gt;&gt; =
+    cy.get(`[data-testid="${id}"]`, options),
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了进行正确的类型检查，我们需要告诉TypeScript编译器我们已经扩展了<code>cy</code>命名空间。在<code>commands.ts</code>中，我们通过为<code>byTestId</code>声明一个方法来扩展<code>Chainable</code>接口。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Get one or more DOM elements by test id.
+     *
+     * @param id The test id
+     * @param options The same options as cy.get
+     */
+    byTestId&lt;E extends Node = HTMLElement&gt;(
+      id: string,
+      options?: Partial&lt;
+        Cypress.Loggable &amp; Cypress.Timeoutable &amp; Cypress.Withinable &amp; Cypress.Shadow
+      &gt;,
+    ): Cypress.Chainable&lt;JQuery&lt;E&gt;&gt;;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>你不必详细了解这些类型定义。它们只是确保你可以像传递给<code>cy.get</code>一样传递相同的<code>选项</code>给<code>cy.byTestId</code>。</p>
+</div>
+<div class="paragraph">
+<p>保存<code>commands.ts</code>，然后打开<code>cypress/support/e2e.ts</code>并激活导入<code>commands.ts</code>的行。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import './commands';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样！现在我们有了一个严格类型的命令<code>cy.byTestId</code>。使用这个命令，我们可以简化测试代码。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Counter (with helpers)', () =&gt; {
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it('has the correct title', () =&gt; {
+    cy.title().should('equal', 'Angular Workshop: Counters');
+  });
+
+  it('increments the count', () =&gt; {
+    cy.byTestId('count').first().should('have.text', '5');
+    cy.byTestId('increment-button').first().click();
+    cy.byTestId('count').first().should('have.text', '6');
+  });
+
+  it('decrements the count', () =&gt; {
+    cy.byTestId('decrement-button').first().click();
+    cy.byTestId('count').first().should('have.text', '4');
+  });
+
+  it('resets the count', () =&gt; {
+    cy.byTestId('reset-input').first().type('123');
+    cy.byTestId('reset-button').first().click();
+    cy.byTestId('count').first().should('have.text', '123');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请记住，所有这些 <code>first</code> 调用只在被测试页面上有多个计数器的情况下才是必需的。如果页面上只有一个具有给定测试ID的元素，那么您不需要它们。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/cypress/e2e/counter-helpers.cy.ts">带有辅助函数的Counter E2E测试</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/cypress/support/commands.ts">完整代码：commands.ts</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/cypress-api/custom-commands">Cypress文档：自定义命令</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/tooling/typescript-support#Types-for-Custom-Commands">Cypress文档：自定义命令的类型</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试flickr搜索"><a class="anchor" href="#_测试flickr搜索"></a>测试Flickr搜索</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>通过测试计数器应用程序，我们已经学习了使用Cypress进行基本测试的基础知识。让我们通过测试一个更复杂的应用程序——Flickr搜索来深入了解使用Cypress进行端到端测试。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search">Flickr照片搜索：源代码</a></p>
+</li>
+<li>
+<p><a href="https://9elements.github.io/angular-flickr-search/">Flickr照片搜索：运行应用程序</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the Flickr photo search in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://9elements.github.io/angular-flickr-search/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>在编写任何代码之前，让我们计划一下端到端测试需要做什么：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>导航到“/”。</p>
+</li>
+<li>
+<p>找到搜索输入字段并输入搜索词，例如“flower”。</p>
+</li>
+<li>
+<p>找到提交按钮并点击它。</p>
+</li>
+<li>
+<p>期望Flickr.com上的照片项目链接出现。</p>
+</li>
+<li>
+<p>点击一个照片项目。</p>
+</li>
+<li>
+<p>期望完整的照片详细信息出现。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+不确定性的API
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>被测试的应用程序使用实际数据查询第三方API。该测试搜索“flower”，并且每次运行测试时，Flickr返回的结果可能不同。</p>
+</div>
+<div class="paragraph">
+<p>在测试过程中处理这种依赖关系有两种方法：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>针对<em>真实</em>的Flickr API进行测试。</p>
+</li>
+<li>
+<p><em>模拟</em>Flickr API并返回固定的响应。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>如果我们针对真实的Flickr API进行测试，由于搜索结果会发生变化，我们无法对期望结果进行具体的说明。我们可以对搜索结果和完整照片进行表面测试。我们只知道点击的照片的标题或标签中包含“flower”。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+真实API vs. 模拟API
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这有优点和缺点。针对真实的Flickr API进行测试使得测试更加真实，但可靠性较低。如果Flickr API出现短暂故障，测试将失败，尽管我们的代码没有错误。</p>
+</div>
+<div class="paragraph">
+<p>运行测试时针对模拟API可以使我们深入检查应用程序。应用程序是否渲染了API返回的照片？照片详细信息是否正确显示？</p>
+</div>
+<div class="paragraph">
+<p>请记住，单元测试、集成测试和端到端测试相互补充。Flickr搜索还通过单元测试和集成测试进行了全面测试。</p>
+</div>
+<div class="paragraph">
+<p>每种类型的测试应该做到最好。单元测试已经对不同的照片组件进行了详细测试。端到端测试不需要达到那种细节水平。</p>
+</div>
+<div class="paragraph">
+<p>使用Cypress，这两种类型的测试都是可行的。首先，我们将针对真实的Flickr API进行测试。然后，我们将模拟API。</p>
+</div>
+<div class="sect2">
+<h3 id="_测试搜索表单"><a class="anchor" href="#_测试搜索表单"></a>测试搜索表单</h3>
+<div class="paragraph">
+<p>我们创建一个名为 <code>cypress/e2e/flickr-search.cy.ts</code> 的文件。我们从一个测试套件开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Flickr search', () =&gt; {
+  const searchTerm = 'flower';
+
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it('searches for a term', () =&gt; {
+    /* … */
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们指示浏览器在搜索字段（测试ID为 <code>search-term-input</code>）中输入“flower”。然后我们点击提交按钮（测试ID为 <code>submit-search</code>）。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('searches for a term', () =&gt; {
+  cy.byTestId('search-term-input')
+    .first()
+    .clear()
+    .type(searchTerm);
+  cy.byTestId('submit-search').first().click();
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+清除后再输入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>type</code> 命令不会用新值覆盖表单字段的值，而是逐个按键发送键盘输入。</p>
+</div>
+<div class="paragraph">
+<p>在输入“flower”之前，我们需要清除字段，因为它已经有预填充的值。否则，我们会将“flower”附加到现有值上。为此，我们使用 Cypress 的 <code>clear</code> 方法。</p>
+</div>
+<div class="paragraph">
+<p>单击提交按钮开始搜索。当 Flickr API 做出响应时，我们期望搜索结果出现。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+期望搜索结果
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>搜索结果包含一个链接（<code>a</code> 元素，测试ID为 <code>photo-item-link</code>）和一张图片（<code>img</code> 元素，测试ID为 <code>photo-item-image</code>）。</p>
+</div>
+<div class="paragraph">
+<p>由于从 Flickr 请求的结果数是15个，我们期望出现15个链接。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('photo-item-link')
+  .should('have.length', 15)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过编写 <code>should('have.length', 15)</code>，我们断言存在15个元素。</p>
+</div>
+<div class="paragraph">
+<p>每个链接的 <code>href</code> 属性都应包含 <code><a href="https://www.flickr.com/photos/" class="bare">https://www.flickr.com/photos/</a></code>。我们无法检查确切的 URL，因为结果是动态的。但我们知道所有的 Flickr 照片 URL 具有相同的结构。</p>
+</div>
+<div class="paragraph">
+<p>Chai 断言中没有直接检查列表中的每个链接是否具有包含 <code><a href="https://www.flickr.com/photos/" class="bare">https://www.flickr.com/photos/</a></code> 的 <code>href</code> 属性的方法。我们需要逐个检查列表中的每个链接。</p>
+</div>
+<div class="paragraph">
+<p>Chainer 提供了 <code>each</code> 方法，用于为每个元素调用一个函数。这类似于 JavaScript 的 <code>forEach</code> 数组方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('photo-item-link')
+  .should('have.length', 15)
+  .each((link) =&gt; {
+    /* Check the link */
+  });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cypress对我们来说有三个惊喜。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+同步的jQuery对象
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>link</code>是一个同步值。在<code>each</code>回调内部，我们处于同步的JavaScript环境中。（我们可以在这里执行异步操作，但没有必要。）</p>
+</li>
+<li>
+<p><code>link</code>的类型是<code>JQuery&lt;HTMLElement&gt;</code>。这是一个使用流行的jQuery库封装的元素。Cypress选择了jQuery，因为许多JavaScript开发人员已经熟悉它。为了读取<code>href</code>属性，我们使用 <code>link.attr('href')</code>。</p>
+</li>
+<li>
+<p>我们不能使用Cypress的<code>should</code>方法，因为它仅存在于Cypress Chainers上。但是在这里我们正在处理一个jQuery对象。我们必须使用标准的Chai断言。我们使用<code>expect</code>和<code>to.contain</code>。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这将引出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('photo-item-link')
+  .should('have.length', 15)
+  .each((link) =&gt; {
+    expect(link.attr('href')).to.contain(
+      'https://www.flickr.com/photos/'
+    );
+  });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>测试现在如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Flickr search', () =&gt; {
+  const searchTerm = 'flower';
+
+  beforeEach(() =&gt; {
+    cy.visit('/');
+  });
+
+  it('searches for a term', () =&gt; {
+    cy.byTestId('search-term-input')
+      .first()
+      .clear()
+      .type(searchTerm);
+    cy.byTestId('submit-search').first().click();
+
+    cy.byTestId('photo-item-link')
+      .should('have.length', 15)
+      .each((link) =&gt; {
+        expect(link.attr('href')).to.contain(
+          'https://www.flickr.com/photos/'
+        );
+      });
+    cy.byTestId('photo-item-image').should('have.length', 15);
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了开始测试，我们首先使用 <code>ng serve</code> 命令启动开发服务器，然后再启动Cypress：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ng run flickr-search:cypress-open</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将打开测试运行器，在其中我们点击 <code>flickr-search.cy.ts</code>。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts">Flickr搜索端到端测试代码</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/clear">Cypress API 参考文档：clear</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/each">Cypress API 参考文档：each</a></p>
+</li>
+<li>
+<p><a href="https://api.jquery.com/attr/">jQuery API 参考文档：attr</a></p>
+</li>
+<li>
+<p><a href="https://www.chaijs.com/api/bdd/#method_include">Chai API 参考文档：include（contain）</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_测试完整的照片"><a class="anchor" href="#_测试完整的照片"></a>测试完整的照片</h3>
+<div class="paragraph">
+<p>当用户点击结果列表中的链接时，将捕获点击事件并在列表旁边显示完整的照片详细信息。（如果用户按住控制/命令键点击或右键点击，他们可以跟随链接访问 flickr.com。）</p>
+</div>
+<div class="paragraph">
+<p>在端到端测试中，我们添加一个规范来验证这种行为。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('shows the full photo', () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先，它搜索“flower”，就像之前的规范一样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('search-term-input').first().clear().type(searchTerm);
+cy.byTestId('submit-search').first().click();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后我们找到所有的照片项目链接，但不是为了检查它们，而是为了点击第一个链接：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('photo-item-link').first().click();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>点击后，照片详细信息将出现。正如上面提到的，我们无法检查特定的标题、特定的照片URL或特定的标签。每次测试运行时，点击的照片可能是不同的。</p>
+</div>
+<div class="paragraph">
+<p>由于我们搜索了“flower”，该词要么在照片标题中，要么在标签中。我们检查具有测试ID <code>full-photo</code> 的包装元素的文本内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('full-photo').should('contain', searchTerm);</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Contain vs. have text
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>包含（contain）</code>断言检查给定的字符串是否出现在元素的文本内容中。（相比之下，<code>have.text</code>断言检查内容是否与给定的字符串相等。它不允许有额外的内容。）</p>
+</div>
+<div class="paragraph">
+<p>接下来，我们检查是否存在标题和一些标签，并且它们不为空。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('full-photo-title').should('not.have.text', '');
+cy.byTestId('full-photo-tags').should('not.have.text', '');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>图片本身需要存在。我们无法详细检查<code>src</code>属性。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">cy.byTestId('full-photo-image').should('exist');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在规范的样子如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('shows the full photo', () =&gt; {
+  cy.byTestId('search-term-input').first().clear().type(searchTerm);
+  cy.byTestId('submit-search').first().click();
+
+  cy.byTestId('photo-item-link').first().click();
+  cy.byTestId('full-photo').should('contain', searchTerm);
+  cy.byTestId('full-photo-title').should('not.have.text', '');
+  cy.byTestId('full-photo-tags').should('not.have.text', '');
+  cy.byTestId('full-photo-image').should('exist');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这里给出的断言（<code>contain</code>、<code>text</code>和<code>exist</code>）是由Chai-jQuery定义的，Chai-jQuery是一个用于检查jQuery元素列表的断言库。</p>
+</div>
+<div class="paragraph">
+<p>恭喜，我们已经成功测试了Flickr搜索！这个示例演示了几个Cypress命令和断言。我们也对Cypress的内部机制有了一瞥。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search.cy.ts">Flickr搜索端到端测试代码</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/references/assertions#Chai-jQuery">Cypress文档：Chai-jQuery断言</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_页面对象"><a class="anchor" href="#_页面对象"></a>页面对象</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们编写的Flickr搜索端到端测试是完全可用的。我们可以进一步改进代码，以增加代码的清晰性和可维护性。</p>
+</div>
+<div class="paragraph">
+<p>我们引入了一种称为<strong>页面对象</strong>的设计模式。设计模式是一种经过验证的代码结构，是解决常见问题的最佳实践。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+高级交互
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>页面对象表示受端到端测试审查的网页。页面对象提供了一个高级接口，用于与页面进行交互。</p>
+</div>
+<div class="paragraph">
+<p>到目前为止，我们编写的是低级别的端到端测试。它们通过硬编码的测试ID查找单个元素，检查其内容并点击它们。这对于小型测试是可以的。</p>
+</div>
+<div class="paragraph">
+<p>但是，如果页面逻辑复杂，有多种测试情况，那么测试将变成一堆难以管理的低级指令。很难找到这些测试的要点，并且很难进行更改。</p>
+</div>
+<div class="paragraph">
+<p>页面对象将众多低级指令组织成少数高级交互。Flickr搜索应用程序中的高级交互是什么？</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>使用搜索词搜索照片</p>
+</li>
+<li>
+<p>读取照片列表并与列表项交互</p>
+</li>
+<li>
+<p>读取照片详细信息</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>在可能的情况下，我们将这些交互分组为页面对象的方法。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+普通类
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>页面对象只是一个抽象模式，其具体实现取决于您。通常，页面对象被声明为在测试开始时实例化的类。</p>
+</div>
+<div class="paragraph">
+<p>我们将这个类称为<code>FlickrSearch</code>，并将其保存在一个单独的文件<code>cypress/pages/flickr-search.page.ts</code>中。<code>pages</code>目录专门用于页面对象，并且<code>.page.ts</code>后缀标记了页面对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">export class FlickrSearch {
+  public visit(): void {
+    cy.visit('/');
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个类有一个<code>visit</code>方法，用于打开页面，即页面对象所表示的页面。</p>
+</div>
+<div class="paragraph">
+<p>在测试中，我们导入这个类，并在<code>beforeEach</code>块中创建一个实例。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { FlickrSearch } from '../pages/flickr-search.page';
+
+describe('Flickr search (with page object)', () =&gt; {
+  const searchTerm = 'flower';
+
+  let page: FlickrSearch;
+
+  beforeEach(() =&gt; {
+    page = new FlickrSearch();
+    page.visit();
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>FlickrSearch</code>实例存储在<code>describe</code>作用域中声明的变量中。这样，所有的规范都可以访问页面对象。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+搜索
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>让我们在页面对象上实现第一个高级交互：搜索照片。我们将相关的代码从测试中移到页面对象的一个方法中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">public searchFor(term: string): void {
+  cy.byTestId('search-term-input').first().clear().type(term);
+  cy.byTestId('submit-search').first().click();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>searchFor</code>方法接受一个搜索词，并执行所有必要的步骤。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+元素查询
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>其他高级交互，如读取照片列表和照片详情，无法转换为页面对象方法。但是，我们可以将测试ID和元素查询移动到页面对象中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">public photoItemLinks(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('photo-item-link');
+}
+
+public photoItemImages(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('photo-item-image');
+}
+
+public fullPhoto(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('full-photo');
+}
+
+public fullPhotoTitle(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('full-photo-title');
+}
+
+public fullPhotoTags(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('full-photo-tags');
+}
+
+public fullPhotoImage(): Cypress.Chainable&lt;JQuery&lt;HTMLElement&gt;&gt; {
+  return cy.byTestId('full-photo-image');
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这些方法返回元素链式调用器（element Chainers）。</p>
+</div>
+<div class="paragraph">
+<p>接下来，我们将重写端到端测试，以使用页面对象的方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { FlickrSearch } from '../pages/flickr-search.page';
+
+describe('Flickr search (with page object)', () =&gt; {
+  const searchTerm = 'flower';
+
+  let page: FlickrSearch;
+
+  beforeEach(() =&gt; {
+    page = new FlickrSearch();
+    page.visit();
+  });
+
+  it('searches for a term', () =&gt; {
+    page.searchFor(searchTerm);
+    page
+      .photoItemLinks()
+      .should('have.length', 15)
+      .each((link) =&gt; {
+        expect(link.attr('href')).to.contain(
+          'https://www.flickr.com/photos/'
+        );
+      });
+    page.photoItemImages().should('have.length', 15);
+  });
+
+  it('shows the full photo', () =&gt; {
+    page.searchFor(searchTerm);
+    page.photoItemLinks().first().click();
+    page.fullPhoto().should('contain', searchTerm);
+    page.fullPhotoTitle().should('not.have.text', '');
+    page.fullPhotoTags().should('not.have.text', '');
+    page.fullPhotoImage().should('exist');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>对于上面的Flickr搜索，使用页面对象可能有些过于复杂。然而，该示例展示了页面对象的关键思想：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>识别重复的高级交互并将其映射到页面对象的方法中。</p>
+</li>
+<li>
+<p>将元素的查找操作移动到页面对象中。用于查找的测试ID、标签名称等应该统一存放在一个集中的位置。</p>
+<div class="paragraph">
+<p>当被测试页面的标记发生变化时，需要更新页面对象，但测试本身不应该改变。</p>
+</div>
+</li>
+<li>
+<p>将所有断言（<code>should</code>和<code>expect</code>）保留在规范中，不要将它们移动到页面对象中。</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+高级测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在编写端到端测试时，很容易陷入技术细节的困扰：查找元素、点击元素、填写表单字段、检查字段的值和文本内容。但是端到端测试不应该围绕这些低级细节展开。它们应该描述用户在高层次上的行为流程。</p>
+</div>
+<div class="paragraph">
+<p>重构的目标不是为了简洁。使用页面对象并不一定会导致代码量减少。页面对象的目的是将低级细节（如通过测试ID查找元素）与高级用户在应用程序中的行为流程分离。这使得规范更易阅读和维护。</p>
+</div>
+<div class="paragraph">
+<p>当您感觉需要整理复杂、重复的测试时，可以使用页面对象模式。一旦您熟悉了这种模式，它也有助于您在首次编写测试时避免编写这样的测试。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-with-po.cy.ts">带页面对象的Flickr搜索端到端测试</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/cypress/pages/flickr-search.page.ts">Flickr搜索页面对象</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_伪造flickr_api"><a class="anchor" href="#_伪造flickr_api"></a>伪造Flickr API</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们为Flickr搜索编写的端到端测试使用了真实的Flickr API。如前所述，这使得测试更加真实可信。</p>
+</div>
+<div class="paragraph">
+<p>该测试确保应用程序与第三方API紧密配合。但它使得测试变慢，并且只允许进行不太具体的断言。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+拦截HTTP请求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>使用Cypress，我们可以解除对API的依赖。Cypress允许我们拦截HTTP请求并使用虚假数据进行响应。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们需要设置虚假数据。我们已经为 <a href="testing-services.html#_测试发送http请求的服务" class="xref page"><code>FlickrService</code>单元测试</a> 创建了虚假的照片对象。为简单起见，我们只需导入它们：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import {
+  photo1,
+  photo1Link,
+  photos,
+  searchTerm,
+} from '../../src/app/spec-helpers/photo.spec-helper';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>使用虚假照片，我们创建一个模仿Flickr响应中相关部分的虚假响应对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const flickrResponse = {
+  photos: {
+    photo: photos,
+  },
+};</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+使用路由创建虚假服务器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在，我们指示Cypress拦截Flickr API请求，并用虚假数据进行响应。这个设置在测试的<code>beforeEach</code>块中完成。相应的Cypress命令是<code>cy.intercept</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">beforeEach(() =&gt; {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: 'https://www.flickr.com/services/rest/*',
+      query: {
+        tags: searchTerm,
+        method: 'flickr.photos.search',
+        format: 'json',
+        nojsoncallback: '1',
+        tag_mode: 'all',
+        media: 'photos',
+        per_page: '15',
+        extras: 'tags,date_taken,owner_name,url_q,url_m',
+        api_key: '*',
+      },
+    },
+    {
+      body: flickrResponse,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    },
+  ).as('flickrSearchRequest');
+
+  cy.visit('/');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>cy.intercept</code>可以以不同的方式调用。在这里，我们传递了两个对象：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>一个<em>路由匹配器</em>，描述要拦截的请求。它包含HTTP GET方法、基本URL和一堆查询字符串参数。在URL和<code>api_key</code>查询参数中，<code>*</code>字符是一个通配符，可以匹配任意字符串。</p>
+</li>
+<li>
+<p>一个<em>路由处理器</em>，描述Cypress应该发送的响应。我们将<code>flickrResponse</code>虚假对象作为JSON响应主体传递。</p>
+<div class="paragraph">
+<p>由于对Flickr的请求是跨域的，我们需要设置 <code>Access-Control-Allow-Origin: *</code> 头部。这允许我们的源自<code><a href="http://localhost:4200" class="bare">http://localhost:4200</a></code>的Angular应用程序读取来自<code><a href="https://www.flickr.com" class="bare">https://www.flickr.com</a></code>的响应。</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+别名
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最后，我们通过调用 <code>.as('flickrSearchRequest')</code> 为请求设置一个<em>别名(alias)</em>。这使得以后可以使用<code>@flickrSearchRequest</code>别名引用该请求。</p>
+</div>
+<div class="paragraph">
+<p>设置完成后，Cypress会拦截对Flickr的请求并自行处理。原始的Flickr API不会被访问。</p>
+</div>
+<div class="paragraph">
+<p>现有的相对通用的规范仍然通过。在我们使它们更具体之前，我们需要验证Cypress是否找到了匹配并拦截了HTTP请求。因为如果没有拦截，测试仍然会通过。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+等待请求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们可以通过在启动搜索后显式等待请求来实现这一点。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('searches for a term', () =&gt; {
+  cy.byTestId('search-term-input').first().clear().type(searchTerm);
+  cy.byTestId('submit-search').first().click();
+
+  cy.wait('@flickrSearchRequest');
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>cy.wait('@flickrSearchRequest')</code> 告诉Cypress等待满足指定条件的请求。<code>@flickrSearchRequest</code>是我们之前定义的别名。</p>
+</div>
+<div class="paragraph">
+<p>如果Cypress在超时时间内找不到匹配的请求，测试将失败。如果Cypress捕获了该请求，
+我们就知道Angular应用程序接收了<code>photos</code>数组中指定的照片。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+具体断言
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>通过伪造Flickr API，我们对响应拥有完全控制权。我们选择返回固定数据。被测试的应用程序以确定性的方式处理数据。如前所述，这使我们能够验证应用程序是否正确地呈现了API返回的照片。</p>
+</div>
+<div class="paragraph">
+<p>让我们编写具体的断言，将结果列表中的照片与<code>photos</code>数组中的照片进行比较。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('searches for a term', () =&gt; {
+  cy.byTestId('search-term-input').first().clear().type(searchTerm);
+  cy.byTestId('submit-search').first().click();
+
+  cy.wait('@flickrSearchRequest');
+
+  cy.byTestId('photo-item-link')
+    .should('have.length', 2)
+    .each((link, index) =&gt; {
+      expect(link.attr('href')).to.equal(
+        `https://www.flickr.com/photos/${photos[index].owner}/${photos[index].id}`,
+      );
+    });
+  cy.byTestId('photo-item-image')
+    .should('have.length', 2)
+    .each((image, index) =&gt; {
+      expect(image.attr('src')).to.equal(photos[index].url_q);
+    });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，我们遍历链接和图片，以确保URL来自虚假数据。之前，在针对真实API进行测试时，我们只对链接进行了表面测试。我们根本无法测试图片URL。</p>
+</div>
+<div class="paragraph">
+<p>同样地，对于完整照片规范，我们将断言更具体。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('shows the full photo', () =&gt; {
+  cy.byTestId('search-term-input').first().clear().type(searchTerm);
+  cy.byTestId('submit-search').first().click();
+
+  cy.wait('@flickrSearchRequest');
+
+  cy.byTestId('photo-item-link').first().click();
+  cy.byTestId('full-photo').should('contain', searchTerm);
+  cy.byTestId('full-photo-title').should('have.text', photo1.title);
+  cy.byTestId('full-photo-tags').should('have.text', photo1.tags);
+  cy.byTestId('full-photo-image').should('have.attr', 'src', photo1.url_m);
+  cy.byTestId('full-photo-link').should('have.attr', 'href', photo1Link);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>现在，规范确保被测试的应用程序输出来自Flickr API的数据。<code>have.text</code>检查元素的文本内容，而<code>have.attr</code>检查<code>src</code>和<code>href</code>属性。</p>
+</div>
+<div class="paragraph">
+<p>我们完成了！我们的端到端测试拦截了API请求，并以虚假数据作出响应，以深入检查应用程序。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+拦截所有请求
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>对于Flickr搜索而言，我们已经拦截了对第三方API的HTTP请求。Cypress允许伪造任何请求，包括对自己的HTTP API的请求。</p>
+</div>
+<div class="paragraph">
+<p>这对于返回对于被测试功能至关重要的确定性响应非常有用。但它还可以用于抑制对于测试无关的请求，比如边缘图像和网络分析。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/cypress/e2e/flickr-search-stub-network-intercept.cy.ts">具有cy.intercept的Flickr搜索端到端测试</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/blob/main/src/app/spec-helpers/photo.spec-helper.ts">照片规范辅助函数</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/guides/guides/network-requests">Cypress文档：网络请求</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/intercept">Cypress API参考：intercept</a></p>
+</li>
+<li>
+<p><a href="https://docs.cypress.io/api/commands/wait">Cypress API参考：wait</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_端到端测试总结"><a class="anchor" href="#_端到端测试总结"></a>端到端测试：总结</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>过去，端到端测试成本高昂，而结果却不理想。很难编写测试，即使应用程序正常工作，也能可靠地通过测试。这些时间无法投入到编写发现错误和回归的有用测试中。</p>
+</div>
+<div class="paragraph">
+<p>多年来，Protractor一直是许多Angular开发人员依赖的端到端测试框架。随着Cypress的出现，它树立了新的标准。</p>
+</div>
+<div class="paragraph">
+<p>本指南建议从Cypress开始，因为它在开发者体验和成本效益方面表现出色。然而，如果您需要测试广泛的浏览器范围，基于WebDriver的框架如Webdriver.io也是有用的。</p>
+</div>
+<div class="paragraph">
+<p>即使使用Cypress，端到端测试比Jasmine和Karma的单元和集成测试要复杂得多，并且容易出错。然而，端到端测试在真实环境下测试功能非常有效。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/tree/main/cypress">计数器：Cypress测试</a></p>
+</li>
+<li>
+<p><a href="https://github.com/9elements/angular-flickr-search/tree/main/cypress">Flickr搜索：Cypress测试</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

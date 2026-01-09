@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>伪造依赖 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="faking-dependencies.html">伪造依赖</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">伪造依赖</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在隔离中测试代码单元</p>
+</li>
+<li>
+<p>用伪造物替换依赖项</p>
+</li>
+<li>
+<p>创建伪造物的规则，以避免陷阱</p>
+</li>
+<li>
+<p>使用 Jasmine 间谍来伪造函数和方法</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在测试代码时，您需要在 <a href="testing-principles.html#_集成测试" class="xref page">集成测试</a> 和 <a href="testing-principles.html#_单元测试" class="xref page">单元测试</a> 之间进行选择。回顾一下，集成测试包括（"整合"）依赖项。相反，单元测试用伪造物替换依赖项，以隔离测试代码。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+也称为模拟
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这些替代物也被称为 <em>测试替身(test doubles)</em>、<em>存根(stubs)_或 _模拟(mocks)</em>。替换依赖项称为 <em>存根(stubbing)</em> 或 <em>模拟(mocking)</em>。</p>
+</div>
+<div class="paragraph">
+<p>由于这些术语的使用不一致，它们之间的区别很微妙，<strong>本指南使用术语“伪造物”和“伪造”</strong> 来表示任何依赖项替换。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+安全伪造
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>创建和注入伪造的依赖项对于单元测试至关重要。这种技术是双刃剑——既强大又危险。由于我们将在本指南中创建许多伪造物，我们需要制定 <strong>规则</strong> 以安全地应用 <strong>伪造依赖项</strong> 技术。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_伪造物和原始物的等价性"><a class="anchor" href="#_伪造物和原始物的等价性"></a>伪造物和原始物的等价性</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>伪造实现必须与原始实现具有相同的结构。如果依赖项是一个函数，则伪造物必须具有相同的签名，即相同的参数和相同的返回值。如果依赖项是一个对象，则伪造物必须具有相同的公共 API，即相同的公共方法和属性。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+可替换性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>伪造物不需要完整，但必须足够作为替代品。伪造物在测试代码所涉及的方面上需要与 <strong>原始物等价</strong> ，而不必完全等于原始物。</p>
+</div>
+<div class="paragraph">
+<p>想象一下电影拍摄现场的伪造建筑。外部形状必须与原始建筑无法区分。但在真实的外观背后，只有一个木质脚手架。建筑物是一个空壳。</p>
+</div>
+<div class="paragraph">
+<p>创建伪造物的最大危险在于它不能正确模仿原始物。即使伪造物在编写代码时与原始物相似，但在原始物更改后很容易不同步。</p>
+</div>
+<div class="paragraph">
+<p>当原始依赖项更改其公共 API 时，依赖代码需要进行调整。伪造物也需要进行调整。当伪造物过时时，单元测试就变成了一个神奇的世界，其中一切都能够奇迹般地工作。测试通过了，但实际上被测试的代码已经出错了。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+保持伪造物同步
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如何确保伪造物与原始物保持最新？如何确保原始物和伪造物的等价性，并防止任何可能的分歧？</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用 TypeScript <strong>强制伪造物具有匹配的类型</strong>。伪造物需要是严格类型化的。伪造物的类型需要是原始物类型的子集。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+类型等价性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>然后，TypeScript 保证了等价性。如果我们忘记了更新实现和伪造物，编译器会提醒我们。我们将在接下来的示例中学习如何声明匹配的类型。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_有效的伪造"><a class="anchor" href="#_有效的伪造"></a>有效的伪造</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>原始的依赖项代码具有需要在测试期间抑制的副作用。伪造物需要 <em>有效地</em> 阻止原始代码的执行。如果混合使用伪造物和原始代码，可能会发生奇怪的错误。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+不要混合使用伪造物和原始物
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在某些伪造方法中，伪造物继承自原始物。只有当前被测试代码使用的属性和方法会被覆盖。</p>
+</div>
+<div class="paragraph">
+<p>这是危险的，因为我们可能会忘记覆盖某些方法。当被测试代码发生变化时，测试可能会意外调用依赖项的原始方法。</p>
+</div>
+<div class="paragraph">
+<p>本指南将介绍彻底的伪造技术，不允许出错。它们模仿原始代码，同时保护原始代码免受调用。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_使用_jasmine_间谍伪造函数"><a class="anchor" href="#_使用_jasmine_间谍伪造函数"></a>使用 Jasmine 间谍伪造函数</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jasmine 提供了简单而强大的模式来创建伪造实现。最基本的模式是使用 <strong>Jasmine 间谍</strong> 来替换函数依赖项。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+调用记录
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在最简单的形式中，间谍是一个记录其调用的函数。对于每个调用，它记录函数的参数。使用这个记录，我们之后可以断言该间谍已经以特定的输入值被调用。</p>
+</div>
+<div class="paragraph">
+<p>例如，我们在一个规范中声明：“期望该间谍已经分别以 <code>mickey</code> 和 <code>minnie</code> 的值被调用两次。”</p>
+</div>
+<div class="paragraph">
+<p>像其他任何函数一样，间谍可以有一个有意义的返回值。在简单的情况下，这是一个固定的值。无论输入参数如何，该间谍始终返回相同的值。在更复杂的情况下，返回值来自底层的伪造函数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>createSpy</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>通过调用 <code>jasmine.createSpy</code> 创建一个独立的间谍：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const spy = jasmine.createSpy('name');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>createSpy</code> 接受一个参数，一个可选的名称。建议传递一个描述原始功能的名称。当您对间谍进行期望时，该名称将在错误消息中使用。</p>
+</div>
+<div class="paragraph">
+<p>假设我们有一个名为 <code>TodoService</code> 的类，负责从服务器获取待办事项列表。该类使用 <a href="https://developer.mozilla.org/de/docs/Web/API/Fetch_API">Fetch API</a> 进行HTTP请求。（这是一个普通的TypeScript示例，在Angular应用中直接使用 <code>fetch</code> 是不常见的。）</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">class TodoService {
+  constructor(
+    // Bind `fetch` to `window` to ensure that `window` is the `this` context
+    private fetch = window.fetch.bind(window)
+  ) {}
+
+  public async getTodos(): Promise&lt;string[]&gt; {
+    const response = await this.fetch('/todos');
+    if (!response.ok) {
+      throw new Error(
+        `HTTP error: ${response.status} ${response.statusText}`
+      );
+    }
+    return await response.json();
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+注入假的依赖项
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>TodoService</code> 使用 <strong>构造函数注入</strong> 模式。<code>fetch</code> 依赖项可以通过可选的构造函数参数进行注入。在生产代码中，该参数为空，并且默认为原始的 <code>window.fetch</code>。在测试中，传递一个假的依赖项给构造函数。</p>
+</div>
+<div class="paragraph">
+<p>无论是原始的还是假的 <code>fetch</code> 参数，都保存为实例属性 <code>this.fetch</code> 。最终，公共方法 <code>getTodos</code> 使用它来发起HTTP请求。</p>
+</div>
+<div class="paragraph">
+<p>在我们的单元测试中，我们不希望Service进行任何HTTP请求。我们使用Jasmine spy作为 <code>window.fetch</code> 的替代品。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Fake todos and response object
+const todos = [
+  'shop groceries',
+  'mow the lawn',
+  'take the cat to the vet'
+];
+const okResponse = new Response(JSON.stringify(todos), {
+  status: 200,
+  statusText: 'OK',
+});
+
+describe('TodoService', () =&gt; {
+  it('gets the to-dos', async () =&gt; {
+    // Arrange
+    const fetchSpy = jasmine.createSpy('fetch')
+      .and.returnValue(okResponse);
+    const todoService = new TodoService(fetchSpy);
+
+    // Act
+    const actualTodos = await todoService.getTodos();
+
+    // Assert
+    expect(actualTodos).toEqual(todos);
+    expect(fetchSpy).toHaveBeenCalledWith('/todos');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这个示例中有很多要理解的内容。让我们从 <code>describe</code> 块之前的假数据开始解析：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const todos = [
+  'shop groceries',
+  'mow the lawn',
+  'take the cat to the vet'
+];
+const okResponse = new Response(JSON.stringify(todos), {
+  status: 200,
+  statusText: 'OK',
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先，我们定义了我们希望 <code>fetch</code> spy返回的假数据。实质上，这是一个字符串数组。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+假响应
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>原始的 <code>fetch</code> 函数返回一个 <code>Response</code> 对象。我们使用内置的 <code>Response</code> 构造函数创建一个 <code>Response</code> 对象。在被解析为JSON之前，原始的服务器响应是一个字符串。因此，我们需要将数组序列化为字符串，然后将其传递给 <code>Response</code> 构造函数。（这些 <code>fetch</code> 的细节与理解spy示例无关。）</p>
+</div>
+<div class="paragraph">
+<p>然后，我们使用 <code>describe</code> 声明一个测试套件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('TodoService', () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该测试套件包含一个规范（spec），用于测试 <code>getTodos</code> 方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('gets the to-dos', async () =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该规范（spec）以“安排（<em>Arrange</em>）”代码开始：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Arrange
+const fetchSpy = jasmine.createSpy('fetch')
+  .and.returnValue(okResponse);
+const todoService = new TodoService(fetchSpy);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里，我们创建一个 Jasmine spy（间谍）。使用 <code>.and.returnValue(…)</code>，我们设置一个固定的返回值：成功的响应。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+注入 spy
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们还创建了 <code>TodoService</code> 的一个实例，也就是待测试的类。我们将 spy 传递给构造函数。这是一种手动依赖注入的形式。</p>
+</div>
+<div class="paragraph">
+<p>在行动（<em>Act</em>）阶段，我们调用待测试的方法：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const actualTodos = await todoService.getTodos();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>getTodos</code> 返回一个 Promise。我们使用 <code>async</code> 函数结合 <code>await</code> 来轻松访问返回值。Jasmine 对于异步函数处理得很好，并等待它们完成。</p>
+</div>
+<div class="paragraph">
+<p>在断言（<em>Assert</em>）阶段，我们创建了两个期望（expectations）：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">expect(actualTodos).toEqual(todos);
+expect(fetchSpy).toHaveBeenCalledWith('/todos');</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+数据处理
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>首先，我们验证返回值。我们将实际数据（<code>actualTodos</code>）与 spy 返回的伪数据（<code>todos</code>）进行比较。如果它们相等，我们就证明了 <code>getTodos</code> 将响应解析为 JSON 并返回结果。（由于 <code>getTodos</code> 访问伪数据的唯一方式就是通过 spy，我们可以推断出 spy 已被调用。）</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+验证调用记录
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>其次，我们验证 <code>fetch</code> spy 是否 <em>使用了正确的参数</em> 进行调用，即 API 终端点 URL。Jasmine 提供了多种匹配器来对 spy 进行期望。示例中使用了 <code>toHaveBeenCalledWith</code> 来断言 spy 是否以参数 '/todos' 被调用。</p>
+</div>
+<div class="paragraph">
+<p>这两个期望都是必要的，以确保 <code>getTodos</code> 正确工作。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+正常和异常路径
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在编写了 <code>getTodos</code> 的第一个规范后，我们需要问自己：这个测试是否完全覆盖了其行为？我们已经测试了成功情况，也称为 <em>正常路径(happy path)</em>，但尚未测试错误情况，也称为 <em>异常路径(unhappy path)</em>，特别是以下错误处理代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">if (!response.ok) {
+  throw new Error(
+    `HTTP error: ${response.status} ${response.statusText}`
+  );
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>当服务器响应不是“ok”时，我们抛出一个错误。“Ok”表示HTTP响应状态码为200-299。不“ok”的示例有“403 Forbidden”、“404 Not Found”和“500 Internal Server Error”。抛出错误会拒绝 Promise，这样调用 <code>getTodos</code> 的调用方就知道获取待办事项失败了。</p>
+</div>
+<div class="paragraph">
+<p>伪造的 <code>okResponse</code> 模拟了成功的情况。对于错误的情况，我们需要定义另一个伪造的 <code>Response</code>。让我们称之为 <code>errorResponse</code>，它具有臭名昭著的 HTTP 状态码 404 Not Found：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const errorResponse = new Response('Not Found', {
+  status: 404,
+  statusText: 'Not Found',
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>假设服务器在错误的情况下不返回 JSON，响应主体只是字符串 <code>'Not Found'</code>。</p>
+</div>
+<div class="paragraph">
+<p>现在我们为错误情况添加第二个规范：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('TodoService', () =&gt; {
+  /* … */
+  it('handles an HTTP error when getting the to-dos', async () =&gt; {
+    // Arrange
+    const fetchSpy = jasmine.createSpy('fetch')
+      .and.returnValue(errorResponse);
+    const todoService = new TodoService(fetchSpy);
+
+    // Act
+    let error;
+    try {
+      await todoService.getTodos();
+    } catch (e) {
+      error = e;
+    }
+
+    // Assert
+    expect(error).toEqual(new Error('HTTP error: 404 Not Found'));
+    expect(fetchSpy).toHaveBeenCalledWith('/todos');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在 <em>Arrange</em> 阶段，我们注入了一个返回错误响应的 spy。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+捕获错误
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在 <em>Act</em> 阶段，我们调用要测试的方法，但预计它会抛出错误。在 Jasmine 中，有几种方法可以测试 Promise 是否被拒绝并抛出错误。上面的示例使用 <code>try/catch</code> 语句包裹 <code>getTodos</code> 调用并保存错误。很可能，这是实现代码处理错误的方式。</p>
+</div>
+<div class="paragraph">
+<p>在 <em>Assert</em> 阶段，我们再次进行两个断言。与验证返回值不同，我们确保捕获的错误是 <code>Error</code> 实例，并具有有用的错误消息。最后，我们验证 spy 是否已使用正确的值调用，就像成功情况的规范中一样。</p>
+</div>
+<div class="paragraph">
+<p>再次强调，这是一个纯 TypeScript 示例，用于说明 spy 的用法。通常，Angular 服务不直接使用 <code>fetch</code>，而是使用 <code>HttpClient</code>。我们将在后面介绍如何测试这一点（请参阅 <a href="testing-services.html#_测试发送http请求的服务" class="xref page">发送 HTTP 请求的服务的测试</a>）。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/9elements/angular-workshop/blob/main/src/app/services/todos-service.spec.ts">TodoService: 实现和测试代码</a></p>
+</li>
+<li>
+<p><a href="https://jasmine.github.io/api/edge/Spy.html">Jasmine 参考文档: Spies</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_对现有方法进行间谍操作"><a class="anchor" href="#_对现有方法进行间谍操作"></a>对现有方法进行间谍操作</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>我们已经使用 <code>jasmine.createSpy('name')</code> 创建了一个独立的 spy，并将其注入到构造函数中。显式构造函数注入在 Angular 代码中很直观，并且被广泛使用。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+对对象方法进行间谍操作
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有时，我们已经有一个对象，我们需要对其方法进行间谍操作。如果代码使用了来自浏览器环境的全局方法，如上面示例中的 <code>window.fetch</code>，这将特别有帮助。</p>
+</div>
+<div class="paragraph">
+<p>为此，我们可以使用 spyOn 方法:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">spyOn(window, 'fetch');</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+覆盖和恢复
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这将在全局的 <code>fetch</code> 方法上安装一个 spy。在内部，Jasmine 会保存原始的 <code>window.fetch</code> 函数以供以后使用，并将 <code>window.fetch</code> 覆盖为一个 spy。一旦规范完成，Jasmine 会自动恢复原始函数。</p>
+</div>
+<div class="paragraph">
+<p><code>spyOn</code> 返回创建的 spy，使我们能够设置返回值，就像我们之前学到的那样。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">spyOn(window, 'fetch')
+  .and.returnValue(okResponse);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们可以创建一个不依赖于构造注入而直接使用 <code>fetch</code> 的 <code>TodoService</code> 版本。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">class TodoService {
+  public async getTodos(): Promise&lt;string[]&gt; {
+    const response = await fetch('/todos');
+    if (!response.ok) {
+      throw new Error(
+        `HTTP error: ${response.status} ${response.statusText}`
+      );
+    }
+    return await response.json();
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>测试套件接下来使用 <code>spyOn</code> 来捕获所有对 <code>window.fetch</code> 的调用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">// Fake todos and response object
+const todos = [
+  'shop groceries',
+  'mow the lawn',
+  'take the cat to the vet'
+];
+const okResponse = new Response(JSON.stringify(todos), {
+  status: 200,
+  statusText: 'OK',
+});
+
+describe('TodoService', () =&gt; {
+  it('gets the to-dos', async () =&gt; {
+    // Arrange
+    spyOn(window, 'fetch')
+      .and.returnValue(okResponse);
+    const todoService = new TodoService();
+
+    // Act
+    const actualTodos = await todoService.getTodos();
+
+    // Assert
+    expect(actualTodos).toEqual(todos);
+    expect(window.fetch).toHaveBeenCalledWith('/todos');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在这里并没有太多变化。我们使用 spyOn 来对 <code>fetch</code> 进行监视，并使其返回 <code>okResponse</code>。由于 <code>window.fetch</code> 被重写为一个 spy，我们对它进行期望以验证它是否被调用。</p>
+</div>
+<div class="paragraph">
+<p>创建独立的 spy 和对现有方法进行监视并不是相互排斥的。在测试 Angular 应用程序时，这两种方式都经常被使用，并且可以很好地与注入到构造函数中的依赖项配合使用。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://jasmine.github.io/api/edge/global.html#spyOn">Jasmine 参考文档：spyOn</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

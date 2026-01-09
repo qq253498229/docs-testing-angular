@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试管道 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="testing-pipes.html">测试管道</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">测试管道</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>验证同步、纯粹管道的输出</p>
+</li>
+<li>
+<p>测试从服务加载数据的异步、非纯粹管道</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Angular管道是从组件模板中调用的特殊函数。它的目的是转换一个值：您将一个值传递给管道，管道计算出一个新值并返回。</p>
+</div>
+<div class="paragraph">
+<p>管道的名称源自位于值和管道名称之间的竖线 “\|” 。这个概念以及 “\|” 语法来自Unix管道和Unix shell。</p>
+</div>
+<div class="paragraph">
+<p>在这个例子中，<code>user.birthday</code>的值通过 <code>date</code> 管道进行转换：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{{ user.birthday | date }}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+格式化
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>管道经常用于国际化，包括标签和消息的翻译，日期、时间和各种数字的格式化。在这些情况下，管道的输入值不应该显示给用户。输出值是可读的。</p>
+</div>
+<div class="paragraph">
+<p>内置管道的示例包括<code>DatePipe</code>、<code>CurrencyPipe</code>和<code>DecimalPipe</code>。它们分别根据本地化设置格式化日期、金额和数字。另一个著名的管道是<code>AsyncPipe</code>，它用于解析Observable或Promise。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+纯粹管道
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>大多数管道都是<em>纯粹(pure)</em>的，意味着它们仅仅接受一个值并计算一个新值。它们没有<em>副作用(side effects)</em>：它们不改变输入值，也不改变其他应用程序部分的状态。像纯函数一样，纯粹的管道相对容易测试。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_greetpipe"><a class="anchor" href="#_greetpipe"></a>GreetPipe</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>让我们首先研究管道的结构，找到测试它的方法。本质上，管道是一个具有公共<code>transform</code>方法的类。下面是一个简单的管道，它期望一个名称并向用户打招呼。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({ name: 'greet' })
+export class GreetPipe implements PipeTransform {
+  transform(name: string): string {
+    return `Hello, ${name}!`;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在组件模板中，我们使用管道来转换一个值：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{{ 'Julie' | greet }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>GreetPipe</code>接受字符串 <code>'Julie'</code> 并计算一个新的字符串，<code>'Hello, Julie!'</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+简单设置 vs 复杂设置
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有两种重要的方法来测试管道：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>手动创建一个Pipe类的实例，然后调用<code>transform</code>方法。</p>
+<div class="paragraph">
+<p>这种方式快速而直接。它需要最小的设置。</p>
+</div>
+</li>
+<li>
+<p>设置一个<code>TestBed</code>。渲染一个使用该管道的宿主组件，然后检查DOM中的文本内容。</p>
+<div class="paragraph">
+<p>这种方式紧密模拟了管道在实践中的使用方式。它还测试了管道的名称，如<code>@Pipe()</code>装饰器中声明的名称。</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>这两种方式都允许测试依赖于服务的管道。我们可以提供原始依赖项来编写集成测试。或者我们可以提供虚拟依赖项来编写单元测试。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_greetpipe_测试"><a class="anchor" href="#_greetpipe_测试"></a>GreetPipe 测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>GreetPipe</code>没有任何依赖项。我们选择第一种方式，编写一个单元测试来检查单个实例。</p>
+</div>
+<div class="paragraph">
+<p>首先，我们创建一个Jasmine测试套件。在<code>beforeEach</code>块中，我们创建一个<code>GreetPipe</code>的实例。在规范中，我们详细检查<code>transform</code>方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('GreetPipe', () =&gt; {
+  let greetPipe: GreetPipe;
+
+  beforeEach(() =&gt; {
+    greetPipe = new GreetPipe();
+  });
+
+  it('says Hello', () =&gt; {
+    expect(greetPipe.transform('Julie')).toBe('Hello, Julie!');
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们使用字符串 <code>'Julie'</code> 调用<code>transform</code>方法，并期望输出 <code>'Hello, Julie!'</code>。</p>
+</div>
+<div class="paragraph">
+<p>这是在<code>GreetPipe</code>示例中需要进行测试的全部内容。如果<code>transform</code>方法包含需要测试的更多逻辑，我们将添加更多的规格来使用不同的输入调用该方法。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试具有依赖关系的管道"><a class="anchor" href="#_测试具有依赖关系的管道"></a>测试具有依赖关系的管道</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>许多管道依赖于本地设置，包括用户界面语言、日期和数字格式规则，以及所选的国家、地区或货币。</p>
+</div>
+<div class="paragraph">
+<p>我们正在引入并测试<code>TranslatePipe</code>，这是一个具有服务依赖性的复杂管道。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/translate-pipe">TranslatePipe：源代码</a></p>
+</li>
+<li>
+<p><a href="https://molily.github.io/translate-pipe/">TranslatePipe：运行应用程序</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the TranslatePipe in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://molily.github.io/translate-pipe/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>示例应用程序允许您在运行时更改用户界面语言。解决这个任务的一种流行解决方案是 <a href="https://github.com/ngx-translate/core">ngx-translate</a> 库。为了本指南的目的，我们将采用ngx-translate已经证明有效的方法，但自己实现和测试代码。</p>
+</div>
+<div class="sect2">
+<h3 id="_translateservice"><a class="anchor" href="#_translateservice"></a>TranslateService</h3>
+<div class="paragraph">
+<p>当前语言存储在<code>TranslateService</code>中。该服务还加载并保存当前语言的翻译内容。</p>
+</div>
+<div class="paragraph">
+<p>翻译内容以键和翻译字符串的映射形式存储。例如，如果当前语言是英语，键<code>greeting</code>将翻译为“Hello!”。</p>
+</div>
+<div class="paragraph">
+<p><code>TranslateService</code>的代码如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+
+export interface Translations {
+  [key: string]: string;
+}
+
+@Injectable()
+export class TranslateService {
+  /** The current language */
+  private currentLang = 'en';
+
+  /** Translations for the current language */
+  private translations: Translations | null = null;
+
+  /** Emits when the language change */
+  public onTranslationChange = new EventEmitter&lt;Translations&gt;();
+
+  constructor(private http: HttpClient) {
+    this.loadTranslations(this.currentLang);
+  }
+
+  /** Changes the language */
+  public use(language: string): void {
+    this.currentLang = language;
+    this.loadTranslations(language);
+  }
+
+  /** Translates a key asynchronously */
+  public get(key: string): Observable&lt;string&gt; {
+    if (this.translations) {
+      return of(this.translations[key]);
+    }
+    return this.onTranslationChange.pipe(
+      take(1),
+      map((translations) =&gt; translations[key])
+    );
+  }
+
+  /** Loads the translations for the given language */
+  private loadTranslations(language: string): void {
+    this.translations = null;
+    this.http
+      .get&lt;Translations&gt;(`assets/${language}.json`)
+      .subscribe((translations) =&gt; {
+        this.translations = translations;
+        this.onTranslationChange.emit(translations);
+      });
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是服务提供的功能：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>use</code>方法：设置当前语言并通过HTTP加载翻译的JSON。</p>
+</li>
+<li>
+<p><code>get</code>方法：获取键的翻译。</p>
+</li>
+<li>
+<p><code>onTranslationChange</code> <code>事件发射器(EventEmitter)</code>：观察翻译 <code>use</code> 的变化结果。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>在示例项目中，<code>AppComponent</code>依赖于<code>TranslateService</code>。在创建时，该服务加载英语翻译。<code>AppComponent</code>渲染一个选择字段，允许用户更改语言。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.ts">TranslateService：实现代码</a></p>
+</li>
+<li>
+<p><a href="https://github.com/molily/translate-pipe/blob/main/src/app/translate.service.spec.ts">TranslateService：测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_translatepipe"><a class="anchor" href="#_translatepipe"></a>TranslatePipe</h3>
+<div class="paragraph">
+<p>为了显示一个已翻译的标签，一个组件可以为每个翻译键手动调用服务的<code>get</code>方法。相反，我们引入<code>TranslatePipe</code>来完成繁重的工作。它允许我们编写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">{{ 'greeting' | translate }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将翻译键 <code>'greeting'</code>。</p>
+</div>
+<div class="paragraph">
+<p>以下是代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import {
+  ChangeDetectorRef,
+  OnDestroy,
+  Pipe,
+  PipeTransform,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { TranslateService } from './translate.service';
+
+@Pipe({
+  name: 'translate',
+  pure: false,
+})
+export class TranslatePipe implements PipeTransform, OnDestroy {
+  private lastKey: string | null = null;
+  private translation: string | null = null;
+
+  private onTranslationChangeSubscription: Subscription;
+  private getSubscription: Subscription | null = null;
+
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private translateService: TranslateService
+  ) {
+    this.onTranslationChangeSubscription =
+      this.translateService.onTranslationChange.subscribe(
+        () =&gt; {
+          if (this.lastKey) {
+            this.getTranslation(this.lastKey);
+          }
+        }
+      );
+  }
+
+  public transform(key: string): string | null {
+    if (key !== this.lastKey) {
+      this.lastKey = key;
+      this.getTranslation(key);
+    }
+    return this.translation;
+  }
+
+  private getTranslation(key: string): void {
+    this.getSubscription?.unsubscribe();
+    this.getSubscription = this.translateService
+      .get(key)
+      .subscribe((translation) =&gt; {
+        this.translation = translation;
+        this.changeDetectorRef.markForCheck();
+        this.getSubscription = null;
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.onTranslationChangeSubscription.unsubscribe();
+    this.getSubscription?.unsubscribe();
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+异步翻译
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>TranslatePipe</code>是<em>不完美(impure)</em>的，因为翻译是异步加载的。当第一次调用时，<code>transform</code>方法无法同步返回正确的翻译。它调用<code>TranslateService</code>的<code>get</code>方法，该方法返回一个Observable。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+触发变更检测
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>一旦翻译加载完成，<code>TranslatePipe</code>会保存它并通知Angular变更检测器。特别是，它通过调用 <a href="https://angular.cn/api/core/ChangeDetectorRef#markForCheck"><code>ChangeDetectorRef</code>的markForCheck</a> 方法将相应的视图标记为已更改。</p>
+</div>
+<div class="paragraph">
+<p>然后，Angular会重新评估使用该管道的每个表达式，比如 <code>'greeting' | translate</code>，并再次调用<code>transform</code>方法。最后，<code>transform</code>同步返回正确的翻译结果。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+翻译变更
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当用户更改语言并加载新的翻译时，同样的过程会发生。该管道订阅<code>TranslateService</code>的<code>onTranslationChange</code>事件，并再次调用<code>TranslateService</code>来获取新的翻译。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.ts">TranslatePipe：实现代码</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/core/ChangeDetectorRef">Angular API参考：ChangeDetectorRef</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_translatepipe_测试"><a class="anchor" href="#_translatepipe_测试"></a>TranslatePipe 测试</h3>
+<div class="paragraph">
+<p>现在让我们来测试<code>TranslatePipe</code>！我们可以编写一个整合<code>TranslateService</code>依赖的测试。或者我们编写一个使用虚拟对象替代依赖的单元测试。</p>
+</div>
+<div class="paragraph">
+<p><code>TranslateService</code>执行HTTP请求来加载翻译。在测试<code>TranslatePipe</code>时，我们应该避免这些副作用。因此，让我们使用虚拟对象来替代Service来编写一个单元测试。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">let translateService: Pick&lt;
+  TranslateService, 'onTranslationChange' | 'get'
+&gt;;
+/* … */
+translateService = {
+  onTranslationChange: new EventEmitter&lt;Translations&gt;(),
+  get(key: string): Observable&lt;string&gt; {
+    return of(`Translation for ${key}`);
+  },
+};</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>虚拟对象是对原始对象的部分实现。我们只需要测试<code>TranslatePipe</code>中的<code>onTranslationChange</code>属性和<code>get</code>方法。后者返回一个包含键的虚拟翻译，这样我们就可以测试键是否被正确传递。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+宿主组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>现在我们需要决定是直接测试管道还是在宿主组件中测试。两种解决方案都没有明显的更简单或更健壮的优势。在示例项目中，您会发现这两种解决方案。在本指南中，我们将讨论使用<code>TestBed</code>和宿主组件的解决方案。</p>
+</div>
+<div class="paragraph">
+<p>让我们从宿主组件开始：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const key1 = 'key1';
+const key2 = 'key2';
+
+@Component({
+  template: '{{ key | translate }}',
+})
+class HostComponent {
+  public key = key1;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该组件使用<code>TranslatePipe</code>来翻译其<code>key</code>属性。默认情况下，它被设置为<code>key1</code>。还有第二个常量<code>key2</code>，用于测试后续键的更改。</p>
+</div>
+<div class="paragraph">
+<p>让我们设置测试套件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('TranslatePipe: with TestBed and HostComponent', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+  let translateService: Pick&lt;
+    TranslateService, 'onTranslationChange' | 'get'
+  &gt;;
+
+  beforeEach(async () =&gt; {
+    translateService = {
+      onTranslationChange: new EventEmitter&lt;Translations&gt;(),
+      get(key: string): Observable&lt;string&gt; {
+        return of(`Translation for ${key}`);
+      },
+    };
+
+    await TestBed.configureTestingModule({
+      declarations: [TranslatePipe, HostComponent],
+      providers: [
+        { provide: TranslateService, useValue: translateService }
+      ],
+    }).compileComponents();
+
+    translateService = TestBed.inject(TranslateService);
+    fixture = TestBed.createComponent(HostComponent);
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在测试模块中，我们声明要测试的管道和 <code>宿主组件(HostComponent)</code>。对于<code>TranslateService</code>，我们提供一个虚拟对象。就像在组件测试中一样，我们创建组件并检查渲染的DOM。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+同步和异步翻译
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>需要测试什么？我们需要检查 <code>{{ key | translate }}</code> 是否计算为 <code>key1的翻译</code>。但是有两种需要测试的情况：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>翻译已加载完成。管道的<code>transform</code>方法立即同步返回正确的翻译。<code>TranslateService</code>的<code>get</code>返回的Observable立即发出翻译并完成。</p>
+</li>
+<li>
+<p>翻译正在进行中。<code>transform</code>方法返回<code>null</code>（或过时的翻译）。Observable随后在任意时间完成。然后，触发变更检测，<code>transform</code>方法第二次被调用并返回正确的翻译。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>在测试中，我们为这两种情况编写规格：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, sync service response', /* … */);
+it('translates the key, async service response', /* … */);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>让我们从第一种情况开始。规格很简单。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, sync service response', () =&gt; {
+  fixture.detectChanges();
+  expectContent(fixture, 'Translation for key1');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>请记住，<code>TranslateService</code>虚拟对象返回使用<code>of</code>创建的Observable。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">return of(`Translation for ${key}`);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这个Observable发出一个值并立即完成。这模拟了服务已经加载完翻译的情况。</p>
+</div>
+<div class="paragraph">
+<p>我们只需要调用<code>detectChanges</code>。Angular会调用管道的<code>transform</code>方法，该方法调用<code>TranslateService</code>的<code>get</code>方法。Observable立即发出翻译，<code>transform</code>将其传递出去。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们使用 <a href="https://github.com/molily/translate-pipe/blob/main/src/app/spec-helpers/element.spec-helper.ts"><code>expectContent</code>组件辅助函数</a> 来测试DOM输出。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+模拟延迟
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>测试第二种情况比较棘手，因为Observable需要异步发出。有很多方法可以实现这一点。为了简单起见，我们将使用 <a href="https://rxjs.dev/api/operators/delay">RxJS的<code>delay</code></a> 操作符。</p>
+</div>
+<div class="paragraph">
+<p>同时，我们正在编写一个异步的规格。也就是说，Jasmine需要等待Observable和断言完成后才能完成规格。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>fakeAsync</code> 和 <code>tick</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>同样，有几种方法可以实现这一点。我们将使用Angular的<code>fakeAsync</code>和<code>tick</code>函数。我们在 <a href="testing-complex-forms.html#_成功提交表单" class="xref page">测试具有异步验证器的表单时</a> 介绍过它们。</p>
+</div>
+<div class="paragraph">
+<p>简单回顾一下：<code>fakeAsync</code>会冻结时间并阻止异步任务的执行。然后，<code>tick</code>函数模拟时间的流逝，执行计划的任务。</p>
+</div>
+<div class="paragraph">
+<p><code>fakeAsync</code>包装传递给 <code>it</code> 的函数：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>接下来，我们需要将<code>TranslateService</code>的<code>get</code>方法更改为异步方法。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  translateService.get = (key) =&gt;
+    of(`Async translation for ${key}`).pipe(delay(100));
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+延迟 Observable
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们仍然使用<code>of</code>，但是我们将输出延迟100毫秒。具体的数字并不重要，只要有<em>一些</em>大于或等于1的延迟即可。</p>
+</div>
+<div class="paragraph">
+<p>现在，我们可以第一次调用<code>detectChanges</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  translateService.get = (key) =&gt;
+    of(`Async translation for ${key}`).pipe(delay(100));
+  fixture.detectChanges();
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>第一次调用管道的<code>transform</code>方法，由于Observable不会立即发出值，所以返回<code>null</code>。</p>
+</div>
+<div class="paragraph">
+<p>因此，我们期望输出为空：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  translateService.get = (key) =&gt;
+    of(`Async translation for ${key}`).pipe(delay(100));
+  fixture.detectChanges();
+  expectContent(fixture, '');
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+让时间流逝
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下面有趣的部分来了。我们希望Observable现在发出一个值。我们使用 <code>tick(100)</code> 来模拟经过了100毫秒的时间。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  translateService.get = (key) =&gt;
+    of(`Async translation for ${key}`).pipe(delay(100));
+  fixture.detectChanges();
+  expectContent(fixture, '');
+
+  tick(100);
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这导致Observable发出翻译并完成。管道接收到翻译并保存起来。</p>
+</div>
+<div class="paragraph">
+<p>为了在DOM中看到变化，我们进行第二次变更检测。管道的<code>transform</code>方法第二次被调用并返回正确的翻译。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates the key, async service response', fakeAsync(() =&gt; {
+  translateService.get = (key) =&gt;
+    of(`Async translation for ${key}`).pipe(delay(100));
+  fixture.detectChanges();
+  expectContent(fixture, '');
+
+  tick(100);
+  fixture.detectChanges();
+  expectContent(fixture, 'Async translation for key1');
+}));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一开始测试这些细节可能显得过于琐碎。但是<code>TranslatePipe</code>中的逻辑是有原因的。</p>
+</div>
+<div class="paragraph">
+<p>还有两个规格需要编写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates a changed key', /* … */);
+it('updates on translation change', /* … */);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>TranslatePipe</code>异步接收到翻译并存储了键和翻译。当Angular再次使用<em>相同的键(key)</em>调用<code>transform</code>时，管道会同步返回翻译。由于管道被标记为<em>impure</em>，Angular不会缓存<code>transform</code>的结果。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+不同的键
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>当使用<em>不同的键(key)</em>调用<code>translate</code>时，管道需要获取新的翻译。我们通过将<code>HostComponent</code>的<code>key</code>属性从<code>key1</code>更改为<code>key2</code>来模拟这种情况。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('translates a changed key', () =&gt; {
+  fixture.detectChanges();
+  fixture.componentInstance.key = key2;
+  fixture.detectChanges();
+  expectContent(fixture, 'Translation for key2');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>经过一次变更检测后，DOM中包含了<code>key2</code>的更新翻译。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+翻译更改
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最后但并非最不重要的是，当用户更改语言并加载了新的翻译时，管道需要从<code>TranslateService</code>获取新的翻译。为此，管道订阅了服务的<code>onTranslationChange</code>事件发射器。</p>
+</div>
+<div class="paragraph">
+<p>我们的<code>TranslateService</code>虚拟对象也支持<code>onTranslationChange</code>，因此我们调用<code>emit</code>方法来模拟翻译更改。在此之前，我们让服务返回不同的翻译，以便在DOM中看到变化。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('updates on translation change', () =&gt; {
+  fixture.detectChanges();
+  translateService.get = (key) =&gt;
+    of(`New translation for ${key}`);
+  translateService.onTranslationChange.emit({});
+  fixture.detectChanges();
+  expectContent(fixture, 'New translation for key1');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们成功完成了！毫无疑问，编写这些规格是具有挑战性的。</p>
+</div>
+<div class="paragraph">
+<p><code>TranslateService</code>和<code>TranslatePipe</code>是具有经过验证的API的非平凡示例。ngx-translate的原始类更加强大。如果您正在寻找一个稳健且灵活的解决方案，应该直接使用ngx-translate库。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/translate-pipe/blob/main/src/app/translate.pipe.spec.ts">TranslatePipe：测试代码</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/core/testing/fakeAsync">Angular API 参考：fakeAsync</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/api/core/testing/tick">Angular API 参考：tick</a></p>
+</li>
+<li>
+<p><a href="https://rxjs.dev/api/operators/delay">RxJS：delay 操作符</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ngx-translate/core">ngx-translate</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

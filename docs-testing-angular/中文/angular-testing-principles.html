@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 测试原则 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="angular-testing-principles.html">Angular 测试原则</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Angular 测试原则</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>促进测试的 Angular 架构原则</p>
+</li>
+<li>
+<p>标准和替代测试工具</p>
+</li>
+<li>
+<p>使用 Karma 和 Jasmine 运行和配置单元测试和集成测试</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_可测试性"><a class="anchor" href="#_可测试性"></a>可测试性</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>与其他流行的前端 JavaScript 库相比，Angular 是一个有意见的、全面的框架，涵盖了开发 JavaScript Web 应用程序的所有重要方面。Angular 提供了高级结构、低级构建块和将所有内容打包成可用应用程序的手段。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+可测试的架构
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>没有考虑自动化测试，就无法理解 Angular 的复杂性。为什么 Angular 应用程序被结构化为组件、服务、模块等？为什么这些部分以这种方式交织在一起？为什么 Angular 应用程序的所有部分都采用相同的模式？</p>
+</div>
+<div class="paragraph">
+<p>一个重要的原因是 <strong>可测试性</strong>。Angular 的架构保证了所有应用程序部分可以以类似的方式轻松进行测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+良好结构化的代码
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们从经验中得知，易于测试的代码也更简单、结构更好、更易于阅读和理解。编写可测试代码的主要技术是将代码分解为更小的块，每个块“做一件事并做好”。然后松耦合这些块。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_依赖注入和模拟"><a class="anchor" href="#_依赖注入和模拟"></a>依赖注入和模拟</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一种实现松耦合的主要设计模式是 <strong>依赖注入</strong> 和底层的 <strong>控制反转</strong>。应用程序部分不再自己创建依赖关系，而只是声明依赖关系。创建和提供依赖关系的繁琐任务被委托给位于顶部的 <strong>注入器</strong>。</p>
+</div>
+<div class="paragraph">
+<p>这种工作分工将应用程序部分与其依赖关系解耦：一个部分不需要知道如何设置依赖关系，更不用说依赖关系的依赖关系等等。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+松耦合
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>依赖注入将紧耦合变成了松耦合。某个应用程序部分不再依赖于特定的类、函数、对象或其他值，而是依赖于一个可以被交换为具体实现的抽象标记。注入器接受标记并将其交换为真实的值。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+原始或模拟
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这对于自动化测试非常重要。在我们的测试中，我们可以决定如何处理依赖关系：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>我们可以提供一个 <strong>原始的</strong>、完全功能的实现。在这种情况下，我们编写的是包括直接和间接依赖关系的 <a href="testing-principles.html#_集成测试" class="xref page">集成测试</a>。</p>
+</li>
+<li>
+<p>或者我们提供一个没有副作用的 <strong>模拟</strong> 实现。在这种情况下，我们编写的是试图在 <strong>隔离环境</strong> 中测试应用程序部分的 <a href="testing-principles.html#_单元测试" class="xref page">单元测试</a>。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>编写测试时，花费的大部分时间都用于将应用程序部分与其依赖关系解耦。本指南将教你如何设置测试环境，将应用程序部分隔离开，并重新连接等效的模拟对象。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/guide/dependency-injection">Angular 指南：依赖注入</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试工具"><a class="anchor" href="#_测试工具"></a>测试工具</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Angular提供了强大的测试工具。当使用命令行界面创建Angular项目时，它会自带一个完整的测试设置，用于单元测试、集成测试和端到端测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+平衡的默认设置
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Angular团队已经为你做出了决策：使用 <a href="https://jasmine.github.io/">Jasmine</a> 作为测试框架，使用 <a href="https://karma-runner.github.io/">Karma</a> 作为测试运行器。实现代码和测试代码使用 <a href="https://webpack.js.org">Webpack</a> 进行打包。应用程序部分通常在Angular的 <a href="https://angular.cn/api/core/testing/TestBed">TestBed</a> 中进行测试。</p>
+</div>
+<div class="paragraph">
+<p>这个设置是一种权衡，有其优势和劣势。由于这只是测试Angular应用程序的一种可能方式，你可以自己编译自己的测试工具链。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+其他选择
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>例如，一些Angular开发者使用 <a href="https://jestjs.io/">Jest</a> 而不是Jasmine和Karma。一些开发者使用 <a href="testing-components-with-spectator.html#_测试时使用spectator库简化组件" class="xref page">Spectator</a> 或 <a href="https://github.com/testing-library/angular-testing-library">Angular Testing Library</a>，而不是直接使用 <code>TestBed</code>。</p>
+</div>
+<div class="paragraph">
+<p>这些替代方案并不是更好或更差，它们只是做出不同的权衡。本指南在单元测试和集成测试中使用Jasmine和Karma。稍后，你将学习有关Spectator的内容。</p>
+</div>
+<div class="paragraph">
+<p>一旦你达到了特定设置的限制，你应该调查一下是否有其他替代方案可以使你的应用程序测试更容易、更快速和更可靠。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试约定"><a class="anchor" href="#_测试约定"></a>测试约定</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Angular提供了一些关于测试的工具和约定。从设计上讲，它们足够灵活，以支持不同的测试方式。因此，你需要决定如何应用它们。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+做出选择
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这种选择的自由使得专家受益，但对初学者来说会感到困惑。在你的项目中，应该有一种首选的方式来测试特定的应用程序部分。你应该做出选择并建立项目范围的约定和模式。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+将约定转化为代码
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Angular附带的测试工具是低级别的工具，它们仅提供基本操作。如果直接使用这些工具，你的测试会变得混乱、重复且难以维护。</p>
+</div>
+<div class="paragraph">
+<p>因此，你应该创建 <strong>高级别的测试工具</strong>，将你的约定转化为代码，以便编写简短、可读和可理解的测试。</p>
+</div>
+<div class="paragraph">
+<p>本指南重视强大的约定，并引入了将这些约定编码为辅助函数的工具。当然，这些工具可能因人而异。你可以根据自己的需求调整这些工具，或者构建其他的测试辅助工具。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_运行单元测试和集成测试"><a class="anchor" href="#_运行单元测试和集成测试"></a>运行单元测试和集成测试</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Angular命令行界面（CLI）允许您运行单元测试、集成测试和端到端测试。如果您尚未安装CLI或需要更新到最新版本，请在命令行中运行以下命令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install -g @angular/cli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将全局安装 Angular CLI，以便可以在任何地方使用 <code>ng</code> 命令。<code>ng</code> 本身并不做任何操作，只是提供了一些特定于 Angular 的命令。</p>
+</div>
+<div class="paragraph">
+<p>例如， <code>ng new</code> 用于创建一个新的Angular项目目录，其中包含一个可用的应用程序脚手架。 <code>ng serve</code> 用于启动开发服务器， <code>ng build</code> 用于构建项目。</p>
+</div>
+<div class="paragraph">
+<p>运行单元测试和集成测试的命令是：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ng test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>首先，该命令会查找目录树中与 <code>.spec.ts</code> 模式匹配的所有文件。使用Webpack，它将它们与其依赖项一起编译成一个JavaScript bundle。该bundle的代码还会初始化Angular的测试环境 - <code>TestBed</code>。</p>
+</div>
+<div class="paragraph">
+<p>通常，Angular应用程序会加载并启动一个 <code>AppModule</code>。这个启动过程被称为引导（bootstrapping）。然后， <code>AppModule</code> 会导入其他模块、组件、服务等。这样，打包工具可以找到应用程序的所有部分。</p>
+</div>
+<div class="paragraph">
+<p>但是测试bundle的工作方式不同。它不会从一个模块开始，然后遍历其依赖项。它只是导入所有以 <code>.spec.ts</code> 结尾的文件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>.spec.ts</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>每个 <strong><code>.spec.ts</code></strong> 文件代表一个测试。通常，一个 <code>.spec.ts</code> 文件包含至少一个Jasmine测试套件（在下一章中会详细介绍）。<code>.spec.ts</code> 文件位于与实现代码相同的目录中。</p>
+</div>
+<div class="paragraph">
+<p>在我们的示例应用程序中，<code>CounterComponent</code> 位于 <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.ts">src/app/components/counter/counter.component.ts</a> 文件中。相应的测试文件位于 <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/components/counter/counter.component.spec.ts">src/app/components/counter/counter.component.spec.ts</a>。这是Angular的约定，并非技术上的必要性，我们将坚持使用这种约定。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Karma
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>其次，<code>ng test</code> 命令启动Karma测试运行器。Karma会在 <a href="http://localhost:9876/">http://localhost:9876/</a> 启动一个开发服务器，用于提供Webpack编译的JavaScript bundle。</p>
+</div>
+<div class="paragraph">
+<p>Karma然后启动一个或多个浏览器。Karma的思想是在不同的浏览器中运行相同的测试，以确保跨浏览器的互操作性。支持所有广泛使用的浏览器：Chrome、Internet Explorer、Edge、Firefox和Safari。默认情况下，Karma会启动Chrome浏览器。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+测试运行器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>启动的浏览器导航到 <code><a href="http://localhost:9876/" class="bare">http://localhost:9876/</a></code>。正如前面提到的，该网站提供测试运行器和测试bundle。测试会立即开始运行。您可以在浏览器和终端中跟踪进度并查看结果。</p>
+</div>
+<div class="paragraph">
+<p>在运行 <a href="example-applications.html#_计数器组件" class="xref page">counter项目</a> 的测试时，浏览器的输出如下所示：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/karma-success.png" alt="karma success">
+</div>
+</div>
+<div class="paragraph">
+<p>这是终端的输出：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">INFO [karma-server]: Karma v5.0.7 server started at http://0.0.0.0:9876/
+INFO [launcher]: Launching browsers Chrome with concurrency unlimited
+INFO [launcher]: Starting browser Chrome
+WARN [karma]: No captured browser, open http://localhost:9876/
+INFO [Chrome 84.0.4147.135 (Mac OS 10.15.6)]: Connected on socket yH0-wtoVtflRWMoWAAAA with id 76614320
+Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 46 of 46 SUCCESS (0.394 secs / 0.329 secs)
+TOTAL: 46 SUCCESS</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Webpack会监视 <code>.spec.ts</code> 文件以及它们导入的文件的变化。当你修改实现代码（例如 <code>counter.component.ts</code> ）或测试代码（例如 <code>counter.component.spec.ts</code> ）时，Webpack会自动重新编译bundle并推送到打开的浏览器中。所有的测试将重新启动。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+红绿循环
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>这个反馈循环允许你同时处理实现代码和测试代码。这对于测试驱动开发非常重要。你修改实现代码，并期望测试失败 - 测试处于“红色”状态。然后你调整测试使其再次通过 - 测试处于“绿色”状态。或者你首先编写一个失败的测试，然后调整实现直到测试通过。</p>
+</div>
+<div class="paragraph">
+<p>测试驱动开发意味着让红绿循环指导你的开发过程。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://angular.cn/cli/test">Angular CLI参考文档：ng test</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_配置karma和jasmine"><a class="anchor" href="#_配置karma和jasmine"></a>配置Karma和Jasmine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Karma和Jasmine的配置文件位于项目根目录下的 <code>karma.conf.js</code> 文件中。自Angular 15开始，Angular CLI不会默认创建这个文件。如果它不存在，你可以使用以下终端命令创建它：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ng generate config karma</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有许多配置选项和插件可用，所以我们只会介绍其中几个。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+启动器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如前所述，标准配置在Chrome浏览器中运行测试。要在其他浏览器中运行测试，我们需要安装不同的 <strong>启动器</strong>。</p>
+</div>
+<div class="paragraph">
+<p>每个启动器都需要在 <code>plugins</code> 数组中加载：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">plugins: [
+  require('karma-jasmine'),
+  require('karma-chrome-launcher'),
+  require('karma-jasmine-html-reporter'),
+  require('karma-coverage'),
+  require('@angular-devkit/build-angular/plugins/karma')
+],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>已经有一个启动器，<code>karma-chrome-launcher</code>。这是一个npm包。</p>
+</div>
+<div class="paragraph">
+<p>要安装其他启动器，我们首先需要安装相应的npm包。让我们安装Firefox启动器。运行以下终端命令：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install --save-dev karma-firefox-launcher</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后在 <code>karma.conf.js</code> 文件中引入该包：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">plugins: [
+  require('karma-jasmine'),
+  require('karma-chrome-launcher'),
+  require('karma-firefox-launcher'),
+  require('karma-jasmine-html-reporter'),
+  require('karma-coverage'),
+  require('@angular-devkit/build-angular/plugins/karma'),
+],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>为了在 Firefox 中运行测试，我们需要将 Firefox 添加到浏览器列表中：<code>browsers: ['Chrome']</code> 变为 <code>browsers: ['Chrome', 'Firefox']</code>。</p>
+</div>
+<div class="paragraph">
+<p>现在，Karma 将启动两个浏览器并并行运行测试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+报告器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Karma 的另一个重要概念是 <strong>报告器</strong>。它们用于格式化和输出测试结果。在默认配置中，有三个报告器处于活动状态：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>内置的 <code>进度</code> 报告器在 shell 上输出文本。在测试运行时，它输出测试进度的信息，例如：</p>
+<div class="paragraph">
+<p><code>Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 9 of 46 SUCCESS (0.278 secs / 0.219 secs)</code></p>
+</div>
+<div class="paragraph">
+<p>最后的输出为：</p>
+</div>
+<div class="paragraph">
+<p><code>Chrome 84.0.4147.135 (Mac OS 10.15.6): Executed 46 of 46 SUCCESS (0.394 secs / 0.329 secs)</code>&lt;br&gt;
+<code>TOTAL: 46 SUCCESS</code></p>
+</div>
+</li>
+<li>
+<p>标准的 HTML 报告器 <code>kjhtml</code>（npm 包: <code>karma-jasmine-html-reporter</code>）在浏览器中呈现结果。+</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/karma-jasmine-html-reporter.png" alt="karma jasmine html reporter">
+</div>
+</div>
+</li>
+<li>
+<p>代码覆盖率报告器（npm 包: <code>karma-coverage</code>）会生成测试覆盖率报告。详见 <a href="measuring-code-coverage.html#_代码覆盖率测量" class="xref page">测量代码覆盖率</a>。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>通过编辑 <code>reporters</code> 数组，您可以添加报告器或替换现有的报告器：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">reporters: ['progress', 'kjhtml'],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>例如，要添加一个创建 JUnit XML 报告的报告器，请先安装 npm 包：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">npm install --save-dev karma-junit-reporter</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>然后，将其作为插件进行引用：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">plugins: [
+  require('karma-jasmine'),
+  require('karma-chrome-launcher'),
+  require('karma-jasmine-html-reporter'),
+  require('karma-coverage'),
+  require('karma-junit-reporter'),
+  require('@angular-devkit/build-angular/plugins/karma'),
+],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后，在添加这个 reporter：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">reporters: ['progress', 'kjhtml', 'junit'],</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>运行 <code>ng test</code> 后，你会在项目目录中找到一个 XML 报告文件。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Jasmine 配置
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Jasmine 适配器的配置位于 <code>client</code> 对象内的 <code>jasmine</code> 属性中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">client: {
+  jasmine: {
+    // 在这里可以添加 Jasmine 的配置选项
+    // 可能的选项列表在 https://jasmine.github.io/api/edge/Configuration.html 中列出
+    // 例如，你可以通过 `random: false` 来禁用随机执行
+    // 或者通过 `seed: 4321` 来设置一个特定的种子值
+  },
+  clearContext: false // leave Jasmine Spec Runner output visible in browser
+},</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>本指南建议激活一个有用的 Jasmine 配置选项：<code>failSpecWithNoExpectations</code>。如果测试中没有至少一个期望（<a href="test-suites-with-jasmine.html#_期望" class="xref page">expectation</a>），则会导致测试失败（有关期望的更多内容稍后会详细介绍）。在几乎所有情况下，没有期望的规范往往源于测试代码的错误。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">client: {
+  jasmine: {
+    failSpecWithNoExpectations: true,
+  },
+  clearContext: false // leave Jasmine Spec Runner output visible in browser
+},</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://karma-runner.github.io/6.4/config/configuration-file.html">Karma 文档：配置文件</a></p>
+</li>
+<li>
+<p><a href="https://karma-runner.github.io/6.4/config/plugins.html">Karma 文档：插件</a></p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/search?q=keywords:karma-plugin">npm：Karma 插件列表</a></p>
+</li>
+<li>
+<p><a href="https://jasmine.github.io/api/edge/Configuration.html">Jasmine 参考文档：配置选项</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

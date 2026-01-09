@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>调试测试 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="debugging-tests.html">调试测试</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">调试测试</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>修复测试中的问题</p>
+</li>
+<li>
+<p>找出测试失败的原因</p>
+</li>
+<li>
+<p>应用熟悉的调试技术到测试中</p>
+</li>
+<li>
+<p>使用Jasmine的调试功能</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>编写测试和编写实现代码一样费力。您经常会遇到困难，并问自己为什么测试失败，有时候也会问为什么测试通过了，明明应该失败的。</p>
+</div>
+<div class="paragraph">
+<p>好消息是，您也可以将熟悉的调试技术应用于测试中。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试焦点"><a class="anchor" href="#_测试焦点"></a>测试焦点</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>有些测试需要一个详尽的 <em>准备(Arrange)</em> 阶段，<em>执行(Act)</em> 阶段调用了多个方法或模拟了复杂的用户输入。这些测试很难调试。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+隔离问题
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在定位错误时，逐渐缩小范围：只执行一个测试、一个测试套件、一个规范、一个期望。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，Karma和Jasmine会在每次代码更改时重新编译和运行所有规范。当您在一个特定的规范上工作时，这会导致反馈周期变慢。在代码更改后，可能需要10-20秒才能看到测试结果。而且一个规范可能会干扰另一个规范。</p>
+</div>
+<div class="paragraph">
+<p>缩小范围的最简单方法是对套件或规范设置一个 <strong>焦点</strong>。假设您有一个包含两个规范的测试套件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Example spec', () =&gt; {
+  it('one spec', () =&gt; { /* … */ });
+  it('another spec', () =&gt; { /* … */ });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>fdescribe</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果你想让Jasmine仅运行这个测试套件并跳过其他所有测试套件，将 <code>describe</code> 更改为 <code>fdescribe</code> 。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">fdescribe('Example spec', () =&gt; {
+  it('one spec', () =&gt; { /* … */ });
+  it('another spec', () =&gt; { /* … */ });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>fit</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果你想让 Jasmine 只运行一个 spec（单个测试用例），将 <code>it</code> 更改为 <code>fit</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('Example spec', () =&gt; {
+  fit('one spec', () =&gt; { /* … */ });
+  it('another spec', () =&gt; { /* … */ });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这极大地改善了开发体验。</p>
+</div>
+<div class="paragraph">
+<p>尽管只更改了一行代码，并且只有一个测试套件专注于某个测试，但Webpack模块打包工具仍然会重新生成整个捆绑包。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+只打包一个文件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在这种情况下，你可以指示 <code>ng test</code> 仅考虑你当前正在工作的文件。Webpack会包含所有依赖项，如Angular框架，但不会比这更多。</p>
+</div>
+<div class="paragraph">
+<p>例如，要仅包含名为 <code>counter.component.spec.ts</code> 的测试，我们使用 <code>--include</code> 选项调用 <code>ng test</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">ng test --include **/counter.component.spec.ts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>**/counter.component.spec.ts</code> 表示任何子目录中名为 <code>counter.component.spec.ts</code> 的所有文件。</p>
+</div>
+<div class="paragraph">
+<p>现在打包速度很快，当我们更改实现或测试代码时，反馈几乎是即时的。</p>
+</div>
+<div class="paragraph">
+<p>在提交代码之前记得移除测试的专注点。有几种工具可以防止提交包含 <code>fdescribe</code> 和 <code>fit</code> 的代码。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://jasmine.github.io/api/edge/global.html#fdescribe">Jasmine API 参考：fdescribe</a></p>
+</li>
+<li>
+<p><a href="https://jasmine.github.io/api/edge/global.html#fit">Jasmine API 参考：fit</a></p>
+</li>
+<li>
+<p><a href="https://angular.cn/cli/test">Angular CLI 参考：ng test</a></p>
+</li>
+<li>
+<p><a href="https://timdeschryver.dev/blog/dont-commit-focused-tests">Tim Deschryver: 不要提交测试焦点(fit)代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_开发者工具"><a class="anchor" href="#_开发者工具"></a>开发者工具</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Jasmine 测试运行器只是使用 HTML、CSS 和 JavaScript 创建的另一个网页。这意味着你可以使用开发者工具在浏览器中调试它。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+熟悉的调试工具
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>将浏览器窗口聚焦并打开开发者工具。在 Chrome、Firefox 和 Edge 中，你可以使用 F12 键。</p>
+</div>
+<div class="paragraph">
+<p>你可以使用开发者工具来：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用 <code>console.log</code>、<code>console.debug</code> 等向控制台输出调试信息。</p>
+</li>
+<li>
+<p>使用 JavaScript 调试器。你可以在开发者工具中设置断点，或者在代码中使用 <code>debugger</code> 语句。</p>
+</li>
+<li>
+<p>检查渲染组件的 DOM。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_调试输出和_javascript_调试器"><a class="anchor" href="#_调试输出和_javascript_调试器"></a>调试输出和 JavaScript 调试器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>最原始的工具 <code>console.log</code> 实际上在调试测试时非常宝贵。你可以在测试代码和实现代码中都放置调试输出。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+多用途的 <code>console.log</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>使用调试输出来回答以下问题：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>测试、套件、用例是否被执行？</p>
+</li>
+<li>
+<p>测试执行是否达到了日志命令？</p>
+</li>
+<li>
+<p>测试是否正确调用了要测试的类、方法、函数？</p>
+</li>
+<li>
+<p>回调函数是否被正确调用？Promises 是否完成或失败？Observables 是否发出、完成或出错？</p>
+</li>
+<li>
+<p>对于组件测试：</p>
+</li>
+<li>
+<p>输入数据是否正确传递？</p>
+</li>
+<li>
+<p>生命周期方法是否被正确调用？</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>debugger</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>有些人喜欢使用 <code>debugger</code> 而不是控制台输出。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jasmine-debugger.png" alt="jasmine debugger">
+</div>
+</div>
+<div class="paragraph">
+<p>虽然<code>debugger</code>确实可以给你更多的控制权，但它会暂停 JavaScript 的执行。这可能会干扰异步 JavaScript 任务的处理和执行顺序。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+异步日志记录
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>console</code> 方法也有它们自己的缺点。出于性能原因，浏览器不会同步将输出写入控制台，而是异步进行。</p>
+</div>
+<div class="paragraph">
+<p>如果你使用 <code>console.log(object)</code> 输出一个复杂的对象，大多数浏览器会在控制台上呈现对象的交互式表示形式。你可以点击该对象以检查其属性。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const exampleObject = { name: 'Usagi Tsukino' };
+console.log(exampleObject);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>重要的是要知道渲染是异步进行的。如果在 console.log 调用之后不久修改了对象，你可能会看到修改后的对象，而不是 <code>console.log</code> 调用时的对象。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const exampleObject = { name: 'Usagi Tsukino' };
+console.log(exampleObject);
+exampleObject.name = 'Sailor Moon';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在控制台上，对象的表示可能显示为 <code>name: 'Sailor Moon'</code> 而不是 <code>name: 'Usagi Tsukino'</code>。</p>
+</div>
+<div class="paragraph">
+<p>避免这种混淆的一种方法是创建对象的快照。你可以将对象转换为 JSON 字符串：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const exampleObject = { name: 'Usagi Tsukino' };
+console.log(JSON.stringify(exampleObject, null, '  '));
+exampleObject.name = 'Sailor Moon';</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+输出快照日志
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果你想在控制台上得到一个交互式的表示形式，可以通过使用 <code>JSON.stringify</code> 后跟 <code>JSON.parse</code> 来创建对象的副本：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const exampleObject = { name: 'Usagi Tsukino' };
+console.log(JSON.parse(JSON.stringify(exampleObject)));
+exampleObject.name = 'Sailor Moon';</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>显然，这仅适用于可以序列化为 JSON 的对象。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_检查_dom"><a class="anchor" href="#_检查_dom"></a>检查 DOM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>在下一章中，我们将学习如何测试组件。这些测试将会将组件渲染到 Jasmine 测试运行器页面的 DOM 中。这意味着你可以在浏览器中简要地查看渲染组件的状态。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jasmine-dom.png" alt="jasmine dom">
+</div>
+</div>
+<div class="paragraph">
+<p>在上面的截图中，你可以在左侧看到渲染的组件，右侧是检查的 DOM。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+根元素
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>组件的根元素被渲染到文档中的最后一个元素中，位于 Jasmine 报告器输出的下方。确保将焦点设置在单个测试用例上，以查看渲染的组件。</p>
+</div>
+<div class="paragraph">
+<p>渲染的组件是可交互的。例如，你可以点击按钮，点击处理程序将被调用。但正如我们之后将学习的那样，在测试环境中没有自动变更检测。所以你可能看不到交互的效果。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jasmine_调试运行器"><a class="anchor" href="#_jasmine_调试运行器"></a>Jasmine 调试运行器</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>位于 <a href="http://localhost:9876">http://localhost:9876</a> 的 Karma 页面会加载一个包含实际 Jasmine 实例的 iframe，即 <a href="http://localhost:9876/context.html。这个" class="bare">http://localhost:9876/context.html。这个</a> iframe 会让调试变得复杂，因为开发者工具默认在最顶层的文档上操作。</p>
+</div>
+<div class="paragraph">
+<p>在开发者工具中，你可以选择 iframe 窗口上下文（下图是 Chrome）：</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/karma-select-context.png" alt="karma select context">
+</div>
+</div>
+<div class="paragraph">
+<p>这样你就可以访问全局对象和测试运行的文档的 DOM。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+没有 iframe 的调试运行器
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Karma 的另一个有用功能是调试测试运行器。点击右上角的大“DEBUG”按钮，然后会打开一个新的标签页，地址为 <a href="http://localhost:9876/debug.html">http://localhost:9876/debug.html</a>。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jasmine-debug-runner.png" alt="jasmine debug runner">
+</div>
+</div>
+<div class="paragraph">
+<p>调试测试运行器没有使用 iframe，它直接加载 Jasmine。而且，它会自动在 shell 上记录测试的运行情况。</p>
+</div>
+<div class="paragraph">
+<p>如果你更改了测试或实现代码，调试运行器不会重新运行测试。你需要手动重新加载页面。</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

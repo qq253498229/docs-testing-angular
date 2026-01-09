@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>测试指令 :: Testing Angular</title>
+    <meta name="generator" content="Antora 3.1.14">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Testing Angular</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Home</a>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="docs-testing-angular" data-version="中文">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">简介</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="target-audience.html">目标受众</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="terminology.html">术语</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-principles.html">测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="example-applications.html">示例应用程序</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="angular-testing-principles.html">Angular 测试原则</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="test-suites-with-jasmine.html">使用Jasmine编写测试套件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="faking-dependencies.html">伪造依赖</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="debugging-tests.html">调试测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components.html">测试组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-children.html">测试带有子组件的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-depending-on-services.html">测试依赖于服务的组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-complex-forms.html">测试复杂表单</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-components-with-spectator.html">测试时使用Spectator库简化组件</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-services.html">测试服务</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-pipes.html">测试管道</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="testing-directives.html">测试指令</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="testing-modules.html">测试模块</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="measuring-code-coverage.html">代码覆盖率测量</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="end-to-end-testing.html">端到端测试</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="summary.html">总结</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index-of-example-applications.html">示例应用程序索引</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="references.html">参考资料</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="acknowledgements.html">鸣谢</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="about.html">关于</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="license.html">许可证</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="other.html">其它</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Testing Angular</span>
+    <span class="version">中文</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="start.html">Testing Angular</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="start.html">中文</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="start.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="start.html">Testing Angular</a></li>
+    <li><a href="testing-directives.html">测试指令</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="目录" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">测试指令</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>学习目标</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>测试属性指令的效果</p>
+</li>
+<li>
+<p>测试具有输入和模板的复杂结构性指令</p>
+</li>
+<li>
+<p>为测试属性指令和结构性指令提供主机组件</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Angular初学者很快会遇到四个核心概念：模块、组件、服务和管道。一个不太知名的核心概念是指令。即使是初学者也在不知不觉中使用了指令，因为指令无处不在。</p>
+</div>
+<div class="paragraph">
+<p>在Angular中，有三种类型的指令：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>组件(Component)</strong>是带有模板的指令。组件通常使用元素类型选择器，比如<code>app-counter</code>。Angular然后查找<code>app-counter</code>元素，并将组件模板渲染到这些宿主元素中。</p>
+</li>
+<li>
+<p><strong>属性指令(Attribute Directive)</strong>在DOM中的现有宿主元素上添加逻辑。内置的属性指令示例包括<code>NgClass</code>和<code>NgStyle</code>。</p>
+</li>
+<li>
+<p><strong>结构性指令(Structural Directive)</strong>改变DOM的结构，也就是以编程方式添加和删除元素。内置的结构性指令示例包括<code>NgIf</code>、<code>NgFor</code>和<code>NgSwitch</code>。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>我们已经测试了组件。我们还需要测试其他两种类型的指令。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试属性指令"><a class="anchor" href="#_测试属性指令"></a>测试属性指令</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>属性指令的名称来自于属性选择器，例如<code>[ngModel]</code>。属性指令没有模板，不能改变DOM结构。</p>
+</div>
+<div class="paragraph">
+<p>我们已经提到了内置的属性指令<code>NgClass</code>和<code>NgStyle</code>。此外，模板驱动和响应式表单都严重依赖属性指令：<code>NgForm</code>、<code>NgModel</code>、<code>FormGroupDirective</code>、<code>FormControlName</code>等。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+样式逻辑
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>属性指令经常用于更改元素的样式，可以直接使用内联样式或间接使用类。</p>
+</div>
+<div class="paragraph">
+<p>大多数样式逻辑可以仅使用CSS来实现，不需要JavaScript代码。但有时需要使用JavaScript来设置内联样式或以编程方式添加类。</p>
+</div>
+<div class="sect2">
+<h3 id="_thresholdwarningdirective"><a class="anchor" href="#_thresholdwarningdirective"></a>ThresholdWarningDirective</h3>
+<div class="paragraph">
+<p>我们的 <a href="example-applications.html#_示例应用程序" class="xref page">示例应用程序</a> 中都不包含属性指令，因此我们将引入和测试<strong><code>ThresholdWarningDirective</code></strong>。</p>
+</div>
+<div class="paragraph">
+<p>该指令适用于 <code>&lt;input type="number"&gt;</code> 元素。如果选择的数字超过给定的阈值，则切换类。如果数字高于阈值，则应在视觉上标记该字段。</p>
+</div>
+<div class="paragraph">
+<p>请注意，阈值以上的数字是有效的输入。<code>ThresholdWarningDirective</code>不添加表单控件验证器。我们只是想提醒用户，以便他们检查输入两次。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts">ThresholdWarningDirective：源代码</a></p>
+</li>
+<li>
+<p><a href="https://molily.github.io/threshold-warning-directive/">ThresholdWarningDirective：运行应用</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the ThresholdWarningDirective in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://molily.github.io/threshold-warning-directive/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>输入一个大于10的数字以查看效果。</p>
+</div>
+<div class="paragraph">
+<p>这是该指令的代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import {
+  Directive, ElementRef, HostBinding, HostListener, Input
+} from '@angular/core';
+
+@Directive({
+  selector: '[appThresholdWarning]',
+})
+export class ThresholdWarningDirective {
+  @Input()
+  public appThresholdWarning: number | null = null;
+
+  @HostBinding('class.overThreshold')
+  public overThreshold = false;
+
+  @HostListener('input')
+  public inputHandler(): void {
+    this.overThreshold =
+      this.appThresholdWarning !== null &amp;&amp;
+      this.elementRef.nativeElement.valueAsNumber &gt; this.appThresholdWarning;
+  }
+
+  constructor(private elementRef: ElementRef&lt;HTMLInputElement&gt;) {}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是我们如何将指令应用于元素：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">&lt;input type="number" [appThresholdWarning]="10" /&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这意味着：如果用户输入的数字大于10，则用视觉警告标记该字段。</p>
+</div>
+<div class="paragraph">
+<p>还缺少一点：视觉警告的样式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">input[type='number'].overThreshold {
+  background-color: #fe9;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在编写指令的测试之前，让我们逐步了解实现的部分。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+同名输入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>ThresholdWarningDirective</code> 使用属性绑定 <code>[appThresholdWarning]="…"</code> 进行应用。它以相同名称的输入属性接收属性值。这是配置阈值的方式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Input()
+public appThresholdWarning: number | null = null;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<code>input</code> 事件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>使用 <code>HostListener</code>，该指令在宿主元素上监听 <code>input</code> 事件。当用户更改字段的值时，将调用 <code>inputHandler</code> 方法。</p>
+</div>
+<div class="paragraph">
+<p><code>inputHandler</code> 方法获取字段的值并检查其是否超过了阈值。结果存储在 <code>overThreshold</code> 布尔属性中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@HostListener('input')
+public inputHandler(): void {
+  this.overThreshold =
+    this.appThresholdWarning !== null &amp;&amp;
+    this.elementRef.nativeElement.valueAsNumber &gt; this.appThresholdWarning;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+读取值
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>为了访问宿主元素，我们使用 <code>ElementRef</code> 依赖项。<code>ElementRef</code> 是宿主元素 DOM 节点的包装器。<code>this.elementRef.nativeElement</code> 返回 <code>input</code> 元素的 DOM 节点。<code>valueAsNumber</code> 包含输入值作为数字的值。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+切换类
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>最后，通过使用 <code>HostBinding</code>，将 <code>overThreshold</code> 属性绑定到具有相同名称的类上。这是如何切换类的方式。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@HostBinding('class.overThreshold')
+public overThreshold = false;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_thresholdwarningdirective_测试"><a class="anchor" href="#_thresholdwarningdirective_测试"></a>ThresholdWarningDirective 测试</h3>
+<div class="paragraph">
+<p>现在我们了解了发生了什么，我们需要在我们的测试中复制这个工作流程。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+宿主组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>首先，属性指令和结构指令需要一个已经存在的宿主元素来应用它们。在测试这些指令时，我们使用一个<strong>宿主组件(host Component)</strong>来渲染宿主元素。例如，<code>ThresholdWarningDirective</code> 需要一个 <code>&lt;input type="number"&gt;</code> 宿主元素。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Component({
+  template: `
+    &lt;input type="number"
+      [appThresholdWarning]="10" /&gt;
+  `
+})
+class HostComponent {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>我们将渲染这个组件。我们需要使用 <code>TestBed</code> 进行标准的 <a href="testing-components.html#_配置测试模块" class="xref page">组件测试设置</a>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('ThresholdWarningDirective', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [ThresholdWarningDirective, HostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在配置测试模块时，我们声明了要测试的指令和宿主组件。就像在组件测试中一样，我们渲染了组件并获得了一个 <code>ComponentFixture</code>。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+找到输入元素
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>在接下来的规范中，我们需要访问输入元素。我们使用标准的方法：使用 <code>data-testid</code> 属性和 <code>findEl</code> <a href="testing-components.html#_测试辅助函数" class="xref page">测试助手</a>。</p>
+</div>
+<div class="paragraph">
+<p>为了方便起见，我们在 <code>beforeEach</code> 块中选择了输入元素。我们将其保存在一个名为 <code>input</code> 的共享变量中。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Component({
+  template: `
+    &lt;input type="number"
+      [appThresholdWarning]="10"
+      data-testid="input" /&gt;
+  `
+})
+class HostComponent {}
+
+describe('ThresholdWarningDirective', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+  let input: HTMLInputElement;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [ThresholdWarningDirective, HostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+
+    input = findEl(fixture, 'input').nativeElement;
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+检查类
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>第一个规范确保当用户未触摸输入时，指令不起作用。使用元素的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList">classList</a>，我们期望<code>overThreshold</code>类不存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('does not set the class initially', () =&gt; {
+  expect(input.classList.contains('overThreshold')).toBe(false);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>下一个规范输入一个超过阈值的数字。为了模拟用户输入，我们使用了我们方便的测试助手<code>setFieldValue</code>。然后，该规范期望该类存在。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('adds the class if the number is over the threshold', () =&gt; {
+  setFieldValue(fixture, 'input', '11');
+  fixture.detectChanges();
+  expect(input.classList.contains('overThreshold')).toBe(true);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>setFieldValue</code>触发了一个伪造的 <code>input</code> 事件。这会触发指令的事件处理程序。<code>11</code>大于阈值<code>10</code>，所以添加了该类。我们仍然需要调用<code>detectChanges</code>以便更新DOM。</p>
+</div>
+<div class="paragraph">
+<p>最后一个规范确保阈值仍然被视为安全值。不应该显示任何警告。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('removes the class if the number is at the threshold', () =&gt; {
+  setFieldValue(fixture, 'input', '10');
+  fixture.detectChanges();
+  expect(input.classList.contains('overThreshold')).toBe(false);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>就是这样了！测试<code>ThresholdWarningDirective</code>就像测试一个组件一样。不同之处在于组件作为指令的宿主。</p>
+</div>
+<div class="paragraph">
+<p><code>ThresholdWarningDirective</code>的完整规范如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { Component } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { findEl, setFieldValue } from './spec-helpers/element.spec-helper';
+import { ThresholdWarningDirective } from './threshold-warning.directive';
+
+@Component({
+  template: `
+    &lt;input type="number"
+      [appThresholdWarning]="10"
+      data-testid="input" /&gt;
+  `
+})
+class HostComponent {}
+
+describe('ThresholdWarningDirective', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+  let input: HTMLInputElement;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [ThresholdWarningDirective, HostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+    input = findEl(fixture, 'input').nativeElement;
+  });
+
+  it('does not set the class initially', () =&gt; {
+    expect(input.classList.contains('overThreshold')).toBe(false);
+  });
+
+  it('adds the class if the number is over the threshold', () =&gt; {
+    setFieldValue(fixture, 'input', '11');
+    fixture.detectChanges();
+    expect(input.classList.contains('overThreshold')).toBe(true);
+  });
+
+  it('removes the class if the number is at the threshold', () =&gt; {
+    setFieldValue(fixture, 'input', '10');
+    fixture.detectChanges();
+    expect(input.classList.contains('overThreshold')).toBe(false);
+  });
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts" class="bare">https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.ts</a> [ThresholdWarningDirective: 实现代码]</p>
+</li>
+<li>
+<p><a href="https://github.com/molily/threshold-warning-directive/blob/main/src/app/threshold-warning.directive.spec.ts">ThresholdWarningDirective: 测试代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_测试结构型指令"><a class="anchor" href="#_测试结构型指令"></a>测试结构型指令</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>结构指令没有像组件那样的模板，而是在内部使用<code>ng-template</code>进行操作。该指令以编程方式将模板呈现到DOM中，并将上下文数据传递给模板。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Render template programmatically
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>以NgIf指令和NgFor指令为例，它们展示了结构指令的功能：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NgIf</code>指令决定是否呈现模板。</p>
+</li>
+<li>
+<p><code>NgFor</code>指令遍历一个项目列表，并针对每个项目重复呈现模板。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>结构指令使用属性选择器，例如<code>[ngIf]</code>。属性应用于具有特殊星号语法的宿主元素，例如<code>*ngIf</code>。在内部，这将被转换为 <code>&lt;ng-template [ngIf]="…"&gt; … &lt;/ng-template&gt;</code>。</p>
+</div>
+<div class="paragraph">
+<p>本指南假设您大致了解结构指令的工作原理以及微语法如何转换为指令输入。请参考 <a href="https://angular.cn/guide/structural-directives">官方全面的结构指令指南</a>。</p>
+</div>
+<div class="sect2">
+<h3 id="_paginatedirective"><a class="anchor" href="#_paginatedirective"></a>PaginateDirective</h3>
+<div class="paragraph">
+<p>我们将介绍和测试<code>PaginateDirective</code>，这是一个复杂的结构指令。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+分页的 <code>NgFor</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>PaginateDirective</code>的工作方式类似于<code>NgFor</code>，但不会一次渲染所有列表项。它将项目分散到页面上，通常称为 <strong>分页(pagination)</strong>。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，只呈现十个项目。用户可以通过点击“下一页”或“上一页”按钮来切换页面。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts">PaginateDirective: 源代码</a></p>
+</li>
+<li>
+<p><a href="https://molily.github.io/paginate-directive/">PaginateDirective: 运行应用程序</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<button class="load-iframe">
+See the PaginateDirective in action
+</button>
+
+<script type="text/x-template">
+<p class="responsive-iframe">
+<iframe src="https://molily.github.io/paginate-directive/" class="responsive-iframe__iframe"></iframe>
+</p>
+</script>
+<div class="paragraph">
+<p>在编写测试之前，我们首先需要了解<code>PaginateDirective</code>的外部结构。</p>
+</div>
+<div class="paragraph">
+<p>最简单的使用方式如下：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ul&gt;
+  &lt;li *appPaginate="let item of items"&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这类似于<code>NgFor</code>指令。假设<code>items</code>是一个数字数组（<code>[1, 2, 3, …]</code>），上面的示例将渲染数组中的前10个数字。</p>
+</div>
+<div class="paragraph">
+<p>星号语法<em>appPaginate</em>和所谓的<em>微语法</em><code>let item of items</code>是语法糖。这是一种更简短、更美观的写法，用于表示复杂的结构。在内部，Angular将代码转换为以下形式：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ng-template appPaginate let-item [appPaginateOf]="items"&gt;
+  &lt;li&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ng-template&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>有一个带有属性<code>appPaginate</code>和属性绑定<code>appPaginateOf</code>的<code>ng-template</code>。还有一个名为<code>item</code>的模板输入变量。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+为每个项目渲染模板
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如上所述，结构性指令没有自己的模板，而是在<code>ng-template</code>上进行操作，并以编程方式进行渲染。我们的<code>PaginateDirective</code>与上述<code>ng-template</code>一起工作。该指令为当前页面上的每个项目渲染模板。</p>
+</div>
+<div class="paragraph">
+<p>既然我们已经看到了Angular的内部表示，我们可以理解<code>PaginateDirective</code>类的结构：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Directive({
+  selector: '[appPaginate]',
+})
+export class PaginateDirective&lt;T&gt; implements OnChanges {
+  @Input()
+  public appPaginateOf: T[] = [];
+
+  /* … */
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>该指令使用<code>[appPaginate]</code>属性选择器，并具有名为<code>appPaginateOf</code>的输入。通过编写微语法 <code>*appPaginate="let item of items"</code>，实际上将<code>appPaginateOf</code>输入设置为<code>items</code>的值。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+指令输入
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>PaginateDirective</code>具有一个名为<code>perPage</code>的配置选项。它指定每页可见的项目数。</p>
+</div>
+<div class="paragraph">
+<p>默认情况下，每页有十个项目。要更改它，我们在微语法中设置 <code>perPage: …</code>：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ul&gt;
+  &lt;li *appPaginate="let item of items; perPage: 5"&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将被翻译为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ng-template
+  appPaginate
+  let-item
+  [appPaginateOf]="items"
+  [appPaginatePerPage]="5"&gt;
+  &lt;li&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ng-template&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>perPage</code>在Directive的代码中会被翻译为名为<code>appPaginatePerPage</code>的输入属性：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Directive({
+  selector: '[appPaginate]',
+})
+export class PaginateDirective&lt;T&gt; implements OnChanges {
+  @Input()
+  public appPaginateOf: T[] = [];
+
+  @Input()
+  public appPaginatePerPage = 10;
+
+  /* … */
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这也是内置的结构性指令（例如 <code>NgIf</code> 和 <code>NgFor</code>）的工作方式。</p>
+</div>
+<div class="paragraph">
+<p>现在情况变得更加复杂。由于我们想要对项目进行分页，除了渲染项目之外，我们还需要用户控制来翻页。</p>
+</div>
+<div class="paragraph">
+<p>同样，Structural Directive缺少模板。<code>PaginateDirective</code>不能自己渲染“next”和“previous”按钮。为了保持灵活性，它不应该渲染特定的标记。使用该Directive的Component应该决定控件的外观。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+传递另一个模板
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>通过传递一个模板给Directive，我们解决了这个问题。具体来说，我们将一个独立的<code>ng-template</code>的引用传递给Directive。这将成为Directive操作的第二个模板。</p>
+</div>
+<div class="paragraph">
+<p>控件模板可能如下所示：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ng-template
+  #controls
+  let-previousPage="previousPage"
+  let-page="page"
+  let-pages="pages"
+  let-nextPage="nextPage"
+&gt;
+  &lt;button (click)="previousPage()"&gt;
+    Previous page
+  &lt;/button&gt;
+  {{ page }} / {{ pages }}
+  &lt;button (click)="nextPage()"&gt;
+    Next page
+  &lt;/button&gt;
+&lt;/ng-template&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>#controls</code> 设置一个 <a href="https://angular.cn/guide/template-reference-variables">模板引用变量</a>。这意味着我们可以通过名称<code>controls</code>进一步引用模板。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+上下文对象
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>该指令使用实现以下TypeScript接口的<em>上下文</em>对象呈现控件模板：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">interface ControlsContext {
+  page: number;
+  pages: number;
+  previousPage(): void;
+  nextPage(): void;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>page</code> 是当前页码，<code>pages</code> 是总页数。<code>previousPage</code> 和 <code>nextPage</code> 是用于翻页的函数。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+使用上下文中的属性
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>ng-template</code>从上下文中获取这些属性，并将它们保存在同名的本地变量中：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">let-previousPage="previousPage"
+let-page="page"
+let-pages="pages"
+let-nextPage="nextPage"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这意味着：将上下文属性<code>previousPage</code>提取出来，在模板中以<code>previousPage</code>的名称进行访问。其他属性也是如此。</p>
+</div>
+<div class="paragraph">
+<p>模板的内容相当简单。它呈现了两个按钮用于翻页，使用这些函数作为点击事件处理程序。它输出当前页码和总页数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;button (click)="previousPage()"&gt;
+  Previous page
+&lt;/button&gt;
+{{ page }} / {{ pages }}
+&lt;button (click)="nextPage()"&gt;
+  Next page
+&lt;/button&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>最后但同样重要的是，我们使用微语法将模板传递给<code>PaginateDirective</code>。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ul&gt;
+  &lt;li *appPaginate="let item of items; perPage: 5; controls: controls"&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这将被翻译为：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;ng-template
+  appPaginate
+  let-item
+  [appPaginateOf]="items"
+  [appPaginatePerPage]="5"
+  [appPaginateControls]="controls"&gt;
+  &lt;li&gt;
+    {{ item }}
+  &lt;/li&gt;
+&lt;/ng-template&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>在微语法中，<code>controls: …</code> 被翻译为一个名为 <code>appPaginateControls</code> 的输入。这完成了指令的外部结构。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">@Directive({
+  selector: '[appPaginate]',
+})
+export class PaginateDirective&lt;T&gt; implements OnChanges {
+  @Input()
+  public appPaginateOf: T[] = [];
+
+  @Input()
+  public appPaginatePerPage = 10;
+
+  @Input()
+  public appPaginateControls?: TemplateRef&lt;ControlsContext&gt;;
+
+  /* … */
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PaginateDirective</code>的内部工作对于测试来说并不相关，因此我们不会在这里详细讨论它们。请参考Angular指南中的 <a href="https://angular.cn/guide/structural-directives#creating-a-structural-directive">编写结构型指令</a> 以获取一般说明。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.ts">PaginateDirective：实现代码</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_paginatedirective_测试"><a class="anchor" href="#_paginatedirective_测试"></a>PaginateDirective 测试</h3>
+<div class="paragraph">
+<p>我们已经探索了<code>PaginateDirective</code>的所有功能，现在准备好进行测试！</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+宿主组件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>首先，我们需要一个宿主组件来应用正在测试的结构指令。我们让它呈现一个包含十个数字的列表，每页显示三个数字。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+@Component({
+  template: `
+    &lt;ul&gt;
+      &lt;li
+        *appPaginate="let item of items; perPage: 3"
+        data-testid="item"
+      &gt;
+        {{ item }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  `,
+})
+class HostComponent {
+  public items = items;
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+控件模板
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>由于我们还想测试自定义控件功能，我们需要传递一个控件模板。我们将使用上面讨论过的简单控件。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+@Component({
+  template: `
+    &lt;ul&gt;
+      &lt;li
+        *appPaginate="let item of items; perPage: 3; controls: controls"
+        data-testid="item"
+      &gt;
+        {{ item }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ng-template
+      #controls
+      let-previousPage="previousPage"
+      let-page="page"
+      let-pages="pages"
+      let-nextPage="nextPage"
+    &gt;
+      &lt;button
+        (click)="previousPage()"
+        data-testid="previousPage"&gt;
+        Previous page
+      &lt;/button&gt;
+      &lt;span data-testid="page"&gt;{{ page }}&lt;/span&gt;
+      /
+      &lt;span data-testid="pages"&gt;{{ pages }}&lt;/span&gt;
+      &lt;button
+        (click)="nextPage()"
+        data-testid="nextPage"&gt;
+        Next page
+      &lt;/button&gt;
+    &lt;/ng-template&gt;
+  `,
+})
+class HostComponent {
+  public items = items;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>模板代码已经包含了<code>data-testid</code>属性。这是我们在测试中查找和检查元素的方式（请参阅 <a href="testing-components.html#_使用测试_id_查询_dom" class="xref page">使用测试ID查询DOM</a>）。</p>
+</div>
+<div class="paragraph">
+<p>这是相当复杂的设置，但毕竟，我们希望在实际条件下测试<code>PaginateDirective</code>。</p>
+</div>
+<div class="paragraph">
+<p>测试套件配置了一个测试模块，声明了 <code>宿主组件(HostComponent)</code> 和<code>PaginateDirective</code>，并渲染了宿主组件：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">describe('PaginateDirective', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [PaginateDirective, HostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+  });
+
+  /* … */
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个标准的组件测试设置-暂时没有特殊之处。</p>
+</div>
+<div class="paragraph">
+<p>第一个规范验证指令在第一页上呈现项目，对于我们来说，是数字1、2和3。</p>
+</div>
+<div class="paragraph">
+<p>我们使用 <code>data-testid="item"</code> 标记了项目元素。我们使用 <a href="https://github.com/9elements/angular-workshop/blob/main/src/app/spec-helpers/element.spec-helper.ts"><code>findEls</code>测试助手</a> 来查找具有该测试ID的所有元素。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+预期渲染的项目
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们期望找到三个项目。然后，我们检查每个项目的文本内容，并期望它与数字列表中的项目相匹配。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders the items of the first page', () =&gt; {
+  const els = findEls(fixture, 'item');
+  expect(els.length).toBe(3);
+
+  expect(els[0].nativeElement.textContent.trim()).toBe('1');
+  expect(els[1].nativeElement.textContent.trim()).toBe('2');
+  expect(els[2].nativeElement.textContent.trim()).toBe('3');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>目前，期望值重复且难以阅读。因此，我们引入一个小的辅助函数。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">function expectItems(
+  elements: DebugElement[],
+  expectedItems: number[],
+): void {
+  elements.forEach((element, index) =&gt; {
+    const actualText = element.nativeElement.textContent.trim();
+    expect(actualText).toBe(String(expectedItems[index]));
+  });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这样，我们可以重新编写规范，使其更易于理解：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders the items of the first page', () =&gt; {
+  const els = findEls(fixture, 'item');
+  expect(els.length).toBe(3);
+  expectItems(els, [1, 2, 3]);
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+检查控件
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下一个规范证明了控件模板被渲染，并传递了当前页和总页数。</p>
+</div>
+<div class="paragraph">
+<p>这些元素分别具有 <code>data-testid="page"</code> 和 <code>data-testid="pages"</code> 属性。我们使用 <a href="testing-components.html#_测试辅助函数" class="xref page"><code>expectText</code>测试助手</a> 来检查它们的文本内容。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('renders the current page and total pages', () =&gt; {
+  expectText(fixture, 'page', '1');
+  expectText(fixture, 'pages', '4');
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>另外还有三个规范处理翻页控件。让我们先从“下一页”按钮开始。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('shows the next page', () =&gt; {
+  click(fixture, 'nextPage');
+  fixture.detectChanges();
+
+  const els = findEls(fixture, 'item');
+  expect(els.length).toBe(3);
+  expectItems(els, [4, 5, 6]);
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+翻页操作
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们使用 <code>click</code> 测试助手模拟点击“下一页”按钮。然后，我们启动Angular的变更检测，以便重新渲染组件和指令。</p>
+</div>
+<div class="paragraph">
+<p>最后，我们验证指令是否已经渲染了接下来的三个项目，即数字4、5和6。</p>
+</div>
+<div class="paragraph">
+<p>“上一页”按钮的规范看起来类似。首先，我们跳转到第二页，然后返回到第一页。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('shows the previous page', () =&gt; {
+  click(fixture, 'nextPage');
+  click(fixture, 'previousPage');
+  fixture.detectChanges();
+
+  const els = findEls(fixture, 'item');
+  expect(els.length).toBe(3);
+  expectItems(els, [1, 2, 3]);
+});</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+压力测试
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>我们现在已经涵盖了指令的重要行为。是时候测试边缘情况了！如果我们在第一页点击“上一页”按钮，在最后一页点击“下一页”按钮，指令是否能正确地处理？</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">it('checks the pages bounds', () =&gt; {
+  click(fixture, 'nextPage'); // -&gt; 2
+  click(fixture, 'nextPage'); // -&gt; 3
+  click(fixture, 'nextPage'); // -&gt; 4
+  click(fixture, 'nextPage'); // -&gt; 4
+  click(fixture, 'previousPage'); // -&gt; 3
+  click(fixture, 'previousPage'); // -&gt; 2
+  click(fixture, 'previousPage'); // -&gt; 1
+  click(fixture, 'previousPage'); // -&gt; 1
+  fixture.detectChanges();
+
+  // Expect that the first page is visible again
+  const els = findEls(fixture, 'item');
+  expect(els.length).toBe(3);
+  expectItems(els, [1, 2, 3]);
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>通过点击按钮，我们前进到最后一页，然后再回到第一页。</p>
+</div>
+<div class="paragraph">
+<p>就是这样！以下是完整的测试代码：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-typescript hljs" data-lang="typescript">import { Component, DebugElement } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import {
+  findEls,
+  expectText,
+  click,
+} from './spec-helpers/element.spec-helper';
+import { PaginateDirective } from './paginate.directive';
+
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+@Component({
+  template: `
+    &lt;ul&gt;
+      &lt;li
+        *appPaginate="let item of items; perPage: 3; controls: controls"
+        data-testid="item"
+      &gt;
+        {{ item }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;ng-template
+      #controls
+      let-previousPage="previousPage"
+      let-page="page"
+      let-pages="pages"
+      let-nextPage="nextPage"
+    &gt;
+      &lt;button (click)="previousPage()" data-testid="previousPage"&gt;
+        Previous page
+      &lt;/button&gt;
+      &lt;span data-testid="page"&gt;{{ page }}&lt;/span&gt;
+      /
+      &lt;span data-testid="pages"&gt;{{ pages }}&lt;/span&gt;
+      &lt;button (click)="nextPage()" data-testid="nextPage"&gt;
+        Next page
+      &lt;/button&gt;
+    &lt;/ng-template&gt;
+  `,
+})
+class HostComponent {
+  public items = items;
+}
+
+function expectItems(
+  elements: DebugElement[],
+  expectedItems: number[],
+): void {
+  elements.forEach((element, index) =&gt; {
+    const actualText = element.nativeElement.textContent.trim();
+    expect(actualText).toBe(String(expectedItems[index]));
+  });
+}
+
+describe('PaginateDirective', () =&gt; {
+  let fixture: ComponentFixture&lt;HostComponent&gt;;
+
+  beforeEach(async () =&gt; {
+    await TestBed.configureTestingModule({
+      declarations: [PaginateDirective, HostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
+  });
+
+  it('renders the items of the first page', () =&gt; {
+    const els = findEls(fixture, 'item');
+    expect(els.length).toBe(3);
+    expectItems(els, [1, 2, 3]);
+  });
+
+  it('renders the current page and total pages', () =&gt; {
+    expectText(fixture, 'page', '1');
+    expectText(fixture, 'pages', '4');
+  });
+
+  it('shows the next page', () =&gt; {
+    click(fixture, 'nextPage');
+    fixture.detectChanges();
+
+    const els = findEls(fixture, 'item');
+    expect(els.length).toBe(3);
+    expectItems(els, [4, 5, 6]);
+  });
+
+  it('shows the previous page', () =&gt; {
+    click(fixture, 'nextPage');
+    click(fixture, 'previousPage');
+    fixture.detectChanges();
+
+    const els = findEls(fixture, 'item');
+    expect(els.length).toBe(3);
+    expectItems(els, [1, 2, 3]);
+  });
+
+  it('checks the pages bounds', () =&gt; {
+    click(fixture, 'nextPage'); // -&gt; 2
+    click(fixture, 'nextPage'); // -&gt; 3
+    click(fixture, 'nextPage'); // -&gt; 4
+    click(fixture, 'previousPage'); // -&gt; 3
+    click(fixture, 'previousPage'); // -&gt; 2
+    click(fixture, 'previousPage'); // -&gt; 1
+    fixture.detectChanges();
+
+    // Expect that the first page is visible again
+    const els = findEls(fixture, 'item');
+    expect(els.length).toBe(3);
+    expectItems(els, [1, 2, 3]);
+  });
+});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PaginateDirective</code>是一个复杂的结构型指令，需要一个复杂的测试设置。一旦我们创建了一个合适的宿主组件，我们就可以使用我们熟悉的测试助手对其进行测试。指令中的逻辑事实对于规范来说并不重要。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.tsPaginateDirective：实现代码" class="bare">https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.tsPaginateDirective：实现代码</a>]</p>
+</li>
+<li>
+<p><a href="https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.spec.tsPaginateDirective：测试代码" class="bare">https://github.com/molily/paginate-directive/blob/main/src/app/paginate.directive.spec.tsPaginateDirective：测试代码</a>]</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
